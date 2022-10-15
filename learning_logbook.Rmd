@@ -8,17 +8,21 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Learning Logbook
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-```{r pressure, echo=FALSE}
+```{r}
 plot(pressure)
 ```
+
+
+## Lesson 03: Tree dormancy
+
+Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.
+
+![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
+
+
+Which are the advantages (2) of the BBCH scale compared with earlies scales?
+
+Classify the following phenological stages of sweet cherry according to the BBCH scale:
 
