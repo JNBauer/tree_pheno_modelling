@@ -13,30 +13,74 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Learning Logbook
 
----
+------------------------------------------------------------------------
 
 ## Lesson 03: Tree dormancy
 
-**Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.**
+1.  **Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.**
 
 -   At the moment the Dynamic model is the most sophisticated approach, because of its process based idea [@fadón2020]. This leads on the other hand to more complicated calculations compared to prior methods . Models like the chilling hours are easier to calculate, but do not longer meet the needed requirements. I would recommend the breeder to use the Dynamic model, because of its high reliability. The temperature as only input is the same for all models.
 
-**Which are the advantages (2) of the BBCH scale compared with earlies scales?**
+\
+
+2.  **Which are the advantages (2) of the BBCH scale compared with earlies scales?**
 
 -   covers the whole development of the plant not only the buds as with earlier scales
-
 -   developed in a way that it can suited to all plant species
+-   numerical order is more comprehensive
 
--   numerical order is more comprehensive\
+\
 
-**Classify the following phenological stages of sweet cherry according to the BBCH scale:** ![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
+3.  **Classify the following phenological stages of sweet cherry according to the BBCH scale:** ![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
 
-1.  54/55
+    1.  54/55
 
-2.  65 could be also lower if the object in the background is a (closed) bud
+    2.  65 could be also lower if the object in the background is a (closed) bud
 
-3.  89
+    3.  89
 
-Pictures similar to 1. and 3. can be seen in the appendix of [@fadon_flower_2015].
+    Pictures similar to 1. and 3. can be seen in the appendix of [@fadon_flower_2015].
 
----
+\
+
+------------------------------------------------------------------------
+
+## Lesson 04: Climate change and impact projection
+
+1.  **List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.**
+
+-   Greenhouse gases (Decade)
+
+-   Aerosols (Decade)
+
+-   Surface albedo
+
+-   Clouds
+
+-   Ozone
+
+-   Volcanic and meteorite activity (Centuries)
+
+-   Ocean currents (Centuries)
+
+-   Milankovic cycles (Centuries)
+
+-   Sun (Centuries)
+
+\
+
+-   The most important driver at the moment are Greenhouse gases (GHGs) and in particular anthropogenic CO~2~, which is mainly released by burning fossil fuels or by the production of cement. The concentration of CO~2~ in the atmosphere, which was closely correlated with the temperature in the past, is rising steadily and steeply at the moment. GHGs only absorb the reflected radiation coming from the earth and are not affected by direct radiation from the sun. This effect works like a trap, where radiation can enter, but not leave the atmosphere, which leads to an increase in temperature.
+
+\
+
+2.  **Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.**
+
+-   In the last decades, the temperature rose steadily. The last two decades were the warmest measured since 1880. We are about to live in a world, that has never been so warm for humans or humanlike beings. The climate of the earth was always changing, but the speed of change was never so fast before. When at some point a tipping point is reached the changes cannot be undone.
+
+3.  **What does the abbreviation 'RCP' stand for, how are RCPs defined, and what is their role in projecting future climates?**
+
+-   RCP is the abbreviation for Representative Concentration Pathways, which are defined by the additional radiated forcing in watts per square meter for the year 2100. They serve as scenarios for the future of our climate. A high scenario like RCP8.5 is caused by increasing GHG emissions, while lower scenarios can be achieved with a decrease of GHG emissions. In the case of RCP6.0, additional 6 W m^-2^ are expected for the year 2100. Multiple scenarios should be considered, since one does not know which RCP prediction will occur.
+
+4.  **Briefly describe the 4 climate impact projection methods described in the fourth video.**
+
+-   
