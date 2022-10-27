@@ -45,3 +45,5 @@ WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA)#, start
 
 warming_hours_for_time_frame <- WH_YEARMODA(hourtemps, 20080305, 20080901)
 warming_hours_for_time_frame
+
+
