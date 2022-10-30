@@ -20,20 +20,19 @@ library(kableExtra)
 library(dplyr)
 ```
 
-# Learning Logbook
-------------------------------------------------------------------------
-Github corner by https://github.com/tholman/github-corners
-------------------------------------------------------------------------
+## \# Learning Logbook
+
+## Github corner from <https://github.com/tholman/github-corners>
 
 ## Lesson 03: Tree dormancy
 
-1.  **Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.**
+**1.Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.**
 
 -   At the moment the Dynamic model is the most sophisticated approach, because of its process based idea [@fadón2020]. This leads on the other hand to more complicated calculations compared to prior methods . Models like the chilling hours are easier to calculate, but do not longer meet the needed requirements. I would recommend the breeder to use the Dynamic model, because of its high reliability. The temperature as only input is the same for all models.
 
 \
 
-2.  **Which are the advantages (2) of the BBCH scale compared with earlies scales?**
+**2.Which are the advantages (2) of the BBCH scale compared with earlies scales?**
 
 -   covers the whole development of the plant not only the buds as with earlier scales
 -   developed in a way that it can suited to all plant species
@@ -41,15 +40,15 @@ Github corner by https://github.com/tholman/github-corners
 
 \
 
-3.  **Classify the following phenological stages of sweet cherry according to the BBCH scale:** ![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
+**3.Classify the following phenological stages of sweet cherry according to the BBCH scale:** ![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
 
-    1.  54/55
+1.  54/55
 
-    2.  65 could be also lower if the object in the background is a (closed) bud
+2.  65 could be also lower if the object in the background is a (closed) bud
 
-    3.  89
+3.  89
 
-    Pictures similar to 1. and 3. can be seen in the appendix of [@fadon_flower_2015].
+Pictures similar to 1. and 3. can be seen in the appendix of [@fadon_flower_2015].
 
 \
 
@@ -57,7 +56,7 @@ Github corner by https://github.com/tholman/github-corners
 
 ## Lesson 04: Climate change and impact projection
 
-1.  **List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.**
+**1.List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.**
 
 -   Greenhouse gases (Decade)
 
@@ -83,15 +82,15 @@ Github corner by https://github.com/tholman/github-corners
 
 \
 
-2.  **Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.**
+**2.Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.**
 
 -   In the last decades, the temperature rose steadily. The last two decades were the warmest measured since 1880. We are about to live in a world, that has never been so warm for humans or humanlike beings. The climate of the earth was always changing, but the speed of change was never so fast before. When at some point a tipping point is reached the changes cannot be undone.
 
-3.  **What does the abbreviation 'RCP' stand for, how are RCPs defined, and what is their role in projecting future climates?**
+**3.What does the abbreviation 'RCP' stand for, how are RCPs defined, and what is their role in projecting future climates?**
 
 -   RCP is the abbreviation for Representative Concentration Pathways, which are defined by the additional radiated forcing in watts per square meter for the year 2100. They serve as scenarios for the future of our climate. A high scenario like RCP8.5 is caused by increasing GHG emissions, while lower scenarios can be achieved with a decrease of GHG emissions. In the case of RCP6.0, additional 6 W m^-2^ are expected for the year 2100. Multiple scenarios should be considered, since one does not know which RCP prediction will occur.
 
-4.  **Briefly describe the 4 climate impact projection methods described in the fourth video.**
+**4.Briefly describe the 4 climate impact projection methods described in the fourth video.**
 
 -   
 
@@ -101,20 +100,22 @@ Github corner by https://github.com/tholman/github-corners
 
 ## Lesson 05: Winter chill projections
 
-1.  **Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology.**
--  Climate data can easily accumulate to high amounts of computer data, which can make further processing highly demanding in time and computing. But good data management and increasingly efficient computers enable tasks like this.
--  Over time, various climate models were created and replaced with improved ones, after new insights were gathered. The changes from SRESs to SSPs and later to RCPs increased the quality of the forecasts, but for users of those forecasts it meant adapting to the new standard.
-- To achieve state-of-the-art chill projections, so called ensembles are used. These consist of several chilling models plotted together. The idea is, that there is no single correct model, but multiple models that represent the chill projections.
+**1.Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology.**
 
-2.  **Outline, in your understanding, the basic steps that are necessary to make such projections.**
--  setting the spatial scope for the projections
--  setting the temporal scope for the projections
--  choosing the ensemble of chill models
--  accessing the data from the past
--  prepare the data
--  generating the data for the future climate with a weather generator
--  apply the ensemble of chill models
--  plot the results
+-   Climate data can easily accumulate to high amounts of computer data, which can make further processing highly demanding in time and computing. But good data management and increasingly efficient computers enable tasks like this.
+-   Over time, various climate models were created and replaced with improved ones, after new insights were gathered. The changes from SRESs to SSPs and later to RCPs increased the quality of the forecasts, but for users of those forecasts it meant adapting to the new standard.
+-   To achieve state-of-the-art chill projections, so called ensembles are used. These consist of several chilling models plotted together. The idea is, that there is no single correct model, but multiple models that represent the chill projections.
+
+**2.Outline, in your understanding, the basic steps that are necessary to make such projections.**
+
+-   setting the spatial scope for the projections
+-   setting the temporal scope for the projections
+-   choosing the ensemble of chill models
+-   accessing the data from the past
+-   prepare the data
+-   generating the data for the future climate with a weather generator
+-   apply the ensemble of chill models
+-   plot the results
 
 ------------------------------------------------------------------------
 
@@ -123,14 +124,17 @@ Github corner by https://github.com/tholman/github-corners
 The data that is used in this lesson is from the inbuilt `Winters_hours_gaps` dataset. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used `Temp_gaps` column.
 
 Table for the modified `Winters_hours_gaps` dataset
+
 ```{r, echo=FALSE}
 hourtemps <- subset(Winters_hours_gaps, select = -c(Temp_gaps))
-kable(hourtemps[1:5,])  %>%
-  kable_styling("striped", position = "left",font_size = 10)
+
+row.names(hourtemps) <- NULL
+kbl(hourtemps[1:5,], escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
 ```
 
+**1.Write a basic function that calculates warm hours (\>25°C)**
 
-1.  Write a basic function that calculates warm hours (>25°C)
 ```{r}
 WH <- function(hourtemps)
   {
@@ -142,18 +146,27 @@ hourtemps_plus_WH <- WH(hourtemps)
 
 \
 
-2.  Apply this function to the Winters_hours_gaps dataset
+**2.Apply this function to the Winters_hours_gaps dataset**
 
 Table for `hourtemps_plus_WH`
+
 ```{r, echo=FALSE}
-kable(hourtemps_plus_WH[4008:4012,])  %>%
-  kable_styling("striped", position = "left",font_size = 10)
+hourtemps_plus_WH <- hourtemps_plus_WH[4008:4018, 1:5]
+row.names(hourtemps_plus_WH) <- NULL
+hourtemps_plus_WH$Temp <- ifelse(
+  hourtemps_plus_WH$Temp > 25,
+  cell_spec(hourtemps_plus_WH$Temp, color = "red", bold = T),
+  cell_spec(hourtemps_plus_WH$Temp, color = "green")
+)
+
+kbl(hourtemps_plus_WH, escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
 ```
 
-3.  Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates
+**3.Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
 
 ```{r}
-WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA)#, start_hour=12, end_hour=12)
+WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA, start_hour=12, end_hour=12)
 {
 
   start_year <- as.numeric(substr(start_dateYEARMODA, 1, 4))
@@ -164,8 +177,6 @@ WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA)#, start
   end_month <- as.numeric(substr(end_dateYEARMODA, 5, 6))
   end_day <- as.numeric(substr(end_dateYEARMODA, 7, 8))
   
-  start_hour <- 12
-  end_hour <-  12
 
   start_date <- which(hourtemps$Year==start_year & hourtemps$Month==start_month
                       & hourtemps$Day==start_day & hourtemps$Hour==start_hour)
@@ -176,19 +187,85 @@ WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA)#, start
   
   WHs <- sum(warm_hours[start_date:end_date, "Warming_hours"])
   return(WHs)
-
-  warming_hours_for_time_frame <- WH_YEARMODA(hourtemps, 20080501, 20080831)
 }
+
+warming_hours_for_time_frame <- WH_YEARMODA(hourtemps, 20080501, 20080831)
+
 ```
 
-Between the 1th of May 2008 and the 31th of August 2008, `r ` hours over 25°C occured.
+Between the 1th of May 2008 and the 31th of August 2008, **`r warming_hours_for_time_frame`** hours over 25°C occured.
 
 ------------------------------------------------------------------------
+
+## Lesson 07: Manual chill analysis
+
+**1.Run the chilling() function on the Winters_hours_gap dataset**
+
+```{r}
+chilling_output <- chilling(make_JDay(Winters_hours_gaps),Start_JDay = 90, End_JDay = 100)
+chilling_output
+```
+
+**2.Create your own temperature-weighting chill model using the step_model() function.**
+
+```{r}
+own_utah_steps <- data.frame(
+  lower=c(-291,0,1,2,3,4,5,6),
+  upper=c(0,1,2,3,4,5,6,100),
+  weight=c(0,0.5,1,2,3,2,1,0))
+
+kable(own_utah_steps) %>%
+  kable_styling("striped", position = "left", font_size = 10)
+
+own_utah <- function(x) step_model(x,own_utah_steps)
+
+test <- own_utah(Winters_hours_gaps$Temp)
+
+```
+
+**3.Run this model on the Winters_hours_gaps dataset using the tempResponse() function.**
+
+```{r}
+output<-tempResponse(make_JDay(Winters_hours_gaps),
+                     Start_JDay = 90, End_JDay = 100, 
+                     models=list(Own_Utah_Model=own_utah, Chill_portions=Dynamic_Model),
+                     whole_record = TRUE)
+kable(output) %>%
+  kable_styling("striped", position = "left", font_size = 10)
+```
+
+------------------------------------------------------------------------
+
+## Lesson 08: Manual chill analysis
+
+**1.Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength**
+
+I chose a location with the latitude `32`, which can be seen in the leaflet below.
+```{r, echo=FALSE}
+library(leaflet) 
+m <- leaflet() %>% setView(lng = -8, lat = 32, zoom = 16)
+m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
+  addMiniMap(
+    tiles = providers$Esri.WorldStreetMap,
+    toggleDisplay = TRUE)
+  
+```
+```{r}
+require(chillR)
+require(ggplot2)
+require(reshape2)
+Days<-daylength(latitude=32,JDay=1:365)
+Days
+```
+
+
+**2.Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)**
+
+**3.Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)**
+
+
+------------------------------------------------------------------------
+
 \
 \
 References
-
-
-
-
-
