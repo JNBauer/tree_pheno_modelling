@@ -1,0 +1,81 @@
+---
+title: "Untitled"
+author: "Julian Bauer"
+date: '2022-10-29'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(knitr)
+library(kableExtra)
+library(formattable)
+library(dplyr)
+library(chillR)
+```
+
+
+## R Markdown
+
+```{r}
+ft_dt <- mtcars[1:5, 1:4]
+ft_dt$car <- row.names(ft_dt)
+row.names(ft_dt) <- NULL
+ft_dt$mpg <- color_tile("white", "orange")(ft_dt$mpg)
+ft_dt$cyl <- cell_spec(ft_dt$cyl, angle = (1:5)*60, 
+                      background = "red", color = "white", align = "center")
+ft_dt$disp <- ifelse(
+  ft_dt$disp > 200,
+  cell_spec(ft_dt$disp, color = "red", bold = T),
+  cell_spec(ft_dt$disp, color = "green", italic = T)
+)
+
+kbl(ft_dt, escape = F) %>%
+  kable_paper("hover", full_width = F) %>%
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c(" ", "Hello" = 2, "World" = 2))
+```
+
+```{r}
+
+hourtemps <- subset(Winters_hours_gaps, select = -c(Temp_gaps))
+
+hourtemps <- hourtemps[1:5, 1:5]
+hourtemps$Year <- row.names(hourtemps)
+row.names(hourtemps) <- NULL
+hourtemps$Hour <- color_tile("white", "orange")(hourtemps$Hour)
+hourtemps$Month <- cell_spec(hourtemps$Month, angle = (1:5)*60, 
+                      background = "red", color = "white", align = "center")
+hourtemps$Temp <- ifelse(
+  hourtemps$Temp > 200,
+  cell_spec(hourtemps$Temp, color = "red", bold = T),
+  cell_spec(hourtemps$Temp, color = "green", italic = T)
+)
+
+kbl(hourtemps, escape = F) %>%
+  kable_paper("hover", full_width = F) %>%
+  column_spec(5, width = "3cm") %>%
+  add_header_above(c(" ", "Hello" = 2, "World" = 2))
+
+```
+
+```{r}
+
+hourtemps <- subset(Winters_hours_gaps, select = -c(Temp_gaps))
+
+hourtemps <- hourtemps[4008:4012, 1:5]
+
+hourtemps$Temp <- ifelse(
+  hourtemps$Temp > 20,
+  cell_spec(hourtemps$Temp, color = "red", bold = T),
+  cell_spec(hourtemps$Temp, color = "green")
+)
+
+kbl(hourtemps, escape = F) %>%
+  kable_paper("hover", full_width = F)
+
+
+```
