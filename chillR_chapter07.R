@@ -20,8 +20,20 @@ own_utah_steps
 
 own_utah <- function(x) step_model(x,df)
 
-test <- own_utah(Winters_hours_gaps$Temp)[90:100]
+test <- own_utah(Winters_hours_gaps$Temp)[1:100]
 test
+
+
+df<-data.frame(
+  lower=c(-1000,1,2,3,4,5,6),
+  upper=c(1,2,3,4,5,6,1000),
+  weight=c(0,1,2,3,2,1,0))
+
+custom<-function(x) step_model(x,df)
+
+cust <- custom(Winters_hours_gaps$Temp)[1:100]
+cust
+
 
 output<-tempResponse(make_JDay(Winters_hours_gaps),
                      Start_JDay = 90, End_JDay = 100, 
