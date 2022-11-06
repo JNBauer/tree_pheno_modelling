@@ -346,14 +346,14 @@ ggplot(data=winters_temps_to_plot, aes(DATE,Temperature, colour=Method)) +
 
 ------------------------------------------------------------------------
 
-## Lesson 09: Manual chill analysis
+## Lesson 09: Getting temperature data
 
 **1.Choose a location of interest and find the 25 closest weather stations using the handle_gsod function**
 
 I chose a location with the latitude `32`, which can be seen in the leaflet below.
 ```{r, echo=FALSE, message=FALSE}
 require(leaflet) 
-m <- leaflet() %>% setView(lng = -84, lat = 42, zoom = 16)
+m <- leaflet() %>% setView(lng = 18.93521767626777 , lat = -34.10835247406239, zoom = 16)
 m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
   addMiniMap(
     tiles = providers$Esri.WorldStreetMap,
@@ -362,9 +362,11 @@ m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
 ```
 
 ```{r}
+require(chillR)
 station_list<-handle_gsod(action="list_stations",
-                          location=c(42,-84),
-                          time_interval=c(1990,2020))
+                          location=c(18.93521767626777, -34.10835247406239),
+                          time_interval=c(1990,2020),
+                          stations_to_choose_from = 25)
 
 station_list
 ```
@@ -372,11 +374,14 @@ station_list
 
 **2.Download weather data for the most promising station on the list**
 
-Selecting the 2th station of the search query from task 1.
+Selecting the 3th station of the search query from task 1.
 ```{r}
 weather<-handle_gsod(action="download_weather",
-                     location=station_list$chillR_code[2],
+                     location=station_list$chillR_code[3],
                      time_interval=c(1990,2020))
+
+
+
 ```
 
 
@@ -385,24 +390,99 @@ weather<-handle_gsod(action="download_weather",
 ```{r}
 cleaned_weather<-handle_gsod(weather)
 
+str(cleaned_weather)
 
+weather <- cleaned_weather$`CAPE TOWN INTL`$weather
 kable(cleaned_weather$weather[1:20,]) %>%
   kable_styling("striped", position = "left", font_size = 8)
+
+print(cleaned_weather$`CAPE TOWN INTL`$database)
 ```
 
 
 ```{r}
-DOWNLOAD = TRUE
-if (DOWNLOAD == TRUE) {
-  write.csv(station_list,"data/station_list.csv",row.names=FALSE)
-  write.csv(weather,"data/Bonn_weather.csv",row.names=FALSE)
-  write.csv(cleaned_weather$weather,"data/Bonn_chillR_weather.csv",row.names=FALSE)
-}
+write.csv(station_list,"data/station_list.csv",row.names=FALSE)
+write.csv(weather,"data/CapeTown_weather.csv",row.names=FALSE)
+write.csv(cleaned_weather$weather,"data/CapeTown_chillR_weather.csv",row.names=FALSE)
+```
+
+------------------------------------------------------------------------
+
+## Lesson 09: Filling gaps in temperature records
+
+**1. Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)**
+
+```{r}
+fixed_weather <- fix_weather(weather)
+fixed_weather$QC
 
 ```
 
 
+**2. Create a list of the 25 closest weather stations using the handle_gsod function**
+```{r}
+patching_station_list<-handle_gsod(action="list_stations",
+                          location=c(18.93521767626777, -34.10835247406239),
+                          time_interval=c(1990,2020),
+                          stations_to_choose_from = 25)
+patching_station_list
 
+```
+
+
+**3. Identify suitable weather stations for patching gaps**
+```{r}
+ELGIN EXP FARM 1
+STRAND 2
+CAPE POINT 10
+
+```
+
+
+**4. Download weather data for promising stations, convert them to chillR format and compile them in a list**
+```{r}
+positions_in_station_list<-c(1,2,10)
+
+patch_weather<-list()
+
+for(i in 1:length(positions_in_station_list))
+  {patch_weather[[i]]<-handle_gsod(handle_gsod(action="download_weather",
+                                   location=station_list$chillR_code[
+                                     positions_in_station_list[i]],
+                                   time_interval=c(1990,2020)))$weather
+#  names(patch_weather)[i]<-station_list$STATION.NAME[
+#   positions_in_station_list[i]]
+}
+?names
+#Error in names(patch_weather) <- `*vtmp*` : 
+#  'names' attribute [1] must be the same length as the vector [0]
+
+```
+
+
+**5. Use the patch_daily_temperatures function to fill gaps**
+
+```{r}
+
+str(patch_weather[1])
+
+patched<-patch_daily_temperatures(weather = fixed_weather,
+                                  patch_weather = patch_weather)
+
+patched$statistics
+
+```
+
+
+**6. Investigate the results - have all gaps been filled?**
+
+```{r}
+fixed_weather <- fix_weather(patched)
+fixed_weather$QC
+```
+
+
+**7. If necessary, repeat until you have a dataset you can work with in further analyses**
 
 
 
