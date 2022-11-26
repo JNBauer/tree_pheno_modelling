@@ -18,32 +18,6 @@ library(chillR)
 ```
 
 
-
-```{r, echo=FALSE}
-require(leaflet) 
-m <- leaflet() %>% setView(lng = 18.877782 , lat = -33.924805, zoom = 16)
-m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
-  addMiniMap(
-    tiles = providers$Esri.WorldStreetMap,
-    toggleDisplay = TRUE)
-
-require(chillR)
-library(kableExtra)
-```
-
-```{r, message=FALSE, warning=FALSE}
-station_list<-handle_gsod(action="list_stations",
-                          location=c(18.877782, -33.924805),
-                          time_interval=c(1990,2020),
-                          stations_to_choose_from = 25)
-
-station_list
-
-```
-
-
-
-
 ## R Markdown
 
 ```{r}

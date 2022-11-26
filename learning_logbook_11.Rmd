@@ -135,3 +135,17 @@ ggplot(freezing_comparison, aes(x=Freezing_Hours)) +
   xlab("Freezing Hours") +
   ylab("Frequency")
 ```
+
+
+```{r Cumulative plotting of Chill portions}
+chill_simulations<-freezing_comparison_full_seasons[
+  which(freezing_comparison_full_seasons$Data_source=="simulated"),]
+
+chill_simulations
+
+ggplot(chill_simulations, aes(x=Freezing_hours)) +
+  stat_ecdf(geom = "step",lwd=1.5,col="blue") +
+  ylab("Cumulative probability") +
+  xlab("Chill accumulation (in Chill Portions)") +
+  theme_bw(base_size = 20)
+```

@@ -50,8 +50,6 @@ downloaded_weather<-handle_gsod(action="download_weather",
 
 ```{r Clean weather data with handle_gsod, eval=FALSE}
 cleaned_weather<-handle_gsod(downloaded_weather)
-cleaned_weather$`CAPE TOWN INTL`$weather
-str(cleaned_weather)
 ```
 
 ```{r Create table with cleaned weather, echo=FALSE}

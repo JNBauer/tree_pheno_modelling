@@ -41,7 +41,7 @@ library(dplyr)
 
 \
 
-**3.Classify the following phenological stages of sweet cherry according to the BBCH scale:** ![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
+**3.Classify the following phenological stages of sweet cherry according to the BBCH scale:** ![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
 
 1.  54/55
 
@@ -198,7 +198,7 @@ Between the 1th of May 2008 and the 31th of August 2008, **`r warming_hours_for_
 
 ------------------------------------------------------------------------
 
-## Lesson 07: Manual chill analysis
+## Lesson 07: Chill Models
 
 **1.Run the chilling() function on the Winters_hours_gap dataset**
 
@@ -237,11 +237,11 @@ kable(output) %>%
 
 ------------------------------------------------------------------------
 
-## Lesson 08: Manual chill analysis
+## Lesson 08: Making hourly temperatures
 
 **1.Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength**
 
-I chose a location with the latitude `32`, which can be seen in the leaflet below.
+The chosen location with the latitude of '32' can be seen below in the leaflet.
 ```{r, echo=FALSE, message=FALSE}
 require(leaflet) 
 m <- leaflet() %>% setView(lng = -8, lat = 32, zoom = 16)
@@ -361,7 +361,7 @@ m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
   
 ```
 
-```{r, eval=FALSE}
+```{r}
 require(chillR)
 station_list<-handle_gsod(action="list_stations",
                           location=c(18.93521767626777, -34.10835247406239),
@@ -408,7 +408,7 @@ write.csv(cleaned_weather$weather,"data/CapeTown_chillR_weather.csv",row.names=F
 
 ------------------------------------------------------------------------
 
-## Lesson 09: Filling gaps in temperature records
+## Lesson 10: Filling gaps in temperature records
 
 **1. Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)**
 
@@ -417,6 +417,9 @@ require(chillR)
 require(dplyr)
 require(kableExtra)
 CapeTown_weather <- read.csv("data/CapeTown_chillR_weather.csv")
+
+fixed_weather <- fix_weather(CapeTown_weather)
+
 
 CapeTown_weather_gap <- CapeTown_weather[-c(4231:4444),]
 
@@ -481,7 +484,7 @@ save_temperature_scenarios(patch_weather,"data/", "patch_weather")
 **5. Use the patch_daily_temperatures function to fill gaps**
 
 ```{r}
-
+require(chillR)
 patch_weather<-load_temperature_scenarios("data/", "patch_weather")
 str(patch_weather[2])
 
@@ -509,19 +512,26 @@ patched_fixed_weather2$QC
 
 ------------------------------------------------------------------------
 
-## Lesson 10: Generating temperature scenarios
+## Lesson 11: Generating temperature scenarios
 
 **1. For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.**
 
 ```{r}
+
+require(chillR)
+fixed_weather
+patched_fixed_weather <- fixed_weather$weather
+
+head(patched_fixed_weather)
+
 temp<-temperature_generation(patched_fixed_weather,
                              years=c(1990,2005),
                              sim_years = c(2001,2100))
 
 
-temperatures<-cbind(KA_weather[
-  which(KA_weather$Year %in% 1998:2005),] ,Data_source="observed")
-temperatures<-rbind(temperatures,
+temperatures<-cbind(patched_fixed_weather[
+  which(patched_fixed_weather$Year %in% 1998:2005),] ,Data_source="observed")
+temperatures<-rbind(temperatures[,c("Year","Month","Day","Tmin","Tmax","Data_source")],
                     cbind(temp[[1]][,c("Year","Month","Day","Tmin","Tmax")],
                           Data_source="simulated"))
 temperatures[,"Date"]<-as.Date(ISOdate(2000,
@@ -534,22 +544,27 @@ temperatures[,"Date"]<-as.Date(ISOdate(2000,
 **2. Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.**
 ```{r}
 require(ggplot2)
+
 chill_observed<-chilling(
   stack_hourly_temps(
     temperatures[which(temperatures$Data_source=="observed"),],
     latitude = -34.10835247406239),
-  Start_JDay = 305,
-  End_JDay = 59)
+  Start_JDay = 121, # Beginning May
+  End_JDay = 243) # End of August
 chill_simulated<-chilling(
   stack_hourly_temps(
     temperatures[which(temperatures$Data_source=="simulated"),],
     latitude = -34.10835247406239),
-  Start_JDay = 305,
-  End_JDay = 59)
+  Start_JDay = 121,
+  End_JDay = 243)
 
-chill_comparison<-cbind(chill_observed ,Data_source="observed")
-chill_comparison<-rbind(chill_comparison,
-                        cbind(chill_simulated ,Data_source="simulated"))
+chill_comparison <- cbind(chill_observed ,Data_source="observed")
+chill_simulated <- cbind(chill_simulated ,Data_source="simulated")
+colnames(chill_comparison) == colnames(chill_simulated)
+#chill_comparison <- chill_comparison[-"Interpolated_days"]
+
+chill_comparison <- rbind(chill_comparison, chill_simulated)
+
 
 chill_comparison_full_seasons<-chill_comparison[
   which(chill_comparison$Perc_complete==100),]
@@ -563,13 +578,95 @@ ggplot(chill_comparison_full_seasons, aes(x=Chill_portions)) +
   ylab("Frequency")
 ```
 
+```{r}
+chill_simulations<-chill_comparison_full_seasons[
+  which(chill_comparison_full_seasons$Data_source=="simulated"),]
+
+ggplot(chill_simulations, aes(x=Chill_portions)) +
+  stat_ecdf(geom = "step",lwd=1.5,col="blue") +
+  ylab("Cumulative probability") +
+  xlab("Chill accumulation (in Chill Portions)") +
+  theme_bw(base_size = 20)
+```
+
 
 **3. Produce similar plots for the number of freezing hours (<0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.**
 
 
+```{r}
+
+temperatures
+
+FH <- function(hourtemps)
+  {
+  hourtemps[,"Freezing_hours"] <- hourtemps$Temp<0
+  return(hourtemps)
+}
+hourtemps_plus_FH <- FH(hourtemps)
+
+hourtemps<-stack_hourly_temps(weather,latitude=50.4)
+
+
+weather<-fix_weather(KA_weather[which(KA_weather$Year>2006),])
+
+hourtemps<-stack_hourly_temps(weather,latitude=50.4)
+
+df=data.frame(
+  lower=c(-1000,1,2,3,4,5,6),
+  upper=c(1,2,3,4,5,6,1000),
+  weight=c(0,1,2,3,2,1,0))
+
+custom<-function(x) step_model(x,df)
+
+models<-list(Chilling_Hours=Chilling_Hours,Utah_Chill_Units=Utah_Model,Chill_Portions=
+  Dynamic_Model,GDH=GDH,Freezing_hours=FH)
+
+tempResponse(hourtemps,Start_JDay = 305,End_JDay = 60,models)
 
 
 
+
+
+freeze_observed <- tempResponse(hourtemps[[1]],
+                     Start_JDay = 275, End_JDay = 305, 
+                     models=list(Freezing_hours=FH),
+                     whole_record = TRUE)
+
+freeze_observed <- tempResponse(
+                    stack_hourly_temps(
+                     temperatures[which(temperatures$Data_source=="observed"),]),
+                     Start_JDay = 275, End_JDay = 305, 
+                     models=list(Freezing_hours=FH),
+                     whole_record = TRUE)
+
+
+```
+
+------------------------------------------------------------------------
+
+## Lesson 11: Generating temperature scenarios
+
+**1. For the location you chose for previous exercises, produce historic temperature scenarios representing several years of the historic record (your choice).**
+
+```{r}
+all_past_scenarios<-temperature_scenario_from_records(
+  weather=Bonn_temps,
+  year=c(1980,1990,2000,2010))
+
+adjusted_scenarios<-temperature_scenario_baseline_adjustment(
+  baseline=scenario_1996,
+  temperature_scenario = all_past_scenarios)
+
+all_past_scenario_temps<-temperature_generation(
+  weather=Bonn_temps,
+  years=c(1973,2019),
+  sim_years=c(2001,2100),
+  temperature_scenario = adjusted_scenarios)
+```
+
+
+
+**2. Produce chill distributions for these scenarios and plot them.**
 
 
 

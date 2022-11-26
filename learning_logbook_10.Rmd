@@ -126,10 +126,6 @@ The last single day gaps were fixed with the `fixed_weather` command. For furthe
 cleaned_weather <- read.csv("data/CapeTown_chillR_weather.csv")
 fixed_weather <- fix_weather(cleaned_weather)
 ```
-```{r Data saving and table creation, echo=FALSE}
-kable(fixed_weather$QC,
-      caption="Quality check after fixing left over gaps") %>%
-  kable_styling("hover", position = "left", font_size = 10)
-
+```{r Data saving, echo=FALSE}
 write.csv(fixed_weather$weather, "data/CapeTown_weather.csv", row.names=FALSE)
 ```
