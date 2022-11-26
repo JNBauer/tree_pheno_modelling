@@ -7,12 +7,14 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
 ```
 
 
 
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 library(chillR)
 library(dormancyR)
 library(dplyr)
@@ -20,7 +22,7 @@ library(kableExtra)
 ```
 
 
-```{r}
+```{r, renaming models and adding model labels}
 
 hourly_models <- list(Chilling_units = chilling_units,
      Low_chill = low_chill_model,
@@ -57,7 +59,7 @@ kable(data.frame(Metric=model_labels,'Function name'=metrics))  %>%
 ```
 
 
-```{r, eval = FALSE}
+```{r create chill metrics for all past scenarios,  eval = FALSE}
 CapeTown_temps<-read_tab("data/CapeTown_weather.csv")
 Temps<-load_temperature_scenarios("data/Weather","CapeTown_historic")
 
@@ -115,7 +117,7 @@ write.csv(past_observed,
           "data/chill/CapeTown_multichill_observed.csv",
           row.names=FALSE)
 ```
-```{r, eval=FALSE}
+```{r create chill metrics for all future scenarios, eval=FALSE}
 RCPs<-c("rcp45","rcp85")
 Times<-c(2050,2085)
 
@@ -159,7 +161,7 @@ for(RCP in RCPs)
 }
 ```
 
-```{r}
+```{r, adapt the structure of the data}
 chill_past_scenarios<-load_temperature_scenarios(
   "data/chill",
   "CapeTown_multichill_historic")
@@ -188,7 +190,7 @@ for(RCP in RCPs)
 }
 ```
 
-```{r}
+```{r prepare the dataset for plotting}
 for(i in 1:length(chills))
    {ch<-chills[[i]]
     if(ch$caption[1]=="Historic")
@@ -219,7 +221,7 @@ for(met in metrics)
       results[which(results$Metric==met&results$Year==1980),"Result"]-1
 ```
 
-```{r}
+```{r simple heatmap for SWC in future scenarios}
 require(ggplot2)
 require(patchwork)
 
@@ -233,14 +235,14 @@ p_future<-ggplot(results[which(!results$GCM=="none"),],
 p_future
 ```
 
-```{r}
+```{r separate plots by RCP and year}
 p_future <-
   p_future +
   facet_grid(RCP ~ Year) 
 p_future
 ```
 
-```{r}
+```{r size and theme changes}
 p_future <-
   p_future +
   theme_bw(base_size = 15) +
@@ -248,7 +250,7 @@ p_future <-
 
 p_future
 ```
-```{r}
+```{r color gradient modification}
 library(colorRamps)
 p_future <-
   p_future +
@@ -257,7 +259,7 @@ p_future <-
                        limits=rng)
 p_future
 ```
-```{r}
+```{r adding labels}
 p_future <-
   p_future  +
   theme(axis.text.x = element_text(angle = 75, hjust = 1, vjust = 1)) +
@@ -267,7 +269,7 @@ p_future <-
 p_future
 ```
 
-```{r}
+```{r prepare past and future plots for combining}
 p_past<-
   ggplot(results[which(results$GCM=="none"),],
          aes(Year, y=factor(Metric, levels=metrics),
@@ -297,18 +299,18 @@ p_past<-
 ```
 
 
-```{r}
+```{r, combine past and future plots with patchwork}
 chill_comp_plot<-
   (p_past +
      p_future +
      plot_layout(guides = "collect",nrow=2, heights=c(1,2))) &
-  theme(legend.position = "right",strip.background = element_blank(),
+  theme(plot.margin = margin(1, 1, 12, 1), legend.position = "right",strip.background = element_blank(),
         strip.text = element_text(face = "bold"))
 
 chill_comp_plot
 ```
 
-```{r}
+```{r data preparation for line graph arrangement}
 hist_results<-results[which(results$GCM=="none"),]
 hist_results$RCP<-"RCP4.5"
 hist_results_2<-hist_results
@@ -326,7 +328,7 @@ RCP_Time_series<-rbind(hist_results[,c("Metric","RCP","Year","SWC")],
                        GCM_aggregate)
 ```
 
-```{r}
+```{r plotting chill_change as line plot}
 chill_change_plot<-
   ggplot(data=RCP_Time_series,
          aes(x=Year,y=SWC,col=factor(Metric,levels=metrics))) +
@@ -343,10 +345,10 @@ chill_change_plot<-
 chill_change_plot
 ```
 
-```{r}
+```{r using gganimate to animate chill_change plot}
 library(gganimate)
 chill_change_plot + transition_reveal(Year)
 
-anim_save("data/chill_comparison_animation.gif", animation = last_animation())
+anim_save("plots/chill_comparison_animation.gif", animation = last_animation())
 ```
 
