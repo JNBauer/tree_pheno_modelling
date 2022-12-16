@@ -1,0 +1,61 @@
+---
+title: Embed 3D plots with rgl
+output: html_document
+---
+
+Set up a hook to save **rgl** plots:
+
+```{r, setup}
+#knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+See if it works for this 3D plot after we enable the hook
+via the chunk option `webgl = TRUE`:
+
+```{r}
+from dash import Dash, dcc, html, Input, Output
+import plotly.express as px
+
+colorscales = px.colors.named_colorscales()
+
+app = Dash(__name__)
+
+
+app.layout = html.Div([
+    html.H4('Interactive color scale'),
+    html.P("Select your palette:"),
+    dcc.Dropdown(
+        id='dropdown', 
+        options=colorscales,
+        value='viridis'
+    ),
+    dcc.Graph(id="graph"),
+])
+
+
+@app.callback(
+    Output("graph", "figure"), 
+    Input("dropdown", "value"))
+def change_colorscale(scale):
+    df = px.data.iris() # replace with your own data source
+    fig = px.scatter(
+        df, x="sepal_width", y="sepal_length", 
+        color="sepal_length", color_continuous_scale=scale)
+    return fig
+
+
+app.run_server(debug=True)
+```
+
+
+```{r, test-rgl, webgl=TRUE}
+# Library
+
+
+# Data: volcano is provided by plotly
+
+# Plot
+library(plotly)
+p <- plot_ly(z = volcano, type = "surface")
+p 
+```

@@ -1,0 +1,75 @@
+---
+title: "Untitled"
+author: "Julian Bauer"
+date: '2022-10-29'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(knitr)
+library(kableExtra)
+library(formattable)
+library(dplyr)
+library(chillR)
+library(leaflet)
+```
+
+
+```{r}
+centerCoords <- c(-34.10835247406239,18.93521767626777)
+station_list <- read.csv("data/station_list.csv")
+
+center <- makeIcon(
+  iconUrl = "https://cdn-icons-png.flaticon.com/512/415/415682.png",
+  iconWidth = 40, iconHeight = 40,
+  iconAnchorX = 20, iconAnchorY = 20)
+
+stations <- makeIcon(
+  iconUrl = "https://cdn-icons-png.flaticon.com/512/1753/1753451.png",
+  iconWidth = 30, iconHeight = 30,
+  iconAnchorX = 15, iconAnchorY = 15)
+
+
+m <- leaflet(width = "100%")
+m <- addTiles(m) %>%
+  setView(m, lng = centerCoords[2], lat = centerCoords[1], zoom = 10) %>%
+  addProviderTiles(providers$Esri.WorldTopoMap, group = "Topographical map") %>%
+  addProviderTiles(providers$Esri.WorldImagery, group = "World imagery") %>%
+  addMarkers(m, lng=centerCoords[2], lat= centerCoords[1], popup="Center", icon = center) %>%
+  addLayersControl(baseGroups = c("Topographical map", "World imagery"),
+                   options = layersControlOptions(collapsed = FALSE))
+
+
+ for(i in 1:10) {
+      m <- addMarkers(m, lng=station_list[i,5], lat=station_list[i,4], popup=station_list[i,2],
+                      icon = stations)
+ }
+m
+```
+
+
+```{r}
+outline <- quakes[chull(quakes$long, quakes$lat),]
+
+map <- leaflet(quakes) %>%
+  # Base groups
+  addTiles(group = "OSM (default)") %>%
+  addProviderTiles(providers$Stamen.Toner, group = "Toner") %>%
+  addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>%
+  # Overlay groups
+  addCircles(~long, ~lat, ~10^mag/5, stroke = F, group = "Quakes") %>%
+  addPolygons(data = outline, lng = ~long, lat = ~lat,
+    fill = F, weight = 2, color = "#FFFFCC", group = "Outline") %>%
+  # Layers control
+  addLayersControl(
+    baseGroups = c("OSM (default)", "Toner", "Toner Lite"),
+    overlayGroups = c("Quakes", "Outline"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+map
+```
+
