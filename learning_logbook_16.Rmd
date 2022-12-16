@@ -11,8 +11,9 @@ knitr::opts_chunk$set(warning = FALSE)
 knitr::opts_chunk$set(message = FALSE)
 ```
 
-
-
+# Chapter 16 Chill model comparison
+\
+**1. Perform a similar analysis for the location you’ve chosen for your exercises.**
 
 ```{r, echo=FALSE, message=FALSE}
 library(chillR)
@@ -189,7 +190,8 @@ for(RCP in RCPs)
                                    add_to = chills)
 }
 ```
-
+\
+**2.  Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here**
 ```{r prepare the dataset for plotting}
 for(i in 1:length(chills))
    {ch<-chills[[i]]
@@ -309,7 +311,8 @@ chill_comp_plot<-
 
 chill_comp_plot
 ```
-
+\
+**3.  Produce an animated line plot of your results (summarizing Safe Winter Chill across all the GCMs).**
 ```{r data preparation for line graph arrangement}
 hist_results<-results[which(results$GCM=="none"),]
 hist_results$RCP<-"RCP4.5"

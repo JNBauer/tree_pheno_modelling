@@ -1,0 +1,22 @@
+---
+bibliography: libs/references.bib
+link-citations: TRUE
+output: 
+  html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+```
+
+# Chapter 16 Chill model comparison
+\
+**1. Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.**
+
+\
+**2. Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.**
+
+\
+**3. What do we need to know to build a process-based model from this?**

@@ -124,8 +124,8 @@ The last single day gaps were fixed with the `fixed_weather` command. For furthe
 
 ```{r Loading original data and fixing single missing days}
 cleaned_weather <- read.csv("data/CapeTown_chillR_weather.csv")
-fixed_weather <- fix_weather(cleaned_weather)
 ```
+
 ```{r Data saving, echo=FALSE}
 write.csv(fixed_weather$weather, "data/CapeTown_weather.csv", row.names=FALSE)
 ```

@@ -117,8 +117,7 @@ plot_scenarios_gg<-function(past_observed,
     theme_bw(base_size = 15) +  
     theme(strip.background = element_blank(),
           strip.text = element_text(face = "bold"),
-          axis.text.x = element_text(angle=45, hjust=1),
-          axis.text.y = element_text(colour = "red")) +
+          axis.text.x = element_text(angle=45, hjust=1)) +
     geom_point(data = past_observed,
                aes_string("End_year",metric),
                col="blue")
@@ -155,36 +154,44 @@ plot_scenarios_gg<-function(past_observed,
             future_plot_list +
             plot_layout(guides = "collect",
                         widths = c(1,rep(1.8,length(future_plot_list))))) +
-          plot_annotation(title = 'Plot for Cape Town, South Africa',
-                  theme = theme(plot.title = element_text(size = 24))) & 
+          plot_annotation(theme = theme(plot.title = element_text(size = 24))) & 
                   theme(legend.position = "bottom",
                   legend.text = element_text(size=8),
                   legend.title = element_text(size=10),
                   axis.title.x=element_blank())
   
 }
+```
 
 
+```{r}
 CapeTown_Heat_GDH <- plot_scenarios_gg(past_observed=past_observed,
                   past_simulated=past_simulated,
                   future_data=future_data,
                   metric="Heat_GDH",
                   axis_label="Heat (in Growing Degree Hours)")
+CapeTown_Heat_GDH
+
 
 CapeTown_Chill_CP <- plot_scenarios_gg(past_observed=past_observed,
                   past_simulated=past_simulated,
                   future_data=future_data,
                   metric="Chill_CP",
                   axis_label="Chill (in Chill Portions)")
+CapeTown_Chill_CP
 
 CapeTown_Frost_H <- plot_scenarios_gg(past_observed=past_observed,
                   past_simulated=past_simulated,
                   future_data=future_data,
                   metric="Frost_H",
                   axis_label="Frost duration (in hours)")
+CapeTown_Frost_H
+```
 
+
+```{r}
 #ggsave("plots/CapeTownPlot_Heat_GDH.png", CapeTown_Heat_GDH, width = 10, height = 5, dpi = 800)
 #ggsave("plots/CapeTownPlot_Chill_CP.png", CapeTown_Chill_CP, width = 10, height = 5, dpi = 800)
-ggsave("plots/CapeTownPlots_Frost_H_RED.png", CapeTown_Frost_H, width = 10, height = 5, dpi = 800)
+#ggsave("plots/CapeTownPlots_Frost_H_RED.png", CapeTown_Frost_H, width = 10, height = 5, dpi = 800)
 ```
 
