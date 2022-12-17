@@ -1,10 +1,17 @@
 ---
-bibliography: libs/references.bib
+title: Tree phenology analysis with R - Logbook
+author: Julian Bauer
+bibliography: ../libs/references.bib
 link-citations: TRUE
-output: 
+output:
   html_document:
-    includes:
-      in_header: html/header.html
+      css: ../style.css
+      toc: TRUE
+      toc_float: TRUE
+      theme: lumen
+      includes:
+        #in_header: ../html/header.html
+        before_body: ../header3.html
 ---
 
 ```{r setup, include=FALSE}

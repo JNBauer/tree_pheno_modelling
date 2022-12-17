@@ -47,7 +47,7 @@ str(patching_station_list$STATION.NAME[1])
 
 
 **3. Identify suitable weather stations for patching gaps**\
-The ``r patching_station_list$STATION.NAME[1]``' station on the first position or the ``r patching_station_list$STATION.NAME[10]`` station on position 10 are suitable stations for patching gaps in our main dataset. The ``r patching_station_list$STATION.NAME[1]`` station is characterized by a close distance to the location of interest and the ``r patching_station_list$STATION.NAME[10]`` station by its completeness.
+The ``r patching_station_list$STATION.NAME[1]``' station on the first position or the ``r patching_station_list$STATION.NAME[10]`` station on position 10 could be suitable stations for patching gaps in our main data set. The ``r patching_station_list$STATION.NAME[1]`` station is characterized by a close distance to the location of interest and the ``r patching_station_list$STATION.NAME[10]`` station by its completeness.
 
 **4. Download weather data for promising stations, convert them to chillR format and compile them in a list**
 
