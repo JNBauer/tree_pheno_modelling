@@ -1,0 +1,43 @@
+# Climate change and impact projection
+
+**1.List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.**
+
+-   Greenhouse gases (Decade)
+
+-   Aerosols (Decade)
+
+-   Surface albedo
+
+-   Clouds
+
+-   Ozone
+
+-   Volcanic and meteorite activity (Centuries)
+
+-   Ocean currents (Centuries)
+
+-   Milankovic cycles (Centuries)
+
+-   Sun (Centuries)
+
+\
+
+-   The most important driver at the moment are Greenhouse gases (GHGs) and in particular anthropogenic CO~2~, which is mainly released by burning fossil fuels or by the production of cement. The concentration of CO~2~ in the atmosphere, which was closely correlated with the temperature in the past, is rising steadily and steeply at the moment. GHGs only absorb the reflected radiation coming from the earth and are not affected by direct radiation from the sun. This effect works like a trap, where radiation can enter, but not leave the atmosphere, which leads to an increase in temperature.
+
+\
+
+**2.Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.**
+
+-   In the last decades, the temperature rose steadily. The last two decades were the warmest measured since 1880. We are about to live in a world, that has never been so warm for humans or humanlike beings. The climate of the earth was always changing, but the speed of change was never so fast before. When at some point a tipping point is reached the changes cannot be undone.
+
+**3.What does the abbreviation 'RCP' stand for, how are RCPs defined, and what is their role in projecting future climates?**
+
+-   RCP is the abbreviation for Representative Concentration Pathways, which are defined by the additional radiated forcing in watts per square meter for the year 2100. They serve as scenarios for the future of our climate. A high scenario like RCP8.5 is caused by increasing GHG emissions, while lower scenarios can be achieved with a decrease of GHG emissions. In the case of RCP6.0, additional 6 W m^-2^ are expected for the year 2100. Multiple scenarios should be considered, since one does not know which RCP prediction will occur.
+
+**4.Briefly describe the 4 climate impact projection methods described in the fourth video.**
+
+-   
+
+\
+
+------------------------------------------------------------------------
