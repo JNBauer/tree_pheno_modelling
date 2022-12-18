@@ -1,0 +1,80 @@
+# Manual chill analysis
+
+The data that is used in this lesson is from the inbuilt `Winters_hours_gaps` dataset. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used `Temp_gaps` column.
+
+Table for the modified `Winters_hours_gaps` dataset
+
+```{r, echo=FALSE}
+require(chillR)
+hourtemps <- subset(Winters_hours_gaps, select = -c(Temp_gaps))
+
+row.names(hourtemps) <- NULL
+require(kableExtra)
+require(dplyr)
+kbl(hourtemps[1:5,], escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
+```
+
+**1.Write a basic function that calculates warm hours (\>25°C)**
+
+```{r}
+WH <- function(hourtemps)
+  {
+  hourtemps[,"Warming_hours"] <- hourtemps$Temp>25
+  return(hourtemps)
+}
+hourtemps_plus_WH <- WH(hourtemps)
+```
+
+\
+
+**2.Apply this function to the Winters_hours_gaps dataset**
+
+Table for `hourtemps_plus_WH`
+
+```{r, echo=FALSE}
+hourtemps_plus_WH <- hourtemps_plus_WH[4008:4018, 1:5]
+row.names(hourtemps_plus_WH) <- NULL
+hourtemps_plus_WH$Temp <- ifelse(
+  hourtemps_plus_WH$Temp > 25,
+  cell_spec(hourtemps_plus_WH$Temp, color = "red", bold = T),
+  cell_spec(hourtemps_plus_WH$Temp, color = "green")
+)
+
+kbl(hourtemps_plus_WH, escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
+```
+
+**3.Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
+
+```{r}
+WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA, start_hour=12, end_hour=12)
+{
+
+  start_year <- as.numeric(substr(start_dateYEARMODA, 1, 4))
+  start_month <- as.numeric(substr(start_dateYEARMODA, 5, 6))
+  start_day <- as.numeric(substr(start_dateYEARMODA, 7, 8))
+
+  end_year <- as.numeric(substr(end_dateYEARMODA, 1, 4))
+  end_month <- as.numeric(substr(end_dateYEARMODA, 5, 6))
+  end_day <- as.numeric(substr(end_dateYEARMODA, 7, 8))
+  
+
+  start_date <- which(hourtemps$Year==start_year & hourtemps$Month==start_month
+                      & hourtemps$Day==start_day & hourtemps$Hour==start_hour)
+  end_date <- which(hourtemps$Year==end_year & hourtemps$Month==end_month
+                    & hourtemps$Day==end_day & hourtemps$Hour==end_hour)
+  
+  warm_hours <- WH(hourtemps)
+  
+  WHs <- sum(warm_hours[start_date:end_date, "Warming_hours"])
+  return(WHs)
+}
+
+warming_hours_for_time_frame <- WH_YEARMODA(hourtemps, 20080501, 20080831)
+
+```
+
+Between the 1th of May 2008 and the 31th of August 2008, **`r warming_hours_for_time_frame`** hours over 25°C occured.
+
+------------------------------------------------------------------------

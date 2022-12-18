@@ -1,0 +1,108 @@
+# Making hourly temperatures
+
+**1.Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength**
+
+The chosen location with the latitude of '32' can be seen below in the leaflet.
+```{r, echo=FALSE, message=FALSE}
+require(leaflet) 
+m <- leaflet() %>% setView(lng = -8, lat = 32, zoom = 16)
+m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
+  addMiniMap(
+    tiles = providers$Esri.WorldStreetMap,
+    toggleDisplay = TRUE)
+  
+```
+
+```{r, message=FALSE}
+require(chillR)
+require(ggplot2)
+require(reshape2)
+day_infos<-daylength(latitude=32,JDay=1:365)
+
+days_df<-data.frame(JDay=1:365,Sunrise=day_infos$Sunrise,Sunset=day_infos$Sunset,Daylength=day_infos$Daylength)
+days_df<-melt(days_df, id=c("JDay"))
+
+ggplot(days_df, aes(JDay, value)) + geom_line(lwd=1.5) + facet_grid(cols=vars(variable)) +
+  ylab("Time of Day / Daylength (Hours)") + theme_bw(base_size = 20)
+```
+
+
+**2.Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)**
+```{r}
+
+hourly_temps_KA <- stack_hourly_temps(KA_weather, latitude=50.4)
+
+#str(hourly_temps_KA) # to get the correct item from the list
+
+hourly_temps_KA_df <- hourly_temps_KA$hourtemps
+
+
+hourly_temps_KA_df[,"connected_timedate"] <- ISOdate(year = hourly_temps_KA_df$Year,
+                                  month = hourly_temps_KA_df$Month,
+                                  day = hourly_temps_KA_df$Day,
+                                  hour = hourly_temps_KA_df$Hour)
+
+ggplot(hourly_temps_KA_df[3500:3660,], aes(connected_timedate,Temp)) +
+  geom_line(lwd=1.5) +
+  labs(x="Date", y="Temperature in C°", title = "Hourly modelled temperature for Week 22 in 2002") +
+  theme_bw(base_size = 14)
+```
+
+**3.Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)**
+
+```{r}
+require(dplyr)
+
+kbl(Winters_hours_gaps[1:10,], escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
+
+coeffs<-Empirical_daily_temperature_curve(Winters_hours_gaps)
+
+kbl(coeffs[1:10,], escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
+
+winters_daily<-make_all_day_table(Winters_hours_gaps, input_timestep="hour")
+
+kbl(winters_daily[1:10,], escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
+
+winters_empirical<-Empirical_hourly_temperatures(winters_daily,coeffs)
+
+kbl(winters_empirical[1:10,], escape = F) %>%
+  kable_paper("hover", full_width = F, position = "left")
+
+```
+
+```{r}
+require(reshape2)
+
+winters_empirical<-winters_empirical[,c("Year","Month","Day","Hour","Temp")]
+colnames(winters_empirical)[ncol(winters_empirical)]<-"Temp_empirical"
+
+winters_ideal<-stack_hourly_temps(winters_daily, latitude=38.5)$hourtemps
+winters_ideal<-winters_ideal[,c("Year","Month","Day","Hour","Temp")]
+colnames(winters_ideal)[ncol(winters_ideal)]<-"Temp_ideal"
+
+winters_temps<-merge(Winters_hours_gaps,winters_empirical, by=c("Year","Month","Day","Hour"))
+winters_temps<-merge(winters_temps,winters_ideal, by=c("Year","Month","Day","Hour"))
+
+winters_temps[,"DATE"]<-ISOdate(winters_temps$Year,winters_temps$Month, winters_temps$Day, winters_temps$Hour)
+
+winters_temps_to_plot<-winters_temps[,c("DATE","Temp","Temp_empirical","Temp_ideal")]
+winters_temps_to_plot<-winters_temps_to_plot[200:262,]
+winters_temps_to_plot<-melt(winters_temps_to_plot, id=c("DATE")) 
+colnames(winters_temps_to_plot)<-c("DATE","Method","Temperature")
+
+
+ggplot(data=winters_temps_to_plot, aes(DATE,Temperature, colour=Method)) +
+  geom_line(lwd=1.3) +
+  ylab("Temperature (°C)") +
+  xlab("Date") +
+  ggtitle ("Different temperature methods for Winters dataset") +
+  scale_color_manual(labels = c("Observed", "Ideal", "Empirical"), name="Temperature", values = c("slateblue", "peru", "mediumaquamarine")) +
+  theme_bw(base_size = 14)
+
+
+```
+
+------------------------------------------------------------------------

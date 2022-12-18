@@ -1,0 +1,20 @@
+# Winter chill projections
+
+**1.Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology.**
+
+-   Climate data can easily accumulate to high amounts of computer data, which can make further processing highly demanding in time and computing. But good data management and increasingly efficient computers enable tasks like this.
+-   Over time, various climate models were created and replaced with improved ones, after new insights were gathered. The changes from SRESs to SSPs and later to RCPs increased the quality of the forecasts, but for users of those forecasts it meant adapting to the new standard.
+-   To achieve state-of-the-art chill projections, so called ensembles are used. These consist of several chilling models plotted together. The idea is, that there is no single correct model, but multiple models that represent the chill projections.
+
+**2.Outline, in your understanding, the basic steps that are necessary to make such projections.**
+
+-   setting the spatial scope for the projections
+-   setting the temporal scope for the projections
+-   choosing the ensemble of chill models
+-   accessing the data from the past
+-   prepare the data
+-   generating the data for the future climate with a weather generator
+-   apply the ensemble of chill models
+-   plot the results
+
+------------------------------------------------------------------------
