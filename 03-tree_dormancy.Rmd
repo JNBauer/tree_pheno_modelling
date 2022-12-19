@@ -1,29 +1,23 @@
 # Tree dormancy
 
-**1.Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.**
+**1. Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.**
 
--   At the moment the Dynamic model is the most sophisticated approach, because of its process based idea [@fadón2020]. This leads on the other hand to more complicated calculations compared to prior methods . Models like the chilling hours are easier to calculate, but do not longer meet the needed requirements. I would recommend the breeder to use the Dynamic model, because of its high reliability. The temperature as only input is the same for all models.
+At the moment the Dynamic model is the most sophisticated approach, because of its process based idea. This leads on the other hand to more complicated calculations compared to prior methods . Models like the chilling hours are easier to calculate, but do not longer meet the needed requirements. I would recommend the breeder to use the Dynamic model, because of its high reliability. The temperature as only input is the same for all models.
 
 \
-
-**2.Which are the advantages (2) of the BBCH scale compared with earlies scales?**
+**2. Which are the advantages (2) of the BBCH scale compared with earlies scales?**
 
 -   covers the whole development of the plant not only the buds as with earlier scales
--   developed in a way that it can suited to all plant species
--   numerical order is more comprehensive
+-   developed in a way that it can suited to all plant species numerical order is more comprehensive
 
 \
-
-**3.Classify the following phenological stages of sweet cherry according to the BBCH scale:** ![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
+**3. Classify the following phenological stages of sweet cherry according to the BBCH scale:**![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
 
 1.  54/55
 
 2.  65 could be also lower if the object in the background is a (closed) bud
 
-3.  89
+3.  89\
+    \
 
-Pictures similar to 1. and 3. can be seen in the appendix of [@fadon_flower_2015].
-
-\
-
-------------------------------------------------------------------------
+    <hr />

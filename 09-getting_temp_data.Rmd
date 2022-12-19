@@ -1,58 +1,100 @@
 # Getting temperature data
 \
-**1.Choose a location of interest and find the 25 closest weather stations using the handle_gsod function**
+**1. Choose a location of interest and find the 25 closest weather stations using the handle_gsod function**
 
-I chose a location with the latitude `32`, which can be seen in the leaflet below.
-```{r Leaflet of selected location, echo=FALSE, message=FALSE}
+I chose a location in South Africa near Cape Town with a longitude of `18.8148` and a latitude of `-33.9575`, which can be seen in the leaflet below.
+```{r}
+coords <- c(18.8148, -33.9575)
+```
+
+```{r Leaflet, echo=FALSE, message=FALSE}
 require(leaflet) 
-m <- leaflet() %>% setView(lng = 18.93521767626777 , lat = -34.10835247406239, zoom = 16)
+m <- leaflet() %>% setView(lng = coords[1] , lat = coords[2], zoom = 16)
 m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
-  addMiniMap(
-    tiles = providers$Esri.WorldStreetMap,
-    toggleDisplay = TRUE)
+  addMiniMap(tiles = providers$Esri.WorldStreetMap,toggleDisplay = TRUE) %>% 
+  addMarkers(coords[1], coords[2])
 
 require(chillR)
 library(kableExtra)
 ```
+The multi-functional `handle_gsod` function can be used to create a list of surrounding stations for a location of interest. The ten closest stations are shown in the list below and are also marked in the lower leaflet map. The apple marks the selected farm and the weather station icons symbolize the position of the stations.
 
 ```{r Creating station list with handle_gsod, message=FALSE, warning=FALSE, eval=FALSE}
 station_list<-handle_gsod(action="list_stations",
-                          location=c(18.93521767626777, -34.10835247406239),
+                          location=c(coords[1], coords[2]),
                           time_interval=c(1977,2020),
                           stations_to_choose_from = 25)
 ```
 
-```{r Create table for station list, echo=FALSE}
+```{r, echo=FALSE}
 station_list <- read.csv(file = "data/station_list.csv")
-kbl(station_list[1:10,], escape = F) %>%
-  kable_paper("hover", full_width = F, position = "left")
+title <- "Table (shortened) for the `station_list`"
+subset(station_list[1:10,],select = -c(chillR_code)) %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
+```
+
+```{r, echo=FALSE}
+station_list <- read.csv("data/station_list.csv")
+
+center <- makeIcon(
+  iconUrl = "https://cdn-icons-png.flaticon.com/512/415/415682.png",
+  iconWidth = 40, iconHeight = 40,
+  iconAnchorX = 20, iconAnchorY = 20)
+
+stations <- makeIcon(
+  iconUrl = "https://cdn-icons-png.flaticon.com/512/1753/1753451.png",
+  iconWidth = 30, iconHeight = 30,
+  iconAnchorX = 15, iconAnchorY = 15)
+
+
+m <- leaflet(width = "100%")
+m <- addTiles(m) %>%
+  setView(m, lng = coords[1], lat = coords[2], zoom = 10) %>%
+  addProviderTiles(providers$Esri.WorldTopoMap, group = "Topographical map") %>%
+  addProviderTiles(providers$Esri.WorldImagery, group = "World imagery") %>%
+  addMarkers(m, lng=coords[1], lat= coords[2], popup="Center", icon = center) %>%
+  addLayersControl(baseGroups = c("Topographical map", "World imagery"),
+                   options = layersControlOptions(collapsed = FALSE))
+
+ for(i in 1:10) {
+      m <- addMarkers(m, lng=station_list[i,5], lat=station_list[i,4], popup=station_list[i,2],
+                      icon = stations)
+ }
+m
 ```
 
 \
-**2.Download weather data for the most promising station on the list**
+**2. Download weather data for the most promising station on the list**
 
-Selecting the 3th station of the search query from task 1.
+The first station seems to be most promising. It is the weather station of the airport of Cape Town, which has a high percentage of the interval covered. Data of other stations that are located directly on the coast are possibly even more affected by the coastal climate. Unfortunately, I could not find any information about the position of the weather station on the airport, but I hope it is representative enough for my case.
+In the next code chunk the `handle_gsod` function is used to download data with `action` input `"download_weather"`. 
+
 ```{r Download with weather for location with station list, eval=FALSE}
 downloaded_weather<-handle_gsod(action="download_weather",
-                     location=station_list$chillR_code[3],
+                     location=station_list$chillR_code[1],
                      time_interval=c(1977,2020))
 ```
 
 \
-**3.Convert the weather data into chillR format**
+**3. Convert the weather data into chillR format**
 
-```{r Clean weather data with handle_gsod, eval=FALSE}
+When the data input has the right format, the `handle_gsod` function cleans the dataset, interpolates gaps and reports everything in a quality check addition.
+```{r 09 Clean weather data with handle_gsod, eval=FALSE}
 cleaned_weather<-handle_gsod(downloaded_weather)
 ```
 
-```{r Create table with cleaned weather, echo=FALSE}
+```{r, echo=FALSE}
 cleaned_weather <- read.csv(file = "data/CapeTown_chillR_weather2.csv")
-kbl(head(cleaned_weather), escape = F) %>%
-  kable_paper("hover", full_width = F, position = "left")
+
+title <- "Table with data from `cleaned_weather`"
+cleaned_weather[1:10,] %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
 ```
 
-```{r Save station list and weather as CSV in /data, echo=FALSE, eval=TRUE}
+```{r Save station list and weather as CSV in /data, echo=FALSE, eval=FALSE}
 write.csv(station_list,"data/station_list.csv",row.names=FALSE)
-#write.csv(weather,"data/CapeTown_weather.csv",row.names=FALSE)
+write.csv(weather,"data/CapeTown_weather.csv",row.names=FALSE)
 write.csv(cleaned_weather$`CAPE TOWN INTL`$weather,"data/CapeTown_chillR_weather.csv",row.names=FALSE)
 ```

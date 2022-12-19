@@ -1,21 +1,22 @@
 # Manual chill analysis
 
-The data that is used in this lesson is from the inbuilt `Winters_hours_gaps` dataset. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used `Temp_gaps` column.
+**1. Write a basic function that calculates warm hours (\>25°C)**
 
-Table for the modified `Winters_hours_gaps` dataset
+The `Winters_hours_gaps` dataset is part of the ChillR package. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used `Temp_gaps` column.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 require(chillR)
 hourtemps <- subset(Winters_hours_gaps, select = -c(Temp_gaps))
-
 row.names(hourtemps) <- NULL
+
 require(kableExtra)
 require(dplyr)
-kbl(hourtemps[1:5,], escape = F) %>%
-  kable_paper("hover", full_width = F, position = "left")
+title <- "Table for the modified `Winters_hours_gaps` dataset"
+hourtemps[1:5,] %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
 ```
-
-**1.Write a basic function that calculates warm hours (\>25°C)**
+The function creates a new column `Warming_hours` that contains the result of the comparison if `hourtemps$Temp`is greater than 25.
 
 ```{r}
 WH <- function(hourtemps)
@@ -23,34 +24,41 @@ WH <- function(hourtemps)
   hourtemps[,"Warming_hours"] <- hourtemps$Temp>25
   return(hourtemps)
 }
-hourtemps_plus_WH <- WH(hourtemps)
 ```
 
 \
 
-**2.Apply this function to the Winters_hours_gaps dataset**
+**2. Apply this function to the Winters_hours_gaps dataset**
 
-Table for `hourtemps_plus_WH`
-
+```{r, echo=TRUE}
+Winters_hours_gaps_plus_WH <- WH(Winters_hours_gaps)
+sum_whgpWH <- sum(Winters_hours_gaps_plus_WH$Warming_hours)
+```
+When applying the function to the Winter_hours_gaps dataset and taking the sum of the `Winters_hours_gaps_plus_WH$Warming_hours` coloumn, **`r sum_whgpWH`** hours over 25°C occured.
+\
+In a table, it could be displayed like this.
+\
 ```{r, echo=FALSE}
-hourtemps_plus_WH <- hourtemps_plus_WH[4008:4018, 1:5]
+hourtemps_plus_WH <- Winters_hours_gaps_plus_WH[4008:4018, 1:5]
 row.names(hourtemps_plus_WH) <- NULL
 hourtemps_plus_WH$Temp <- ifelse(
   hourtemps_plus_WH$Temp > 25,
   cell_spec(hourtemps_plus_WH$Temp, color = "red", bold = T),
   cell_spec(hourtemps_plus_WH$Temp, color = "green")
 )
-
-kbl(hourtemps_plus_WH, escape = F) %>%
-  kable_paper("hover", full_width = F, position = "left")
+title <- "Table for `Winters_hours_gaps_plus_WH`"
+hourtemps_plus_WH %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
 ```
+\
 
-**3.Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
+**3. Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
 
+The following function contains additional input variables for the start and end dates. The variables are used to index the correct rows between which the sum of the warm hours should be taken. The previously created `WH` function is used to compare the temperature to the threshold.
 ```{r}
 WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA, start_hour=12, end_hour=12)
 {
-
   start_year <- as.numeric(substr(start_dateYEARMODA, 1, 4))
   start_month <- as.numeric(substr(start_dateYEARMODA, 5, 6))
   start_day <- as.numeric(substr(start_dateYEARMODA, 7, 8))
@@ -75,6 +83,6 @@ warming_hours_for_time_frame <- WH_YEARMODA(hourtemps, 20080501, 20080831)
 
 ```
 
-Between the 1th of May 2008 and the 31th of August 2008, **`r warming_hours_for_time_frame`** hours over 25°C occured.
+Between the 1th of May 2008 (20080501) and the 31th of August 2008 (20080831), **`r warming_hours_for_time_frame`** hours over 25°C occurred.
 
 ------------------------------------------------------------------------

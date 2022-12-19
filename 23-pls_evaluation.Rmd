@@ -1,0 +1,223 @@
+# pls_evaluation
+
+```{r}
+library(chillR)
+library(dplyr)
+library(purrr)
+Alex_first<-read_tab("data/Alexander_Lucas_bloom_1958_2019.csv")[,1:2] %>% 
+  mutate(Year=substr(First_bloom,1,4),
+         Month=substr(First_bloom,5,6),
+         Day=substr(First_bloom,7,8)) %>% 
+  make_JDay() %>%
+  select(Pheno_year,JDay) %>%
+  rename(Year=1,pheno=2)
+
+
+temps<-read_tab("data/TMaxTMin1958-2019_patched.csv")
+
+temps_hourly<-read_tab("data/TMaxTMin1958-2019_patched.csv") %>%
+  stack_hourly_temps(latitude=50.6)
+
+daychill<-daily_chill(hourtemps=temps_hourly,
+            running_mean=1,
+            models = list(Chilling_Hours = Chilling_Hours,
+                          Utah_Chill_Units = Utah_Model,
+                          Chill_Portions = Dynamic_Model,
+                          GDH = GDH)
+    )
+
+
+plscf<-PLS_chill_force(daily_chill_obj=daychill,
+                       bio_data_frame=Alex_first,
+                       split_month=6,
+                       chill_models = "Chill_Portions",
+                       heat_models = "GDH",
+                       runn_means = 11)
+
+```
+
+```{r}
+  # first, a sub-function (function defined within a function) to
+  # compute the temperature means
+
+library(fields)
+library(reshape2)
+library(metR)
+library(ggplot2)
+library(colorRamps)
+
+pheno<-Alex_first
+colnames(pheno)[1]<-"End_year"
+
+chill_phase<-c(317,62)
+heat_phase<-c(360,105.5)
+
+mean_temp_period<-function(temps,
+                           start_JDay,
+                           end_JDay, 
+                           end_season = end_JDay)
+  { temps_JDay<-make_JDay(temps)
+  temps_JDay[,"Season"]<-temps_JDay$Year
+  if(start_JDay>end_season)
+    temps_JDay$Season[which(temps_JDay$JDay>=start_JDay)]<-
+    temps_JDay$Year[which(temps_JDay$JDay>=start_JDay)]+1
+  if(start_JDay>end_season)
+    sub_temps<-subset(temps_JDay,JDay<=end_JDay|JDay>=start_JDay)
+  if(start_JDay<=end_JDay)
+    sub_temps<-subset(temps_JDay,JDay<=end_JDay&JDay>=start_JDay)
+  mean_temps<-aggregate(sub_temps[,c("Tmin","Tmax")],
+                        by=list(sub_temps$Season),
+                        FUN=function(x) mean(x, na.rm=TRUE))
+  mean_temps[,"n_days"]<-aggregate(sub_temps[,"Tmin"],
+                                   by=list(sub_temps$Season),
+                                   FUN=length)[,2]
+  mean_temps[,"Tmean"]<-(mean_temps$Tmin+mean_temps$Tmax)/2
+  mean_temps<-mean_temps[,c(1,4,2,3,5)]
+  colnames(mean_temps)[1]<-"End_year"
+  return(mean_temps)
+  }
+  
+mean_temp_chill<-mean_temp_period(temps = temps,
+                                  start_JDay = chill_phase[1],
+                                  end_JDay = chill_phase[2],
+                                  end_season = heat_phase[2])
+
+mean_temp_heat<-mean_temp_period(temps = temps,
+                                 start_JDay = heat_phase[1],
+                                 end_JDay = heat_phase[2],
+                                 end_season = heat_phase[2])
+
+mean_temp_chill<-
+  mean_temp_chill[which(mean_temp_chill$n_days >= 
+                          max(mean_temp_chill$n_days)-1),]
+mean_temp_heat<-
+  mean_temp_heat[which(mean_temp_heat$n_days >= 
+                         max(mean_temp_heat$n_days)-1),]
+mean_chill<-mean_temp_chill[,c("End_year","Tmean")]
+colnames(mean_chill)[2]<-"Tmean_chill"
+mean_heat<-mean_temp_heat[,c("End_year","Tmean")]
+colnames(mean_heat)[2]<-"Tmean_heat"
+phase_Tmeans<-merge(mean_chill,mean_heat, by="End_year")
+
+colnames(pheno)<-c("End_year","pheno")
+Tmeans_pheno<-merge(phase_Tmeans,pheno, by="End_year")
+  
+  # Kriging interpolation
+k<-Krig(x=as.matrix(Tmeans_pheno[,c("Tmean_chill","Tmean_heat")]),
+        Y=Tmeans_pheno$pheno)
+pred <- predictSurface(k)
+colnames(pred$z)<-pred$y
+rownames(pred$z)<-pred$x
+melted<-melt(pred$z)
+colnames(melted)<-c("Tmean_chill","Tmean_heat","value")
+```
+
+```{r}
+
+mean_temp_chill<-mean_temp_period(temps = temps,
+                                  start_JDay = chill_phase[1],
+                                  end_JDay = chill_phase[2],
+                                  end_season = 60)
+
+mean_temp_heat<-mean_temp_period(temps = temps,
+                                  start_JDay = heat_phase[1],
+                                  end_JDay = heat_phase[2],
+                                  end_season = 60)
+
+
+mean_temp_chill<-
+  mean_temp_chill[which(mean_temp_chill$n_days >=
+                          max(mean_temp_chill$n_days)-1),]
+mean_temp_heat<-
+  mean_temp_heat[which(mean_temp_heat$n_days >=
+                         max(mean_temp_heat$n_days)-1),]
+
+mean_chill<-mean_temp_chill[,c("End_year","Tmean")]
+colnames(mean_chill)[2]<-"Tmean_chill"
+
+mean_heat<-mean_temp_heat[,c("End_year","Tmean")]
+colnames(mean_heat)[2]<-"Tmean_heat"
+
+phase_Tmeans<-merge(mean_chill,mean_heat, by="End_year")
+
+
+pheno<-Alex_first
+colnames(pheno)[1]<-"End_year"
+
+Tmeans_pheno<-merge(phase_Tmeans,pheno, by="End_year")
+
+Tmeans_pheno
+
+
+library(fields)
+k<-Krig(x=as.matrix(Tmeans_pheno[,c("Tmean_chill","Tmean_heat")]),
+        Y=Tmeans_pheno$pheno)
+str(pred)
+pred<-predictSurface(k)
+
+N<-pred$z[c(80:1),]
+N
+rotate <- function(x) t(apply(x, 2, rev))
+B <- rotate(N)
+B
+
+
+library(colorRamps)
+library(plotly)
+
+
+fig1 <- plot_ly() %>% 
+  add_surface(x = pred$x,
+              y = pred$y,
+              z = B,
+              colors = alpha(matlab.like(15)),
+              name = "Interpolated",
+              hoverlabel = list(namelength = 0),
+              hovertemplate = paste('</br><b>Interpolated</b>',
+                                    '</br>Chill T<sub>mean</sub>: %{x:.2f}°C',
+                                    '</br>Force T<sub>mean</sub>: %{y:.2f}°C',
+                                    '</br>Bloom date: %{z:.1f} JDay'),
+              contours =
+                list(
+                  z = list(color = alpha(matlab.like(15)),
+                           highlight = TRUE,
+                           show = TRUE,
+                           start = 85,
+                           end = 150,
+                           size = 5,
+                           project=list(z=TRUE)),
+                           showlabels = TRUE)) %>% 
+  add_trace(x = Tmeans_pheno$Tmean_chill,
+            y = Tmeans_pheno$Tmean_heat,
+            z = Tmeans_pheno$pheno,
+            type = 'scatter3d',
+            mode = 'markers',
+            name = "Observed",
+            hoverinfo ="text",
+            text = ~paste('</br><b>Observed</b>',
+                          '</br>Chill T<sub>mean</sub>:',round(Tmeans_pheno$Tmean_chill, digits = 2),'°C',
+                          '</br>Force T<sub>mean</sub>:',round(Tmeans_pheno$Tmean_heat, digits = 2),'°C',
+                          '</br>Bloom date:',Tmeans_pheno$pheno, 'JDay',
+                          '</br>Year:', as.character(Tmeans_pheno$End_year)),
+            marker = list(size = 4, color = 'black')) %>%
+  colorbar(title = "Bloom date\n(day of the year)") %>% 
+  layout(
+    scene = list(
+      xaxis = list(title = "Chilling phase T<sub>mean</sub> (°C)", showspikes=FALSE),
+      yaxis = list(title = "Forcing phase T<sub>mean</sub> (°C)", showspikes=FALSE),
+      zaxis = list(title = "Date of Bloom", showspikes=FALSE)
+    ))%>% 
+  layout(
+      scene = list(
+        camera=list(
+          #up = list(x=0, y=0, z=0),
+          #center = list(x=0, y=0, z=0),
+          eye = list(x=-1.2, y=2, z=1)
+        )
+      )
+    )
+
+
+fig1
+```
+

@@ -6,6 +6,7 @@
 -   Over time, various climate models were created and replaced with improved ones, after new insights were gathered. The changes from SRESs to SSPs and later to RCPs increased the quality of the forecasts, but for users of those forecasts it meant adapting to the new standard.
 -   To achieve state-of-the-art chill projections, so called ensembles are used. These consist of several chilling models plotted together. The idea is, that there is no single correct model, but multiple models that represent the chill projections.
 
+\
 **2.Outline, in your understanding, the basic steps that are necessary to make such projections.**
 
 -   setting the spatial scope for the projections
@@ -17,4 +18,5 @@
 -   apply the ensemble of chill models
 -   plot the results
 
-------------------------------------------------------------------------
+\
+<hr />

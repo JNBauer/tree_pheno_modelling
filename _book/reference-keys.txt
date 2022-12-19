@@ -18,3 +18,10 @@ chill-model-comparison-1
 delineating-temperature-response-phases-with-pls-regression
 simple-phenology-analysis
 pls-regression-with-agroclimatic-metrics
+tab:unnamed-chunk-1
+pls_evaluation
+tab:unnamed-chunk-3
+tab:unnamed-chunk-4
+tab:unnamed-chunk-2
+tab:unnamed-chunk-6
+tab:unnamed-chunk-5

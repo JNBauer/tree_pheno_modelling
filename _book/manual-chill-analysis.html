@@ -34,7 +34,6 @@
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -53,19 +52,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
-<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
-<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
 
 
 <style type="text/css">
@@ -170,6 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a></li>
 <li class="chapter" data-level="19" data-path="simple-phenology-analysis.html"><a href="simple-phenology-analysis.html"><i class="fa fa-check"></i><b>19</b> Simple phenology analysis</a></li>
 <li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a></li>
+<li class="chapter" data-level="21" data-path="pls_evaluation.html"><a href="pls_evaluation.html"><i class="fa fa-check"></i><b>21</b> pls_evaluation</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -192,9 +179,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="manual-chill-analysis" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Manual chill analysis<a href="manual-chill-analysis.html#manual-chill-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The data that is used in this lesson is from the inbuilt <code>Winters_hours_gaps</code> dataset. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used <code>Temp_gaps</code> column.</p>
-<p>Table for the modified <code>Winters_hours_gaps</code> dataset</p>
-<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; ">
+<p><strong>1. Write a basic function that calculates warm hours (&gt;25°C)</strong></p>
+<p>The <code>Winters_hours_gaps</code> dataset is part of the ChillR package. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used <code>Temp_gaps</code> column.</p>
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
+<caption>
+<span id="tab:unnamed-chunk-1">Table 6.1: </span>Table for the modified <code>Winters_hours_gaps</code> dataset
+</caption>
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -302,18 +292,24 @@ Temp
 </tr>
 </tbody>
 </table>
-<p><strong>1.Write a basic function that calculates warm hours (&gt;25°C)</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="manual-chill-analysis.html#cb2-1" aria-hidden="true" tabindex="-1"></a>WH <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps)</span>
-<span id="cb2-2"><a href="manual-chill-analysis.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb2-3"><a href="manual-chill-analysis.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  hourtemps[,<span class="st">&quot;Warming_hours&quot;</span>] <span class="ot">&lt;-</span> hourtemps<span class="sc">$</span>Temp<span class="sc">&gt;</span><span class="dv">25</span></span>
-<span id="cb2-4"><a href="manual-chill-analysis.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(hourtemps)</span>
-<span id="cb2-5"><a href="manual-chill-analysis.html#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-6"><a href="manual-chill-analysis.html#cb2-6" aria-hidden="true" tabindex="-1"></a>hourtemps_plus_WH <span class="ot">&lt;-</span> <span class="fu">WH</span>(hourtemps)</span></code></pre></div>
+<p>The function creates a new column <code>Warming_hours</code> that contains the result of the comparison if <code>hourtemps$Temp</code>is greater than 25.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="manual-chill-analysis.html#cb1-1" aria-hidden="true" tabindex="-1"></a>WH <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps)</span>
+<span id="cb1-2"><a href="manual-chill-analysis.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb1-3"><a href="manual-chill-analysis.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  hourtemps[,<span class="st">&quot;Warming_hours&quot;</span>] <span class="ot">&lt;-</span> hourtemps<span class="sc">$</span>Temp<span class="sc">&gt;</span><span class="dv">25</span></span>
+<span id="cb1-4"><a href="manual-chill-analysis.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(hourtemps)</span>
+<span id="cb1-5"><a href="manual-chill-analysis.html#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><br />
 </p>
-<p><strong>2.Apply this function to the Winters_hours_gaps dataset</strong></p>
-<p>Table for <code>hourtemps_plus_WH</code></p>
-<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; ">
+<p><strong>2. Apply this function to the Winters_hours_gaps dataset</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="manual-chill-analysis.html#cb2-1" aria-hidden="true" tabindex="-1"></a>Winters_hours_gaps_plus_WH <span class="ot">&lt;-</span> <span class="fu">WH</span>(Winters_hours_gaps)</span>
+<span id="cb2-2"><a href="manual-chill-analysis.html#cb2-2" aria-hidden="true" tabindex="-1"></a>sum_whgpWH <span class="ot">&lt;-</span> <span class="fu">sum</span>(Winters_hours_gaps_plus_WH<span class="sc">$</span>Warming_hours)</span></code></pre></div>
+When applying the function to the Winter_hours_gaps dataset and taking the sum of the <code>Winters_hours_gaps_plus_WH$Warming_hours</code> coloumn, <strong>1275</strong> hours over 25°C occured.<br />
+In a table, it could be displayed like this.<br />
+
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
+<caption>
+<span id="tab:unnamed-chunk-4">Table 6.2: </span>Table for <code>Winters_hours_gaps_plus_WH</code>
+</caption>
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -327,6 +323,9 @@ Day
 </th>
 <th style="text-align:right;">
 Hour
+</th>
+<th style="text-align:right;">
+Temp_gaps
 </th>
 <th style="text-align:left;">
 Temp
@@ -347,6 +346,9 @@ Temp
 <td style="text-align:right;">
 9
 </td>
+<td style="text-align:right;">
+22.082
+</td>
 <td style="text-align:left;">
 <span style="     color: green !important;">22.082</span>
 </td>
@@ -363,6 +365,9 @@ Temp
 </td>
 <td style="text-align:right;">
 10
+</td>
+<td style="text-align:right;">
+24.508
 </td>
 <td style="text-align:left;">
 <span style="     color: green !important;">24.508</span>
@@ -381,6 +386,9 @@ Temp
 <td style="text-align:right;">
 11
 </td>
+<td style="text-align:right;">
+25.404
+</td>
 <td style="text-align:left;">
 <span style=" font-weight: bold;    color: red !important;">25.404</span>
 </td>
@@ -397,6 +405,9 @@ Temp
 </td>
 <td style="text-align:right;">
 12
+</td>
+<td style="text-align:right;">
+26.842
 </td>
 <td style="text-align:left;">
 <span style=" font-weight: bold;    color: red !important;">26.842</span>
@@ -415,6 +426,9 @@ Temp
 <td style="text-align:right;">
 13
 </td>
+<td style="text-align:right;">
+28.171
+</td>
 <td style="text-align:left;">
 <span style=" font-weight: bold;    color: red !important;">28.171</span>
 </td>
@@ -431,6 +445,9 @@ Temp
 </td>
 <td style="text-align:right;">
 14
+</td>
+<td style="text-align:right;">
+27.949
 </td>
 <td style="text-align:left;">
 <span style=" font-weight: bold;    color: red !important;">27.949</span>
@@ -449,8 +466,11 @@ Temp
 <td style="text-align:right;">
 15
 </td>
+<td style="text-align:right;">
+NA
+</td>
 <td style="text-align:left;">
-<span style=" font-weight: bold;    color: red !important;">28.245</span>
+NA
 </td>
 </tr>
 <tr>
@@ -466,8 +486,11 @@ Temp
 <td style="text-align:right;">
 16
 </td>
+<td style="text-align:right;">
+NA
+</td>
 <td style="text-align:left;">
-<span style=" font-weight: bold;    color: red !important;">28.221</span>
+NA
 </td>
 </tr>
 <tr>
@@ -483,8 +506,11 @@ Temp
 <td style="text-align:right;">
 17
 </td>
+<td style="text-align:right;">
+NA
+</td>
 <td style="text-align:left;">
-<span style=" font-weight: bold;    color: red !important;">26.549</span>
+NA
 </td>
 </tr>
 <tr>
@@ -500,8 +526,11 @@ Temp
 <td style="text-align:right;">
 18
 </td>
+<td style="text-align:right;">
+NA
+</td>
 <td style="text-align:left;">
-<span style="     color: green !important;">24.677</span>
+NA
 </td>
 </tr>
 <tr>
@@ -517,38 +546,43 @@ Temp
 <td style="text-align:right;">
 19
 </td>
+<td style="text-align:right;">
+NA
+</td>
 <td style="text-align:left;">
-<span style="     color: green !important;">21.891</span>
+NA
 </td>
 </tr>
 </tbody>
 </table>
-<p><strong>3.Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</strong></p>
+<p><br />
+</p>
+<p><strong>3. Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</strong></p>
+<p>The following function contains additional input variables for the start and end dates. The variables are used to index the correct rows between which the sum of the warm hours should be taken. The previously created <code>WH</code> function is used to compare the temperature to the threshold.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="manual-chill-analysis.html#cb3-1" aria-hidden="true" tabindex="-1"></a>WH_YEARMODA <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps, start_dateYEARMODA, end_dateYEARMODA, <span class="at">start_hour=</span><span class="dv">12</span>, <span class="at">end_hour=</span><span class="dv">12</span>)</span>
 <span id="cb3-2"><a href="manual-chill-analysis.html#cb3-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-3"><a href="manual-chill-analysis.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="manual-chill-analysis.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  start_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
-<span id="cb3-5"><a href="manual-chill-analysis.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  start_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
-<span id="cb3-6"><a href="manual-chill-analysis.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  start_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
-<span id="cb3-7"><a href="manual-chill-analysis.html#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="manual-chill-analysis.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  end_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
-<span id="cb3-9"><a href="manual-chill-analysis.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  end_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
-<span id="cb3-10"><a href="manual-chill-analysis.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  end_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
-<span id="cb3-11"><a href="manual-chill-analysis.html#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-12"><a href="manual-chill-analysis.html#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="manual-chill-analysis.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  start_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>start_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>start_month</span>
-<span id="cb3-14"><a href="manual-chill-analysis.html#cb3-14" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>start_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>start_hour)</span>
-<span id="cb3-15"><a href="manual-chill-analysis.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  end_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>end_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>end_month</span>
-<span id="cb3-16"><a href="manual-chill-analysis.html#cb3-16" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>end_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>end_hour)</span>
-<span id="cb3-17"><a href="manual-chill-analysis.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-18"><a href="manual-chill-analysis.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  warm_hours <span class="ot">&lt;-</span> <span class="fu">WH</span>(hourtemps)</span>
-<span id="cb3-19"><a href="manual-chill-analysis.html#cb3-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-20"><a href="manual-chill-analysis.html#cb3-20" aria-hidden="true" tabindex="-1"></a>  WHs <span class="ot">&lt;-</span> <span class="fu">sum</span>(warm_hours[start_date<span class="sc">:</span>end_date, <span class="st">&quot;Warming_hours&quot;</span>])</span>
-<span id="cb3-21"><a href="manual-chill-analysis.html#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(WHs)</span>
-<span id="cb3-22"><a href="manual-chill-analysis.html#cb3-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-23"><a href="manual-chill-analysis.html#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="manual-chill-analysis.html#cb3-24" aria-hidden="true" tabindex="-1"></a>warming_hours_for_time_frame <span class="ot">&lt;-</span> <span class="fu">WH_YEARMODA</span>(hourtemps, <span class="dv">20080501</span>, <span class="dv">20080831</span>)</span></code></pre></div>
-<p>Between the 1th of May 2008 and the 31th of August 2008, <strong>957</strong> hours over 25°C occured.</p>
+<span id="cb3-3"><a href="manual-chill-analysis.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  start_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
+<span id="cb3-4"><a href="manual-chill-analysis.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  start_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
+<span id="cb3-5"><a href="manual-chill-analysis.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  start_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
+<span id="cb3-6"><a href="manual-chill-analysis.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="manual-chill-analysis.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  end_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
+<span id="cb3-8"><a href="manual-chill-analysis.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  end_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
+<span id="cb3-9"><a href="manual-chill-analysis.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  end_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
+<span id="cb3-10"><a href="manual-chill-analysis.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-11"><a href="manual-chill-analysis.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="manual-chill-analysis.html#cb3-12" aria-hidden="true" tabindex="-1"></a>  start_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>start_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>start_month</span>
+<span id="cb3-13"><a href="manual-chill-analysis.html#cb3-13" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>start_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>start_hour)</span>
+<span id="cb3-14"><a href="manual-chill-analysis.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  end_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>end_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>end_month</span>
+<span id="cb3-15"><a href="manual-chill-analysis.html#cb3-15" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>end_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>end_hour)</span>
+<span id="cb3-16"><a href="manual-chill-analysis.html#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-17"><a href="manual-chill-analysis.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  warm_hours <span class="ot">&lt;-</span> <span class="fu">WH</span>(hourtemps)</span>
+<span id="cb3-18"><a href="manual-chill-analysis.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-19"><a href="manual-chill-analysis.html#cb3-19" aria-hidden="true" tabindex="-1"></a>  WHs <span class="ot">&lt;-</span> <span class="fu">sum</span>(warm_hours[start_date<span class="sc">:</span>end_date, <span class="st">&quot;Warming_hours&quot;</span>])</span>
+<span id="cb3-20"><a href="manual-chill-analysis.html#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(WHs)</span>
+<span id="cb3-21"><a href="manual-chill-analysis.html#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-22"><a href="manual-chill-analysis.html#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="manual-chill-analysis.html#cb3-23" aria-hidden="true" tabindex="-1"></a>warming_hours_for_time_frame <span class="ot">&lt;-</span> <span class="fu">WH_YEARMODA</span>(hourtemps, <span class="dv">20080501</span>, <span class="dv">20080831</span>)</span></code></pre></div>
+<p>Between the 1th of May 2008 (20080501) and the 31th of August 2008 (20080831), <strong>957</strong> hours over 25°C occured.</p>
 <hr />
 
 </div>
@@ -612,20 +646,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

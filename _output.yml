@@ -1,5 +1,6 @@
 bookdown::gitbook:
   css: style.css
+  table_css: false
   #includes:
     #before_body: html/header.html
   config:
