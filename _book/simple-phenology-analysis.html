@@ -34,7 +34,6 @@
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -66,6 +65,12 @@
 <link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
 <script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
 <script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -159,8 +164,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
 <li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
 <li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a></li>
-<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a></li>
-<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a></li>
+<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</a></li>
+<li class="chapter" data-level="10.2" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#create-a-list-of-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>10.2</b> Create a list of the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="10.3" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#identify-suitable-weather-stations-for-patching-gaps"><i class="fa fa-check"></i><b>10.3</b> Identify suitable weather stations for patching gaps</a></li>
+<li class="chapter" data-level="10.4" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#download-weather-data-for-promising-stations-convert-them-to-chillr-format-and-compile-them-in-a-list"><i class="fa fa-check"></i><b>10.4</b> Download weather data for promising stations, convert them to chillR format and compile them in a list</a></li>
+<li class="chapter" data-level="10.5" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-the-patch_daily_temperatures-function-to-fill-gaps"><i class="fa fa-check"></i><b>10.5</b> Use the patch_daily_temperatures function to fill gaps</a></li>
+<li class="chapter" data-level="10.6" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#investigate-the-results---have-all-gaps-been-filled"><i class="fa fa-check"></i><b>10.6</b> Investigate the results - have all gaps been filled?</a></li>
+<li class="chapter" data-level="10.7" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#if-necessary-repeat-until-you-have-a-dataset-you-can-work-with-in-further-analyses"><i class="fa fa-check"></i><b>10.7</b> If necessary, repeat until you have a dataset you can work with in further analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#for-the-location-you-chose-for-your-earlier-analyses-use-chillrs-weather-generator-to-produce-100-years-of-synthetic-temperature-data."><i class="fa fa-check"></i><b>11.1</b> For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.</a></li>
+<li class="chapter" data-level="11.2" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#calculate-winter-chill-in-chill-portions-for-your-synthetic-weather-and-illustrate-your-results-as-histograms-and-cumulative-distributions."><i class="fa fa-check"></i><b>11.2</b> Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.</a></li>
+<li class="chapter" data-level="11.3" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#produce-similar-plots-for-the-number-of-freezing-hours-0c-in-april-or-october-if-your-site-is-in-the-southern-hemisphere-for-your-location-of-interest."><i class="fa fa-check"></i><b>11.3</b> Produce similar plots for the number of freezing hours (&lt;0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.</a></li>
+</ul></li>
 <li class="chapter" data-level="12" data-path="saving-and-loading-data.html"><a href="saving-and-loading-data.html"><i class="fa fa-check"></i><b>12</b> Saving and Loading Data</a></li>
 <li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a></li>
 <li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a></li>
@@ -170,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a></li>
 <li class="chapter" data-level="19" data-path="simple-phenology-analysis.html"><a href="simple-phenology-analysis.html"><i class="fa fa-check"></i><b>19</b> Simple phenology analysis</a></li>
 <li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a></li>
+<li class="chapter" data-level="21" data-path="pls_evaluation.html"><a href="pls_evaluation.html"><i class="fa fa-check"></i><b>21</b> pls_evaluation</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -194,19 +214,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 19</span> Simple phenology analysis<a href="simple-phenology-analysis.html#simple-phenology-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><br />
 <strong>1. Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</strong></p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="simple-phenology-analysis.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
-<span id="cb85-2"><a href="simple-phenology-analysis.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb85-3"><a href="simple-phenology-analysis.html#cb85-3" aria-hidden="true" tabindex="-1"></a>Boskoop<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>)</span>
-<span id="cb85-4"><a href="simple-phenology-analysis.html#cb85-4" aria-hidden="true" tabindex="-1"></a>Boskoop_first<span class="ot">&lt;-</span>Boskoop[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb85-5"><a href="simple-phenology-analysis.html#cb85-5" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Year&quot;</span>]<span class="ot">&lt;-</span><span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">1</span>,<span class="dv">4</span>)</span>
-<span id="cb85-6"><a href="simple-phenology-analysis.html#cb85-6" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Month&quot;</span>]<span class="ot">&lt;-</span><span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">5</span>,<span class="dv">6</span>)</span>
-<span id="cb85-7"><a href="simple-phenology-analysis.html#cb85-7" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Day&quot;</span>]<span class="ot">&lt;-</span><span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">7</span>,<span class="dv">8</span>)</span>
-<span id="cb85-8"><a href="simple-phenology-analysis.html#cb85-8" aria-hidden="true" tabindex="-1"></a>Boskoop_first<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(Boskoop_first)</span>
-<span id="cb85-9"><a href="simple-phenology-analysis.html#cb85-9" aria-hidden="true" tabindex="-1"></a>Boskoop_first<span class="ot">&lt;-</span>Boskoop_first[,<span class="fu">c</span>(<span class="st">&quot;Pheno_year&quot;</span>,<span class="st">&quot;JDay&quot;</span>)]</span>
-<span id="cb85-10"><a href="simple-phenology-analysis.html#cb85-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Boskoop_first)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;pheno&quot;</span>)</span>
-<span id="cb85-11"><a href="simple-phenology-analysis.html#cb85-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-12"><a href="simple-phenology-analysis.html#cb85-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Boskoop_first[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]) <span class="sc">%&gt;%</span></span>
-<span id="cb85-13"><a href="simple-phenology-analysis.html#cb85-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="simple-phenology-analysis.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb89-2"><a href="simple-phenology-analysis.html#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb89-3"><a href="simple-phenology-analysis.html#cb89-3" aria-hidden="true" tabindex="-1"></a>Boskoop<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>)</span>
+<span id="cb89-4"><a href="simple-phenology-analysis.html#cb89-4" aria-hidden="true" tabindex="-1"></a>Boskoop_first<span class="ot">&lt;-</span>Boskoop[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb89-5"><a href="simple-phenology-analysis.html#cb89-5" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Year&quot;</span>]<span class="ot">&lt;-</span><span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb89-6"><a href="simple-phenology-analysis.html#cb89-6" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Month&quot;</span>]<span class="ot">&lt;-</span><span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb89-7"><a href="simple-phenology-analysis.html#cb89-7" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Day&quot;</span>]<span class="ot">&lt;-</span><span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">7</span>,<span class="dv">8</span>)</span>
+<span id="cb89-8"><a href="simple-phenology-analysis.html#cb89-8" aria-hidden="true" tabindex="-1"></a>Boskoop_first<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(Boskoop_first)</span>
+<span id="cb89-9"><a href="simple-phenology-analysis.html#cb89-9" aria-hidden="true" tabindex="-1"></a>Boskoop_first<span class="ot">&lt;-</span>Boskoop_first[,<span class="fu">c</span>(<span class="st">&quot;Pheno_year&quot;</span>,<span class="st">&quot;JDay&quot;</span>)]</span>
+<span id="cb89-10"><a href="simple-phenology-analysis.html#cb89-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Boskoop_first)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;pheno&quot;</span>)</span>
+<span id="cb89-11"><a href="simple-phenology-analysis.html#cb89-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-12"><a href="simple-phenology-analysis.html#cb89-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Boskoop_first[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]) <span class="sc">%&gt;%</span></span>
+<span id="cb89-13"><a href="simple-phenology-analysis.html#cb89-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
 <table class="table table-striped" style="font-size: 8px; ">
 <thead>
 <tr>
@@ -261,11 +281,11 @@ pheno
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="simple-phenology-analysis.html#cb86-1" aria-hidden="true" tabindex="-1"></a>KA_temps<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
-<span id="cb86-2"><a href="simple-phenology-analysis.html#cb86-2" aria-hidden="true" tabindex="-1"></a>KA_temps<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(KA_temps)</span>
-<span id="cb86-3"><a href="simple-phenology-analysis.html#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-4"><a href="simple-phenology-analysis.html#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(KA_temps[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])  <span class="sc">%&gt;%</span></span>
-<span id="cb86-5"><a href="simple-phenology-analysis.html#cb86-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="simple-phenology-analysis.html#cb90-1" aria-hidden="true" tabindex="-1"></a>KA_temps<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
+<span id="cb90-2"><a href="simple-phenology-analysis.html#cb90-2" aria-hidden="true" tabindex="-1"></a>KA_temps<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(KA_temps)</span>
+<span id="cb90-3"><a href="simple-phenology-analysis.html#cb90-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-4"><a href="simple-phenology-analysis.html#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(KA_temps[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])  <span class="sc">%&gt;%</span></span>
+<span id="cb90-5"><a href="simple-phenology-analysis.html#cb90-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
 <table class="table table-striped" style="font-size: 8px; ">
 <thead>
 <tr>
@@ -500,10 +520,10 @@ TRUE
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="simple-phenology-analysis.html#cb87-1" aria-hidden="true" tabindex="-1"></a>PLS_results<span class="ot">&lt;-</span><span class="fu">PLS_pheno</span>(KA_temps,Boskoop_first)</span>
-<span id="cb87-2"><a href="simple-phenology-analysis.html#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-3"><a href="simple-phenology-analysis.html#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(PLS_results<span class="sc">$</span>PLS_summary[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])  <span class="sc">%&gt;%</span></span>
-<span id="cb87-4"><a href="simple-phenology-analysis.html#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="simple-phenology-analysis.html#cb91-1" aria-hidden="true" tabindex="-1"></a>PLS_results<span class="ot">&lt;-</span><span class="fu">PLS_pheno</span>(KA_temps,Boskoop_first)</span>
+<span id="cb91-2"><a href="simple-phenology-analysis.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="simple-phenology-analysis.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(PLS_results<span class="sc">$</span>PLS_summary[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])  <span class="sc">%&gt;%</span></span>
+<span id="cb91-4"><a href="simple-phenology-analysis.html#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
 <table class="table table-striped" style="font-size: 8px; ">
 <thead>
 <tr>
@@ -632,74 +652,74 @@ Tstdev
 </table>
 <p><br />
 <strong>2. Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</strong></p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="simple-phenology-analysis.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb88-2"><a href="simple-phenology-analysis.html#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-3"><a href="simple-phenology-analysis.html#cb88-3" aria-hidden="true" tabindex="-1"></a>PLS_gg<span class="ot">&lt;-</span>PLS_results<span class="sc">$</span>PLS_summary</span>
-<span id="cb88-4"><a href="simple-phenology-analysis.html#cb88-4" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;Month&quot;</span>]<span class="ot">&lt;-</span><span class="fu">trunc</span>(PLS_gg<span class="sc">$</span>Date<span class="sc">/</span><span class="dv">100</span>)</span>
-<span id="cb88-5"><a href="simple-phenology-analysis.html#cb88-5" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;Day&quot;</span>]<span class="ot">&lt;-</span>PLS_gg<span class="sc">$</span>Date<span class="sc">-</span>PLS_gg<span class="sc">$</span>Month<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb88-6"><a href="simple-phenology-analysis.html#cb88-6" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;Date&quot;</span>]<span class="ot">&lt;-</span><span class="fu">ISOdate</span>(<span class="dv">2002</span>,PLS_gg<span class="sc">$</span>Month,PLS_gg<span class="sc">$</span>Day)</span>
-<span id="cb88-7"><a href="simple-phenology-analysis.html#cb88-7" aria-hidden="true" tabindex="-1"></a>PLS_gg[<span class="fu">which</span>(PLS_gg<span class="sc">$</span>JDay<span class="sc">&lt;=</span><span class="dv">0</span>),<span class="st">&quot;Date&quot;</span>]<span class="ot">&lt;-</span></span>
-<span id="cb88-8"><a href="simple-phenology-analysis.html#cb88-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ISOdate</span>(<span class="dv">2001</span>,</span>
-<span id="cb88-9"><a href="simple-phenology-analysis.html#cb88-9" aria-hidden="true" tabindex="-1"></a>          PLS_gg<span class="sc">$</span>Month[<span class="fu">which</span>(PLS_gg<span class="sc">$</span>JDay<span class="sc">&lt;=</span><span class="dv">0</span>)],</span>
-<span id="cb88-10"><a href="simple-phenology-analysis.html#cb88-10" aria-hidden="true" tabindex="-1"></a>          PLS_gg<span class="sc">$</span>Day[<span class="fu">which</span>(PLS_gg<span class="sc">$</span>JDay<span class="sc">&lt;=</span><span class="dv">0</span>)])</span>
-<span id="cb88-11"><a href="simple-phenology-analysis.html#cb88-11" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;VIP_importance&quot;</span>]<span class="ot">&lt;-</span>PLS_gg<span class="sc">$</span>VIP<span class="sc">&gt;=</span><span class="fl">0.8</span></span>
-<span id="cb88-12"><a href="simple-phenology-analysis.html#cb88-12" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;VIP_Coeff&quot;</span>]<span class="ot">&lt;-</span><span class="fu">factor</span>(<span class="fu">sign</span>(PLS_gg<span class="sc">$</span>Coef)<span class="sc">*</span>PLS_gg<span class="sc">$</span>VIP_importance)</span>
-<span id="cb88-13"><a href="simple-phenology-analysis.html#cb88-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-14"><a href="simple-phenology-analysis.html#cb88-14" aria-hidden="true" tabindex="-1"></a>VIP_plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PLS_gg,<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">y=</span>VIP)) <span class="sc">+</span></span>
-<span id="cb88-15"><a href="simple-phenology-analysis.html#cb88-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&#39;identity&#39;</span>,<span class="fu">aes</span>(<span class="at">fill=</span>VIP<span class="sc">&gt;</span><span class="fl">0.8</span>))</span>
-<span id="cb88-16"><a href="simple-phenology-analysis.html#cb88-16" aria-hidden="true" tabindex="-1"></a>VIP_plot <span class="ot">&lt;-</span> VIP_plot <span class="sc">+</span></span>
-<span id="cb88-17"><a href="simple-phenology-analysis.html#cb88-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;VIP&quot;</span>, </span>
-<span id="cb88-18"><a href="simple-phenology-analysis.html#cb88-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;&lt;0.8&quot;</span>, <span class="st">&quot;&gt;0.8&quot;</span>), </span>
-<span id="cb88-19"><a href="simple-phenology-analysis.html#cb88-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span><span class="ot">=</span><span class="st">&quot;grey&quot;</span>, <span class="st">&quot;TRUE&quot;</span><span class="ot">=</span><span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb88-20"><a href="simple-phenology-analysis.html#cb88-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb88-21"><a href="simple-phenology-analysis.html#cb88-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb88-22"><a href="simple-phenology-analysis.html#cb88-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb88-23"><a href="simple-phenology-analysis.html#cb88-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>() )</span>
-<span id="cb88-24"><a href="simple-phenology-analysis.html#cb88-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-25"><a href="simple-phenology-analysis.html#cb88-25" aria-hidden="true" tabindex="-1"></a>VIP_plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="simple-phenology-analysis.html#cb89-1" aria-hidden="true" tabindex="-1"></a>coeff_plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PLS_gg,<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">y=</span>Coef)) <span class="sc">+</span></span>
-<span id="cb89-2"><a href="simple-phenology-analysis.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&#39;identity&#39;</span>,<span class="fu">aes</span>(<span class="at">fill=</span>VIP_Coeff)) <span class="sc">+</span></span>
-<span id="cb89-3"><a href="simple-phenology-analysis.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Effect direction&quot;</span>, </span>
-<span id="cb89-4"><a href="simple-phenology-analysis.html#cb89-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Advancing&quot;</span>, <span class="st">&quot;Unimportant&quot;</span>,<span class="st">&quot;Delaying&quot;</span>), </span>
-<span id="cb89-5"><a href="simple-phenology-analysis.html#cb89-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;-1&quot;</span><span class="ot">=</span><span class="st">&quot;red&quot;</span>, <span class="st">&quot;0&quot;</span><span class="ot">=</span><span class="st">&quot;grey&quot;</span>,<span class="st">&quot;1&quot;</span><span class="ot">=</span><span class="st">&quot;dark green&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb89-6"><a href="simple-phenology-analysis.html#cb89-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb89-7"><a href="simple-phenology-analysis.html#cb89-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PLS coefficient&quot;</span>) <span class="sc">+</span></span>
-<span id="cb89-8"><a href="simple-phenology-analysis.html#cb89-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb89-9"><a href="simple-phenology-analysis.html#cb89-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb89-10"><a href="simple-phenology-analysis.html#cb89-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>() )</span>
-<span id="cb89-11"><a href="simple-phenology-analysis.html#cb89-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-12"><a href="simple-phenology-analysis.html#cb89-12" aria-hidden="true" tabindex="-1"></a>coeff_plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="simple-phenology-analysis.html#cb90-1" aria-hidden="true" tabindex="-1"></a>temp_plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PLS_gg) <span class="sc">+</span></span>
-<span id="cb90-2"><a href="simple-phenology-analysis.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">ymin=</span>Tmean<span class="sc">-</span>Tstdev,<span class="at">ymax=</span>Tmean<span class="sc">+</span>Tstdev),</span>
-<span id="cb90-3"><a href="simple-phenology-analysis.html#cb90-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb90-4"><a href="simple-phenology-analysis.html#cb90-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">ymin=</span>Tmean<span class="sc">-</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==-</span><span class="dv">1</span>),</span>
-<span id="cb90-5"><a href="simple-phenology-analysis.html#cb90-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>Tmean<span class="sc">+</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==-</span><span class="dv">1</span>)),</span>
-<span id="cb90-6"><a href="simple-phenology-analysis.html#cb90-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb90-7"><a href="simple-phenology-analysis.html#cb90-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">ymin=</span>Tmean<span class="sc">-</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==</span><span class="dv">1</span>),</span>
-<span id="cb90-8"><a href="simple-phenology-analysis.html#cb90-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>Tmean<span class="sc">+</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==</span><span class="dv">1</span>)),</span>
-<span id="cb90-9"><a href="simple-phenology-analysis.html#cb90-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill=</span><span class="st">&quot;dark green&quot;</span>) <span class="sc">+</span></span>
-<span id="cb90-10"><a href="simple-phenology-analysis.html#cb90-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">y=</span>Tmean)) <span class="sc">+</span></span>
-<span id="cb90-11"><a href="simple-phenology-analysis.html#cb90-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb90-12"><a href="simple-phenology-analysis.html#cb90-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(T[mean],<span class="st">&quot; (°C)&quot;</span>)))</span>
-<span id="cb90-13"><a href="simple-phenology-analysis.html#cb90-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-14"><a href="simple-phenology-analysis.html#cb90-14" aria-hidden="true" tabindex="-1"></a>temp_plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="simple-phenology-analysis.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb91-2"><a href="simple-phenology-analysis.html#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-3"><a href="simple-phenology-analysis.html#cb91-3" aria-hidden="true" tabindex="-1"></a>plot<span class="ot">&lt;-</span> (VIP_plot <span class="sc">+</span></span>
-<span id="cb91-4"><a href="simple-phenology-analysis.html#cb91-4" aria-hidden="true" tabindex="-1"></a>          coeff_plot <span class="sc">+</span></span>
-<span id="cb91-5"><a href="simple-phenology-analysis.html#cb91-5" aria-hidden="true" tabindex="-1"></a>          temp_plot <span class="sc">+</span></span>
-<span id="cb91-6"><a href="simple-phenology-analysis.html#cb91-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">plot_layout</span>(<span class="at">ncol=</span><span class="dv">1</span>,</span>
-<span id="cb91-7"><a href="simple-phenology-analysis.html#cb91-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>)</span>
-<span id="cb91-8"><a href="simple-phenology-analysis.html#cb91-8" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">&amp;</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
-<span id="cb91-9"><a href="simple-phenology-analysis.html#cb91-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
-<span id="cb91-10"><a href="simple-phenology-analysis.html#cb91-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
-<span id="cb91-11"><a href="simple-phenology-analysis.html#cb91-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.title.x=</span><span class="fu">element_blank</span>())</span>
-<span id="cb91-12"><a href="simple-phenology-analysis.html#cb91-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-13"><a href="simple-phenology-analysis.html#cb91-13" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="simple-phenology-analysis.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb92-2"><a href="simple-phenology-analysis.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="simple-phenology-analysis.html#cb92-3" aria-hidden="true" tabindex="-1"></a>PLS_gg<span class="ot">&lt;-</span>PLS_results<span class="sc">$</span>PLS_summary</span>
+<span id="cb92-4"><a href="simple-phenology-analysis.html#cb92-4" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;Month&quot;</span>]<span class="ot">&lt;-</span><span class="fu">trunc</span>(PLS_gg<span class="sc">$</span>Date<span class="sc">/</span><span class="dv">100</span>)</span>
+<span id="cb92-5"><a href="simple-phenology-analysis.html#cb92-5" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;Day&quot;</span>]<span class="ot">&lt;-</span>PLS_gg<span class="sc">$</span>Date<span class="sc">-</span>PLS_gg<span class="sc">$</span>Month<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb92-6"><a href="simple-phenology-analysis.html#cb92-6" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;Date&quot;</span>]<span class="ot">&lt;-</span><span class="fu">ISOdate</span>(<span class="dv">2002</span>,PLS_gg<span class="sc">$</span>Month,PLS_gg<span class="sc">$</span>Day)</span>
+<span id="cb92-7"><a href="simple-phenology-analysis.html#cb92-7" aria-hidden="true" tabindex="-1"></a>PLS_gg[<span class="fu">which</span>(PLS_gg<span class="sc">$</span>JDay<span class="sc">&lt;=</span><span class="dv">0</span>),<span class="st">&quot;Date&quot;</span>]<span class="ot">&lt;-</span></span>
+<span id="cb92-8"><a href="simple-phenology-analysis.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ISOdate</span>(<span class="dv">2001</span>,</span>
+<span id="cb92-9"><a href="simple-phenology-analysis.html#cb92-9" aria-hidden="true" tabindex="-1"></a>          PLS_gg<span class="sc">$</span>Month[<span class="fu">which</span>(PLS_gg<span class="sc">$</span>JDay<span class="sc">&lt;=</span><span class="dv">0</span>)],</span>
+<span id="cb92-10"><a href="simple-phenology-analysis.html#cb92-10" aria-hidden="true" tabindex="-1"></a>          PLS_gg<span class="sc">$</span>Day[<span class="fu">which</span>(PLS_gg<span class="sc">$</span>JDay<span class="sc">&lt;=</span><span class="dv">0</span>)])</span>
+<span id="cb92-11"><a href="simple-phenology-analysis.html#cb92-11" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;VIP_importance&quot;</span>]<span class="ot">&lt;-</span>PLS_gg<span class="sc">$</span>VIP<span class="sc">&gt;=</span><span class="fl">0.8</span></span>
+<span id="cb92-12"><a href="simple-phenology-analysis.html#cb92-12" aria-hidden="true" tabindex="-1"></a>PLS_gg[,<span class="st">&quot;VIP_Coeff&quot;</span>]<span class="ot">&lt;-</span><span class="fu">factor</span>(<span class="fu">sign</span>(PLS_gg<span class="sc">$</span>Coef)<span class="sc">*</span>PLS_gg<span class="sc">$</span>VIP_importance)</span>
+<span id="cb92-13"><a href="simple-phenology-analysis.html#cb92-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-14"><a href="simple-phenology-analysis.html#cb92-14" aria-hidden="true" tabindex="-1"></a>VIP_plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PLS_gg,<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">y=</span>VIP)) <span class="sc">+</span></span>
+<span id="cb92-15"><a href="simple-phenology-analysis.html#cb92-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&#39;identity&#39;</span>,<span class="fu">aes</span>(<span class="at">fill=</span>VIP<span class="sc">&gt;</span><span class="fl">0.8</span>))</span>
+<span id="cb92-16"><a href="simple-phenology-analysis.html#cb92-16" aria-hidden="true" tabindex="-1"></a>VIP_plot <span class="ot">&lt;-</span> VIP_plot <span class="sc">+</span></span>
+<span id="cb92-17"><a href="simple-phenology-analysis.html#cb92-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;VIP&quot;</span>, </span>
+<span id="cb92-18"><a href="simple-phenology-analysis.html#cb92-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;&lt;0.8&quot;</span>, <span class="st">&quot;&gt;0.8&quot;</span>), </span>
+<span id="cb92-19"><a href="simple-phenology-analysis.html#cb92-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;FALSE&quot;</span><span class="ot">=</span><span class="st">&quot;grey&quot;</span>, <span class="st">&quot;TRUE&quot;</span><span class="ot">=</span><span class="st">&quot;blue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb92-20"><a href="simple-phenology-analysis.html#cb92-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb92-21"><a href="simple-phenology-analysis.html#cb92-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb92-22"><a href="simple-phenology-analysis.html#cb92-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb92-23"><a href="simple-phenology-analysis.html#cb92-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>() )</span>
+<span id="cb92-24"><a href="simple-phenology-analysis.html#cb92-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-25"><a href="simple-phenology-analysis.html#cb92-25" aria-hidden="true" tabindex="-1"></a>VIP_plot</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="simple-phenology-analysis.html#cb93-1" aria-hidden="true" tabindex="-1"></a>coeff_plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PLS_gg,<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">y=</span>Coef)) <span class="sc">+</span></span>
+<span id="cb93-2"><a href="simple-phenology-analysis.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&#39;identity&#39;</span>,<span class="fu">aes</span>(<span class="at">fill=</span>VIP_Coeff)) <span class="sc">+</span></span>
+<span id="cb93-3"><a href="simple-phenology-analysis.html#cb93-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name=</span><span class="st">&quot;Effect direction&quot;</span>, </span>
+<span id="cb93-4"><a href="simple-phenology-analysis.html#cb93-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Advancing&quot;</span>, <span class="st">&quot;Unimportant&quot;</span>,<span class="st">&quot;Delaying&quot;</span>), </span>
+<span id="cb93-5"><a href="simple-phenology-analysis.html#cb93-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;-1&quot;</span><span class="ot">=</span><span class="st">&quot;red&quot;</span>, <span class="st">&quot;0&quot;</span><span class="ot">=</span><span class="st">&quot;grey&quot;</span>,<span class="st">&quot;1&quot;</span><span class="ot">=</span><span class="st">&quot;dark green&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb93-6"><a href="simple-phenology-analysis.html#cb93-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb93-7"><a href="simple-phenology-analysis.html#cb93-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;PLS coefficient&quot;</span>) <span class="sc">+</span></span>
+<span id="cb93-8"><a href="simple-phenology-analysis.html#cb93-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb93-9"><a href="simple-phenology-analysis.html#cb93-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb93-10"><a href="simple-phenology-analysis.html#cb93-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>() )</span>
+<span id="cb93-11"><a href="simple-phenology-analysis.html#cb93-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-12"><a href="simple-phenology-analysis.html#cb93-12" aria-hidden="true" tabindex="-1"></a>coeff_plot</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="simple-phenology-analysis.html#cb94-1" aria-hidden="true" tabindex="-1"></a>temp_plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(PLS_gg) <span class="sc">+</span></span>
+<span id="cb94-2"><a href="simple-phenology-analysis.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">ymin=</span>Tmean<span class="sc">-</span>Tstdev,<span class="at">ymax=</span>Tmean<span class="sc">+</span>Tstdev),</span>
+<span id="cb94-3"><a href="simple-phenology-analysis.html#cb94-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-4"><a href="simple-phenology-analysis.html#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">ymin=</span>Tmean<span class="sc">-</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==-</span><span class="dv">1</span>),</span>
+<span id="cb94-5"><a href="simple-phenology-analysis.html#cb94-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>Tmean<span class="sc">+</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==-</span><span class="dv">1</span>)),</span>
+<span id="cb94-6"><a href="simple-phenology-analysis.html#cb94-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-7"><a href="simple-phenology-analysis.html#cb94-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">ymin=</span>Tmean<span class="sc">-</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==</span><span class="dv">1</span>),</span>
+<span id="cb94-8"><a href="simple-phenology-analysis.html#cb94-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span>Tmean<span class="sc">+</span>Tstdev<span class="sc">*</span>(VIP_Coeff<span class="sc">==</span><span class="dv">1</span>)),</span>
+<span id="cb94-9"><a href="simple-phenology-analysis.html#cb94-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill=</span><span class="st">&quot;dark green&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-10"><a href="simple-phenology-analysis.html#cb94-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x=</span>Date,<span class="at">y=</span>Tmean)) <span class="sc">+</span></span>
+<span id="cb94-11"><a href="simple-phenology-analysis.html#cb94-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb94-12"><a href="simple-phenology-analysis.html#cb94-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(T[mean],<span class="st">&quot; (°C)&quot;</span>)))</span>
+<span id="cb94-13"><a href="simple-phenology-analysis.html#cb94-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-14"><a href="simple-phenology-analysis.html#cb94-14" aria-hidden="true" tabindex="-1"></a>temp_plot</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="simple-phenology-analysis.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb95-2"><a href="simple-phenology-analysis.html#cb95-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-3"><a href="simple-phenology-analysis.html#cb95-3" aria-hidden="true" tabindex="-1"></a>plot<span class="ot">&lt;-</span> (VIP_plot <span class="sc">+</span></span>
+<span id="cb95-4"><a href="simple-phenology-analysis.html#cb95-4" aria-hidden="true" tabindex="-1"></a>          coeff_plot <span class="sc">+</span></span>
+<span id="cb95-5"><a href="simple-phenology-analysis.html#cb95-5" aria-hidden="true" tabindex="-1"></a>          temp_plot <span class="sc">+</span></span>
+<span id="cb95-6"><a href="simple-phenology-analysis.html#cb95-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">plot_layout</span>(<span class="at">ncol=</span><span class="dv">1</span>,</span>
+<span id="cb95-7"><a href="simple-phenology-analysis.html#cb95-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>)</span>
+<span id="cb95-8"><a href="simple-phenology-analysis.html#cb95-8" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">&amp;</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb95-9"><a href="simple-phenology-analysis.html#cb95-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb95-10"><a href="simple-phenology-analysis.html#cb95-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb95-11"><a href="simple-phenology-analysis.html#cb95-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.title.x=</span><span class="fu">element_blank</span>())</span>
+<span id="cb95-12"><a href="simple-phenology-analysis.html#cb95-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-13"><a href="simple-phenology-analysis.html#cb95-13" aria-hidden="true" tabindex="-1"></a>plot</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
 <p><br />
 <strong>3. Write down your thoughts on why we’re not seeing the temperature response pattern we may have expected. What happened to the chill response?</strong></p>
 
@@ -764,20 +784,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

@@ -1,13 +1,13 @@
 # Getting temperature data
 \
-**1. Choose a location of interest and find the 25 closest weather stations using the handle_gsod function**
+## Choose a location of interest and find the 25 closest weather stations using the handle_gsod function
 
 I chose a location in South Africa near Cape Town with a longitude of `18.8148` and a latitude of `-33.9575`, which can be seen in the leaflet below.
 ```{r}
 coords <- c(18.8148, -33.9575)
 ```
 
-```{r Leaflet, echo=FALSE, message=FALSE}
+```{r goedvertrouw, fig.cap="A leaflet map that shows the selected location.", echo=FALSE, message=FALSE}
 require(leaflet) 
 m <- leaflet() %>% setView(lng = coords[1] , lat = coords[2], zoom = 16)
 m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
@@ -65,7 +65,7 @@ m
 ```
 
 \
-**2. Download weather data for the most promising station on the list**
+## Download weather data for the most promising station on the list
 
 The first station seems to be most promising. It is the weather station of the airport of Cape Town, which has a high percentage of the interval covered. Data of other stations that are located directly on the coast are possibly even more affected by the coastal climate. Unfortunately, I could not find any information about the position of the weather station on the airport, but I hope it is representative enough for my case.
 In the next code chunk the `handle_gsod` function is used to download data with `action` input `"download_weather"`. 
@@ -77,7 +77,7 @@ downloaded_weather<-handle_gsod(action="download_weather",
 ```
 
 \
-**3. Convert the weather data into chillR format**
+## Convert the weather data into chillR format
 
 When the data input has the right format, the `handle_gsod` function cleans the dataset, interpolates gaps and reports everything in a quality check addition.
 ```{r 09 Clean weather data with handle_gsod, eval=FALSE}

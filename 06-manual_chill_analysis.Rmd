@@ -12,7 +12,7 @@ row.names(hourtemps) <- NULL
 require(kableExtra)
 require(dplyr)
 title <- "Table for the modified `Winters_hours_gaps` dataset"
-hourtemps[1:5,] %>% 
+hourtemps[1:5,] %>%
 kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```

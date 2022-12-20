@@ -50,6 +50,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -63,8 +65,12 @@
 <link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
 <script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
 <script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -158,8 +164,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
 <li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
 <li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a></li>
-<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a></li>
-<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a></li>
+<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</a></li>
+<li class="chapter" data-level="10.2" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#create-a-list-of-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>10.2</b> Create a list of the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="10.3" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#identify-suitable-weather-stations-for-patching-gaps"><i class="fa fa-check"></i><b>10.3</b> Identify suitable weather stations for patching gaps</a></li>
+<li class="chapter" data-level="10.4" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#download-weather-data-for-promising-stations-convert-them-to-chillr-format-and-compile-them-in-a-list"><i class="fa fa-check"></i><b>10.4</b> Download weather data for promising stations, convert them to chillR format and compile them in a list</a></li>
+<li class="chapter" data-level="10.5" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-the-patch_daily_temperatures-function-to-fill-gaps"><i class="fa fa-check"></i><b>10.5</b> Use the patch_daily_temperatures function to fill gaps</a></li>
+<li class="chapter" data-level="10.6" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#investigate-the-results---have-all-gaps-been-filled"><i class="fa fa-check"></i><b>10.6</b> Investigate the results - have all gaps been filled?</a></li>
+<li class="chapter" data-level="10.7" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#if-necessary-repeat-until-you-have-a-dataset-you-can-work-with-in-further-analyses"><i class="fa fa-check"></i><b>10.7</b> If necessary, repeat until you have a dataset you can work with in further analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#for-the-location-you-chose-for-your-earlier-analyses-use-chillrs-weather-generator-to-produce-100-years-of-synthetic-temperature-data."><i class="fa fa-check"></i><b>11.1</b> For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.</a></li>
+<li class="chapter" data-level="11.2" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#calculate-winter-chill-in-chill-portions-for-your-synthetic-weather-and-illustrate-your-results-as-histograms-and-cumulative-distributions."><i class="fa fa-check"></i><b>11.2</b> Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.</a></li>
+<li class="chapter" data-level="11.3" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#produce-similar-plots-for-the-number-of-freezing-hours-0c-in-april-or-october-if-your-site-is-in-the-southern-hemisphere-for-your-location-of-interest."><i class="fa fa-check"></i><b>11.3</b> Produce similar plots for the number of freezing hours (&lt;0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.</a></li>
+</ul></li>
 <li class="chapter" data-level="12" data-path="saving-and-loading-data.html"><a href="saving-and-loading-data.html"><i class="fa fa-check"></i><b>12</b> Saving and Loading Data</a></li>
 <li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a></li>
 <li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a></li>
@@ -194,58 +214,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 8</span> Making hourly temperatures<a href="making-hourly-temperatures.html#making-hourly-temperatures" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>1. Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength</strong></p>
 <p>The chosen location with the latitude of ‘32’ can be seen below in the leaflet. It is a farm located in the south of Morocco.</p>
-<div id="htmlwidget-60d41b7925e4cf8f2fad" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-60d41b7925e4cf8f2fad">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[32,-8],16,[]],"calls":[{"method":"addProviderTiles","args":["Esri.WorldImagery",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMiniMap","args":[null,"Esri.WorldStreetMap","bottomright",150,150,19,19,-5,false,false,false,true,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]}]},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-760280ace5550df99799" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-760280ace5550df99799">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[32,-8],16,[]],"calls":[{"method":"addProviderTiles","args":["Esri.WorldImagery",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMiniMap","args":[null,"Esri.WorldStreetMap","bottomright",150,150,19,19,-5,false,false,false,true,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]}]},"evals":[],"jsHooks":[]}</script>
 <p><br />
 The <code>chillR</code> <code>daylength</code> function can be used to get the data for the sunsets and sunrises for a specified latitude. The <code>melt</code> command of the <code>reshape2</code> package is used to bring the dataset in the “long” format, that is more suitable for the use with <code>ggplot2</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="making-hourly-temperatures.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(chillR)</span>
-<span id="cb1-2"><a href="making-hourly-temperatures.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(reshape2)</span>
-<span id="cb1-3"><a href="making-hourly-temperatures.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="making-hourly-temperatures.html#cb1-4" aria-hidden="true" tabindex="-1"></a>day_infos<span class="ot">&lt;-</span><span class="fu">daylength</span>(<span class="at">latitude=</span><span class="dv">32</span>,<span class="at">JDay=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>)</span>
-<span id="cb1-5"><a href="making-hourly-temperatures.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="making-hourly-temperatures.html#cb1-6" aria-hidden="true" tabindex="-1"></a>days_df<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">JDay=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>,</span>
-<span id="cb1-7"><a href="making-hourly-temperatures.html#cb1-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Sunrise=</span>day_infos<span class="sc">$</span>Sunrise,</span>
-<span id="cb1-8"><a href="making-hourly-temperatures.html#cb1-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Sunset=</span>day_infos<span class="sc">$</span>Sunset,</span>
-<span id="cb1-9"><a href="making-hourly-temperatures.html#cb1-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Daylength=</span>day_infos<span class="sc">$</span>Daylength)</span>
-<span id="cb1-10"><a href="making-hourly-temperatures.html#cb1-10" aria-hidden="true" tabindex="-1"></a>days_df<span class="ot">&lt;-</span><span class="fu">melt</span>(days_df, <span class="at">id=</span><span class="fu">c</span>(<span class="st">&quot;JDay&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="making-hourly-temperatures.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(chillR)</span>
+<span id="cb10-2"><a href="making-hourly-temperatures.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(reshape2)</span>
+<span id="cb10-3"><a href="making-hourly-temperatures.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="making-hourly-temperatures.html#cb10-4" aria-hidden="true" tabindex="-1"></a>day_infos<span class="ot">&lt;-</span><span class="fu">daylength</span>(<span class="at">latitude=</span><span class="dv">32</span>,<span class="at">JDay=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>)</span>
+<span id="cb10-5"><a href="making-hourly-temperatures.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="making-hourly-temperatures.html#cb10-6" aria-hidden="true" tabindex="-1"></a>days_df<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">JDay=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>,</span>
+<span id="cb10-7"><a href="making-hourly-temperatures.html#cb10-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Sunrise=</span>day_infos<span class="sc">$</span>Sunrise,</span>
+<span id="cb10-8"><a href="making-hourly-temperatures.html#cb10-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Sunset=</span>day_infos<span class="sc">$</span>Sunset,</span>
+<span id="cb10-9"><a href="making-hourly-temperatures.html#cb10-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Daylength=</span>day_infos<span class="sc">$</span>Daylength)</span>
+<span id="cb10-10"><a href="making-hourly-temperatures.html#cb10-10" aria-hidden="true" tabindex="-1"></a>days_df<span class="ot">&lt;-</span><span class="fu">melt</span>(days_df, <span class="at">id=</span><span class="fu">c</span>(<span class="st">&quot;JDay&quot;</span>))</span></code></pre></div>
 <p>The <code>days_df</code> data is plotted in 3 line graphs (<code>geom_line</code>) split by the factor <code>variable</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="making-hourly-temperatures.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
-<span id="cb2-2"><a href="making-hourly-temperatures.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(days_df, <span class="fu">aes</span>(JDay, value)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="making-hourly-temperatures.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.5</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="at">cols=</span><span class="fu">vars</span>(variable)) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="making-hourly-temperatures.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Time of Day / Daylength (Hours)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="making-hourly-temperatures.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-3-1.png" width="672" /><br />
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="making-hourly-temperatures.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb11-2"><a href="making-hourly-temperatures.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(days_df, <span class="fu">aes</span>(JDay, value)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="making-hourly-temperatures.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.5</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="at">cols=</span><span class="fu">vars</span>(variable)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="making-hourly-temperatures.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Time of Day / Daylength (Hours)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="making-hourly-temperatures.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /><br />
 </p>
 <p><strong>2. Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)</strong></p>
 <p>The <code>stack_hourly_temps</code> function is able to simulate idealized hourly data with daily minimal temperatures, daily maximal temperatures and the latitude of the place of interest.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="making-hourly-temperatures.html#cb3-1" aria-hidden="true" tabindex="-1"></a>hourly_temps_KA <span class="ot">&lt;-</span> <span class="fu">stack_hourly_temps</span>(KA_weather, <span class="at">latitude=</span><span class="fl">50.4</span>)</span>
-<span id="cb3-2"><a href="making-hourly-temperatures.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="making-hourly-temperatures.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#str(hourly_temps_KA) # to get the correct item from the list</span></span>
-<span id="cb3-4"><a href="making-hourly-temperatures.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="making-hourly-temperatures.html#cb3-5" aria-hidden="true" tabindex="-1"></a>hourly_temps_KA_df <span class="ot">&lt;-</span> hourly_temps_KA<span class="sc">$</span>hourtemps</span>
-<span id="cb3-6"><a href="making-hourly-temperatures.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="making-hourly-temperatures.html#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="making-hourly-temperatures.html#cb3-8" aria-hidden="true" tabindex="-1"></a>hourly_temps_KA_df[,<span class="st">&quot;connected_timedate&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">ISOdate</span>(</span>
-<span id="cb3-9"><a href="making-hourly-temperatures.html#cb3-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">year =</span> hourly_temps_KA_df<span class="sc">$</span>Year,</span>
-<span id="cb3-10"><a href="making-hourly-temperatures.html#cb3-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">month =</span> hourly_temps_KA_df<span class="sc">$</span>Month,</span>
-<span id="cb3-11"><a href="making-hourly-temperatures.html#cb3-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">day =</span> hourly_temps_KA_df<span class="sc">$</span>Day,</span>
-<span id="cb3-12"><a href="making-hourly-temperatures.html#cb3-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">hour =</span> hourly_temps_KA_df<span class="sc">$</span>Hour)</span>
-<span id="cb3-13"><a href="making-hourly-temperatures.html#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="making-hourly-temperatures.html#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hourly_temps_KA_df[<span class="dv">3500</span><span class="sc">:</span><span class="dv">3660</span>,], <span class="fu">aes</span>(connected_timedate,Temp)) <span class="sc">+</span></span>
-<span id="cb3-15"><a href="making-hourly-temperatures.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb3-16"><a href="making-hourly-temperatures.html#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Date&quot;</span>,</span>
-<span id="cb3-17"><a href="making-hourly-temperatures.html#cb3-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Temperature in C°&quot;</span>,</span>
-<span id="cb3-18"><a href="making-hourly-temperatures.html#cb3-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Hourly modelled temperature for Week 22 in 2002&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-19"><a href="making-hourly-temperatures.html#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="making-hourly-temperatures.html#cb12-1" aria-hidden="true" tabindex="-1"></a>hourly_temps_KA <span class="ot">&lt;-</span> <span class="fu">stack_hourly_temps</span>(KA_weather, <span class="at">latitude=</span><span class="fl">50.4</span>)</span>
+<span id="cb12-2"><a href="making-hourly-temperatures.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="making-hourly-temperatures.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#str(hourly_temps_KA) # to get the correct item from the list</span></span>
+<span id="cb12-4"><a href="making-hourly-temperatures.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="making-hourly-temperatures.html#cb12-5" aria-hidden="true" tabindex="-1"></a>hourly_temps_KA_df <span class="ot">&lt;-</span> hourly_temps_KA<span class="sc">$</span>hourtemps</span>
+<span id="cb12-6"><a href="making-hourly-temperatures.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="making-hourly-temperatures.html#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="making-hourly-temperatures.html#cb12-8" aria-hidden="true" tabindex="-1"></a>hourly_temps_KA_df[,<span class="st">&quot;connected_timedate&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">ISOdate</span>(</span>
+<span id="cb12-9"><a href="making-hourly-temperatures.html#cb12-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">year =</span> hourly_temps_KA_df<span class="sc">$</span>Year,</span>
+<span id="cb12-10"><a href="making-hourly-temperatures.html#cb12-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">month =</span> hourly_temps_KA_df<span class="sc">$</span>Month,</span>
+<span id="cb12-11"><a href="making-hourly-temperatures.html#cb12-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">day =</span> hourly_temps_KA_df<span class="sc">$</span>Day,</span>
+<span id="cb12-12"><a href="making-hourly-temperatures.html#cb12-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">hour =</span> hourly_temps_KA_df<span class="sc">$</span>Hour)</span>
+<span id="cb12-13"><a href="making-hourly-temperatures.html#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="making-hourly-temperatures.html#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(hourly_temps_KA_df[<span class="dv">3500</span><span class="sc">:</span><span class="dv">3660</span>,], <span class="fu">aes</span>(connected_timedate,Temp)) <span class="sc">+</span></span>
+<span id="cb12-15"><a href="making-hourly-temperatures.html#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="making-hourly-temperatures.html#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Date&quot;</span>,</span>
+<span id="cb12-17"><a href="making-hourly-temperatures.html#cb12-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">&quot;Temperature in C°&quot;</span>,</span>
+<span id="cb12-18"><a href="making-hourly-temperatures.html#cb12-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Hourly modelled temperature for Week 22 in 2002&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-19"><a href="making-hourly-temperatures.html#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p><strong>3. Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)</strong></p>
 <p>The <code>Empirical_daily_temperature_curve</code> function is used to extract hourly coefficients for each month from the <code>Winters_hours_gaps</code>. The <code>make_all_day_table</code> function is used to calculate <code>Tmin</code> and <code>Tmax</code> values, that are used in combination with the coefficients in the <code>Empirical_hourly_temperatures</code> to calculate the hourly temperatures.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="making-hourly-temperatures.html#cb4-1" aria-hidden="true" tabindex="-1"></a>coeffs<span class="ot">&lt;-</span><span class="fu">Empirical_daily_temperature_curve</span>(Winters_hours_gaps)</span>
-<span id="cb4-2"><a href="making-hourly-temperatures.html#cb4-2" aria-hidden="true" tabindex="-1"></a>winters_daily<span class="ot">&lt;-</span><span class="fu">make_all_day_table</span>(Winters_hours_gaps, <span class="at">input_timestep=</span><span class="st">&quot;hour&quot;</span>)</span>
-<span id="cb4-3"><a href="making-hourly-temperatures.html#cb4-3" aria-hidden="true" tabindex="-1"></a>winters_empirical<span class="ot">&lt;-</span><span class="fu">Empirical_hourly_temperatures</span>(winters_daily,coeffs)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="making-hourly-temperatures.html#cb13-1" aria-hidden="true" tabindex="-1"></a>coeffs<span class="ot">&lt;-</span><span class="fu">Empirical_daily_temperature_curve</span>(Winters_hours_gaps)</span>
+<span id="cb13-2"><a href="making-hourly-temperatures.html#cb13-2" aria-hidden="true" tabindex="-1"></a>winters_daily<span class="ot">&lt;-</span><span class="fu">make_all_day_table</span>(Winters_hours_gaps, <span class="at">input_timestep=</span><span class="st">&quot;hour&quot;</span>)</span>
+<span id="cb13-3"><a href="making-hourly-temperatures.html#cb13-3" aria-hidden="true" tabindex="-1"></a>winters_empirical<span class="ot">&lt;-</span><span class="fu">Empirical_hourly_temperatures</span>(winters_daily,coeffs)</span></code></pre></div>
 <table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
 <caption>
-<span id="tab:unnamed-chunk-5">Table 8.1: </span>Modified Table for empirical hourly temperatures
+<span id="tab:unnamed-chunk-15">Table 8.1: </span>Modified Table for empirical hourly temperatures
 </caption>
 <thead>
 <tr>
@@ -505,44 +525,44 @@ Temp
 </tbody>
 </table>
 <p>Hourly data with the Empirical and ideal method are compared with the real measured temperature. The <code>melt</code> function is again used to bring the dataset into the right shape.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="making-hourly-temperatures.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(reshape2)</span>
-<span id="cb5-2"><a href="making-hourly-temperatures.html#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="making-hourly-temperatures.html#cb5-3" aria-hidden="true" tabindex="-1"></a>winters_empirical<span class="ot">&lt;-</span>winters_empirical[,<span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>,<span class="st">&quot;Temp&quot;</span>)]</span>
-<span id="cb5-4"><a href="making-hourly-temperatures.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(winters_empirical)[<span class="fu">ncol</span>(winters_empirical)]<span class="ot">&lt;-</span><span class="st">&quot;Temp_empirical&quot;</span></span>
-<span id="cb5-5"><a href="making-hourly-temperatures.html#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="making-hourly-temperatures.html#cb5-6" aria-hidden="true" tabindex="-1"></a>winters_ideal<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(winters_daily, <span class="at">latitude=</span><span class="fl">38.5</span>)<span class="sc">$</span>hourtemps</span>
-<span id="cb5-7"><a href="making-hourly-temperatures.html#cb5-7" aria-hidden="true" tabindex="-1"></a>winters_ideal<span class="ot">&lt;-</span>winters_ideal[,<span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>,<span class="st">&quot;Temp&quot;</span>)]</span>
-<span id="cb5-8"><a href="making-hourly-temperatures.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(winters_ideal)[<span class="fu">ncol</span>(winters_ideal)]<span class="ot">&lt;-</span><span class="st">&quot;Temp_ideal&quot;</span></span>
-<span id="cb5-9"><a href="making-hourly-temperatures.html#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="making-hourly-temperatures.html#cb5-10" aria-hidden="true" tabindex="-1"></a>winters_temps<span class="ot">&lt;-</span><span class="fu">merge</span>(Winters_hours_gaps,winters_empirical,</span>
-<span id="cb5-11"><a href="making-hourly-temperatures.html#cb5-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>))</span>
-<span id="cb5-12"><a href="making-hourly-temperatures.html#cb5-12" aria-hidden="true" tabindex="-1"></a>winters_temps<span class="ot">&lt;-</span><span class="fu">merge</span>(winters_temps,winters_ideal,</span>
-<span id="cb5-13"><a href="making-hourly-temperatures.html#cb5-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>))</span>
-<span id="cb5-14"><a href="making-hourly-temperatures.html#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="making-hourly-temperatures.html#cb5-15" aria-hidden="true" tabindex="-1"></a>winters_temps[,<span class="st">&quot;DATE&quot;</span>]<span class="ot">&lt;-</span><span class="fu">ISOdate</span>(winters_temps<span class="sc">$</span>Year,</span>
-<span id="cb5-16"><a href="making-hourly-temperatures.html#cb5-16" aria-hidden="true" tabindex="-1"></a>                                winters_temps<span class="sc">$</span>Month,</span>
-<span id="cb5-17"><a href="making-hourly-temperatures.html#cb5-17" aria-hidden="true" tabindex="-1"></a>                                winters_temps<span class="sc">$</span>Day,</span>
-<span id="cb5-18"><a href="making-hourly-temperatures.html#cb5-18" aria-hidden="true" tabindex="-1"></a>                                winters_temps<span class="sc">$</span>Hour)</span>
-<span id="cb5-19"><a href="making-hourly-temperatures.html#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="making-hourly-temperatures.html#cb5-20" aria-hidden="true" tabindex="-1"></a>winters_temps_to_plot<span class="ot">&lt;-</span>winters_temps[,<span class="fu">c</span>(<span class="st">&quot;DATE&quot;</span>,</span>
-<span id="cb5-21"><a href="making-hourly-temperatures.html#cb5-21" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Temp&quot;</span>,</span>
-<span id="cb5-22"><a href="making-hourly-temperatures.html#cb5-22" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Temp_empirical&quot;</span>,</span>
-<span id="cb5-23"><a href="making-hourly-temperatures.html#cb5-23" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Temp_ideal&quot;</span>)]</span>
-<span id="cb5-24"><a href="making-hourly-temperatures.html#cb5-24" aria-hidden="true" tabindex="-1"></a>winters_temps_to_plot<span class="ot">&lt;-</span>winters_temps_to_plot[<span class="dv">200</span><span class="sc">:</span><span class="dv">262</span>,]</span>
-<span id="cb5-25"><a href="making-hourly-temperatures.html#cb5-25" aria-hidden="true" tabindex="-1"></a>winters_temps_to_plot<span class="ot">&lt;-</span><span class="fu">melt</span>(winters_temps_to_plot, <span class="at">id=</span><span class="fu">c</span>(<span class="st">&quot;DATE&quot;</span>)) </span>
-<span id="cb5-26"><a href="making-hourly-temperatures.html#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(winters_temps_to_plot)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;DATE&quot;</span>,<span class="st">&quot;Method&quot;</span>,<span class="st">&quot;Temperature&quot;</span>)</span>
-<span id="cb5-27"><a href="making-hourly-temperatures.html#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="making-hourly-temperatures.html#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="making-hourly-temperatures.html#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>winters_temps_to_plot, <span class="fu">aes</span>(DATE,Temperature, <span class="at">colour=</span>Method)) <span class="sc">+</span></span>
-<span id="cb5-30"><a href="making-hourly-temperatures.html#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.3</span>) <span class="sc">+</span></span>
-<span id="cb5-31"><a href="making-hourly-temperatures.html#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Temperature (°C)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb5-32"><a href="making-hourly-temperatures.html#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>) <span class="sc">+</span></span>
-<span id="cb5-33"><a href="making-hourly-temperatures.html#cb5-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span> (<span class="st">&quot;Different temperature methods for Winters dataset&quot;</span>) <span class="sc">+</span></span>
-<span id="cb5-34"><a href="making-hourly-temperatures.html#cb5-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Observed&quot;</span>, <span class="st">&quot;Ideal&quot;</span>, <span class="st">&quot;Empirical&quot;</span>),</span>
-<span id="cb5-35"><a href="making-hourly-temperatures.html#cb5-35" aria-hidden="true" tabindex="-1"></a>                     <span class="at">name=</span><span class="st">&quot;Temperature&quot;</span>,</span>
-<span id="cb5-36"><a href="making-hourly-temperatures.html#cb5-36" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;slateblue&quot;</span>, <span class="st">&quot;peru&quot;</span>, <span class="st">&quot;mediumaquamarine&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb5-37"><a href="making-hourly-temperatures.html#cb5-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="making-hourly-temperatures.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(reshape2)</span>
+<span id="cb14-2"><a href="making-hourly-temperatures.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="making-hourly-temperatures.html#cb14-3" aria-hidden="true" tabindex="-1"></a>winters_empirical<span class="ot">&lt;-</span>winters_empirical[,<span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>,<span class="st">&quot;Temp&quot;</span>)]</span>
+<span id="cb14-4"><a href="making-hourly-temperatures.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(winters_empirical)[<span class="fu">ncol</span>(winters_empirical)]<span class="ot">&lt;-</span><span class="st">&quot;Temp_empirical&quot;</span></span>
+<span id="cb14-5"><a href="making-hourly-temperatures.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="making-hourly-temperatures.html#cb14-6" aria-hidden="true" tabindex="-1"></a>winters_ideal<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(winters_daily, <span class="at">latitude=</span><span class="fl">38.5</span>)<span class="sc">$</span>hourtemps</span>
+<span id="cb14-7"><a href="making-hourly-temperatures.html#cb14-7" aria-hidden="true" tabindex="-1"></a>winters_ideal<span class="ot">&lt;-</span>winters_ideal[,<span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>,<span class="st">&quot;Temp&quot;</span>)]</span>
+<span id="cb14-8"><a href="making-hourly-temperatures.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(winters_ideal)[<span class="fu">ncol</span>(winters_ideal)]<span class="ot">&lt;-</span><span class="st">&quot;Temp_ideal&quot;</span></span>
+<span id="cb14-9"><a href="making-hourly-temperatures.html#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="making-hourly-temperatures.html#cb14-10" aria-hidden="true" tabindex="-1"></a>winters_temps<span class="ot">&lt;-</span><span class="fu">merge</span>(Winters_hours_gaps,winters_empirical,</span>
+<span id="cb14-11"><a href="making-hourly-temperatures.html#cb14-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>))</span>
+<span id="cb14-12"><a href="making-hourly-temperatures.html#cb14-12" aria-hidden="true" tabindex="-1"></a>winters_temps<span class="ot">&lt;-</span><span class="fu">merge</span>(winters_temps,winters_ideal,</span>
+<span id="cb14-13"><a href="making-hourly-temperatures.html#cb14-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Month&quot;</span>,<span class="st">&quot;Day&quot;</span>,<span class="st">&quot;Hour&quot;</span>))</span>
+<span id="cb14-14"><a href="making-hourly-temperatures.html#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="making-hourly-temperatures.html#cb14-15" aria-hidden="true" tabindex="-1"></a>winters_temps[,<span class="st">&quot;DATE&quot;</span>]<span class="ot">&lt;-</span><span class="fu">ISOdate</span>(winters_temps<span class="sc">$</span>Year,</span>
+<span id="cb14-16"><a href="making-hourly-temperatures.html#cb14-16" aria-hidden="true" tabindex="-1"></a>                                winters_temps<span class="sc">$</span>Month,</span>
+<span id="cb14-17"><a href="making-hourly-temperatures.html#cb14-17" aria-hidden="true" tabindex="-1"></a>                                winters_temps<span class="sc">$</span>Day,</span>
+<span id="cb14-18"><a href="making-hourly-temperatures.html#cb14-18" aria-hidden="true" tabindex="-1"></a>                                winters_temps<span class="sc">$</span>Hour)</span>
+<span id="cb14-19"><a href="making-hourly-temperatures.html#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-20"><a href="making-hourly-temperatures.html#cb14-20" aria-hidden="true" tabindex="-1"></a>winters_temps_to_plot<span class="ot">&lt;-</span>winters_temps[,<span class="fu">c</span>(<span class="st">&quot;DATE&quot;</span>,</span>
+<span id="cb14-21"><a href="making-hourly-temperatures.html#cb14-21" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Temp&quot;</span>,</span>
+<span id="cb14-22"><a href="making-hourly-temperatures.html#cb14-22" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Temp_empirical&quot;</span>,</span>
+<span id="cb14-23"><a href="making-hourly-temperatures.html#cb14-23" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Temp_ideal&quot;</span>)]</span>
+<span id="cb14-24"><a href="making-hourly-temperatures.html#cb14-24" aria-hidden="true" tabindex="-1"></a>winters_temps_to_plot<span class="ot">&lt;-</span>winters_temps_to_plot[<span class="dv">200</span><span class="sc">:</span><span class="dv">262</span>,]</span>
+<span id="cb14-25"><a href="making-hourly-temperatures.html#cb14-25" aria-hidden="true" tabindex="-1"></a>winters_temps_to_plot<span class="ot">&lt;-</span><span class="fu">melt</span>(winters_temps_to_plot, <span class="at">id=</span><span class="fu">c</span>(<span class="st">&quot;DATE&quot;</span>)) </span>
+<span id="cb14-26"><a href="making-hourly-temperatures.html#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(winters_temps_to_plot)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;DATE&quot;</span>,<span class="st">&quot;Method&quot;</span>,<span class="st">&quot;Temperature&quot;</span>)</span>
+<span id="cb14-27"><a href="making-hourly-temperatures.html#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="making-hourly-temperatures.html#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="making-hourly-temperatures.html#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>winters_temps_to_plot, <span class="fu">aes</span>(DATE,Temperature, <span class="at">colour=</span>Method)) <span class="sc">+</span></span>
+<span id="cb14-30"><a href="making-hourly-temperatures.html#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">lwd=</span><span class="fl">1.3</span>) <span class="sc">+</span></span>
+<span id="cb14-31"><a href="making-hourly-temperatures.html#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Temperature (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-32"><a href="making-hourly-temperatures.html#cb14-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Date&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-33"><a href="making-hourly-temperatures.html#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span> (<span class="st">&quot;Different temperature methods for Winters dataset&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-34"><a href="making-hourly-temperatures.html#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Observed&quot;</span>, <span class="st">&quot;Ideal&quot;</span>, <span class="st">&quot;Empirical&quot;</span>),</span>
+<span id="cb14-35"><a href="making-hourly-temperatures.html#cb14-35" aria-hidden="true" tabindex="-1"></a>                     <span class="at">name=</span><span class="st">&quot;Temperature&quot;</span>,</span>
+<span id="cb14-36"><a href="making-hourly-temperatures.html#cb14-36" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;slateblue&quot;</span>, <span class="st">&quot;peru&quot;</span>, <span class="st">&quot;mediumaquamarine&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb14-37"><a href="making-hourly-temperatures.html#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <hr />
 
 </div>
