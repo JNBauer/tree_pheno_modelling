@@ -50,93 +50,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
-<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
-<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
-<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -156,23 +71,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
-<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a></li>
-<li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a></li>
-<li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a></li>
-<li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a></li>
+<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
+<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
+<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
+<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
+<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
+<li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
+<li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
+<li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#sketch-out-three-data-access-and-processing-challenges-that-had-to-be-overcome-in-order-to-produce-chill-projections-with-state-of-the-art-methodology."><i class="fa fa-check"></i><b>5.1</b> Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology.</a></li>
+<li class="chapter" data-level="5.2" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#outline-in-your-understanding-the-basic-steps-that-are-necessary-to-make-such-projections."><i class="fa fa-check"></i><b>5.2</b> Outline, in your understanding, the basic steps that are necessary to make such projections.</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html"><i class="fa fa-check"></i><b>6</b> Manual chill analysis</a></li>
 <li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
 <li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
-<li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a></li>
+<li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="9.2" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#download-weather-data-for-the-most-promising-station-on-the-list"><i class="fa fa-check"></i><b>9.2</b> Download weather data for the most promising station on the list</a></li>
+<li class="chapter" data-level="9.3" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#convert-the-weather-data-into-chillr-format"><i class="fa fa-check"></i><b>9.3</b> Convert the weather data into chillR format</a></li>
+</ul></li>
 <li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</a></li>
-<li class="chapter" data-level="10.2" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#create-a-list-of-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>10.2</b> Create a list of the 25 closest weather stations using the handle_gsod function</a></li>
-<li class="chapter" data-level="10.3" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#identify-suitable-weather-stations-for-patching-gaps"><i class="fa fa-check"></i><b>10.3</b> Identify suitable weather stations for patching gaps</a></li>
-<li class="chapter" data-level="10.4" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#download-weather-data-for-promising-stations-convert-them-to-chillr-format-and-compile-them-in-a-list"><i class="fa fa-check"></i><b>10.4</b> Download weather data for promising stations, convert them to chillR format and compile them in a list</a></li>
-<li class="chapter" data-level="10.5" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-the-patch_daily_temperatures-function-to-fill-gaps"><i class="fa fa-check"></i><b>10.5</b> Use the patch_daily_temperatures function to fill gaps</a></li>
-<li class="chapter" data-level="10.6" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#investigate-the-results---have-all-gaps-been-filled"><i class="fa fa-check"></i><b>10.6</b> Investigate the results - have all gaps been filled?</a></li>
-<li class="chapter" data-level="10.7" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#if-necessary-repeat-until-you-have-a-dataset-you-can-work-with-in-further-analyses"><i class="fa fa-check"></i><b>10.7</b> If necessary, repeat until you have a dataset you can work with in further analyses</a></li>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> <strong>1. Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</strong></a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
 <ul>
@@ -181,8 +124,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#produce-similar-plots-for-the-number-of-freezing-hours-0c-in-april-or-october-if-your-site-is-in-the-southern-hemisphere-for-your-location-of-interest."><i class="fa fa-check"></i><b>11.3</b> Produce similar plots for the number of freezing hours (&lt;0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.</a></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="saving-and-loading-data.html"><a href="saving-and-loading-data.html"><i class="fa fa-check"></i><b>12</b> Saving and Loading Data</a></li>
-<li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a></li>
-<li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a></li>
+<li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#for-the-location-you-chose-for-previous-exercises-produce-historic-temperature-scenarios-representing-several-years-of-the-historic-record-your-choice."><i class="fa fa-check"></i><b>13.1</b> For the location you chose for previous exercises, produce historic temperature scenarios representing several years of the historic record (your choice).</a></li>
+<li class="chapter" data-level="13.2" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#produce-chill-distributions-for-these-scenarios-and-plot-them."><i class="fa fa-check"></i><b>13.2</b> Produce chill distributions for these scenarios and plot them.</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html#analyze-the-historic-and-future-impact-of-climate-change-on-three-agroclimatic-metrics-of-your-choice-for-the-location-youve-chosen-for-your-earlier-analyses."><i class="fa fa-check"></i><b>14.1</b> Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.</a></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a></li>
 <li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a></li>
 <li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a></li>
@@ -212,8 +162,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="tools" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Tools<a href="tools.html#tools" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="organization" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Organization<a href="tools.html#organization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bookdown" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Bookdown<a href="tools.html#bookdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>I chose the markdown+bookdown approach for a better organization</p>
+</div>
+</div>
+<div id="packages" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Packages<a href="tools.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="chillr" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> chillR<a href="tools.html#chillr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="dplyr-family" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> dplyr family<a href="tools.html#dplyr-family" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="ggplot2" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> ggplot2<a href="tools.html#ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="plotly" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> plotly<a href="tools.html#plotly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="leaflet" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> leaflet<a href="tools.html#leaflet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
+</div>
+</div>
 </div>
             </section>
 

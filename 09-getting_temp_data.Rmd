@@ -1,5 +1,5 @@
 # Getting temperature data
-\
+
 ## Choose a location of interest and find the 25 closest weather stations using the handle_gsod function
 
 I chose a location in South Africa near Cape Town with a longitude of `18.8148` and a latitude of `-33.9575`, which can be seen in the leaflet below.
@@ -64,7 +64,7 @@ m <- addTiles(m) %>%
 m
 ```
 
-\
+
 ## Download weather data for the most promising station on the list
 
 The first station seems to be most promising. It is the weather station of the airport of Cape Town, which has a high percentage of the interval covered. Data of other stations that are located directly on the coast are possibly even more affected by the coastal climate. Unfortunately, I could not find any information about the position of the weather station on the airport, but I hope it is representative enough for my case.
@@ -76,7 +76,7 @@ downloaded_weather<-handle_gsod(action="download_weather",
                      time_interval=c(1977,2020))
 ```
 
-\
+
 ## Convert the weather data into chillR format
 
 When the data input has the right format, the `handle_gsod` function cleans the dataset, interpolates gaps and reports everything in a quality check addition.
@@ -98,3 +98,4 @@ write.csv(station_list,"data/station_list.csv",row.names=FALSE)
 write.csv(weather,"data/CapeTown_weather.csv",row.names=FALSE)
 write.csv(cleaned_weather$`CAPE TOWN INTL`$weather,"data/CapeTown_chillR_weather.csv",row.names=FALSE)
 ```
+<hr />

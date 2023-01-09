@@ -176,3 +176,4 @@ ggplot(freezing_simulations, aes(x=Freezing_Hours)) +
   xlab("Freeze hours accumulation") +
   theme_bw(base_size = 20)
 ```
+<hr />

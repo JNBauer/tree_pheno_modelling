@@ -2,3 +2,4 @@
 
 The chapter conveyed some important tips to reduce the knitting and processing time for the Markdown files with chunk attributes like `echo=FALSE` and `eval=FALSE`. We are able to hide some parts of our code or show code to the reader, without executing it in the background.
 ![alt text here](images/example_eval.png)
+<hr />

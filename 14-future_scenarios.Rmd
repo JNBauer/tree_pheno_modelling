@@ -1,19 +1,19 @@
 # Future temperature scenarios
 
-**1. Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.**
-```{r, echo=FALSE}
+## Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.
+```{r 14-intro-chunk, echo=FALSE, message=FALSE}
 require(chillR)
 require(ggplot2)
 fixed_weather <- read.csv("data/CapeTown_weather.csv")
 weather_CapeTown <- fixed_weather
-summary(weather_CapeTown)
-
+#summary(weather_CapeTown)
+coords <- c(18.8148, -33.9575)
 RCPs<-c("rcp45","rcp85")
 Times<-c(2050,2085)
 ```
 
-
-```{r, eval=FALSE}
+We are downloading the temperature scenarios for the baseline between 1977 and 2005 for two RCPs with the help of a loop. The baseline is selected in a way to achieve an integer as median, which is in this case 1991. The data is directly saved afterwards in the ClimateWizard directory in the data directory.
+```{r 14-, eval=FALSE}
 RCPs<-c("rcp45","rcp85")
 Times<-c(2050,2085)
 
@@ -23,7 +23,7 @@ for(RCP in RCPs)
     {start_year <- Time-15
      end_year <- Time+15
      clim_scen <-getClimateWizardData(
-     c(longitude = 18.93521767626777,latitude = -34.10835247406239),
+     c(longitude = coords[1],latitude = coords[2]),
      RCP,
      start_year,
      end_year,
@@ -37,13 +37,14 @@ for(RCP in RCPs)
 
 ```
 
+In the next step we need to adjust the baseline of our observed data to the baseline we want to use for the future data. The `temperature_scenario_baseline_adjustment` command is made for this purpose.
 ```{r, eval=FALSE}
 scenario_1991<-temperature_scenario_from_records(weather_CapeTown,1991) #median of 1977 and 2005
 scenario_1998<-temperature_scenario_from_records(weather_CapeTown,1998) #median of 1977 and 2019
 adjustment_scenario<-temperature_scenario_baseline_adjustment(scenario_1998,scenario_1991)
-adjustment_scenario
 ```
 
+In another `for` loop, we can use the `load_ClimateWizard_scenarios` function to load the previously downloaded climate scenarios. The climate scenarios are adjusted to the baseline and the weather is then generated with the `temperature_generation` function. After generation the data is saved to be easier accessed for the next use case.
 ```{r, eval=FALSE}
 RCPs<-c("rcp45","rcp85")
 Times<-c(2050,2085)
@@ -71,6 +72,7 @@ for(RCP in RCPs)
   }
 ```
 
+We create additional historic scenarios, that we can later use for display in the plot. Before generating the temperature, the scenarios are adjusted to the baseline. After generation, the newly created weather is saved in the same directory as the previously generated future weather data.
 ```{r, eval=FALSE}
 all_past_scenarios<-temperature_scenario_from_records(
   weather=weather_CapeTown,
@@ -92,6 +94,7 @@ save_temperature_scenarios(
   "CapeTown_historic")
 ```
 
+With `tempResponse_daily_list` we are able to apply our three agroclimatic metrics to our historic data, which is loaded at once. For the frost model, we create one by ourselves with the help of the `step_model` function.
 ```{r, eval=FALSE}
 frost_model<-function(x) step_model(x,data.frame(
   lower=c(-1000,0),
@@ -105,14 +108,14 @@ models<-list(Chill_CP=Dynamic_Model,Heat_GDH=GDH,Frost_H=frost_model)
 Temps<-load_temperature_scenarios("data/Weather","CapeTown_historic")
 chill_past_scenarios<-tempResponse_daily_list(
   Temps,
-  latitude=-34.10835247406239,
+  latitude=coords[2],
   Start_JDay = 121,
   End_JDay = 243,
   models=models,
   misstolerance = 10)
 chill_observed<-tempResponse_daily_list(
   weather_CapeTown,
-  latitude=-34.10835247406239,
+  latitude=coords[2],
   Start_JDay = 121,
   End_JDay = 243,
   models=models,
@@ -126,26 +129,25 @@ save_temperature_scenarios(chill_observed,
                            "CapeTown_observed")
 ```
 
-```{r, eval=TRUE}
+```{r, eval=TRUE, results='hide', echo=FALSE}
 chill_past_scenarios<-load_temperature_scenarios(
   "data/chill",
   "CapeTown_historic")
 chill_observed<-load_temperature_scenarios(
   "data/chill",
   "CapeTown_observed")
+```
 
+Prior to plotting, we need to bring the chill data in the right shape with the help of the `make_climate_scenario` function. 
+```{r, eval=TRUE, results='hide'}
 chills <-make_climate_scenario(
   chill_past_scenarios,
   caption = "Historic",
   historic_data = chill_observed,
   time_series = TRUE)
-
-plot_climate_scenarios(
-  climate_scenario_list=chills,
-  metric="Chill_CP",
-  metric_label="Chill (Chill Portions)")
 ```
 
+In the next code chunk, we use the same `for` loop, to cycle trough our data structure to apply the agroclimatic metrics to the future data. Also this data is saved afterwards.
 ```{r, eval=FALSE}
 for(RCP in RCPs)
   for(Time in Times)
@@ -155,7 +157,7 @@ for(RCP in RCPs)
       paste0("CapeTown_",Time,"_",RCP))
     chill<-tempResponse_daily_list(
       Temps,
-      latitude=-34.10835247406239,
+      latitude= coords[2],
   Start_JDay = 121,
   End_JDay = 243,
       models=models,
@@ -167,6 +169,7 @@ for(RCP in RCPs)
 }
 ```
 
+We again use the `make_climate_scenario` function and the same loop structure to bring the last parts of our dataset in shape. With `add_to` we can combine the future chill data with the previously created historic chill data.
 ```{r}
 for(RCP in RCPs)
   for(Time in Times)
@@ -178,6 +181,7 @@ for(RCP in RCPs)
     if(RCP=="rcp85") RCPcaption <- "RCP8.5"
     if(Time=="2050") Time_caption <- "2050"
     if(Time=="2085") Time_caption <- "2085"
+    
     chills <-make_climate_scenario(
       chill,
       caption =c(RCPcaption, Time_caption),
@@ -185,19 +189,27 @@ for(RCP in RCPs)
 }
 ```
 
-```{r}
+
+The three graphs show the development of the three selected agroclimatic metrics of the past and for our forecast for 2050 and 2085 for two different RCPs. These graphs are made with base R in the next chapter we take the same data and plot those graphs with the help of the `ggplot2` package. I will then also analyse the graphs in detail.
+```{r, echo=FALSE, fig.cap="`plot_climate_scenarios` plot for Chill Portions for future temperature scenarios",message=FALSE, warning=FALSE, results='hide'}
 plot_climate_scenarios(
   climate_scenario_list=chills,
   metric="Chill_CP",
   metric_label="Chill (Chill Portions)",
   texcex=1.5)
+```
 
+
+```{r, echo=FALSE, fig.cap="`plot_climate_scenarios` plot for Growing Degree Hours for future temperature scenarios",message=FALSE, warning=FALSE, results='hide'}
 plot_climate_scenarios(
   climate_scenario_list=chills,
   metric="Heat_GDH",
   metric_label="Heat (Growing Degree Hours)",
   texcex=1.5)
+```
 
+
+```{r, echo=FALSE, fig.cap="`plot_climate_scenarios` plot for Frost hours for future temperature scenarios",message=FALSE, warning=FALSE, results='hide'}
 plot_climate_scenarios(
   climate_scenario_list=chills,
   metric="Frost_H",

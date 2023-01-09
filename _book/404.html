@@ -4,32 +4,25 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | A Minimal Book Example</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <title>Page not found | Tree phenology analysis with R - Logbook</title>
+  <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | A Minimal Book Example" />
+  <meta property="og:title" content="Page not found | Tree phenology analysis with R - Logbook" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta property="og:description" content="The logbook for the Tree phenology analysis with R logbook" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | A Minimal Book Example" />
+  <meta name="twitter:title" content="Page not found | Tree phenology analysis with R - Logbook" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="twitter:description" content="The logbook for the Tree phenology analysis with R logbook" />
   
 
 <meta name="author" content="Julian Bauer" />
 
 
-<meta name="date" content="2022-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -41,7 +34,6 @@ set in the _output.yml file.</p>" />
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -58,21 +50,6 @@ set in the _output.yml file.</p>" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/proj4-2.6.2/proj4.min.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
-<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
-<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
-<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
-<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
 
 
 <style type="text/css">
@@ -154,29 +131,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Tree phenology Logbook</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
-<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a></li>
-<li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a></li>
-<li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a></li>
-<li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a></li>
-<li class="chapter" data-level="6" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html"><i class="fa fa-check"></i><b>6</b> Manual chill analysis</a></li>
+<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
+<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
+<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
+<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
+<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
+<li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
+<li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
+<li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#sketch-out-three-data-access-and-processing-challenges-that-had-to-be-overcome-in-order-to-produce-chill-projections-with-state-of-the-art-methodology."><i class="fa fa-check"></i><b>5.1</b> Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology.</a></li>
+<li class="chapter" data-level="5.2" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#outline-in-your-understanding-the-basic-steps-that-are-necessary-to-make-such-projections."><i class="fa fa-check"></i><b>5.2</b> Outline, in your understanding, the basic steps that are necessary to make such projections.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html"><i class="fa fa-check"></i><b>6</b> Manual chill analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#write-a-basic-function-that-calculates-warm-hours-25c"><i class="fa fa-check"></i><b>6.1</b> Write a basic function that calculates warm hours (&gt;25°C)</a></li>
+<li class="chapter" data-level="6.2" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset"><i class="fa fa-check"></i><b>6.2</b> Apply this function to the Winters_hours_gaps dataset</a></li>
+<li class="chapter" data-level="6.3" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates"><i class="fa fa-check"></i><b>6.3</b> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
 <li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
-<li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a></li>
-<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a></li>
-<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a></li>
+<li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="9.2" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#download-weather-data-for-the-most-promising-station-on-the-list"><i class="fa fa-check"></i><b>9.2</b> Download weather data for the most promising station on the list</a></li>
+<li class="chapter" data-level="9.3" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#convert-the-weather-data-into-chillr-format"><i class="fa fa-check"></i><b>9.3</b> Convert the weather data into chillR format</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> <strong>1. Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#for-the-location-you-chose-for-your-earlier-analyses-use-chillrs-weather-generator-to-produce-100-years-of-synthetic-temperature-data."><i class="fa fa-check"></i><b>11.1</b> For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.</a></li>
+<li class="chapter" data-level="11.2" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#calculate-winter-chill-in-chill-portions-for-your-synthetic-weather-and-illustrate-your-results-as-histograms-and-cumulative-distributions."><i class="fa fa-check"></i><b>11.2</b> Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.</a></li>
+<li class="chapter" data-level="11.3" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#produce-similar-plots-for-the-number-of-freezing-hours-0c-in-april-or-october-if-your-site-is-in-the-southern-hemisphere-for-your-location-of-interest."><i class="fa fa-check"></i><b>11.3</b> Produce similar plots for the number of freezing hours (&lt;0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.</a></li>
+</ul></li>
 <li class="chapter" data-level="12" data-path="saving-and-loading-data.html"><a href="saving-and-loading-data.html"><i class="fa fa-check"></i><b>12</b> Saving and Loading Data</a></li>
-<li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a></li>
-<li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a></li>
+<li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#for-the-location-you-chose-for-previous-exercises-produce-historic-temperature-scenarios-representing-several-years-of-the-historic-record-your-choice."><i class="fa fa-check"></i><b>13.1</b> For the location you chose for previous exercises, produce historic temperature scenarios representing several years of the historic record (your choice).</a></li>
+<li class="chapter" data-level="13.2" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#produce-chill-distributions-for-these-scenarios-and-plot-them."><i class="fa fa-check"></i><b>13.2</b> Produce chill distributions for these scenarios and plot them.</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html#analyze-the-historic-and-future-impact-of-climate-change-on-three-agroclimatic-metrics-of-your-choice-for-the-location-youve-chosen-for-your-earlier-analyses."><i class="fa fa-check"></i><b>14.1</b> Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.</a></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a></li>
-<li class="chapter" data-level="16" data-path="chapter-16-chill-model-comparison.html"><a href="chapter-16-chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chapter 16 Chill model comparison</a></li>
-<li class="chapter" data-level="17" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a></li>
+<li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a></li>
+<li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a></li>
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a></li>
 <li class="chapter" data-level="19" data-path="simple-phenology-analysis.html"><a href="simple-phenology-analysis.html"><i class="fa fa-check"></i><b>19</b> Simple phenology analysis</a></li>
 <li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a></li>
+<li class="chapter" data-level="21" data-path="pls_evaluation.html"><a href="pls_evaluation.html"><i class="fa fa-check"></i><b>21</b> pls_evaluation</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -189,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree phenology analysis with R - Logbook</a>
           </h1>
         </div>
 
@@ -263,20 +295,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

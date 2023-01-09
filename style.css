@@ -62,6 +62,10 @@ a {
   color: #69b3a2;
 }
 
+.book-summary ul ul {
+  display: none;
+}
+
 <style type="text/css">
 body{ /* Normal  */
   font-size: 14px;

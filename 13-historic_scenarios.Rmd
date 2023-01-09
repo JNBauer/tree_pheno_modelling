@@ -14,7 +14,6 @@ After creating a baseline scenario for 2001, we can use the `temperature_scenari
 require(chillR)
 scenario_2001<-temperature_scenario_from_records(weather=weather_CapeTown,
                                                  year=2001)
-scenario_2001
 
 all_past_scenarios <- temperature_scenario_from_records(
   weather=weather_CapeTown,
@@ -31,10 +30,9 @@ all_past_scenario_temps <- temperature_generation(
   temperature_scenario = adjusted_scenarios)
 ```
 
-```{r}
+```{r, echo=FALSE}
 scenario_2001<-temperature_scenario_from_records(weather=weather_CapeTown,
                                                  year=2001)
-scenario_2001
 
 all_past_scenarios <- temperature_scenario_from_records(
   weather=weather_CapeTown,
@@ -46,7 +44,7 @@ adjusted_scenarios <- temperature_scenario_baseline_adjustment(
 ```
 
 
-```{r, echo=FALSE}
+```{r, fig.cap="A leaflet map that shows the selected location.", echo=FALSE, eval=FALSE}
 t1 <- scenario_2001$`2001`$data
 t2 <- all_past_scenarios$`1985`$data
 t3 <- adjusted_scenarios$`1985`$data
@@ -61,7 +59,29 @@ t3 %>%
   kbl(escape = F, format = "html", caption = "Adjusted relative 1985") %>%
   kable_paper("hover", full_width = FALSE, position = "float_left")
 ```
-<hr />
+
+```{r, echo=FALSE}
+t1 <- scenario_2001$`2001`$data
+t2 <- all_past_scenarios$`1985`$data
+t3 <- adjusted_scenarios$`1985`$data
+
+knitr::kable(
+  list(t1,t2,t3),
+  escape = F, format = "html", caption = "Three tables to display the adjustment of the scenario for 1985 with the baseline of 2001", booktabs = TRUE) %>%
+  kable_paper("st", full_width = FALSE, position = "center") %>% 
+  add_header_above(c("Baseline 2001" = 1, "Absolute 1985" = 1, "Adjusted relative 1985" = 1))
+```
+
+```{r, echo=FALSE, message=FALSE, eval=FALSE}
+t <- bind_cols(t1,t2,t3) 
+
+kable(t,
+  escape = F, format = "html", caption = "Absolute 1985", booktabs = TRUE) %>%
+  kable_paper("hover", full_width = FALSE, position = "center") %>% 
+  add_header_above(c("Baseline 2001" = 2, "Absolute 1985" = 2, "Adjusted relative 1985" = 2))
+```
+
+
 
 ```{r 13-Saving-all- past-scenario-temperatures, echo=FALSE, eval=FALSE}
 save_temperature_scenarios(all_past_scenario_temps,"data",
@@ -77,7 +97,9 @@ all_past_scenario_temps <- load_temperature_scenarios("data",
 
 ## Produce chill distributions for these scenarios and plot them.
 
-```{r 13-Calculating chill-for-all-past-scenarios}
+We apply the `tempResponse_daily_list` function to our generated data and add a column with the scenario year and stack all 4 scenarios vertically. In `actual_chill`, we calculate the chilling for our original data.
+
+```{r 13-Calculating chill-for-all-past-scenarios, message=FALSE}
 chill_hist_scenario_list <- tempResponse_daily_list(all_past_scenario_temps,
                                                   latitude=coords[2],
                                                   Start_JDay = 121,
@@ -102,15 +124,17 @@ actual_chill <- tempResponse_daily_list(weather_CapeTown,latitude=coords[2],
 actual_chill <- actual_chill[which(actual_chill$Perc_complete==100),]
 ```
 
+This time, we use the `geom_violin` to display the distribution of chill for our scenario years. With `geom_point`, we can add the data from the `actual_chill` to our plot.
 
-```{r 13-Plotting-the-past-chill-portions-in-a-violin-ggplot, fig.cap="Violin charts that display the chill accumulation for the simulated years of 1985,1995,2005,2015. The blue points represent the actual chill measured during this time"}
+```{r 13-Plotting-the-past-chill-portions-in-a-violin-ggplot, fig.cap="Violin charts that display the chill accumulation for the simulated years of 1985,1995,2005,2015. The blue points represent the actual chill measured during this time", message=FALSE, warning=FALSE}
 require(ggplot2)
 ggplot(data=all_scenarios,aes(scenario,Chill_Portions,
                               fill=factor(scenario))) +
   geom_violin() +
   ylab("Chill accumulation (Chill Portions)") +
-  xlab("Scenario year") +
   theme_bw(base_size=15) +
+  scale_x_discrete(name ="Scenario year", 
+                   limits=unique(all_scenarios$scenario)) +
   ylim(c(0,90)) +
   geom_point(data=actual_chill,
              aes(End_year,Chill_Portions,fill="blue"),
@@ -119,3 +143,4 @@ ggplot(data=all_scenarios,aes(scenario,Chill_Portions,
                       breaks = unique(all_scenarios$scenario)) 
 ```
 
+<hr />

@@ -1,3 +1,20 @@
 # Tools
 
+## Organization
+
+### Bookdown
 I chose the markdown+bookdown approach for a better organization
+
+## Packages
+
+### chillR
+
+### dplyr family
+
+### ggplot2
+
+### plotly
+
+### leaflet
+
+

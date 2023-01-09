@@ -1,6 +1,6 @@
 # Manual chill analysis
 
-**1. Write a basic function that calculates warm hours (\>25°C)**
+## Write a basic function that calculates warm hours (\>25°C)
 
 The `Winters_hours_gaps` dataset is part of the ChillR package. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used `Temp_gaps` column.
 
@@ -28,18 +28,18 @@ WH <- function(hourtemps)
 
 \
 
-**2. Apply this function to the Winters_hours_gaps dataset**
+## Apply this function to the Winters_hours_gaps dataset
 
 ```{r, echo=TRUE}
 Winters_hours_gaps_plus_WH <- WH(Winters_hours_gaps)
 sum_whgpWH <- sum(Winters_hours_gaps_plus_WH$Warming_hours)
 ```
-When applying the function to the Winter_hours_gaps dataset and taking the sum of the `Winters_hours_gaps_plus_WH$Warming_hours` coloumn, **`r sum_whgpWH`** hours over 25°C occured.
-\
-In a table, it could be displayed like this.
-\
+When applying the function to the Winter_hours_gaps dataset and taking the sum of the `Winters_hours_gaps_plus_WH$Warming_hours` coloumn, **`r sum_whgpWH`** hours over 25°C occured.\
+
+In a table, it could be displayed like this:\
+
 ```{r, echo=FALSE}
-hourtemps_plus_WH <- Winters_hours_gaps_plus_WH[4008:4018, 1:5]
+hourtemps_plus_WH <- Winters_hours_gaps_plus_WH[4004:4013, 1:5]
 row.names(hourtemps_plus_WH) <- NULL
 hourtemps_plus_WH$Temp <- ifelse(
   hourtemps_plus_WH$Temp > 25,
@@ -53,7 +53,7 @@ kbl(escape = F, format = "html", caption = title) %>%
 ```
 \
 
-**3. Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates**
+## Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates
 
 The following function contains additional input variables for the start and end dates. The variables are used to index the correct rows between which the sum of the warm hours should be taken. The previously created `WH` function is used to compare the temperature to the threshold.
 ```{r}
