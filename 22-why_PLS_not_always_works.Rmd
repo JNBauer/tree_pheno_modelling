@@ -1,0 +1,336 @@
+# Why PLS doesn’t always work
+\
+
+## Produce chill and heat model sensitivity plots for the location you focused on in previous exercises.
+
+The following loops create a data frame, that contains all the information to visualize the sensitivity of the Dynamic model to different temperature combinations. Since chilling is mainly relevant during dormancy, we calculate the model sensitivity only for the winter months. Cape Town, the place whose weather data I have already used for the previous tasks, is located in the southern hemisphere. This means that the summer and winter months are swapped with those of the northern hemisphere.
+
+```{r, echo=FALSE}
+library(chillR)
+
+coords <- c(18.8148, -33.9575)
+
+latitude<-coords[2]
+
+month_range=c(4,5,6,7,8,9)
+
+Tmins=c(-20:20)
+Tmaxs=c(-15:30)
+```
+
+
+```{r, eval=FALSE}
+
+
+coords <- c(18.8148, -33.9575)
+
+latitude<-coords[2]
+
+month_range=c(4,5,6,7,8,9)
+
+Tmins=c(-20:20)
+Tmaxs=c(-15:30)
+
+mins<-NA
+maxs<-NA
+CP<-NA
+month<-NA
+temp_model<-Dynamic_Model
+
+for(mon in month_range)
+    {days_month<-as.numeric(difftime( ISOdate(2002,mon+1,1),
+                                           ISOdate(2002,mon,1) ))
+    if(mon==12) days_month<-31
+    weather<-make_all_day_table(data.frame(Year=c(2001,2002),
+                                         Month=c(mon,mon),
+                                         Day=c(1,days_month),Tmin=c(0,0),Tmax=c(0,0)))
+    for(tmin in Tmins)
+      for(tmax in Tmaxs)
+        if(tmax>=tmin)
+          {
+          weather$Tmin<-tmin
+          weather$Tmax<-tmax
+          hourtemps<-stack_hourly_temps(weather,
+                                        latitude=latitude)$hourtemps$Temp
+          CP<-c(CP,do.call(Dynamic_Model,
+                           list(hourtemps))[length(hourtemps)]/(length(hourtemps)/24))
+          mins<-c(mins,tmin)
+          maxs<-c(maxs,tmax)
+          month<-c(month,mon)
+        }
+    }
+results<-data.frame(Month=month,Tmin=mins,Tmax=maxs,CP)
+results<-results[!is.na(results$Month),]
+
+
+write.csv(results,"data/model_sensitivity_development.csv",row.names = FALSE)
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(colorRamps)
+
+results <- read.csv("data/model_sensitivity_development.csv")
+
+results$Month_names<- factor(results$Month, levels=month_range,
+                             labels=month.name[month_range])  
+
+DM_sensitivity<-ggplot(results,aes(x=Tmin,y=Tmax,fill=CP)) +
+  geom_tile() +
+  scale_fill_gradientn(colours=alpha(matlab.like(15), alpha = .5),
+                       name="Chill/day (CP)") +
+  ylim(min(results$Tmax),max(results$Tmax)) +
+  ylim(min(results$Tmin),max(results$Tmin))
+
+DM_sensitivity <- DM_sensitivity +
+  facet_wrap(vars(Month_names)) +
+  ylim(min(results$Tmax),max(results$Tmax)) +
+  ylim(min(results$Tmin),max(results$Tmin))
+
+DM_sensitivity
+```
+
+In order to link the plot with Cape Town, real weather recordings are included as points in the existing sensitivity plots. This visualizes how effective the recorded temperatures have been to generate chill. 
+
+```{r,warning=FALSE, message=FALSE}
+CT_temperatures<-read_tab("data/CapeTown_weather.csv")
+
+CT_temperatures<-CT_temperatures[which(CT_temperatures$Month %in% month_range),]
+
+CT_temperatures[which(CT_temperatures$Tmax<CT_temperatures$Tmin),
+             c("Tmax","Tmin")]<-NA
+
+CT_temperatures$Month_names = factor(CT_temperatures$Month,
+                                  levels=c(4,5,6,7,8,9),
+                                  labels=c("April","May",
+                                           "June","July",
+                                           "August","September")) 
+
+DM_sensitivity +
+  geom_point(data=CT_temperatures,aes(x=Tmin,y=Tmax,fill=NULL,
+                                   color="Temperature"),size=0.2) +
+  facet_wrap(vars(Month_names)) +
+  scale_color_manual(values = "black",
+                     labels = "Daily temperature \nextremes (°C)",
+                     name="Observed at site" ) +
+  guides(fill = guide_colorbar(order = 1),
+         color = guide_legend(order = 2)) +
+  ylab("Tmax (°C)") +
+  xlab("Tmin (°C)") + 
+  theme_bw(base_size=15)
+```
+
+Compared to other regions where low temperatures result in enough chill, this is not the case in Cape Town. The plotted actual weather records in the plots overlap only to a small extent with the area in which chill is generated at all. Additionally, the generation of chill per day is significantly lower in the majority of the overlapping areas because the temperatures are too warm in general.
+\
+The code to create the sensitivity data frames and the sensitivity plots is easier to handle within in functions. This also allows to import the functions at a later point in time.
+
+```{r, warning=FALSE, message=FALSE}
+chill_model_sensitivity <- 
+  function(latitude,
+           temp_models=list(Dynamic_Model=Dynamic_Model,GDH=GDH),
+           month_range=c(10,11,12,1,2,3),
+           Tmins=c(-10:20),
+           Tmaxs=c(-5:30))
+  {
+  mins<-NA
+  maxs<-NA
+  metrics<-as.list(rep(NA,length(temp_models)))
+  names(metrics)<-names(temp_models)
+  month<-NA
+ 
+  for(mon in month_range)
+    {
+    days_month<-as.numeric(difftime( ISOdate(2002,mon+1,1),
+                                      ISOdate(2002,mon,1) ))
+    if(mon==12) days_month<-31
+    weather<-make_all_day_table(data.frame(Year=c(2001,2002),
+                                           Month=c(mon,mon),
+                                           Day=c(1,days_month),
+                                           Tmin=c(0,0),Tmax=c(0,0)))
+
+    
+    for(tmin in Tmins)
+      for(tmax in Tmaxs)
+        if(tmax>=tmin)
+          {
+          weather$Tmin<-tmin
+          weather$Tmax<-tmax
+          hourtemps<-stack_hourly_temps(weather,
+                                        latitude=latitude)$hourtemps$Temp
+          for(tm in 1:length(temp_models))
+           metrics[[tm]]<-c(metrics[[tm]],
+                            do.call(temp_models[[tm]],
+                                    list(hourtemps))[length(hourtemps)]/
+                              (length(hourtemps)/24))
+          mins<-c(mins,tmin)
+          maxs<-c(maxs,tmax)
+          month<-c(month,mon)
+        }
+    }
+  results<-cbind(data.frame(Month=month,Tmin=mins,Tmax=maxs),
+                 as.data.frame(metrics))
+  results<-results[!is.na(results$Month),]
+}
+```
+
+
+```{r, warning=FALSE, message=FALSE}
+chill_sensitivity_temps <- function(chill_model_sensitivity_table,
+                                  temperatures,
+                                  temp_model,
+                                  month_range=c(10,11,12,1,2,3),
+                                  Tmins=c(-10:20),
+                                  Tmaxs=c(-5:30),
+                                  legend_label="Chill/day (CP)")
+{
+  library(ggplot2)
+  library(colorRamps)
+
+  cmst<-chill_model_sensitivity_table
+  cmst<-cmst[which(cmst$Month %in% month_range),]
+  cmst$Month_names<- factor(cmst$Month, levels=month_range,
+                            labels=month.name[month_range])  
+  
+  DM_sensitivity<-
+    ggplot(cmst,
+           aes_string(x="Tmin",y="Tmax",fill=temp_model)) +
+    geom_tile() +
+    scale_fill_gradientn(colours=alpha(matlab.like(15), alpha = .5),
+                         name=legend_label) +
+    xlim(Tmins[1],Tmins[length(Tmins)]) +
+    ylim(Tmaxs[1],Tmaxs[length(Tmaxs)])
+  
+  temperatures<-
+    temperatures[which(temperatures$Month %in% month_range),]
+  temperatures[which(temperatures$Tmax<temperatures$Tmin),
+               c("Tmax","Tmin")]<-NA
+  temperatures$Month_names <-
+    factor(temperatures$Month,
+           levels=month_range,
+           labels=month.name[month_range])  
+  
+  DM_sensitivity +
+    geom_point(data=temperatures,
+               aes(x=Tmin,y=Tmax,fill=NULL,color="Temperature"),
+               size=0.2) +
+    facet_wrap(vars(Month_names)) +
+    scale_color_manual(values = "black",
+                       labels = "Daily temperature \nextremes (°C)",
+                       name="Observed at site" ) +
+    guides(fill = guide_colorbar(order = 1),
+           color = guide_legend(order = 2)) +
+    ylab("Tmax (°C)") +
+    xlab("Tmin (°C)") + 
+    theme_bw(base_size=15)
+
+}
+```
+
+In the following code chunk, I create again a sensitivity data frame. This time I also add the Growing Degree Hours to the function. This allows me to use the `chill_sensitivity_temps()` to create plots for chill and heat model sensitivity as seen below.
+
+```{r, eval=FALSE}
+model_sensitivities_CT <- 
+  chill_model_sensitivity(latitude = coords[2],
+                          temp_models = list(Dynamic_Model=Dynamic_Model,
+                                             GDH=GDH),
+                          month_range = c(4,5,6,7,8,9))
+
+
+write.csv(model_sensitivities_CT,
+          "data/model_sensitivities_CT.csv",row.names = FALSE)
+```
+
+```{r, warning=FALSE, message=FALSE}
+model_sensitivities_CT <- read.csv("data/model_sensitivities_CT.csv")
+
+chill_sensitivity_temps(model_sensitivities_CT,
+                        CT_temperatures,
+                        temp_model="Dynamic_Model",
+                        month_range=c(4,5,6,7,8,9),
+                        legend_label="Chill per day \n(Dynamic Model)") +
+  ggtitle("Chill model sensitivity at Cape Town, South Africa")
+```
+
+```{r, warning=FALSE, message=FALSE}
+chill_sensitivity_temps(model_sensitivities_CT,
+                        CT_temperatures,
+                        temp_model="GDH",
+                        month_range=c(4,5,6,7,8,9),
+                        legend_label="Heat per day \n(GDH)") +
+  ggtitle("Heat model sensitivity at Cape Town, South Africa")
+```
+
+I already discussed the temperatures in Cape Town in the context of chill generation. I still plotted the sensitivity again, because the preset temperature ranges are more suitable with the warm temperatures of South Africa. The heat model sensitivity plot shows in which way the temperatures in Cape Town generate for the ecodormancy relevant heat. The amount of generated heat is sufficient and chill is the limiting factor for the phenology development.
+
+## Look at the plots for the agroclimate-based PLS analyses of the ‘Alexander Lucas’ and ‘Roter Boskoop’ datasets. Provide your best estimates of the chilling and forcing phases.
+
+```{r, warning=FALSE, message=FALSE}
+temps<-read_tab("data/TMaxTMin1958-2019_patched.csv")
+temps_hourly<-stack_hourly_temps(temps,latitude=50.6)
+
+Boskoop <- read_tab("data/Roter_Boskoop_bloom_1958_2019.csv")
+Boskoop_first <- Boskoop[,1:2]
+Boskoop_first[,"Year"] <- substr(Boskoop_first$First_bloom,1,4)
+Boskoop_first[,"Month"] <- substr(Boskoop_first$First_bloom,5,6)
+Boskoop_first[,"Day"] <- substr(Boskoop_first$First_bloom,7,8)
+Boskoop_first <- make_JDay(Boskoop_first)
+Boskoop_first <- Boskoop_first[,c("Pheno_year","JDay")]
+colnames(Boskoop_first) <- c("Year","pheno")
+
+Alex <- read_tab("data/Alexander_Lucas_bloom_1958_2019.csv")
+Alex_first <- Alex[,1:2]
+Alex_first[,"Year"] <- substr(Alex_first$First_bloom,1,4)
+Alex_first[,"Month"] <- substr(Alex_first$First_bloom,5,6)
+Alex_first[,"Day"] <- substr(Alex_first$First_bloom,7,8)
+Alex_first <- make_JDay(Alex_first)
+Alex_first <- Alex_first[,c("Pheno_year","JDay")]
+colnames(Alex_first) <- c("Year","pheno")
+```
+
+I added a title function to the `plot_PLS_chill_force()` function to add the cultivar name to the plots. The estimated delineations for the plots can be seen in the plots. The phases of the Alexander Lucas cultivar extend over a longer period of time, while the Roter Boskoop phases are shorter. The heat phase is easier to delineate compared to the chilling period, which can sometimes have a less significant beginning.
+
+```{r, warning=FALSE, message=FALSE}
+source("functions/plot_PLS_chill_force.R")
+
+daychill<-daily_chill(hourtemps=temps_hourly,
+            running_mean=9,
+            models = list(Chilling_Hours = Chilling_Hours, Utah_Chill_Units = Utah_Model,
+    Chill_Portions = Dynamic_Model, GDH = GDH)
+    )
+
+plscf_alex<-PLS_chill_force(daily_chill_obj=daychill,
+                       bio_data_frame=Alex_first,
+                       split_month=6,
+                       chill_models = c("Chill_Portions"),
+                       heat_models = c("GDH"))
+
+plscf_boskoop<-PLS_chill_force(daily_chill_obj=daychill,
+                       bio_data_frame=Boskoop_first,
+                       split_month=6,
+                       chill_models = c("Chill_Portions"),
+                       heat_models = c("GDH"))
+```
+
+```{r, warning=FALSE, message=FALSE}
+plot_PLS_chill_force(plscf_alex,
+                     chill_metric="Chill_Portions",
+                     heat_metric="GDH",
+                     chill_label="CP",
+                     heat_label="GDH",
+                     chill_phase=c(-52,62),
+                     heat_phase=c(-5,106),
+                     cultivar_name = "Alexander Lucas")
+```
+
+
+```{r, warning=FALSE, message=FALSE}
+plot_PLS_chill_force(plscf_boskoop,
+                     chill_metric="Chill_Portions",
+                     heat_metric="GDH",
+                     chill_label="CP",
+                     heat_label="GDH",
+                     chill_phase=c(-24,62),
+                     heat_phase=c(10,108),
+                     cultivar_name = "Roter Boskoop")
+```
+

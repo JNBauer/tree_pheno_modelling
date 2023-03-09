@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 29 Frost risk analysis | Tree phenology analysis with R - Logbook</title>
+  <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 29 Frost risk analysis | Tree phenology analysis with R - Logbook" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="The logbook for the Tree phenology analysis with R logbook" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 29 Frost risk analysis | Tree phenology analysis with R - Logbook" />
+  
+  <meta name="twitter:description" content="The logbook for the Tree phenology analysis with R logbook" />
+  
+
+<meta name="author" content="Julian Bauer" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="can-we-improve-the-performance-of-phenoflex.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tree phenology Logbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
+<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
+<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
+<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
+<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
+<li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
+<li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
+<li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#sketch-out-three-data-access-and-processing-challenges-that-had-to-be-overcome-in-order-to-produce-chill-projections-with-state-of-the-art-methodology."><i class="fa fa-check"></i><b>5.1</b> Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology.</a></li>
+<li class="chapter" data-level="5.2" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#outline-in-your-understanding-the-basic-steps-that-are-necessary-to-make-such-projections."><i class="fa fa-check"></i><b>5.2</b> Outline, in your understanding, the basic steps that are necessary to make such projections.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html"><i class="fa fa-check"></i><b>6</b> Manual chill analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#write-a-basic-function-that-calculates-warm-hours-25c"><i class="fa fa-check"></i><b>6.1</b> Write a basic function that calculates warm hours (&gt;25°C)</a></li>
+<li class="chapter" data-level="6.2" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset"><i class="fa fa-check"></i><b>6.2</b> Apply this function to the Winters_hours_gaps dataset</a></li>
+<li class="chapter" data-level="6.3" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates"><i class="fa fa-check"></i><b>6.3</b> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
+<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
+<li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="9.2" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#download-weather-data-for-the-most-promising-station-on-the-list"><i class="fa fa-check"></i><b>9.2</b> Download weather data for the most promising station on the list</a></li>
+<li class="chapter" data-level="9.3" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#convert-the-weather-data-into-chillr-format"><i class="fa fa-check"></i><b>9.3</b> Convert the weather data into chillR format</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</a></li>
+<li class="chapter" data-level="10.2" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#create-a-list-of-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>10.2</b> Create a list of the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="10.3" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#identify-suitable-weather-stations-for-patching-gaps"><i class="fa fa-check"></i><b>10.3</b> Identify suitable weather stations for patching gaps</a></li>
+<li class="chapter" data-level="10.4" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#download-weather-data-for-promising-stations-convert-them-to-chillr-format-and-compile-them-in-a-list"><i class="fa fa-check"></i><b>10.4</b> Download weather data for promising stations, convert them to chillR format and compile them in a list</a></li>
+<li class="chapter" data-level="10.5" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-the-patch_daily_temperatures-function-to-fill-gaps"><i class="fa fa-check"></i><b>10.5</b> Use the patch_daily_temperatures function to fill gaps</a></li>
+<li class="chapter" data-level="10.6" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#investigate-the-results---have-all-gaps-been-filled"><i class="fa fa-check"></i><b>10.6</b> Investigate the results - have all gaps been filled?</a></li>
+<li class="chapter" data-level="10.7" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#if-necessary-repeat-until-you-have-a-dataset-you-can-work-with-in-further-analyses"><i class="fa fa-check"></i><b>10.7</b> If necessary, repeat until you have a dataset you can work with in further analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#for-the-location-you-chose-for-your-earlier-analyses-use-chillrs-weather-generator-to-produce-100-years-of-synthetic-temperature-data."><i class="fa fa-check"></i><b>11.1</b> For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.</a></li>
+<li class="chapter" data-level="11.2" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#calculate-winter-chill-in-chill-portions-for-your-synthetic-weather-and-illustrate-your-results-as-histograms-and-cumulative-distributions."><i class="fa fa-check"></i><b>11.2</b> Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.</a></li>
+<li class="chapter" data-level="11.3" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#produce-similar-plots-for-the-number-of-freezing-hours-0c-in-april-or-october-if-your-site-is-in-the-southern-hemisphere-for-your-location-of-interest."><i class="fa fa-check"></i><b>11.3</b> Produce similar plots for the number of freezing hours (&lt;0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="saving-and-loading-data.html"><a href="saving-and-loading-data.html"><i class="fa fa-check"></i><b>12</b> Saving and Loading Data</a></li>
+<li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#for-the-location-you-chose-for-previous-exercises-produce-historic-temperature-scenarios-representing-several-years-of-the-historic-record-your-choice."><i class="fa fa-check"></i><b>13.1</b> For the location you chose for previous exercises, produce historic temperature scenarios representing several years of the historic record (your choice).</a></li>
+<li class="chapter" data-level="13.2" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#produce-chill-distributions-for-these-scenarios-and-plot-them."><i class="fa fa-check"></i><b>13.2</b> Produce chill distributions for these scenarios and plot them.</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html#analyze-the-historic-and-future-impact-of-climate-change-on-three-agroclimatic-metrics-of-your-choice-for-the-location-youve-chosen-for-your-earlier-analyses."><i class="fa fa-check"></i><b>14.1</b> Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html#produce-similar-plots-for-the-weather-station-you-selected-for-earlier-exercises."><i class="fa fa-check"></i><b>15.1</b> Produce similar plots for the weather station you selected for earlier exercises.</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#perform-a-similar-analysis-for-the-location-youve-chosen-for-your-exercises."><i class="fa fa-check"></i><b>16.1</b> Perform a similar analysis for the location you’ve chosen for your exercises.</a></li>
+<li class="chapter" data-level="16.2" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#make-a-heat-map-illustrating-past-and-future-changes-in-safe-winter-chill-relative-to-a-past-scenario-for-the-13-chill-models-used-here."><i class="fa fa-check"></i><b>16.2</b> Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here.</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a></li>
+<li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a></li>
+<li class="chapter" data-level="19" data-path="simple-phenology-analysis.html"><a href="simple-phenology-analysis.html"><i class="fa fa-check"></i><b>19</b> Simple phenology analysis</a></li>
+<li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a></li>
+<li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a></li>
+<li class="chapter" data-level="22" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html"><i class="fa fa-check"></i><b>22</b> Evaluating PLS outputs</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#reproduce-the-analysis-for-the-roter-boskoop-dataset."><i class="fa fa-check"></i><b>22.1</b> Reproduce the analysis for the ‘Roter Boskoop’ dataset.</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html"><i class="fa fa-check"></i><b>23</b> The relative importance of chill and heat</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html#describe-the-temperature-response-hypothesis-outlined-in-this-chapter."><i class="fa fa-check"></i><b>23.1</b> Describe the temperature response hypothesis outlined in this chapter.</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html"><i class="fa fa-check"></i><b>24</b> Making valid tree phenology models</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-the-difference-between-output-validation-and-process-validation."><i class="fa fa-check"></i><b>24.1</b> Explain the difference between output validation and process validation.</a></li>
+<li class="chapter" data-level="24.2" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-what-a-validity-domain-is-and-why-it-is-important-to-consider-this-whenever-we-want-to-use-our-model-to-forecast-something."><i class="fa fa-check"></i><b>24.2</b> Explain what a validity domain is and why it is important to consider this whenever we want to use our model to forecast something.</a></li>
+<li class="chapter" data-level="24.3" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#what-is-validation-for-purpose"><i class="fa fa-check"></i><b>24.3</b> What is validation for purpose?</a></li>
+<li class="chapter" data-level="24.4" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#how-can-we-ensure-that-our-model-is-suitable-for-the-predictions-we-want-to-make"><i class="fa fa-check"></i><b>24.4</b> How can we ensure that our model is suitable for the predictions we want to make?</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html"><i class="fa fa-check"></i><b>25</b> The PhenoFlex model</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#parameterize-the-phenoflex-model-for-roter-boskoop-apples."><i class="fa fa-check"></i><b>25.1</b> Parameterize the PhenoFlex model for `Roter Boskoop’ apples.</a></li>
+<li class="chapter" data-level="25.2" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#produce-plots-of-predicted-vs.-observed-bloom-dates-and-distribution-of-prediction-errors."><i class="fa fa-check"></i><b>25.2</b> Produce plots of predicted vs. observed bloom dates and distribution of prediction errors.</a></li>
+<li class="chapter" data-level="25.3" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#compute-the-model-performance-metrics-rmsep-rpiq-mean-error-and-mean-absolute-error."><i class="fa fa-check"></i><b>25.3</b> Compute the model performance metrics RMSEP, RPIQ, mean error and mean absolute error.</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html"><i class="fa fa-check"></i><b>26</b> The PhenoFlex model - a second look</a></li>
+<li class="chapter" data-level="27" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html"><i class="fa fa-check"></i><b>27</b> The PhenoFlex model - a second look</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html#make-chill-and-heat-response-plots-for-the-alexander-lucas-phenoflex-model-for-the-location-you-did-the-earlier-analyses-for."><i class="fa fa-check"></i><b>27.1</b> Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html"><i class="fa fa-check"></i><b>28</b> Can we improve the performance of PhenoFlex?</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-objective-of-this-work"><i class="fa fa-check"></i><b>28.1</b> What was the objective of this work?</a></li>
+<li class="chapter" data-level="28.2" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-main-conclusion"><i class="fa fa-check"></i><b>28.2</b> What was the main conclusion?</a></li>
+<li class="chapter" data-level="28.3" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-experiments-could-we-conduct-to-test-the-hypothesis-that-emerged-at-the-end-of-the-conclusion"><i class="fa fa-check"></i><b>28.3</b> What experiments could we conduct to test the hypothesis that emerged at the end of the conclusion?</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html"><i class="fa fa-check"></i><b>29</b> Frost risk analysis</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#download-the-phenology-dataset-for-the-apple-cultivar-roter-boskoop-from-klein-altendorf."><i class="fa fa-check"></i><b>29.1</b> Download the phenology dataset for the apple cultivar Roter Boskoop from Klein-Altendorf.</a></li>
+<li class="chapter" data-level="29.2" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#illustrate-the-development-of-the-bloom-period-over-the-duration-of-the-weather-record.-use-multiple-ways-to-show-this---feel-free-to-be-creative."><i class="fa fa-check"></i><b>29.2</b> Illustrate the development of the bloom period over the duration of the weather record. Use multiple ways to show this - feel free to be creative.</a></li>
+<li class="chapter" data-level="29.3" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-the-occurrence-of-frost-events-at-klein-altendorf-since-1958.-illustrate-this-in-a-plot."><i class="fa fa-check"></i><b>29.3</b> Evaluate the occurrence of frost events at Klein-Altendorf since 1958. Illustrate this in a plot.</a></li>
+<li class="chapter" data-level="29.4" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#produce-an-illustration-of-the-relationship-between-spring-frost-events-and-the-bloom-period-of-roter-boskoop."><i class="fa fa-check"></i><b>29.4</b> Produce an illustration of the relationship between spring frost events and the bloom period of ‘Roter Boskoop.’</a></li>
+<li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree phenology analysis with R - Logbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="frost-risk-analysis" class="section level1 hasAnchor" number="29">
+<h1><span class="header-section-number">Chapter 29</span> Frost risk analysis<a href="frost-risk-analysis.html#frost-risk-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><br />
+</p>
+<div id="download-the-phenology-dataset-for-the-apple-cultivar-roter-boskoop-from-klein-altendorf." class="section level2 hasAnchor" number="29.1">
+<h2><span class="header-section-number">29.1</span> Download the phenology dataset for the apple cultivar Roter Boskoop from Klein-Altendorf.<a href="frost-risk-analysis.html#download-the-phenology-dataset-for-the-apple-cultivar-roter-boskoop-from-klein-altendorf." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I loaded the files directly from the data directory. I then used the melt() function to shape the data frame for the use with ggplot2.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="frost-risk-analysis.html#cb119-1" aria-hidden="true" tabindex="-1"></a>CKA_Roter_Boskoop<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>)</span>
+<span id="cb119-2"><a href="frost-risk-analysis.html#cb119-2" aria-hidden="true" tabindex="-1"></a>CKA_weather<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="frost-risk-analysis.html#cb120-1" aria-hidden="true" tabindex="-1"></a>Roter_Boskoop<span class="ot">&lt;-</span><span class="fu">melt</span>(CKA_Roter_Boskoop,</span>
+<span id="cb120-2"><a href="frost-risk-analysis.html#cb120-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">id.vars =</span> <span class="st">&quot;Pheno_year&quot;</span>,</span>
+<span id="cb120-3"><a href="frost-risk-analysis.html#cb120-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">value.name=</span><span class="st">&quot;YEARMODA&quot;</span>)</span>
+<span id="cb120-4"><a href="frost-risk-analysis.html#cb120-4" aria-hidden="true" tabindex="-1"></a>Roter_Boskoop<span class="sc">$</span>Year<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">substr</span>(Roter_Boskoop<span class="sc">$</span>YEARMODA,<span class="dv">1</span>,<span class="dv">4</span>))</span>
+<span id="cb120-5"><a href="frost-risk-analysis.html#cb120-5" aria-hidden="true" tabindex="-1"></a>Roter_Boskoop<span class="sc">$</span>Month<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">substr</span>(Roter_Boskoop<span class="sc">$</span>YEARMODA,<span class="dv">5</span>,<span class="dv">6</span>))</span>
+<span id="cb120-6"><a href="frost-risk-analysis.html#cb120-6" aria-hidden="true" tabindex="-1"></a>Roter_Boskoop<span class="sc">$</span>Day<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">substr</span>(Roter_Boskoop<span class="sc">$</span>YEARMODA,<span class="dv">7</span>,<span class="dv">8</span>))</span>
+<span id="cb120-7"><a href="frost-risk-analysis.html#cb120-7" aria-hidden="true" tabindex="-1"></a>Roter_Boskoop<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(Roter_Boskoop)</span></code></pre></div>
+</div>
+<div id="illustrate-the-development-of-the-bloom-period-over-the-duration-of-the-weather-record.-use-multiple-ways-to-show-this---feel-free-to-be-creative." class="section level2 hasAnchor" number="29.2">
+<h2><span class="header-section-number">29.2</span> Illustrate the development of the bloom period over the duration of the weather record. Use multiple ways to show this - feel free to be creative.<a href="frost-risk-analysis.html#illustrate-the-development-of-the-bloom-period-over-the-duration-of-the-weather-record.-use-multiple-ways-to-show-this---feel-free-to-be-creative." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I tried different plot types to visualize the development over the bloom period. To see the development, the year must be represented in the plot in some way. The bar chart give a good overview and also show that the bloom occurs increasingly earlier in the year. I used the facet_wrap() function to split the plot also in its three subparts to also visualize the advance within the flowering.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="frost-risk-analysis.html#cb121-1" aria-hidden="true" tabindex="-1"></a>bloom_sections <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb121-2"><a href="frost-risk-analysis.html#cb121-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;First_bloom&quot;</span> <span class="ot">=</span> <span class="st">&quot;First bloom&quot;</span>,</span>
+<span id="cb121-3"><a href="frost-risk-analysis.html#cb121-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Full_bloom&quot;</span> <span class="ot">=</span> <span class="st">&quot;Full bloom&quot;</span>,</span>
+<span id="cb121-4"><a href="frost-risk-analysis.html#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Last_bloom&quot;</span> <span class="ot">=</span> <span class="st">&quot;Last bloom&quot;</span></span>
+<span id="cb121-5"><a href="frost-risk-analysis.html#cb121-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb121-6"><a href="frost-risk-analysis.html#cb121-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-7"><a href="frost-risk-analysis.html#cb121-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-8"><a href="frost-risk-analysis.html#cb121-8" aria-hidden="true" tabindex="-1"></a>bloom_labeller <span class="ot">&lt;-</span> <span class="cf">function</span>(variable,value){</span>
+<span id="cb121-9"><a href="frost-risk-analysis.html#cb121-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bloom_sections[value])}</span>
+<span id="cb121-10"><a href="frost-risk-analysis.html#cb121-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-11"><a href="frost-risk-analysis.html#cb121-11" aria-hidden="true" tabindex="-1"></a>Roter_Boskoop <span class="ot">&lt;-</span> Roter_Boskoop[<span class="fu">order</span>(<span class="fu">nrow</span>(Roter_Boskoop)<span class="sc">:</span><span class="dv">1</span>),]</span>
+<span id="cb121-12"><a href="frost-risk-analysis.html#cb121-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-13"><a href="frost-risk-analysis.html#cb121-13" aria-hidden="true" tabindex="-1"></a>RB_phenology <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Roter_Boskoop, <span class="fu">aes</span>(<span class="at">x =</span> Pheno_year, <span class="at">y =</span> JDay, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb121-14"><a href="frost-risk-analysis.html#cb121-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb121-15"><a href="frost-risk-analysis.html#cb121-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Bloom sections&quot;</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&#39;First bloom&#39;</span>, <span class="st">&#39;Full bloom&#39;</span>, <span class="st">&#39;Last bloom&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb121-16"><a href="frost-risk-analysis.html#cb121-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb121-17"><a href="frost-risk-analysis.html#cb121-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb121-18"><a href="frost-risk-analysis.html#cb121-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb121-19"><a href="frost-risk-analysis.html#cb121-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb121-20"><a href="frost-risk-analysis.html#cb121-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>))</span>
+<span id="cb121-21"><a href="frost-risk-analysis.html#cb121-21" aria-hidden="true" tabindex="-1"></a>RB_phenology</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="frost-risk-analysis.html#cb122-1" aria-hidden="true" tabindex="-1"></a>RB_phenology_split <span class="ot">&lt;-</span> RB_phenology <span class="sc">+</span> <span class="fu">facet_wrap</span>(Roter_Boskoop<span class="sc">$</span>variable, <span class="at">labeller =</span> bloom_labeller) <span class="sc">+</span></span>
+<span id="cb122-2"><a href="frost-risk-analysis.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb122-3"><a href="frost-risk-analysis.html#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb122-4"><a href="frost-risk-analysis.html#cb122-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb122-5"><a href="frost-risk-analysis.html#cb122-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb122-6"><a href="frost-risk-analysis.html#cb122-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb122-7"><a href="frost-risk-analysis.html#cb122-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>))</span>
+<span id="cb122-8"><a href="frost-risk-analysis.html#cb122-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-9"><a href="frost-risk-analysis.html#cb122-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-10"><a href="frost-risk-analysis.html#cb122-10" aria-hidden="true" tabindex="-1"></a>RB_phenology_split</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p>The animated point plot shows in a different way how the beginning of flowering moves forward. The color of the dots represents the years, resulting in darker dots for the early years and in lighter dots for the recent years. While the darker dots tend to accumulate at a later time, the lighter dots tend to be earlier.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="frost-risk-analysis.html#cb123-1" aria-hidden="true" tabindex="-1"></a>PG_phenology <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Roter_Boskoop, <span class="fu">aes</span>(<span class="at">x=</span>JDay, <span class="at">y=</span>variable, <span class="at">fill=</span>Year, <span class="at">color=</span>Year)) <span class="sc">+</span></span>
+<span id="cb123-2"><a href="frost-risk-analysis.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group=</span>Year, <span class="at">size=</span><span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb123-3"><a href="frost-risk-analysis.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_reveal</span>(<span class="at">along=</span>Year) <span class="sc">+</span></span>
+<span id="cb123-4"><a href="frost-risk-analysis.html#cb123-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(Roter_Boskoop<span class="sc">$</span>variable, <span class="at">labeller =</span> bloom_labeller) <span class="sc">+</span></span>
+<span id="cb123-5"><a href="frost-risk-analysis.html#cb123-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb123-6"><a href="frost-risk-analysis.html#cb123-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb123-7"><a href="frost-risk-analysis.html#cb123-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb123-8"><a href="frost-risk-analysis.html#cb123-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb123-9"><a href="frost-risk-analysis.html#cb123-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb123-10"><a href="frost-risk-analysis.html#cb123-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb123-11"><a href="frost-risk-analysis.html#cb123-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb123-12"><a href="frost-risk-analysis.html#cb123-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb123-13"><a href="frost-risk-analysis.html#cb123-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">size =</span> <span class="cn">FALSE</span>)   </span>
+<span id="cb123-14"><a href="frost-risk-analysis.html#cb123-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb123-15"><a href="frost-risk-analysis.html#cb123-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-16"><a href="frost-risk-analysis.html#cb123-16" aria-hidden="true" tabindex="-1"></a>PG_phenology</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-107-1.gif" /><!-- -->
+This animated graph is based on a line graph that shows the development of the three different phenology dates. To plot this graph, I applied the runn_mean() function on the data. This reduces the number of extreme values and makes the plot easier to view.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="frost-risk-analysis.html#cb124-1" aria-hidden="true" tabindex="-1"></a>Roter_Boskoop[,<span class="st">&quot;runn_mean_JDay&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">runn_mean</span>(Roter_Boskoop<span class="sc">$</span>JDay,<span class="dv">4</span>)</span>
+<span id="cb124-2"><a href="frost-risk-analysis.html#cb124-2" aria-hidden="true" tabindex="-1"></a>LP_Phenology <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Roter_Boskoop, <span class="fu">aes</span>(<span class="at">x=</span>Year,</span>
+<span id="cb124-3"><a href="frost-risk-analysis.html#cb124-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">y=</span>runn_mean_JDay,</span>
+<span id="cb124-4"><a href="frost-risk-analysis.html#cb124-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">group=</span>variable,</span>
+<span id="cb124-5"><a href="frost-risk-analysis.html#cb124-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">color=</span>variable)) <span class="sc">+</span></span>
+<span id="cb124-6"><a href="frost-risk-analysis.html#cb124-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb124-7"><a href="frost-risk-analysis.html#cb124-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">geom_line</span>(<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb124-8"><a href="frost-risk-analysis.html#cb124-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">scale_color_discrete</span>(</span>
+<span id="cb124-9"><a href="frost-risk-analysis.html#cb124-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name=</span><span class="st">&quot;Bloom sections&quot;</span>,</span>
+<span id="cb124-10"><a href="frost-risk-analysis.html#cb124-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;First bloom&quot;</span>, <span class="st">&quot;Full bloom&quot;</span>, <span class="st">&quot;Last bloom&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb124-11"><a href="frost-risk-analysis.html#cb124-11" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">xlab</span>(<span class="st">&quot;Season (Year)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb124-12"><a href="frost-risk-analysis.html#cb124-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ylab</span>(<span class="st">&quot;Julian date&quot;</span>) <span class="sc">+</span></span>
+<span id="cb124-13"><a href="frost-risk-analysis.html#cb124-13" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb124-14"><a href="frost-risk-analysis.html#cb124-14" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb124-15"><a href="frost-risk-analysis.html#cb124-15" aria-hidden="true" tabindex="-1"></a>                        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb124-16"><a href="frost-risk-analysis.html#cb124-16" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb124-17"><a href="frost-risk-analysis.html#cb124-17" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb124-18"><a href="frost-risk-analysis.html#cb124-18" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">guides</span>(<span class="at">size =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb124-19"><a href="frost-risk-analysis.html#cb124-19" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">transition_reveal</span>(Year)</span>
+<span id="cb124-20"><a href="frost-risk-analysis.html#cb124-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-21"><a href="frost-risk-analysis.html#cb124-21" aria-hidden="true" tabindex="-1"></a><span class="fu">animate</span>(LP_Phenology, <span class="at">height =</span> <span class="dv">600</span>, <span class="at">width =</span><span class="dv">1200</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-108-1.gif" /><!-- --></p>
+</div>
+<div id="evaluate-the-occurrence-of-frost-events-at-klein-altendorf-since-1958.-illustrate-this-in-a-plot." class="section level2 hasAnchor" number="29.3">
+<h2><span class="header-section-number">29.3</span> Evaluate the occurrence of frost events at Klein-Altendorf since 1958. Illustrate this in a plot.<a href="frost-risk-analysis.html#evaluate-the-occurrence-of-frost-events-at-klein-altendorf-since-1958.-illustrate-this-in-a-plot." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The graphs illustrates the development of yearly frost hours since 1958. It can be seen that there is a trend towards fewer frost hours. Also the geom_smooth() line shows this trend. To plot this data, we need a function that counts the frost hours in the data. The frost hours are automatically summarized for every year, which simplifies plotting.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="frost-risk-analysis.html#cb125-1" aria-hidden="true" tabindex="-1"></a>frost_df<span class="ot">=</span><span class="fu">data.frame</span>(</span>
+<span id="cb125-2"><a href="frost-risk-analysis.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1000</span>,<span class="dv">0</span>),</span>
+<span id="cb125-3"><a href="frost-risk-analysis.html#cb125-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>),</span>
+<span id="cb125-4"><a href="frost-risk-analysis.html#cb125-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weight=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb125-5"><a href="frost-risk-analysis.html#cb125-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-6"><a href="frost-risk-analysis.html#cb125-6" aria-hidden="true" tabindex="-1"></a>frost_model<span class="ot">&lt;-</span><span class="cf">function</span>(x) <span class="fu">step_model</span>(x,frost_df)</span>
+<span id="cb125-7"><a href="frost-risk-analysis.html#cb125-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-8"><a href="frost-risk-analysis.html#cb125-8" aria-hidden="true" tabindex="-1"></a>hourly<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(CKA_weather,<span class="at">latitude=</span><span class="fl">50.625</span>)</span>
+<span id="cb125-9"><a href="frost-risk-analysis.html#cb125-9" aria-hidden="true" tabindex="-1"></a>frost<span class="ot">&lt;-</span><span class="fu">tempResponse</span>(hourly,<span class="at">models=</span><span class="fu">c</span>(<span class="at">frost=</span>frost_model))</span>
+<span id="cb125-10"><a href="frost-risk-analysis.html#cb125-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-11"><a href="frost-risk-analysis.html#cb125-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(frost, <span class="fu">aes</span>(End_year,frost)) <span class="sc">+</span></span>
+<span id="cb125-12"><a href="frost-risk-analysis.html#cb125-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb125-13"><a href="frost-risk-analysis.html#cb125-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb125-14"><a href="frost-risk-analysis.html#cb125-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="cn">NA</span>)) <span class="sc">+</span></span>
+<span id="cb125-15"><a href="frost-risk-analysis.html#cb125-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Frost hours per year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb125-16"><a href="frost-risk-analysis.html#cb125-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb125-17"><a href="frost-risk-analysis.html#cb125-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb125-18"><a href="frost-risk-analysis.html#cb125-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb125-19"><a href="frost-risk-analysis.html#cb125-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb125-20"><a href="frost-risk-analysis.html#cb125-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>),</span>
+<span id="cb125-21"><a href="frost-risk-analysis.html#cb125-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+</div>
+<div id="produce-an-illustration-of-the-relationship-between-spring-frost-events-and-the-bloom-period-of-roter-boskoop." class="section level2 hasAnchor" number="29.4">
+<h2><span class="header-section-number">29.4</span> Produce an illustration of the relationship between spring frost events and the bloom period of ‘Roter Boskoop.’<a href="frost-risk-analysis.html#produce-an-illustration-of-the-relationship-between-spring-frost-events-and-the-bloom-period-of-roter-boskoop." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For the next graph, we use the daily amount of frost hours. This can be done with the aggregate() function, so that all days with frost events can be plotted in the next step.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="frost-risk-analysis.html#cb126-1" aria-hidden="true" tabindex="-1"></a>frost_model_no_summ<span class="ot">&lt;-</span><span class="cf">function</span>(x) <span class="fu">step_model</span>(x, frost_df, <span class="at">summ=</span><span class="cn">FALSE</span>)</span>
+<span id="cb126-2"><a href="frost-risk-analysis.html#cb126-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-3"><a href="frost-risk-analysis.html#cb126-3" aria-hidden="true" tabindex="-1"></a>hourly<span class="sc">$</span>hourtemps[,<span class="st">&quot;frost&quot;</span>]<span class="ot">&lt;-</span><span class="fu">frost_model_no_summ</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp)</span>
+<span id="cb126-4"><a href="frost-risk-analysis.html#cb126-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-5"><a href="frost-risk-analysis.html#cb126-5" aria-hidden="true" tabindex="-1"></a>Daily_frost_hours<span class="ot">&lt;-</span><span class="fu">aggregate</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>frost,</span>
+<span id="cb126-6"><a href="frost-risk-analysis.html#cb126-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">by=</span><span class="fu">list</span>(hourly<span class="sc">$</span>hourtemps<span class="sc">$</span>YEARMODA),</span>
+<span id="cb126-7"><a href="frost-risk-analysis.html#cb126-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">FUN=</span>sum)</span>
+<span id="cb126-8"><a href="frost-risk-analysis.html#cb126-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-9"><a href="frost-risk-analysis.html#cb126-9" aria-hidden="true" tabindex="-1"></a>Daily_frost<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(CKA_weather)</span>
+<span id="cb126-10"><a href="frost-risk-analysis.html#cb126-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-11"><a href="frost-risk-analysis.html#cb126-11" aria-hidden="true" tabindex="-1"></a>Daily_frost[,<span class="st">&quot;Frost_hours&quot;</span>]<span class="ot">&lt;-</span>Daily_frost_hours<span class="sc">$</span>x</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="frost-risk-analysis.html#cb127-1" aria-hidden="true" tabindex="-1"></a>Ribbon_Boskoop<span class="ot">&lt;-</span><span class="fu">dcast</span>(</span>
+<span id="cb127-2"><a href="frost-risk-analysis.html#cb127-2" aria-hidden="true" tabindex="-1"></a>  Roter_Boskoop,Pheno_year <span class="sc">~</span> variable, <span class="at">value.var =</span> <span class="st">&quot;JDay&quot;</span>)</span>
+<span id="cb127-3"><a href="frost-risk-analysis.html#cb127-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-4"><a href="frost-risk-analysis.html#cb127-4" aria-hidden="true" tabindex="-1"></a>lookup_dates<span class="ot">&lt;-</span>Ribbon_Boskoop</span>
+<span id="cb127-5"><a href="frost-risk-analysis.html#cb127-5" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(lookup_dates)<span class="ot">&lt;-</span>lookup_dates<span class="sc">$</span>Pheno_year</span>
+<span id="cb127-6"><a href="frost-risk-analysis.html#cb127-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-7"><a href="frost-risk-analysis.html#cb127-7" aria-hidden="true" tabindex="-1"></a>Daily_frost[,<span class="st">&quot;First_bloom&quot;</span>]<span class="ot">&lt;-</span></span>
+<span id="cb127-8"><a href="frost-risk-analysis.html#cb127-8" aria-hidden="true" tabindex="-1"></a>  lookup_dates[<span class="fu">as.character</span>(Daily_frost<span class="sc">$</span>Year),<span class="st">&quot;First_bloom&quot;</span>]</span>
+<span id="cb127-9"><a href="frost-risk-analysis.html#cb127-9" aria-hidden="true" tabindex="-1"></a>Daily_frost[,<span class="st">&quot;Last_bloom&quot;</span>]<span class="ot">&lt;-</span></span>
+<span id="cb127-10"><a href="frost-risk-analysis.html#cb127-10" aria-hidden="true" tabindex="-1"></a>  lookup_dates[<span class="fu">as.character</span>(Daily_frost<span class="sc">$</span>Year),<span class="st">&quot;Last_bloom&quot;</span>]</span>
+<span id="cb127-11"><a href="frost-risk-analysis.html#cb127-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-12"><a href="frost-risk-analysis.html#cb127-12" aria-hidden="true" tabindex="-1"></a>Daily_frost[</span>
+<span id="cb127-13"><a href="frost-risk-analysis.html#cb127-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(Daily_frost<span class="sc">$</span>Frost_hours)),<span class="st">&quot;Bloom_frost&quot;</span>]<span class="ot">&lt;-</span></span>
+<span id="cb127-14"><a href="frost-risk-analysis.html#cb127-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Before bloom&quot;</span></span>
+<span id="cb127-15"><a href="frost-risk-analysis.html#cb127-15" aria-hidden="true" tabindex="-1"></a>Daily_frost[</span>
+<span id="cb127-16"><a href="frost-risk-analysis.html#cb127-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">which</span>(Daily_frost<span class="sc">$</span>JDay<span class="sc">&gt;=</span>Daily_frost<span class="sc">$</span>First_bloom),<span class="st">&quot;Bloom_frost&quot;</span>]<span class="ot">&lt;-</span></span>
+<span id="cb127-17"><a href="frost-risk-analysis.html#cb127-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;During bloom&quot;</span></span>
+<span id="cb127-18"><a href="frost-risk-analysis.html#cb127-18" aria-hidden="true" tabindex="-1"></a>Daily_frost[</span>
+<span id="cb127-19"><a href="frost-risk-analysis.html#cb127-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">which</span>(Daily_frost<span class="sc">$</span>JDay<span class="sc">&gt;</span>Daily_frost<span class="sc">$</span>Last_bloom),<span class="st">&quot;Bloom_frost&quot;</span>]<span class="ot">&lt;-</span></span>
+<span id="cb127-20"><a href="frost-risk-analysis.html#cb127-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;After bloom&quot;</span></span>
+<span id="cb127-21"><a href="frost-risk-analysis.html#cb127-21" aria-hidden="true" tabindex="-1"></a>Daily_frost[</span>
+<span id="cb127-22"><a href="frost-risk-analysis.html#cb127-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">which</span>(Daily_frost<span class="sc">$</span>JDay<span class="sc">&gt;</span><span class="dv">180</span>),<span class="st">&quot;Bloom_frost&quot;</span>]<span class="ot">&lt;-</span></span>
+<span id="cb127-23"><a href="frost-risk-analysis.html#cb127-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Before bloom&quot;</span></span>
+<span id="cb127-24"><a href="frost-risk-analysis.html#cb127-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb127-25"><a href="frost-risk-analysis.html#cb127-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Ribbon_Boskoop,<span class="fu">aes</span>(Pheno_year)) <span class="sc">+</span></span>
+<span id="cb127-26"><a href="frost-risk-analysis.html#cb127-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> First_bloom, <span class="at">ymax =</span> Last_bloom),</span>
+<span id="cb127-27"><a href="frost-risk-analysis.html#cb127-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;light gray&quot;</span>) <span class="sc">+</span></span>
+<span id="cb127-28"><a href="frost-risk-analysis.html#cb127-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Full_bloom)) <span class="sc">+</span></span>
+<span id="cb127-29"><a href="frost-risk-analysis.html#cb127-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb127-30"><a href="frost-risk-analysis.html#cb127-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Phenological year&quot;</span>) <span class="sc">+</span></span>
+<span id="cb127-31"><a href="frost-risk-analysis.html#cb127-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Julian date (day of the year)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb127-32"><a href="frost-risk-analysis.html#cb127-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>Daily_frost,</span>
+<span id="cb127-33"><a href="frost-risk-analysis.html#cb127-33" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(Year,JDay,<span class="at">size=</span>Frost_hours,<span class="at">col=</span>Bloom_frost),</span>
+<span id="cb127-34"><a href="frost-risk-analysis.html#cb127-34" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
+<span id="cb127-35"><a href="frost-risk-analysis.html#cb127-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>),</span>
+<span id="cb127-36"><a href="frost-risk-analysis.html#cb127-36" aria-hidden="true" tabindex="-1"></a>             <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>),</span>
+<span id="cb127-37"><a href="frost-risk-analysis.html#cb127-37" aria-hidden="true" tabindex="-1"></a>             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;5&quot;</span>, <span class="st">&quot;10&quot;</span>, <span class="st">&quot;15&quot;</span>, <span class="st">&quot;20&quot;</span>),</span>
+<span id="cb127-38"><a href="frost-risk-analysis.html#cb127-38" aria-hidden="true" tabindex="-1"></a>             <span class="at">name=</span><span class="st">&quot;Frost hours&quot;</span>) <span class="sc">+</span></span>
+<span id="cb127-39"><a href="frost-risk-analysis.html#cb127-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb127-40"><a href="frost-risk-analysis.html#cb127-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks=</span><span class="fu">c</span>(<span class="st">&quot;Before bloom&quot;</span>, <span class="st">&quot;During bloom&quot;</span>, <span class="st">&quot;After bloom&quot;</span>),</span>
+<span id="cb127-41"><a href="frost-risk-analysis.html#cb127-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;light green&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;light blue&quot;</span>),</span>
+<span id="cb127-42"><a href="frost-risk-analysis.html#cb127-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">name=</span><span class="st">&quot;Frost timing&quot;</span>) <span class="sc">+</span></span>
+<span id="cb127-43"><a href="frost-risk-analysis.html#cb127-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb127-44"><a href="frost-risk-analysis.html#cb127-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">80</span>,<span class="dv">140</span>))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+</div>
+<div id="evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend" class="section level2 hasAnchor" number="29.5">
+<h2><span class="header-section-number">29.5</span> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?<a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="frost-risk-analysis.html#cb128-1" aria-hidden="true" tabindex="-1"></a>Bloom_frost_trend<span class="ot">&lt;-</span><span class="fu">aggregate</span>(</span>
+<span id="cb128-2"><a href="frost-risk-analysis.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  Daily_frost<span class="sc">$</span>Frost_hours,</span>
+<span id="cb128-3"><a href="frost-risk-analysis.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">by=</span><span class="fu">list</span>(Daily_frost<span class="sc">$</span>Year,Daily_frost<span class="sc">$</span>Bloom_frost),</span>
+<span id="cb128-4"><a href="frost-risk-analysis.html#cb128-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN=</span><span class="cf">function</span>(x) <span class="fu">sum</span>(x,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb128-5"><a href="frost-risk-analysis.html#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Bloom_frost_trend)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;Frost_timing&quot;</span>,<span class="st">&quot;Frost_hours&quot;</span>)</span>
+<span id="cb128-6"><a href="frost-risk-analysis.html#cb128-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-7"><a href="frost-risk-analysis.html#cb128-7" aria-hidden="true" tabindex="-1"></a>DuringBloom<span class="ot">&lt;-</span></span>
+<span id="cb128-8"><a href="frost-risk-analysis.html#cb128-8" aria-hidden="true" tabindex="-1"></a>  Bloom_frost_trend[<span class="fu">which</span>(Bloom_frost_trend<span class="sc">$</span>Frost_timing<span class="sc">==</span><span class="st">&quot;During bloom&quot;</span>),]</span>
+<span id="cb128-9"><a href="frost-risk-analysis.html#cb128-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-10"><a href="frost-risk-analysis.html#cb128-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>DuringBloom,<span class="fu">aes</span>(Year,Frost_hours)) <span class="sc">+</span></span>
+<span id="cb128-11"><a href="frost-risk-analysis.html#cb128-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb128-12"><a href="frost-risk-analysis.html#cb128-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="frost-risk-analysis.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Kendall</span>(<span class="at">x=</span>DuringBloom<span class="sc">$</span>Year,<span class="at">y=</span>DuringBloom<span class="sc">$</span>Frost_hours)</span></code></pre></div>
+<pre><code>## tau = 0.0333, 2-sided pvalue =0.74038</code></pre>
+<p>Spring frosts are one of the biggest threats to total fruit loss for apple growers. Therefore, any frost during the flowering period should be taken seriously. The graph shows that in the past and also in the most recent years there were always dangerous frost periods. A significant trend cannot be determined with the Kendall test, nevertheless the value tau of 0.03 rather indicates an increase. If we consider that the beginning of flowering is pushed forward by climate change, we can expect more frost during the flowering period in the future. Growers should get early information on regional circumstances and possibilities for frost damage prevention.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="can-we-improve-the-performance-of-phenoflex.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/30-frost_risk_analysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

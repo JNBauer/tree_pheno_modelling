@@ -52,6 +52,25 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -186,7 +205,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> <strong>1. Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</strong></a></li>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</a></li>
+<li class="chapter" data-level="10.2" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#create-a-list-of-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>10.2</b> Create a list of the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="10.3" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#identify-suitable-weather-stations-for-patching-gaps"><i class="fa fa-check"></i><b>10.3</b> Identify suitable weather stations for patching gaps</a></li>
+<li class="chapter" data-level="10.4" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#download-weather-data-for-promising-stations-convert-them-to-chillr-format-and-compile-them-in-a-list"><i class="fa fa-check"></i><b>10.4</b> Download weather data for promising stations, convert them to chillR format and compile them in a list</a></li>
+<li class="chapter" data-level="10.5" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-the-patch_daily_temperatures-function-to-fill-gaps"><i class="fa fa-check"></i><b>10.5</b> Use the patch_daily_temperatures function to fill gaps</a></li>
+<li class="chapter" data-level="10.6" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#investigate-the-results---have-all-gaps-been-filled"><i class="fa fa-check"></i><b>10.6</b> Investigate the results - have all gaps been filled?</a></li>
+<li class="chapter" data-level="10.7" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#if-necessary-repeat-until-you-have-a-dataset-you-can-work-with-in-further-analyses"><i class="fa fa-check"></i><b>10.7</b> If necessary, repeat until you have a dataset you can work with in further analyses</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
 <ul>
@@ -204,13 +229,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="14.1" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html#analyze-the-historic-and-future-impact-of-climate-change-on-three-agroclimatic-metrics-of-your-choice-for-the-location-youve-chosen-for-your-earlier-analyses."><i class="fa fa-check"></i><b>14.1</b> Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a></li>
-<li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a></li>
+<li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html#produce-similar-plots-for-the-weather-station-you-selected-for-earlier-exercises."><i class="fa fa-check"></i><b>15.1</b> Produce similar plots for the weather station you selected for earlier exercises.</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#perform-a-similar-analysis-for-the-location-youve-chosen-for-your-exercises."><i class="fa fa-check"></i><b>16.1</b> Perform a similar analysis for the location you’ve chosen for your exercises.</a></li>
+<li class="chapter" data-level="16.2" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#make-a-heat-map-illustrating-past-and-future-changes-in-safe-winter-chill-relative-to-a-past-scenario-for-the-13-chill-models-used-here."><i class="fa fa-check"></i><b>16.2</b> Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here.</a></li>
+</ul></li>
 <li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a></li>
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a></li>
 <li class="chapter" data-level="19" data-path="simple-phenology-analysis.html"><a href="simple-phenology-analysis.html"><i class="fa fa-check"></i><b>19</b> Simple phenology analysis</a></li>
 <li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a></li>
-<li class="chapter" data-level="21" data-path="pls_evaluation.html"><a href="pls_evaluation.html"><i class="fa fa-check"></i><b>21</b> pls_evaluation</a></li>
+<li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a></li>
+<li class="chapter" data-level="22" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html"><i class="fa fa-check"></i><b>22</b> Evaluating PLS outputs</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#reproduce-the-analysis-for-the-roter-boskoop-dataset."><i class="fa fa-check"></i><b>22.1</b> Reproduce the analysis for the ‘Roter Boskoop’ dataset.</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html"><i class="fa fa-check"></i><b>23</b> The relative importance of chill and heat</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html#describe-the-temperature-response-hypothesis-outlined-in-this-chapter."><i class="fa fa-check"></i><b>23.1</b> Describe the temperature response hypothesis outlined in this chapter.</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html"><i class="fa fa-check"></i><b>24</b> Making valid tree phenology models</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-the-difference-between-output-validation-and-process-validation."><i class="fa fa-check"></i><b>24.1</b> Explain the difference between output validation and process validation.</a></li>
+<li class="chapter" data-level="24.2" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-what-a-validity-domain-is-and-why-it-is-important-to-consider-this-whenever-we-want-to-use-our-model-to-forecast-something."><i class="fa fa-check"></i><b>24.2</b> Explain what a validity domain is and why it is important to consider this whenever we want to use our model to forecast something.</a></li>
+<li class="chapter" data-level="24.3" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#what-is-validation-for-purpose"><i class="fa fa-check"></i><b>24.3</b> What is validation for purpose?</a></li>
+<li class="chapter" data-level="24.4" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#how-can-we-ensure-that-our-model-is-suitable-for-the-predictions-we-want-to-make"><i class="fa fa-check"></i><b>24.4</b> How can we ensure that our model is suitable for the predictions we want to make?</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html"><i class="fa fa-check"></i><b>25</b> The PhenoFlex model</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#parameterize-the-phenoflex-model-for-roter-boskoop-apples."><i class="fa fa-check"></i><b>25.1</b> Parameterize the PhenoFlex model for `Roter Boskoop’ apples.</a></li>
+<li class="chapter" data-level="25.2" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#produce-plots-of-predicted-vs.-observed-bloom-dates-and-distribution-of-prediction-errors."><i class="fa fa-check"></i><b>25.2</b> Produce plots of predicted vs. observed bloom dates and distribution of prediction errors.</a></li>
+<li class="chapter" data-level="25.3" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#compute-the-model-performance-metrics-rmsep-rpiq-mean-error-and-mean-absolute-error."><i class="fa fa-check"></i><b>25.3</b> Compute the model performance metrics RMSEP, RPIQ, mean error and mean absolute error.</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html"><i class="fa fa-check"></i><b>26</b> The PhenoFlex model - a second look</a></li>
+<li class="chapter" data-level="27" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html"><i class="fa fa-check"></i><b>27</b> The PhenoFlex model - a second look</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html#make-chill-and-heat-response-plots-for-the-alexander-lucas-phenoflex-model-for-the-location-you-did-the-earlier-analyses-for."><i class="fa fa-check"></i><b>27.1</b> Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html"><i class="fa fa-check"></i><b>28</b> Can we improve the performance of PhenoFlex?</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-objective-of-this-work"><i class="fa fa-check"></i><b>28.1</b> What was the objective of this work?</a></li>
+<li class="chapter" data-level="28.2" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-main-conclusion"><i class="fa fa-check"></i><b>28.2</b> What was the main conclusion?</a></li>
+<li class="chapter" data-level="28.3" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-experiments-could-we-conduct-to-test-the-hypothesis-that-emerged-at-the-end-of-the-conclusion"><i class="fa fa-check"></i><b>28.3</b> What experiments could we conduct to test the hypothesis that emerged at the end of the conclusion?</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html"><i class="fa fa-check"></i><b>29</b> Frost risk analysis</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#download-the-phenology-dataset-for-the-apple-cultivar-roter-boskoop-from-klein-altendorf."><i class="fa fa-check"></i><b>29.1</b> Download the phenology dataset for the apple cultivar Roter Boskoop from Klein-Altendorf.</a></li>
+<li class="chapter" data-level="29.2" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#illustrate-the-development-of-the-bloom-period-over-the-duration-of-the-weather-record.-use-multiple-ways-to-show-this---feel-free-to-be-creative."><i class="fa fa-check"></i><b>29.2</b> Illustrate the development of the bloom period over the duration of the weather record. Use multiple ways to show this - feel free to be creative.</a></li>
+<li class="chapter" data-level="29.3" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-the-occurrence-of-frost-events-at-klein-altendorf-since-1958.-illustrate-this-in-a-plot."><i class="fa fa-check"></i><b>29.3</b> Evaluate the occurrence of frost events at Klein-Altendorf since 1958. Illustrate this in a plot.</a></li>
+<li class="chapter" data-level="29.4" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#produce-an-illustration-of-the-relationship-between-spring-frost-events-and-the-bloom-period-of-roter-boskoop."><i class="fa fa-check"></i><b>29.4</b> Produce an illustration of the relationship between spring frost events and the bloom period of ‘Roter Boskoop.’</a></li>
+<li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -236,23 +308,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="for-the-location-you-chose-for-previous-exercises-produce-historic-temperature-scenarios-representing-several-years-of-the-historic-record-your-choice." class="section level2 hasAnchor" number="13.1">
 <h2><span class="header-section-number">13.1</span> For the location you chose for previous exercises, produce historic temperature scenarios representing several years of the historic record (your choice).<a href="historic-temperature-scenarios.html#for-the-location-you-chose-for-previous-exercises-produce-historic-temperature-scenarios-representing-several-years-of-the-historic-record-your-choice." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>After creating a baseline scenario for 2001, we can use the <code>temperature_scenario_from_records</code> function to create absolute scenarios for the years <code>c(1985, 1995, 2005, 2015)</code>. The absolute scenarios are adjusted to the baseline to be used in the <code>temperature_generation()</code> function.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="historic-temperature-scenarios.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(chillR)</span>
-<span id="cb1-2"><a href="historic-temperature-scenarios.html#cb1-2" aria-hidden="true" tabindex="-1"></a>scenario_2001<span class="ot">&lt;-</span><span class="fu">temperature_scenario_from_records</span>(<span class="at">weather=</span>weather_CapeTown,</span>
-<span id="cb1-3"><a href="historic-temperature-scenarios.html#cb1-3" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">year=</span><span class="dv">2001</span>)</span>
-<span id="cb1-4"><a href="historic-temperature-scenarios.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="historic-temperature-scenarios.html#cb1-5" aria-hidden="true" tabindex="-1"></a>all_past_scenarios <span class="ot">&lt;-</span> <span class="fu">temperature_scenario_from_records</span>(</span>
-<span id="cb1-6"><a href="historic-temperature-scenarios.html#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weather=</span>weather_CapeTown,</span>
-<span id="cb1-7"><a href="historic-temperature-scenarios.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">year=</span><span class="fu">c</span>(<span class="dv">1985</span>, <span class="dv">1995</span>, <span class="dv">2005</span>, <span class="dv">2015</span>)) <span class="co">#creating absolute scenarios for those years</span></span>
-<span id="cb1-8"><a href="historic-temperature-scenarios.html#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="historic-temperature-scenarios.html#cb1-9" aria-hidden="true" tabindex="-1"></a>adjusted_scenarios <span class="ot">&lt;-</span> <span class="fu">temperature_scenario_baseline_adjustment</span>(</span>
-<span id="cb1-10"><a href="historic-temperature-scenarios.html#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline=</span>scenario_2001,</span>
-<span id="cb1-11"><a href="historic-temperature-scenarios.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature_scenario =</span> all_past_scenarios) <span class="co">#transform to relative with bl 96</span></span>
-<span id="cb1-12"><a href="historic-temperature-scenarios.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="historic-temperature-scenarios.html#cb1-13" aria-hidden="true" tabindex="-1"></a>all_past_scenario_temps <span class="ot">&lt;-</span> <span class="fu">temperature_generation</span>(</span>
-<span id="cb1-14"><a href="historic-temperature-scenarios.html#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">weather=</span>weather_CapeTown,</span>
-<span id="cb1-15"><a href="historic-temperature-scenarios.html#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">years=</span><span class="fu">c</span>(<span class="dv">1982</span>,<span class="dv">2020</span>),</span>
-<span id="cb1-16"><a href="historic-temperature-scenarios.html#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">sim_years=</span><span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2100</span>),</span>
-<span id="cb1-17"><a href="historic-temperature-scenarios.html#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature_scenario =</span> adjusted_scenarios)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="historic-temperature-scenarios.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(chillR)</span>
+<span id="cb36-2"><a href="historic-temperature-scenarios.html#cb36-2" aria-hidden="true" tabindex="-1"></a>scenario_2001<span class="ot">&lt;-</span><span class="fu">temperature_scenario_from_records</span>(<span class="at">weather=</span>weather_CapeTown,</span>
+<span id="cb36-3"><a href="historic-temperature-scenarios.html#cb36-3" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">year=</span><span class="dv">2001</span>)</span>
+<span id="cb36-4"><a href="historic-temperature-scenarios.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="historic-temperature-scenarios.html#cb36-5" aria-hidden="true" tabindex="-1"></a>all_past_scenarios <span class="ot">&lt;-</span> <span class="fu">temperature_scenario_from_records</span>(</span>
+<span id="cb36-6"><a href="historic-temperature-scenarios.html#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weather=</span>weather_CapeTown,</span>
+<span id="cb36-7"><a href="historic-temperature-scenarios.html#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">year=</span><span class="fu">c</span>(<span class="dv">1985</span>, <span class="dv">1995</span>, <span class="dv">2005</span>, <span class="dv">2015</span>)) <span class="co">#creating absolute scenarios for those years</span></span>
+<span id="cb36-8"><a href="historic-temperature-scenarios.html#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="historic-temperature-scenarios.html#cb36-9" aria-hidden="true" tabindex="-1"></a>adjusted_scenarios <span class="ot">&lt;-</span> <span class="fu">temperature_scenario_baseline_adjustment</span>(</span>
+<span id="cb36-10"><a href="historic-temperature-scenarios.html#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline=</span>scenario_2001,</span>
+<span id="cb36-11"><a href="historic-temperature-scenarios.html#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature_scenario =</span> all_past_scenarios) <span class="co">#transform to relative with bl 96</span></span>
+<span id="cb36-12"><a href="historic-temperature-scenarios.html#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="historic-temperature-scenarios.html#cb36-13" aria-hidden="true" tabindex="-1"></a>all_past_scenario_temps <span class="ot">&lt;-</span> <span class="fu">temperature_generation</span>(</span>
+<span id="cb36-14"><a href="historic-temperature-scenarios.html#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">weather=</span>weather_CapeTown,</span>
+<span id="cb36-15"><a href="historic-temperature-scenarios.html#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">years=</span><span class="fu">c</span>(<span class="dv">1982</span>,<span class="dv">2020</span>),</span>
+<span id="cb36-16"><a href="historic-temperature-scenarios.html#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">sim_years=</span><span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2100</span>),</span>
+<span id="cb36-17"><a href="historic-temperature-scenarios.html#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">temperature_scenario =</span> adjusted_scenarios)</span></code></pre></div>
 <table class="kable_wrapper lightable-paper lightable-striped" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -274,7 +346,7 @@ Adjusted relative 1985
 </tr>
 </thead>
 <caption>
-<span id="tab:unnamed-chunk-3">Table 13.1: </span>Three tables to display the adjustment of the scenario for 1985 with the baseline of 2001
+<span id="tab:unnamed-chunk-31">Table 13.1: </span>Three tables to display the adjustment of the scenario for 1985 with the baseline of 2001
 </caption>
 <tbody>
 <tr>
@@ -623,43 +695,43 @@ Tmax
 <div id="produce-chill-distributions-for-these-scenarios-and-plot-them." class="section level2 hasAnchor" number="13.2">
 <h2><span class="header-section-number">13.2</span> Produce chill distributions for these scenarios and plot them.<a href="historic-temperature-scenarios.html#produce-chill-distributions-for-these-scenarios-and-plot-them." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We apply the <code>tempResponse_daily_list</code> function to our generated data and add a column with the scenario year and stack all 4 scenarios vertically. In <code>actual_chill</code>, we calculate the chilling for our original data.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="historic-temperature-scenarios.html#cb2-1" aria-hidden="true" tabindex="-1"></a>chill_hist_scenario_list <span class="ot">&lt;-</span> <span class="fu">tempResponse_daily_list</span>(all_past_scenario_temps,</span>
-<span id="cb2-2"><a href="historic-temperature-scenarios.html#cb2-2" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">latitude=</span>coords[<span class="dv">2</span>],</span>
-<span id="cb2-3"><a href="historic-temperature-scenarios.html#cb2-3" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">Start_JDay =</span> <span class="dv">121</span>,</span>
-<span id="cb2-4"><a href="historic-temperature-scenarios.html#cb2-4" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">End_JDay =</span> <span class="dv">243</span>)</span>
-<span id="cb2-5"><a href="historic-temperature-scenarios.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="historic-temperature-scenarios.html#cb2-6" aria-hidden="true" tabindex="-1"></a>scenarios<span class="ot">&lt;-</span><span class="fu">names</span>(chill_hist_scenario_list)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
-<span id="cb2-7"><a href="historic-temperature-scenarios.html#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="historic-temperature-scenarios.html#cb2-8" aria-hidden="true" tabindex="-1"></a>all_scenarios<span class="ot">&lt;-</span>chill_hist_scenario_list[[scenarios[<span class="dv">1</span>]]]</span>
-<span id="cb2-9"><a href="historic-temperature-scenarios.html#cb2-9" aria-hidden="true" tabindex="-1"></a>all_scenarios[,<span class="st">&quot;scenario&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(scenarios[<span class="dv">1</span>])</span>
-<span id="cb2-10"><a href="historic-temperature-scenarios.html#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="historic-temperature-scenarios.html#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="historic-temperature-scenarios.html#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sc <span class="cf">in</span> scenarios[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb2-13"><a href="historic-temperature-scenarios.html#cb2-13" aria-hidden="true" tabindex="-1"></a> all_scenarios<span class="ot">&lt;-</span><span class="fu">rbind</span>(all_scenarios,</span>
-<span id="cb2-14"><a href="historic-temperature-scenarios.html#cb2-14" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">cbind</span>(chill_hist_scenario_list[[sc]],<span class="at">scenario=</span><span class="fu">as.numeric</span>(sc)))</span>
-<span id="cb2-15"><a href="historic-temperature-scenarios.html#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="historic-temperature-scenarios.html#cb2-16" aria-hidden="true" tabindex="-1"></a>all_scenarios <span class="ot">&lt;-</span> all_scenarios[<span class="fu">which</span>(all_scenarios<span class="sc">$</span>Perc_complete<span class="sc">==</span><span class="dv">100</span>),]</span>
-<span id="cb2-17"><a href="historic-temperature-scenarios.html#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="historic-temperature-scenarios.html#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="historic-temperature-scenarios.html#cb2-19" aria-hidden="true" tabindex="-1"></a>actual_chill <span class="ot">&lt;-</span> <span class="fu">tempResponse_daily_list</span>(weather_CapeTown,<span class="at">latitude=</span>coords[<span class="dv">2</span>],</span>
-<span id="cb2-20"><a href="historic-temperature-scenarios.html#cb2-20" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">Start_JDay =</span> <span class="dv">121</span>,</span>
-<span id="cb2-21"><a href="historic-temperature-scenarios.html#cb2-21" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">End_JDay =</span> <span class="dv">243</span>)[[<span class="dv">1</span>]]</span>
-<span id="cb2-22"><a href="historic-temperature-scenarios.html#cb2-22" aria-hidden="true" tabindex="-1"></a>actual_chill <span class="ot">&lt;-</span> actual_chill[<span class="fu">which</span>(actual_chill<span class="sc">$</span>Perc_complete<span class="sc">==</span><span class="dv">100</span>),]</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="historic-temperature-scenarios.html#cb37-1" aria-hidden="true" tabindex="-1"></a>chill_hist_scenario_list <span class="ot">&lt;-</span> <span class="fu">tempResponse_daily_list</span>(all_past_scenario_temps,</span>
+<span id="cb37-2"><a href="historic-temperature-scenarios.html#cb37-2" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">latitude=</span>coords[<span class="dv">2</span>],</span>
+<span id="cb37-3"><a href="historic-temperature-scenarios.html#cb37-3" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">Start_JDay =</span> <span class="dv">121</span>,</span>
+<span id="cb37-4"><a href="historic-temperature-scenarios.html#cb37-4" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">End_JDay =</span> <span class="dv">243</span>)</span>
+<span id="cb37-5"><a href="historic-temperature-scenarios.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="historic-temperature-scenarios.html#cb37-6" aria-hidden="true" tabindex="-1"></a>scenarios<span class="ot">&lt;-</span><span class="fu">names</span>(chill_hist_scenario_list)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span>
+<span id="cb37-7"><a href="historic-temperature-scenarios.html#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="historic-temperature-scenarios.html#cb37-8" aria-hidden="true" tabindex="-1"></a>all_scenarios<span class="ot">&lt;-</span>chill_hist_scenario_list[[scenarios[<span class="dv">1</span>]]]</span>
+<span id="cb37-9"><a href="historic-temperature-scenarios.html#cb37-9" aria-hidden="true" tabindex="-1"></a>all_scenarios[,<span class="st">&quot;scenario&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(scenarios[<span class="dv">1</span>])</span>
+<span id="cb37-10"><a href="historic-temperature-scenarios.html#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="historic-temperature-scenarios.html#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="historic-temperature-scenarios.html#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (sc <span class="cf">in</span> scenarios[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb37-13"><a href="historic-temperature-scenarios.html#cb37-13" aria-hidden="true" tabindex="-1"></a> all_scenarios<span class="ot">&lt;-</span><span class="fu">rbind</span>(all_scenarios,</span>
+<span id="cb37-14"><a href="historic-temperature-scenarios.html#cb37-14" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">cbind</span>(chill_hist_scenario_list[[sc]],<span class="at">scenario=</span><span class="fu">as.numeric</span>(sc)))</span>
+<span id="cb37-15"><a href="historic-temperature-scenarios.html#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="historic-temperature-scenarios.html#cb37-16" aria-hidden="true" tabindex="-1"></a>all_scenarios <span class="ot">&lt;-</span> all_scenarios[<span class="fu">which</span>(all_scenarios<span class="sc">$</span>Perc_complete<span class="sc">==</span><span class="dv">100</span>),]</span>
+<span id="cb37-17"><a href="historic-temperature-scenarios.html#cb37-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-18"><a href="historic-temperature-scenarios.html#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-19"><a href="historic-temperature-scenarios.html#cb37-19" aria-hidden="true" tabindex="-1"></a>actual_chill <span class="ot">&lt;-</span> <span class="fu">tempResponse_daily_list</span>(weather_CapeTown,<span class="at">latitude=</span>coords[<span class="dv">2</span>],</span>
+<span id="cb37-20"><a href="historic-temperature-scenarios.html#cb37-20" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">Start_JDay =</span> <span class="dv">121</span>,</span>
+<span id="cb37-21"><a href="historic-temperature-scenarios.html#cb37-21" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">End_JDay =</span> <span class="dv">243</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb37-22"><a href="historic-temperature-scenarios.html#cb37-22" aria-hidden="true" tabindex="-1"></a>actual_chill <span class="ot">&lt;-</span> actual_chill[<span class="fu">which</span>(actual_chill<span class="sc">$</span>Perc_complete<span class="sc">==</span><span class="dv">100</span>),]</span></code></pre></div>
 <p>This time, we use the <code>geom_violin</code> to display the distribution of chill for our scenario years. With <code>geom_point</code>, we can add the data from the <code>actual_chill</code> to our plot.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="historic-temperature-scenarios.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
-<span id="cb3-2"><a href="historic-temperature-scenarios.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>all_scenarios,<span class="fu">aes</span>(scenario,Chill_Portions,</span>
-<span id="cb3-3"><a href="historic-temperature-scenarios.html#cb3-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">fill=</span><span class="fu">factor</span>(scenario))) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="historic-temperature-scenarios.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb3-5"><a href="historic-temperature-scenarios.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Chill accumulation (Chill Portions)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="historic-temperature-scenarios.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="historic-temperature-scenarios.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span><span class="st">&quot;Scenario year&quot;</span>, </span>
-<span id="cb3-8"><a href="historic-temperature-scenarios.html#cb3-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">limits=</span><span class="fu">unique</span>(all_scenarios<span class="sc">$</span>scenario)) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="historic-temperature-scenarios.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">90</span>)) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="historic-temperature-scenarios.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>actual_chill,</span>
-<span id="cb3-11"><a href="historic-temperature-scenarios.html#cb3-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(End_year,Chill_Portions,<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>),</span>
-<span id="cb3-12"><a href="historic-temperature-scenarios.html#cb3-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb3-13"><a href="historic-temperature-scenarios.html#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">&quot;Scenario&quot;</span>,</span>
-<span id="cb3-14"><a href="historic-temperature-scenarios.html#cb3-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">breaks =</span> <span class="fu">unique</span>(all_scenarios<span class="sc">$</span>scenario)) </span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="historic-temperature-scenarios.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb38-2"><a href="historic-temperature-scenarios.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>all_scenarios,<span class="fu">aes</span>(scenario,Chill_Portions,</span>
+<span id="cb38-3"><a href="historic-temperature-scenarios.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">fill=</span><span class="fu">factor</span>(scenario))) <span class="sc">+</span></span>
+<span id="cb38-4"><a href="historic-temperature-scenarios.html#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb38-5"><a href="historic-temperature-scenarios.html#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Chill accumulation (Chill Portions)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb38-6"><a href="historic-temperature-scenarios.html#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb38-7"><a href="historic-temperature-scenarios.html#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span><span class="st">&quot;Scenario year&quot;</span>, </span>
+<span id="cb38-8"><a href="historic-temperature-scenarios.html#cb38-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">limits=</span><span class="fu">unique</span>(all_scenarios<span class="sc">$</span>scenario)) <span class="sc">+</span></span>
+<span id="cb38-9"><a href="historic-temperature-scenarios.html#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">90</span>)) <span class="sc">+</span></span>
+<span id="cb38-10"><a href="historic-temperature-scenarios.html#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>actual_chill,</span>
+<span id="cb38-11"><a href="historic-temperature-scenarios.html#cb38-11" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(End_year,Chill_Portions,<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>),</span>
+<span id="cb38-12"><a href="historic-temperature-scenarios.html#cb38-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">col=</span><span class="st">&quot;blue&quot;</span>,<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb38-13"><a href="historic-temperature-scenarios.html#cb38-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name=</span><span class="st">&quot;Scenario&quot;</span>,</span>
+<span id="cb38-14"><a href="historic-temperature-scenarios.html#cb38-14" aria-hidden="true" tabindex="-1"></a>                      <span class="at">breaks =</span> <span class="fu">unique</span>(all_scenarios<span class="sc">$</span>scenario)) </span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:13-Plotting-the-past-chill-portions-in-a-violin-ggplot"></span>
 <img src="_main_files/figure-html/13-Plotting-the-past-chill-portions-in-a-violin-ggplot-1.png" alt="Violin charts that display the chill accumulation for the simulated years of 1985,1995,2005,2015. The blue points represent the actual chill measured during this time" width="672" />
 <p class="caption">

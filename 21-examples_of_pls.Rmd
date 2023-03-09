@@ -1,0 +1,11 @@
+# Examples of PLS regression with agroclimatic metrics
+\
+
+## Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?.
+
+We can see that some of the PLS results can be easier delineated. The PLS analysis on Chinese data, showed no clear dormancy phases. There were some peaks, which could be assigned to the chilling or forcing period, but on the other side some contradictory coefficients were also seen, especially during the endodormancy. During the ecodormancy the results could be assigned easier and also in a more uniform way. Similar results can we also see in Germany, the UK and also Croatia. In countries like Tunisia or regions like California, we can see that the two phases can be recognized easier. The average temperature during winter and summer is lower in countries like China or Germany compared to Tunisia or California. Croatia is in between regarding there temperatures, but the PLS analysis do not show clear results.
+
+\
+## Can you think about possible reasons for the success or failure of PLS analysis based on agroclimatic metrics (if so, write down your thoughts)?
+The PLS-analysis is based on variation in the data. This means that if our PLS analysis does not result in clear observations, one reason could be low variation in the data. In the next chapter, we can see how the data of the well performing countries is distributed in comparison to the chill model sensitivity. The data from these regions shows variation and is spread about areas of the functions, where chill is generated, but also on parts where chill is not generated, due to high temperatures. 
+

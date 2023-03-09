@@ -140,7 +140,7 @@ chill_observed<-load_temperature_scenarios(
 
 Prior to plotting, we need to bring the chill data in the right shape with the help of the `make_climate_scenario` function. 
 ```{r, eval=TRUE, results='hide'}
-chills <-make_climate_scenario(
+chills <- make_climate_scenario(
   chill_past_scenarios,
   caption = "Historic",
   historic_data = chill_observed,

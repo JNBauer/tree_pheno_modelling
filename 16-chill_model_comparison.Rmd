@@ -1,15 +1,16 @@
 # Chill model comparison
-\
-**1. Perform a similar analysis for the location you’ve chosen for your exercises.**
+
+## Perform a similar analysis for the location you’ve chosen for your exercises.
 
 ```{r, echo=FALSE, message=FALSE}
 library(chillR)
 library(dormancyR)
 library(dplyr)
 library(kableExtra)
+coords <- c(18.8148, -33.9575)
 ```
 
-
+In the first step, we rename all the chill metrics of the `dormancyR` package. And assign also names for the plotting.
 ```{r, renaming models and adding model labels}
 
 hourly_models <- list(Chilling_units = chilling_units,
@@ -42,11 +43,16 @@ model_labels=c("Rate of Chill",
                "Utah Chill Units",
                "Chill Portions")
 
-kable(data.frame(Metric=model_labels,'Function name'=metrics))  %>%
-  kable_styling("striped", position = "left",font_size = 10)
 ```
 
+```{r, echo=FALSE}
+title <- "List with all Chill metrics"
+data.frame(Metric=model_labels,'Function name'=metrics) %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
+```
 
+In the next code chunk, we apply the whole list of chill metrics to all our past scenarios. And save our newly calculated data as `CapeTown_multichill_historic'
 ```{r create chill metrics for all past scenarios,  eval = FALSE}
 CapeTown_temps<-read_tab("data/CapeTown_weather.csv")
 Temps<-load_temperature_scenarios("data/Weather","CapeTown_historic")
@@ -65,7 +71,7 @@ daily_models_past_scenarios<-lapply(
   function(x) x[which(x$Perc_complete>90),])
 hourly_models_past_scenarios<-tempResponse_daily_list(
   Temps,
-  latitude=-34.10835247406239,
+  latitude= coords[2],
   Start_JDay = Start_JDay,
   End_JDay = End_JDay,
   models=hourly_models,
@@ -88,7 +94,7 @@ daily_models_observed<-
   daily_models_observed[which(daily_models_observed$Perc_complete>90),]
 hourly_models_observed<-tempResponse_daily_list(
   CapeTown_temps,
-  latitude=-34.10835247406239,
+  latitude= coords[2],
   Start_JDay = Start_JDay,
   End_JDay = End_JDay,
   models=hourly_models,
@@ -105,6 +111,8 @@ write.csv(past_observed,
           "data/chill/CapeTown_multichill_observed.csv",
           row.names=FALSE)
 ```
+
+In the next code chunk, we apply the whole list of chill metrics to all our future scenarios. And save our newly calculated data in multiple files depending on their RCP and date.
 ```{r create chill metrics for all future scenarios, eval=FALSE}
 RCPs<-c("rcp45","rcp85")
 Times<-c(2050,2085)
@@ -127,7 +135,7 @@ for(RCP in RCPs)
     hourly_models_future_scenarios<-
       tempResponse_daily_list(
         Temps,
-        latitude=-34.10835247406239,
+        latitude= coords[2],
         Start_JDay = Start_JDay,
         End_JDay = End_JDay,
         models=hourly_models,
@@ -149,6 +157,7 @@ for(RCP in RCPs)
 }
 ```
 
+The following code chunk is needed to combine 
 ```{r, adapt the structure of the data}
 chill_past_scenarios<-load_temperature_scenarios(
   "data/chill",
@@ -177,8 +186,10 @@ for(RCP in RCPs)
                                    add_to = chills)
 }
 ```
-\
-**2.  Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here**
+
+
+## Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here.
+
 ```{r prepare the dataset for plotting}
 for(i in 1:length(chills))
    {ch<-chills[[i]]
@@ -299,7 +310,7 @@ chill_comp_plot<-
 chill_comp_plot
 ```
 \
-**3.  Produce an animated line plot of your results (summarizing Safe Winter Chill across all the GCMs).**
+## Produce an animated line plot of your results (summarizing Safe Winter Chill across all the GCMs).
 ```{r data preparation for line graph arrangement}
 hist_results<-results[which(results$GCM=="none"),]
 hist_results$RCP<-"RCP4.5"

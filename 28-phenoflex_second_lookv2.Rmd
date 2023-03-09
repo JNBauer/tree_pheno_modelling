@@ -1,0 +1,114 @@
+# The PhenoFlex model - a second look
+
+## Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(colorRamps)
+library(tidyr)
+require(reshape2)
+library(chillR)
+library(lubridate)
+
+source("functions/chill_model_sensitivity.R")
+
+coords <- c(18.8148, -33.9575)
+```
+
+First we need to set some parameters for the generation of the different temperatures. In the case of South Africa, we set the latitude to 33.95° South. Because of the location in the southern hemisphere it is also important to change the range of the month from April to September.
+```{r}
+PhenoFlex_parameters_Alex <- read_tab("data/PhenoFlex_parameters_Alexander_Lucas.csv")[,2]
+
+latitude<-coords[2]
+
+#month_range<-c(10,11,12,1,2,3)
+month_range=c(4,5,6,7,8,9)
+
+Tmins=c(-20:20)
+Tmaxs=c(-15:30)
+
+mins<-NA
+maxs<-NA
+chill_eff<-NA
+heat_eff<-NA
+month<-NA
+```
+\
+
+With the parameters set, we can calculate the model sensitivity to our generated temperature dataframe. The result is saved to be imported later.
+```{r, eval=FALSE}
+for(mon in month_range)
+    {
+    weather<-make_all_day_table(data.frame(Year=c(2001,2001),
+                                         Month=c(mon,mon),
+                                         Day=c(1,days_in_month(mon)),
+                                         Tmin=c(0,0),
+                                         Tmax=c(0,0)))
+    for(tmin in Tmins)
+      for(tmax in Tmaxs)
+        if(tmax>=tmin)
+          {
+          weather$Tmin<-tmin
+          weather$Tmax<-tmax
+          hourtemps<-stack_hourly_temps(weather,
+                                        latitude=latitude)$hourtemps$Temp
+          chill_eff<-c(chill_eff,
+                       tail(PhenoFlex(temp=hourtemps,
+                                 times=c(1: length(hourtemps)),
+                                 A0=PhenoFlex_parameters_Alex[7],
+                                 A1=PhenoFlex_parameters_Alex[8],
+                                 E0=PhenoFlex_parameters_Alex[5],
+                                 E1=PhenoFlex_parameters_Alex[6],
+                                 Tf=PhenoFlex_parameters_Alex[9],
+                                 slope=PhenoFlex_parameters_Alex[12],
+                                 deg_celsius=TRUE,
+                                 basic_output=FALSE)$y,1)/
+                         days_in_month(mon))
+                                       
+          heat_eff<-c(heat_eff,
+                      tail(cumsum(GDH_response(hourtemps,
+                                          PhenoFlex_parameters_Alex)),1)/
+                        days_in_month(mon))
+          mins<-c(mins,tmin)
+          maxs<-c(maxs,tmax)
+          month<-c(month,mon)
+        }
+}
+
+results<-data.frame(Month=month,Tmin=mins,Tmax=maxs,Chill_eff=chill_eff,Heat_eff=heat_eff)
+results<-results[!is.na(results$Month),]
+
+
+write.csv(results,"data/model_sensitivity_PhenoFlex.csv")
+```
+\
+
+For the chill and heat response plots, we use the functions created in the earlier chapter, where we already conducted similar analysis.
+
+```{r, warning=FALSE, message=FALSE}
+model_sens_PhenoFlex <- read.csv("data/model_sensitivity_PhenoFlex.csv")
+CapeTown_weather <- read_tab("data/CapeTown_chillR_weather.csv")
+
+chill_sensitivity_temps(model_sens_PhenoFlex,
+                        CapeTown_weather,
+                        temp_model="Chill_eff",
+                        month_range=c(4,5,6,7,8,9),
+                        Tmins=c(-20:20),
+                        Tmaxs=c(-15:30),
+                        legend_label="Chill per day \n(arbitrary)") +
+  ggtitle("PhenoFlex chill efficiency ('Alexander Lucas')")
+```
+
+
+```{r, warning=FALSE, message=FALSE}
+chill_sensitivity_temps(model_sens_PhenoFlex,
+                        CapeTown_weather,
+                        temp_model="Heat_eff",
+                        month_range=c(4,5,6,7,8,9),
+                        Tmins=c(-20:20),
+                        Tmaxs=c(-15:30),
+                        legend_label="Heat per day \n(arbitrary)") +
+  ggtitle("PhenoFlex heat efficiency ('Alexander Lucas')")
+```
+
+

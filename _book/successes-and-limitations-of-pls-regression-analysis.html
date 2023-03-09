@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 19 Successes and limitations of PLS regression analysis | Tree phenology analysis with R - Logbook</title>
+  <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 19 Successes and limitations of PLS regression analysis | Tree phenology analysis with R - Logbook" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="The logbook for the Tree phenology analysis with R logbook" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 19 Successes and limitations of PLS regression analysis | Tree phenology analysis with R - Logbook" />
+  
+  <meta name="twitter:description" content="The logbook for the Tree phenology analysis with R logbook" />
+  
+
+<meta name="author" content="Julian Bauer" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="delineating-temperature-response-phases-with-pls-regression.html"/>
+<link rel="next" href="pls-regression-with-agroclimatic-metrics.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tree phenology Logbook</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
+<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
+<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
+<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
+<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
+<li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
+<li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
+<li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#sketch-out-three-data-access-and-processing-challenges-that-had-to-be-overcome-in-order-to-produce-chill-projections-with-state-of-the-art-methodology."><i class="fa fa-check"></i><b>5.1</b> Sketch out three data access and processing challenges that had to be overcome in order to produce chill projections with state-of-the-art methodology.</a></li>
+<li class="chapter" data-level="5.2" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html#outline-in-your-understanding-the-basic-steps-that-are-necessary-to-make-such-projections."><i class="fa fa-check"></i><b>5.2</b> Outline, in your understanding, the basic steps that are necessary to make such projections.</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html"><i class="fa fa-check"></i><b>6</b> Manual chill analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#write-a-basic-function-that-calculates-warm-hours-25c"><i class="fa fa-check"></i><b>6.1</b> Write a basic function that calculates warm hours (&gt;25°C)</a></li>
+<li class="chapter" data-level="6.2" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset"><i class="fa fa-check"></i><b>6.2</b> Apply this function to the Winters_hours_gaps dataset</a></li>
+<li class="chapter" data-level="6.3" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates"><i class="fa fa-check"></i><b>6.3</b> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
+<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
+<li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="9.2" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#download-weather-data-for-the-most-promising-station-on-the-list"><i class="fa fa-check"></i><b>9.2</b> Download weather data for the most promising station on the list</a></li>
+<li class="chapter" data-level="9.3" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#convert-the-weather-data-into-chillr-format"><i class="fa fa-check"></i><b>9.3</b> Convert the weather data into chillR format</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</a></li>
+<li class="chapter" data-level="10.2" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#create-a-list-of-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>10.2</b> Create a list of the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="10.3" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#identify-suitable-weather-stations-for-patching-gaps"><i class="fa fa-check"></i><b>10.3</b> Identify suitable weather stations for patching gaps</a></li>
+<li class="chapter" data-level="10.4" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#download-weather-data-for-promising-stations-convert-them-to-chillr-format-and-compile-them-in-a-list"><i class="fa fa-check"></i><b>10.4</b> Download weather data for promising stations, convert them to chillR format and compile them in a list</a></li>
+<li class="chapter" data-level="10.5" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-the-patch_daily_temperatures-function-to-fill-gaps"><i class="fa fa-check"></i><b>10.5</b> Use the patch_daily_temperatures function to fill gaps</a></li>
+<li class="chapter" data-level="10.6" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#investigate-the-results---have-all-gaps-been-filled"><i class="fa fa-check"></i><b>10.6</b> Investigate the results - have all gaps been filled?</a></li>
+<li class="chapter" data-level="10.7" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#if-necessary-repeat-until-you-have-a-dataset-you-can-work-with-in-further-analyses"><i class="fa fa-check"></i><b>10.7</b> If necessary, repeat until you have a dataset you can work with in further analyses</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#for-the-location-you-chose-for-your-earlier-analyses-use-chillrs-weather-generator-to-produce-100-years-of-synthetic-temperature-data."><i class="fa fa-check"></i><b>11.1</b> For the location you chose for your earlier analyses, use chillR’s weather generator to produce 100 years of synthetic temperature data.</a></li>
+<li class="chapter" data-level="11.2" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#calculate-winter-chill-in-chill-portions-for-your-synthetic-weather-and-illustrate-your-results-as-histograms-and-cumulative-distributions."><i class="fa fa-check"></i><b>11.2</b> Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.</a></li>
+<li class="chapter" data-level="11.3" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html#produce-similar-plots-for-the-number-of-freezing-hours-0c-in-april-or-october-if-your-site-is-in-the-southern-hemisphere-for-your-location-of-interest."><i class="fa fa-check"></i><b>11.3</b> Produce similar plots for the number of freezing hours (&lt;0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="saving-and-loading-data.html"><a href="saving-and-loading-data.html"><i class="fa fa-check"></i><b>12</b> Saving and Loading Data</a></li>
+<li class="chapter" data-level="13" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html"><i class="fa fa-check"></i><b>13</b> Historic temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#for-the-location-you-chose-for-previous-exercises-produce-historic-temperature-scenarios-representing-several-years-of-the-historic-record-your-choice."><i class="fa fa-check"></i><b>13.1</b> For the location you chose for previous exercises, produce historic temperature scenarios representing several years of the historic record (your choice).</a></li>
+<li class="chapter" data-level="13.2" data-path="historic-temperature-scenarios.html"><a href="historic-temperature-scenarios.html#produce-chill-distributions-for-these-scenarios-and-plot-them."><i class="fa fa-check"></i><b>13.2</b> Produce chill distributions for these scenarios and plot them.</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html"><i class="fa fa-check"></i><b>14</b> Future temperature scenarios</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html#analyze-the-historic-and-future-impact-of-climate-change-on-three-agroclimatic-metrics-of-your-choice-for-the-location-youve-chosen-for-your-earlier-analyses."><i class="fa fa-check"></i><b>14.1</b> Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html#produce-similar-plots-for-the-weather-station-you-selected-for-earlier-exercises."><i class="fa fa-check"></i><b>15.1</b> Produce similar plots for the weather station you selected for earlier exercises.</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#perform-a-similar-analysis-for-the-location-youve-chosen-for-your-exercises."><i class="fa fa-check"></i><b>16.1</b> Perform a similar analysis for the location you’ve chosen for your exercises.</a></li>
+<li class="chapter" data-level="16.2" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#make-a-heat-map-illustrating-past-and-future-changes-in-safe-winter-chill-relative-to-a-past-scenario-for-the-13-chill-models-used-here."><i class="fa fa-check"></i><b>16.2</b> Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here.</a></li>
+<li class="chapter" data-level="16.3" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#produce-an-animated-line-plot-of-your-results-summarizing-safe-winter-chill-across-all-the-gcms."><i class="fa fa-check"></i><b>16.3</b> Produce an animated line plot of your results (summarizing Safe Winter Chill across all the GCMs).</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis."><i class="fa fa-check"></i><b>17.1</b> Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.</a></li>
+<li class="chapter" data-level="17.2" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates."><i class="fa fa-check"></i><b>17.2</b> Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.</a></li>
+<li class="chapter" data-level="17.3" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#what-do-we-need-to-know-to-build-a-process-based-model-from-this"><i class="fa fa-check"></i><b>17.3</b> What do we need to know to build a process-based model from this?</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson."><i class="fa fa-check"></i><b>18.1</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
+<li class="chapter" data-level="18.2" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson.-1"><i class="fa fa-check"></i><b>18.2</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
+<li class="chapter" data-level="18.3" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#write-down-your-thoughts-on-why-were-not-seeing-the-temperature-response-pattern-we-may-have-expected.-what-happened-to-the-chill-response"><i class="fa fa-check"></i><b>18.3</b> Write down your thoughts on why we’re not seeing the temperature response pattern we may have expected. What happened to the chill response?</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html"><i class="fa fa-check"></i><b>19</b> Successes and limitations of PLS regression analysis</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html#briefly-explain-in-what-climatic-settings-we-can-expect-pls-regression-to-detect-the-chilling-phase---and-in-what-settings-this-probably-wont-work."><i class="fa fa-check"></i><b>19.1</b> Briefly explain in what climatic settings we can expect PLS regression to detect the chilling phase - and in what settings this probably won’t work.</a></li>
+<li class="chapter" data-level="19.2" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html#how-could-we-overcome-this-problem"><i class="fa fa-check"></i><b>19.2</b> How could we overcome this problem?</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html#repeat-the-pls_chill_force-procedure-for-the-roter-boskoop-dataset.-include-plots-of-daily-chill-and-heat-accumulation."><i class="fa fa-check"></i><b>20.1</b> Repeat the PLS_chill_force procedure for the ‘Roter Boskoop’ dataset. Include plots of daily chill and heat accumulation.</a></li>
+<li class="chapter" data-level="20.2" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html#run-pls_chill_force-analyses-for-all-three-major-chill-models.-delineate-your-best-estimates-of-chilling-and-forcing-phases-for-all-of-them."><i class="fa fa-check"></i><b>20.2</b> Run PLS_chill_force analyses for all three major chill models. Delineate your best estimates of chilling and forcing phases for all of them.</a></li>
+<li class="chapter" data-level="20.3" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html#plot-results-for-all-three-analyses-including-shaded-plot-areas-for-the-chilling-and-forcing-periods-you-estimated."><i class="fa fa-check"></i><b>20.3</b> Plot results for all three analyses, including shaded plot areas for the chilling and forcing periods you estimated.</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed."><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?.</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html"><i class="fa fa-check"></i><b>22</b> Why PLS doesn’t always work</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html#produce-chill-and-heat-model-sensitivity-plots-for-the-location-you-focused-on-in-previous-exercises."><i class="fa fa-check"></i><b>22.1</b> Produce chill and heat model sensitivity plots for the location you focused on in previous exercises.</a></li>
+<li class="chapter" data-level="22.2" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html#look-at-the-plots-for-the-agroclimate-based-pls-analyses-of-the-alexander-lucas-and-roter-boskoop-datasets.-provide-your-best-estimates-of-the-chilling-and-forcing-phases."><i class="fa fa-check"></i><b>22.2</b> Look at the plots for the agroclimate-based PLS analyses of the ‘Alexander Lucas’ and ‘Roter Boskoop’ datasets. Provide your best estimates of the chilling and forcing phases.</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html"><i class="fa fa-check"></i><b>23</b> Evaluating PLS outputs</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#reproduce-the-analysis-for-the-roter-boskoop-dataset."><i class="fa fa-check"></i><b>23.1</b> Reproduce the analysis for the ‘Roter Boskoop’ dataset.</a></li>
+<li class="chapter" data-level="23.2" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#weve-looked-at-data-from-a-number-of-locations-so-far.-how-would-you-expect-this-surface-plot-to-look-like-in-beijing-and-how-should-it-look-in-tunisia"><i class="fa fa-check"></i><b>23.2</b> We’ve looked at data from a number of locations so far. How would you expect this surface plot to look like in Beijing? And how should it look in Tunisia?</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html"><i class="fa fa-check"></i><b>24</b> The relative importance of chill and heat</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html#describe-the-temperature-response-hypothesis-outlined-in-this-chapter."><i class="fa fa-check"></i><b>24.1</b> Describe the temperature response hypothesis outlined in this chapter.</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html"><i class="fa fa-check"></i><b>25</b> Making valid tree phenology models</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-the-difference-between-output-validation-and-process-validation."><i class="fa fa-check"></i><b>25.1</b> Explain the difference between output validation and process validation.</a></li>
+<li class="chapter" data-level="25.2" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-what-a-validity-domain-is-and-why-it-is-important-to-consider-this-whenever-we-want-to-use-our-model-to-forecast-something."><i class="fa fa-check"></i><b>25.2</b> Explain what a validity domain is and why it is important to consider this whenever we want to use our model to forecast something.</a></li>
+<li class="chapter" data-level="25.3" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#what-is-validation-for-purpose"><i class="fa fa-check"></i><b>25.3</b> What is validation for purpose?</a></li>
+<li class="chapter" data-level="25.4" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#how-can-we-ensure-that-our-model-is-suitable-for-the-predictions-we-want-to-make"><i class="fa fa-check"></i><b>25.4</b> How can we ensure that our model is suitable for the predictions we want to make?</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html"><i class="fa fa-check"></i><b>26</b> The PhenoFlex model</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#parameterize-the-phenoflex-model-for-roter-boskoop-apples."><i class="fa fa-check"></i><b>26.1</b> Parameterize the PhenoFlex model for `Roter Boskoop’ apples.</a></li>
+<li class="chapter" data-level="26.2" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#produce-plots-of-predicted-vs.-observed-bloom-dates-and-distribution-of-prediction-errors."><i class="fa fa-check"></i><b>26.2</b> Produce plots of predicted vs. observed bloom dates and distribution of prediction errors.</a></li>
+<li class="chapter" data-level="26.3" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#compute-the-model-performance-metrics-rmsep-rpiq-mean-error-and-mean-absolute-error."><i class="fa fa-check"></i><b>26.3</b> Compute the model performance metrics RMSEP, RPIQ, mean error and mean absolute error.</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html"><i class="fa fa-check"></i><b>27</b> The PhenoFlex model - a second look</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html#make-chill-and-heat-response-plots-for-the-alexander-lucas-phenoflex-model-for-the-location-you-did-the-earlier-analyses-for."><i class="fa fa-check"></i><b>27.1</b> Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html"><i class="fa fa-check"></i><b>28</b> Can we improve the performance of PhenoFlex?</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-objective-of-this-work"><i class="fa fa-check"></i><b>28.1</b> What was the objective of this work?</a></li>
+<li class="chapter" data-level="28.2" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-main-conclusion"><i class="fa fa-check"></i><b>28.2</b> What was the main conclusion?</a></li>
+<li class="chapter" data-level="28.3" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-experiments-could-we-conduct-to-test-the-hypothesis-that-emerged-at-the-end-of-the-conclusion"><i class="fa fa-check"></i><b>28.3</b> What experiments could we conduct to test the hypothesis that emerged at the end of the conclusion?</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html"><i class="fa fa-check"></i><b>29</b> Frost risk analysis</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#download-the-phenology-dataset-for-the-apple-cultivar-roter-boskoop-from-klein-altendorf."><i class="fa fa-check"></i><b>29.1</b> Download the phenology dataset for the apple cultivar Roter Boskoop from Klein-Altendorf.</a></li>
+<li class="chapter" data-level="29.2" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#illustrate-the-development-of-the-bloom-period-over-the-duration-of-the-weather-record.-use-multiple-ways-to-show-this---feel-free-to-be-creative."><i class="fa fa-check"></i><b>29.2</b> Illustrate the development of the bloom period over the duration of the weather record. Use multiple ways to show this - feel free to be creative.</a></li>
+<li class="chapter" data-level="29.3" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-the-occurrence-of-frost-events-at-klein-altendorf-since-1958.-illustrate-this-in-a-plot."><i class="fa fa-check"></i><b>29.3</b> Evaluate the occurrence of frost events at Klein-Altendorf since 1958. Illustrate this in a plot.</a></li>
+<li class="chapter" data-level="29.4" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#produce-an-illustration-of-the-relationship-between-spring-frost-events-and-the-bloom-period-of-roter-boskoop."><i class="fa fa-check"></i><b>29.4</b> Produce an illustration of the relationship between spring frost events and the bloom period of ‘Roter Boskoop.’</a></li>
+<li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tree phenology analysis with R - Logbook</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="successes-and-limitations-of-pls-regression-analysis" class="section level1 hasAnchor" number="19">
+<h1><span class="header-section-number">Chapter 19</span> Successes and limitations of PLS regression analysis<a href="successes-and-limitations-of-pls-regression-analysis.html#successes-and-limitations-of-pls-regression-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="briefly-explain-in-what-climatic-settings-we-can-expect-pls-regression-to-detect-the-chilling-phase---and-in-what-settings-this-probably-wont-work." class="section level2 hasAnchor" number="19.1">
+<h2><span class="header-section-number">19.1</span> Briefly explain in what climatic settings we can expect PLS regression to detect the chilling phase - and in what settings this probably won’t work.<a href="successes-and-limitations-of-pls-regression-analysis.html#briefly-explain-in-what-climatic-settings-we-can-expect-pls-regression-to-detect-the-chilling-phase---and-in-what-settings-this-probably-wont-work." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can expect PLS regression to detect the chilling phase, when the setting features a continuous monotonic relationship in temperature and generation of chill. In climate settings such as China or Germany a change in temperature can lead to more or less chill dependent on the initial temperature before the change. An increase in temperature from -5°C to 5°C leads to an increase in chill accumulation, while the same increase in the same direction from 5°C to 15°C leads to a decrease in chill accumulation. In California for example PLS detects the chilling phase, because chill accumulation monotonically declines with warmer temperatures or increases with colder temperatures. A decrease in chill due to too cold temperatures is less common.</p>
+<p>In the graph below I have added the temperatures for Tunisia. Robin kindly provided me with his temperature data from there. In Tunisia, as already seen in California, there is a monotonic relationship between temperature and chill accumulation. Thus, a PLS regression can be successfully performed there as well, as we will later see in Chapter 21.<br />
+</p>
+<p><br />
+</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-1-1.png" width="672" /><br />
+</p>
+</div>
+<div id="how-could-we-overcome-this-problem" class="section level2 hasAnchor" number="19.2">
+<h2><span class="header-section-number">19.2</span> How could we overcome this problem?<a href="successes-and-limitations-of-pls-regression-analysis.html#how-could-we-overcome-this-problem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To overcome this problem, we should not perform PLS analysis on temperature but directly from the chill accumulation. This filters out the problems caused by the double-sided effect at cool temperatures.
+Because the chill models are not exactly accurate, we introduce a certain error into our data, which would not have been present with the temperature alone. On the other hand, this allows us to delineated the phases, especially the chilling phase, easier.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="delineating-temperature-response-phases-with-pls-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pls-regression-with-agroclimatic-metrics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/19-pls_successes_and_limits.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

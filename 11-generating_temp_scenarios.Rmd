@@ -54,7 +54,7 @@ ggplot(data=temperatures, aes(Date,Tmin)) +
 
 ## Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.
 
-We apply the `chilling` function to all of our `temperatures` that have the `Data_source` `"observed"` and `"simulated"`.
+We apply the `chilling()` function to all of our `temperatures` that have the `Data_source` `"observed"` and `"simulated"`.
 
 ```{r 11 Chill calc and data prep, message=FALSE}
 chill_observed<-chilling(
@@ -103,6 +103,7 @@ ggplot(chill_simulations, aes(x=Chill_portions)) +
   geom_hline(yintercept = 0.1, colour="red") +
   theme_bw(base_size = 20)
 ```
+
 ```{r 11 Calculating the SWC with quantile}
 quantile(chill_simulations$Chill_portions, 0.1)
 ```

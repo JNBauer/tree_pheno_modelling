@@ -52,6 +52,25 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -186,7 +205,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html"><i class="fa fa-check"></i><b>10</b> Filling gaps in temperature records</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> <strong>1. Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</strong></a></li>
+<li class="chapter" data-level="10.1" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-chillr-functions-to-find-out-how-many-gaps-you-have-in-this-dataset-even-if-you-have-none-please-still-follow-all-further-steps"><i class="fa fa-check"></i><b>10.1</b> Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)</a></li>
+<li class="chapter" data-level="10.2" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#create-a-list-of-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>10.2</b> Create a list of the 25 closest weather stations using the handle_gsod function</a></li>
+<li class="chapter" data-level="10.3" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#identify-suitable-weather-stations-for-patching-gaps"><i class="fa fa-check"></i><b>10.3</b> Identify suitable weather stations for patching gaps</a></li>
+<li class="chapter" data-level="10.4" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#download-weather-data-for-promising-stations-convert-them-to-chillr-format-and-compile-them-in-a-list"><i class="fa fa-check"></i><b>10.4</b> Download weather data for promising stations, convert them to chillR format and compile them in a list</a></li>
+<li class="chapter" data-level="10.5" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#use-the-patch_daily_temperatures-function-to-fill-gaps"><i class="fa fa-check"></i><b>10.5</b> Use the patch_daily_temperatures function to fill gaps</a></li>
+<li class="chapter" data-level="10.6" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#investigate-the-results---have-all-gaps-been-filled"><i class="fa fa-check"></i><b>10.6</b> Investigate the results - have all gaps been filled?</a></li>
+<li class="chapter" data-level="10.7" data-path="filling-gaps-in-temperature-records.html"><a href="filling-gaps-in-temperature-records.html#if-necessary-repeat-until-you-have-a-dataset-you-can-work-with-in-further-analyses"><i class="fa fa-check"></i><b>10.7</b> If necessary, repeat until you have a dataset you can work with in further analyses</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="generating-temperature-scenarios.html"><a href="generating-temperature-scenarios.html"><i class="fa fa-check"></i><b>11</b> Generating temperature scenarios</a>
 <ul>
@@ -204,13 +229,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="14.1" data-path="future-temperature-scenarios.html"><a href="future-temperature-scenarios.html#analyze-the-historic-and-future-impact-of-climate-change-on-three-agroclimatic-metrics-of-your-choice-for-the-location-youve-chosen-for-your-earlier-analyses."><i class="fa fa-check"></i><b>14.1</b> Analyze the historic and future impact of climate change on three agroclimatic metrics of your choice, for the location you’ve chosen for your earlier analyses.</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a></li>
-<li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a></li>
+<li class="chapter" data-level="15" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html"><i class="fa fa-check"></i><b>15</b> Plotting future scenarios</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="plotting-future-scenarios.html"><a href="plotting-future-scenarios.html#produce-similar-plots-for-the-weather-station-you-selected-for-earlier-exercises."><i class="fa fa-check"></i><b>15.1</b> Produce similar plots for the weather station you selected for earlier exercises.</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html"><i class="fa fa-check"></i><b>16</b> Chill model comparison</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#perform-a-similar-analysis-for-the-location-youve-chosen-for-your-exercises."><i class="fa fa-check"></i><b>16.1</b> Perform a similar analysis for the location you’ve chosen for your exercises.</a></li>
+<li class="chapter" data-level="16.2" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#make-a-heat-map-illustrating-past-and-future-changes-in-safe-winter-chill-relative-to-a-past-scenario-for-the-13-chill-models-used-here."><i class="fa fa-check"></i><b>16.2</b> Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here.</a></li>
+</ul></li>
 <li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a></li>
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a></li>
 <li class="chapter" data-level="19" data-path="simple-phenology-analysis.html"><a href="simple-phenology-analysis.html"><i class="fa fa-check"></i><b>19</b> Simple phenology analysis</a></li>
 <li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a></li>
-<li class="chapter" data-level="21" data-path="pls_evaluation.html"><a href="pls_evaluation.html"><i class="fa fa-check"></i><b>21</b> pls_evaluation</a></li>
+<li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a></li>
+<li class="chapter" data-level="22" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html"><i class="fa fa-check"></i><b>22</b> Evaluating PLS outputs</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#reproduce-the-analysis-for-the-roter-boskoop-dataset."><i class="fa fa-check"></i><b>22.1</b> Reproduce the analysis for the ‘Roter Boskoop’ dataset.</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html"><i class="fa fa-check"></i><b>23</b> The relative importance of chill and heat</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html#describe-the-temperature-response-hypothesis-outlined-in-this-chapter."><i class="fa fa-check"></i><b>23.1</b> Describe the temperature response hypothesis outlined in this chapter.</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html"><i class="fa fa-check"></i><b>24</b> Making valid tree phenology models</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-the-difference-between-output-validation-and-process-validation."><i class="fa fa-check"></i><b>24.1</b> Explain the difference between output validation and process validation.</a></li>
+<li class="chapter" data-level="24.2" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-what-a-validity-domain-is-and-why-it-is-important-to-consider-this-whenever-we-want-to-use-our-model-to-forecast-something."><i class="fa fa-check"></i><b>24.2</b> Explain what a validity domain is and why it is important to consider this whenever we want to use our model to forecast something.</a></li>
+<li class="chapter" data-level="24.3" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#what-is-validation-for-purpose"><i class="fa fa-check"></i><b>24.3</b> What is validation for purpose?</a></li>
+<li class="chapter" data-level="24.4" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#how-can-we-ensure-that-our-model-is-suitable-for-the-predictions-we-want-to-make"><i class="fa fa-check"></i><b>24.4</b> How can we ensure that our model is suitable for the predictions we want to make?</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html"><i class="fa fa-check"></i><b>25</b> The PhenoFlex model</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#parameterize-the-phenoflex-model-for-roter-boskoop-apples."><i class="fa fa-check"></i><b>25.1</b> Parameterize the PhenoFlex model for `Roter Boskoop’ apples.</a></li>
+<li class="chapter" data-level="25.2" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#produce-plots-of-predicted-vs.-observed-bloom-dates-and-distribution-of-prediction-errors."><i class="fa fa-check"></i><b>25.2</b> Produce plots of predicted vs. observed bloom dates and distribution of prediction errors.</a></li>
+<li class="chapter" data-level="25.3" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#compute-the-model-performance-metrics-rmsep-rpiq-mean-error-and-mean-absolute-error."><i class="fa fa-check"></i><b>25.3</b> Compute the model performance metrics RMSEP, RPIQ, mean error and mean absolute error.</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html"><i class="fa fa-check"></i><b>26</b> The PhenoFlex model - a second look</a></li>
+<li class="chapter" data-level="27" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html"><i class="fa fa-check"></i><b>27</b> The PhenoFlex model - a second look</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html#make-chill-and-heat-response-plots-for-the-alexander-lucas-phenoflex-model-for-the-location-you-did-the-earlier-analyses-for."><i class="fa fa-check"></i><b>27.1</b> Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.</a></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html"><i class="fa fa-check"></i><b>28</b> Can we improve the performance of PhenoFlex?</a>
+<ul>
+<li class="chapter" data-level="28.1" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-objective-of-this-work"><i class="fa fa-check"></i><b>28.1</b> What was the objective of this work?</a></li>
+<li class="chapter" data-level="28.2" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-was-the-main-conclusion"><i class="fa fa-check"></i><b>28.2</b> What was the main conclusion?</a></li>
+<li class="chapter" data-level="28.3" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html#what-experiments-could-we-conduct-to-test-the-hypothesis-that-emerged-at-the-end-of-the-conclusion"><i class="fa fa-check"></i><b>28.3</b> What experiments could we conduct to test the hypothesis that emerged at the end of the conclusion?</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html"><i class="fa fa-check"></i><b>29</b> Frost risk analysis</a>
+<ul>
+<li class="chapter" data-level="29.1" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#download-the-phenology-dataset-for-the-apple-cultivar-roter-boskoop-from-klein-altendorf."><i class="fa fa-check"></i><b>29.1</b> Download the phenology dataset for the apple cultivar Roter Boskoop from Klein-Altendorf.</a></li>
+<li class="chapter" data-level="29.2" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#illustrate-the-development-of-the-bloom-period-over-the-duration-of-the-weather-record.-use-multiple-ways-to-show-this---feel-free-to-be-creative."><i class="fa fa-check"></i><b>29.2</b> Illustrate the development of the bloom period over the duration of the weather record. Use multiple ways to show this - feel free to be creative.</a></li>
+<li class="chapter" data-level="29.3" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-the-occurrence-of-frost-events-at-klein-altendorf-since-1958.-illustrate-this-in-a-plot."><i class="fa fa-check"></i><b>29.3</b> Evaluate the occurrence of frost events at Klein-Altendorf since 1958. Illustrate this in a plot.</a></li>
+<li class="chapter" data-level="29.4" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#produce-an-illustration-of-the-relationship-between-spring-frost-events-and-the-bloom-period-of-roter-boskoop."><i class="fa fa-check"></i><b>29.4</b> Produce an illustration of the relationship between spring frost events and the bloom period of ‘Roter Boskoop.’</a></li>
+<li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -238,7 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>Winters_hours_gaps</code> dataset is part of the ChillR package. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used <code>Temp_gaps</code> column.</p>
 <table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
 <caption>
-<span id="tab:unnamed-chunk-1">Table 6.1: </span>Table for the modified <code>Winters_hours_gaps</code> dataset
+<span id="tab:unnamed-chunk-2">Table 6.1: </span>Table for the modified <code>Winters_hours_gaps</code> dataset
 </caption>
 <thead>
 <tr>
@@ -348,25 +420,25 @@ Temp
 </tbody>
 </table>
 <p>The function creates a new column <code>Warming_hours</code> that contains the result of the comparison if <code>hourtemps$Temp</code>is greater than 25.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="manual-chill-analysis.html#cb1-1" aria-hidden="true" tabindex="-1"></a>WH <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps)</span>
-<span id="cb1-2"><a href="manual-chill-analysis.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb1-3"><a href="manual-chill-analysis.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  hourtemps[,<span class="st">&quot;Warming_hours&quot;</span>] <span class="ot">&lt;-</span> hourtemps<span class="sc">$</span>Temp<span class="sc">&gt;</span><span class="dv">25</span></span>
-<span id="cb1-4"><a href="manual-chill-analysis.html#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(hourtemps)</span>
-<span id="cb1-5"><a href="manual-chill-analysis.html#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="manual-chill-analysis.html#cb3-1" aria-hidden="true" tabindex="-1"></a>WH <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps)</span>
+<span id="cb3-2"><a href="manual-chill-analysis.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb3-3"><a href="manual-chill-analysis.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  hourtemps[,<span class="st">&quot;Warming_hours&quot;</span>] <span class="ot">&lt;-</span> hourtemps<span class="sc">$</span>Temp<span class="sc">&gt;</span><span class="dv">25</span></span>
+<span id="cb3-4"><a href="manual-chill-analysis.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(hourtemps)</span>
+<span id="cb3-5"><a href="manual-chill-analysis.html#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><br />
 </p>
 </div>
 <div id="apply-this-function-to-the-winters_hours_gaps-dataset" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Apply this function to the Winters_hours_gaps dataset<a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="manual-chill-analysis.html#cb2-1" aria-hidden="true" tabindex="-1"></a>Winters_hours_gaps_plus_WH <span class="ot">&lt;-</span> <span class="fu">WH</span>(Winters_hours_gaps)</span>
-<span id="cb2-2"><a href="manual-chill-analysis.html#cb2-2" aria-hidden="true" tabindex="-1"></a>sum_whgpWH <span class="ot">&lt;-</span> <span class="fu">sum</span>(Winters_hours_gaps_plus_WH<span class="sc">$</span>Warming_hours)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="manual-chill-analysis.html#cb4-1" aria-hidden="true" tabindex="-1"></a>Winters_hours_gaps_plus_WH <span class="ot">&lt;-</span> <span class="fu">WH</span>(Winters_hours_gaps)</span>
+<span id="cb4-2"><a href="manual-chill-analysis.html#cb4-2" aria-hidden="true" tabindex="-1"></a>sum_whgpWH <span class="ot">&lt;-</span> <span class="fu">sum</span>(Winters_hours_gaps_plus_WH<span class="sc">$</span>Warming_hours)</span></code></pre></div>
 <p>When applying the function to the Winter_hours_gaps dataset and taking the sum of the <code>Winters_hours_gaps_plus_WH$Warming_hours</code> coloumn, <strong>1275</strong> hours over 25°C occured.<br />
 </p>
 <p>In a table, it could be displayed like this:<br />
 </p>
 <table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
 <caption>
-<span id="tab:unnamed-chunk-4">Table 6.2: </span>Table for <code>Winters_hours_gaps_plus_WH</code>
+<span id="tab:unnamed-chunk-5">Table 6.2: </span>Table for <code>Winters_hours_gaps_plus_WH</code>
 </caption>
 <thead>
 <tr>
@@ -599,29 +671,29 @@ Temp
 <div id="extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates<a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following function contains additional input variables for the start and end dates. The variables are used to index the correct rows between which the sum of the warm hours should be taken. The previously created <code>WH</code> function is used to compare the temperature to the threshold.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="manual-chill-analysis.html#cb3-1" aria-hidden="true" tabindex="-1"></a>WH_YEARMODA <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps, start_dateYEARMODA, end_dateYEARMODA, <span class="at">start_hour=</span><span class="dv">12</span>, <span class="at">end_hour=</span><span class="dv">12</span>)</span>
-<span id="cb3-2"><a href="manual-chill-analysis.html#cb3-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-3"><a href="manual-chill-analysis.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  start_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
-<span id="cb3-4"><a href="manual-chill-analysis.html#cb3-4" aria-hidden="true" tabindex="-1"></a>  start_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
-<span id="cb3-5"><a href="manual-chill-analysis.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  start_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
-<span id="cb3-6"><a href="manual-chill-analysis.html#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="manual-chill-analysis.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  end_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
-<span id="cb3-8"><a href="manual-chill-analysis.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  end_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
-<span id="cb3-9"><a href="manual-chill-analysis.html#cb3-9" aria-hidden="true" tabindex="-1"></a>  end_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
-<span id="cb3-10"><a href="manual-chill-analysis.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-11"><a href="manual-chill-analysis.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="manual-chill-analysis.html#cb3-12" aria-hidden="true" tabindex="-1"></a>  start_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>start_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>start_month</span>
-<span id="cb3-13"><a href="manual-chill-analysis.html#cb3-13" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>start_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>start_hour)</span>
-<span id="cb3-14"><a href="manual-chill-analysis.html#cb3-14" aria-hidden="true" tabindex="-1"></a>  end_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>end_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>end_month</span>
-<span id="cb3-15"><a href="manual-chill-analysis.html#cb3-15" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>end_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>end_hour)</span>
-<span id="cb3-16"><a href="manual-chill-analysis.html#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-17"><a href="manual-chill-analysis.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  warm_hours <span class="ot">&lt;-</span> <span class="fu">WH</span>(hourtemps)</span>
-<span id="cb3-18"><a href="manual-chill-analysis.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-19"><a href="manual-chill-analysis.html#cb3-19" aria-hidden="true" tabindex="-1"></a>  WHs <span class="ot">&lt;-</span> <span class="fu">sum</span>(warm_hours[start_date<span class="sc">:</span>end_date, <span class="st">&quot;Warming_hours&quot;</span>])</span>
-<span id="cb3-20"><a href="manual-chill-analysis.html#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(WHs)</span>
-<span id="cb3-21"><a href="manual-chill-analysis.html#cb3-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-22"><a href="manual-chill-analysis.html#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="manual-chill-analysis.html#cb3-23" aria-hidden="true" tabindex="-1"></a>warming_hours_for_time_frame <span class="ot">&lt;-</span> <span class="fu">WH_YEARMODA</span>(hourtemps, <span class="dv">20080501</span>, <span class="dv">20080831</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="manual-chill-analysis.html#cb5-1" aria-hidden="true" tabindex="-1"></a>WH_YEARMODA <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps, start_dateYEARMODA, end_dateYEARMODA, <span class="at">start_hour=</span><span class="dv">12</span>, <span class="at">end_hour=</span><span class="dv">12</span>)</span>
+<span id="cb5-2"><a href="manual-chill-analysis.html#cb5-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-3"><a href="manual-chill-analysis.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  start_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
+<span id="cb5-4"><a href="manual-chill-analysis.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  start_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
+<span id="cb5-5"><a href="manual-chill-analysis.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  start_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
+<span id="cb5-6"><a href="manual-chill-analysis.html#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="manual-chill-analysis.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  end_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
+<span id="cb5-8"><a href="manual-chill-analysis.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  end_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
+<span id="cb5-9"><a href="manual-chill-analysis.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  end_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
+<span id="cb5-10"><a href="manual-chill-analysis.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-11"><a href="manual-chill-analysis.html#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="manual-chill-analysis.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  start_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>start_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>start_month</span>
+<span id="cb5-13"><a href="manual-chill-analysis.html#cb5-13" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>start_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>start_hour)</span>
+<span id="cb5-14"><a href="manual-chill-analysis.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  end_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>end_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>end_month</span>
+<span id="cb5-15"><a href="manual-chill-analysis.html#cb5-15" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>end_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>end_hour)</span>
+<span id="cb5-16"><a href="manual-chill-analysis.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-17"><a href="manual-chill-analysis.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  warm_hours <span class="ot">&lt;-</span> <span class="fu">WH</span>(hourtemps)</span>
+<span id="cb5-18"><a href="manual-chill-analysis.html#cb5-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-19"><a href="manual-chill-analysis.html#cb5-19" aria-hidden="true" tabindex="-1"></a>  WHs <span class="ot">&lt;-</span> <span class="fu">sum</span>(warm_hours[start_date<span class="sc">:</span>end_date, <span class="st">&quot;Warming_hours&quot;</span>])</span>
+<span id="cb5-20"><a href="manual-chill-analysis.html#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(WHs)</span>
+<span id="cb5-21"><a href="manual-chill-analysis.html#cb5-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-22"><a href="manual-chill-analysis.html#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="manual-chill-analysis.html#cb5-23" aria-hidden="true" tabindex="-1"></a>warming_hours_for_time_frame <span class="ot">&lt;-</span> <span class="fu">WH_YEARMODA</span>(hourtemps, <span class="dv">20080501</span>, <span class="dv">20080831</span>)</span></code></pre></div>
 <p>Between the 1th of May 2008 (20080501) and the 31th of August 2008 (20080831), <strong>957</strong> hours over 25°C occurred.</p>
 <hr />
 

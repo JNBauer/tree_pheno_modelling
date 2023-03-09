@@ -1,8 +1,8 @@
 # Plotting future scenarios
 
-**1. Produce similar plots for the weather station you selected for earlier exercises.**
+## Produce similar plots for the weather station you selected for earlier exercises.
 
-```{r}
+```{r, message=FALSE}
 library(chillR)
 library(ggplot2)
 library(reshape2)
@@ -11,7 +11,7 @@ library(ggpmisc)
 library(patchwork)
 ```
 
-```{r}
+```{r, eval=FALSE}
 chill_past_scenarios<-load_temperature_scenarios(
   "data/chill",
   "CapeTown_historic")
@@ -44,7 +44,7 @@ for(RCP in RCPs)
   }
 ```
 
-```{r}
+```{r, eval=FALSE}
 for(nam in names(chills[[1]]$data))
   {
 
@@ -59,7 +59,7 @@ for(nam in names(chills[[1]]$data))
   }
 ```
 
-```{r}
+```{r, eval=FALSE}
 past_simulated["Scenario"] <- "Historic"
 
 kable(past_simulated[1:5,])  %>%
@@ -71,7 +71,7 @@ kable(past_observed[1:5,])  %>%
   kable_styling("striped", position = "left",font_size = 8)
 ```
 
-```{r}
+```{r, eval=FALSE}
 for(i in 2:length(chills))
   for(nam in names(chills[[i]]$data))
     {ch<-chills[[i]]$data[[nam]]
@@ -87,7 +87,7 @@ kable(future_data[1:5,])  %>%
   kable_styling("striped", position = "left",font_size = 8)
 ```
 
-```{r}
+```{r, eval=FALSE}
 plot_scenarios_gg<-function(past_observed,
                             past_simulated,
                             future_data,
@@ -154,7 +154,7 @@ plot_scenarios_gg<-function(past_observed,
 ```
 
 
-```{r}
+```{r, eval=FALSE}
 CapeTown_Heat_GDH <- plot_scenarios_gg(past_observed=past_observed,
                   past_simulated=past_simulated,
                   future_data=future_data,

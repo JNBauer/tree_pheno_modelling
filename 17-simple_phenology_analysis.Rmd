@@ -1,9 +1,15 @@
 # Chill model comparison
-\
-**1. Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.**
 
-\
-**2. Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.**
+## Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.{.tabset}
 
-\
-**3. What do we need to know to build a process-based model from this?**
+### Answer{.active}
+P-hacking is the term used when scientists artificially represent their results in a significant way. Large data sets always contain significant structures. By data analysis and there especially often by machine learning methods such correlations are specifically searched for, although they have no relevance for the actual application. Therefore, it is important to understand the data in the context of its origin and its natural process.
+
+### Cartoon
+![So, uh, we did the green study again and got no link. It was probably a-- "RESEARCH CONFLICTED ON GREEN JELLY BEAN/ACNE LINK; MORE STUDY RECOMMENDED!".](images/significant.png)
+## {-}
+
+## Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.
+
+
+## What do we need to know to build a process-based model from this?

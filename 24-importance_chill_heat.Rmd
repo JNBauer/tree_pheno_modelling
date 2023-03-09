@@ -1,0 +1,7 @@
+# The relative importance of chill and heat
+
+
+## Describe the temperature response hypothesis outlined in this chapter.
+
+The phenology temperature response hypothesis addresses how different climate in various regions affects the impact of the chilling and forcing period during the dormancy. In cold regions such as China or Germany, where chill is sufficient the temperatures of the forcing period determine the blossom development almost exclusively. The driver of the phenology development is the forcing phase. In warm regions such as Tunisia, where heat is abundant the temperatures in the chilling period determine the duration of dormancy. In these regions the driver for development is mainly the chilling. The cases where the length of dormancy is influenced by only almost one of the two phases are the most extreme cases. They represent the two ends of the spectrum of the temperature influence of the dormancy. In between there is a gradient in which both phases can have a substitutable influence.
+

@@ -1,5 +1,29 @@
 # Climate change and impact projection
 
+```{r, fig.width=12,fig.height=4}
+library(chillR)
+library(dplyr)
+library(RColorBrewer)
+col_strip <- brewer.pal(11, "RdBu")
+
+weather<-read_tab("data/TMaxTMin1958-2019_patched.csv") %>%
+mutate(Tmean = (Tmin + Tmax)/2)
+
+plot <- aggregate(weather$Tmean, list(weather$Year), FUN=mean) %>%
+  mutate(height = 1) %>%
+  rename("Tmean"="x") %>%
+  rename("year"="Group.1") %>%
+  
+  ggplot(aes(x = year, y = 1, fill = Tmean)) +
+    geom_tile() +
+    scale_fill_gradientn(colors = rev(col_strip), name = "Yearly mean\nTemperature °C") +
+    theme_void()
+plot
+```
+
+
+
+
 ## List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.
 
 -   Greenhouse gases (Decade)

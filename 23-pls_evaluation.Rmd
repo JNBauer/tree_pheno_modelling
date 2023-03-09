@@ -1,10 +1,20 @@
-# pls_evaluation
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# Evaluating PLS outputs
 
-```{r}
+## Reproduce the analysis for the ‘Roter Boskoop’ dataset.
+
+In the first part, I try to delineate the chill and heat phases with the help of a PLS analysis. I load the phenology data and also the according temperatures. After that, I calculate the chill and the heat with the `daily_chill()` function.
+
+```{r, message=FALSE, warning=FALSE}
 library(chillR)
 library(dplyr)
 library(purrr)
-Alex_first<-read_tab("data/Alexander_Lucas_bloom_1958_2019.csv")[,1:2] %>% 
+
+Boskoop_first<-read_tab("data/Roter_Boskoop_bloom_1958_2019.csv")[,1:2] %>% 
   mutate(Year=substr(First_bloom,1,4),
          Month=substr(First_bloom,5,6),
          Day=substr(First_bloom,7,8)) %>% 
@@ -28,7 +38,7 @@ daychill<-daily_chill(hourtemps=temps_hourly,
 
 
 plscf<-PLS_chill_force(daily_chill_obj=daychill,
-                       bio_data_frame=Alex_first,
+                       bio_data_frame=Boskoop_first,
                        split_month=6,
                        chill_models = "Chill_Portions",
                        heat_models = "GDH",
@@ -36,21 +46,34 @@ plscf<-PLS_chill_force(daily_chill_obj=daychill,
 
 ```
 
-```{r}
-  # first, a sub-function (function defined within a function) to
-  # compute the temperature means
+With the `plot_PLS_chill_force()` function, that we already created in one of the previous chapters, we can try to visualize the two phases. I adjusted the parameter for the beginning of the forcing phase to accurately delineate it. For the other delineations, the parameters from the website were suitable . 
 
+```{r, warning=FALSE, message=FALSE}
+source("functions/plot_PLS_chill_force.R")
+
+plot_PLS_chill_force(plscf,
+                     chill_metric="Chill_Portions",
+                     heat_metric="GDH",
+                     chill_label="CP",
+                     heat_label="GDH",
+                     chill_phase=c(-48,62),
+                     heat_phase=c(10,105.5))
+```
+
+The fields package contains tools to work with spatial data. In this case the `krig()` function was used to create an interpolated surface that shows the impact of the chilling and forcing temperatures on the bloom date.
+
+```{r, message=FALSE, warning=FALSE}
 library(fields)
 library(reshape2)
 library(metR)
 library(ggplot2)
 library(colorRamps)
 
-pheno<-Alex_first
+pheno<-Boskoop_first
 colnames(pheno)[1]<-"End_year"
 
 chill_phase<-c(317,62)
-heat_phase<-c(360,105.5)
+heat_phase<-c(10,105.5)
 
 mean_temp_period<-function(temps,
                            start_JDay,
@@ -61,10 +84,13 @@ mean_temp_period<-function(temps,
   if(start_JDay>end_season)
     temps_JDay$Season[which(temps_JDay$JDay>=start_JDay)]<-
     temps_JDay$Year[which(temps_JDay$JDay>=start_JDay)]+1
+  
   if(start_JDay>end_season)
     sub_temps<-subset(temps_JDay,JDay<=end_JDay|JDay>=start_JDay)
+  
   if(start_JDay<=end_JDay)
     sub_temps<-subset(temps_JDay,JDay<=end_JDay&JDay>=start_JDay)
+  
   mean_temps<-aggregate(sub_temps[,c("Tmin","Tmax")],
                         by=list(sub_temps$Season),
                         FUN=function(x) mean(x, na.rm=TRUE))
@@ -74,9 +100,11 @@ mean_temp_period<-function(temps,
   mean_temps[,"Tmean"]<-(mean_temps$Tmin+mean_temps$Tmax)/2
   mean_temps<-mean_temps[,c(1,4,2,3,5)]
   colnames(mean_temps)[1]<-"End_year"
-  return(mean_temps)
-  }
   
+  return(mean_temps)
+}
+
+
 mean_temp_chill<-mean_temp_period(temps = temps,
                                   start_JDay = chill_phase[1],
                                   end_JDay = chill_phase[2],
@@ -102,71 +130,50 @@ phase_Tmeans<-merge(mean_chill,mean_heat, by="End_year")
 colnames(pheno)<-c("End_year","pheno")
 Tmeans_pheno<-merge(phase_Tmeans,pheno, by="End_year")
   
-  # Kriging interpolation
-k<-Krig(x=as.matrix(Tmeans_pheno[,c("Tmean_chill","Tmean_heat")]),
-        Y=Tmeans_pheno$pheno)
+
+# Kriging interpolation
+k <- Krig(x=as.matrix(Tmeans_pheno[,c("Tmean_chill","Tmean_heat")]),
+        Y=Tmeans_pheno$pheno, give.warnings = TRUE)
 pred <- predictSurface(k)
 colnames(pred$z)<-pred$y
 rownames(pred$z)<-pred$x
 melted<-melt(pred$z)
 colnames(melted)<-c("Tmean_chill","Tmean_heat","value")
-```
-
-```{r}
-
-mean_temp_chill<-mean_temp_period(temps = temps,
-                                  start_JDay = chill_phase[1],
-                                  end_JDay = chill_phase[2],
-                                  end_season = 60)
-
-mean_temp_heat<-mean_temp_period(temps = temps,
-                                  start_JDay = heat_phase[1],
-                                  end_JDay = heat_phase[2],
-                                  end_season = 60)
 
 
-mean_temp_chill<-
-  mean_temp_chill[which(mean_temp_chill$n_days >=
-                          max(mean_temp_chill$n_days)-1),]
-mean_temp_heat<-
-  mean_temp_heat[which(mean_temp_heat$n_days >=
-                         max(mean_temp_heat$n_days)-1),]
 
-mean_chill<-mean_temp_chill[,c("End_year","Tmean")]
-colnames(mean_chill)[2]<-"Tmean_chill"
-
-mean_heat<-mean_temp_heat[,c("End_year","Tmean")]
-colnames(mean_heat)[2]<-"Tmean_heat"
-
-phase_Tmeans<-merge(mean_chill,mean_heat, by="End_year")
-
-
-pheno<-Alex_first
-colnames(pheno)[1]<-"End_year"
-
-Tmeans_pheno<-merge(phase_Tmeans,pheno, by="End_year")
-
-Tmeans_pheno
-
-
-library(fields)
-k<-Krig(x=as.matrix(Tmeans_pheno[,c("Tmean_chill","Tmean_heat")]),
-        Y=Tmeans_pheno$pheno)
-str(pred)
-pred<-predictSurface(k)
-
-N<-pred$z[c(80:1),]
-N
+N <- pred$z[c(80:1),]
 rotate <- function(x) t(apply(x, 2, rev))
 B <- rotate(N)
-B
+```
 
+For plotting the krigged matrix we can use the `scale_fill_gradientn()` function from `ggplot2`. This creates a two-dimensional surface where the bloom date is coded by color. One finding of the plot is that a warm forcing phase contributes significantly to earlier flowering. The black dots in the graph show the years that were used in the krigging process. Years with the most distinctive temperatures shape the outer border of the surface.
 
-library(colorRamps)
+I noticed that the selection of delineations has an impact on the generation of the graph. If the delineations from the Alexander Lucas dataset are used, a surface plot is created, which appears to be not correct and additionally the `krig()` function outputs a warning. In the two-dimensional plot I was already able to see it, but where it was visible even better is in the three-dimensional graph below. There the surface with the wrong lineated phase parameters was a completely smooth plane, which was not possible due to the given data.
+
+```{r, message=FALSE, warning=FALSE}
+ggplot(melted,
+       aes(x=Tmean_chill,y=Tmean_heat,z=value)) +
+  geom_contour_fill(bins=100) +
+  scale_fill_gradientn(colours=alpha(matlab.like(15)),
+                       name="Bloom date \n(day of the year)") +
+  geom_contour(col="black")  +
+  geom_point(data=Tmeans_pheno,
+             aes(x=Tmean_chill,y=Tmean_heat,z=NULL),
+             size=0.7) +
+  geom_text_contour(stroke = 0.2) +
+  ylab(expression(paste("Forcing phase ", T[mean]," (",degree,"C)"))) +
+  xlab(expression(paste("Chilling phase ", T[mean]," (",degree,"C)")))  +
+  theme_bw(base_size=15)
+```
+
+Three-dimensional graphs rarely contain data that could not be extracted from a two-dimensional graph. The idea of actively interacting with the data fascinates me on the other hand. With `plotly` I came across a R package that offers this interactivity. In terms of the surface plot, I also liked the feature of being able to immediately see more detailed data from each individual point (interpolated as well as observed). This makes it possible, for example, to find out more about outliers like the point at the top right from the year 1963. Additionally, the influence of individual data points on the interpolation becomes more clearly visible.
+
+```{r, message=FALSE}
 library(plotly)
+library(colorRamps)
 
-
-fig1 <- plot_ly() %>% 
+plot_ly() %>% 
   add_surface(x = pred$x,
               y = pred$y,
               z = B,
@@ -195,16 +202,20 @@ fig1 <- plot_ly() %>%
             name = "Observed",
             hoverinfo ="text",
             text = ~paste('</br><b>Observed</b>',
-                          '</br>Chill T<sub>mean</sub>:',round(Tmeans_pheno$Tmean_chill, digits = 2),'°C',
-                          '</br>Force T<sub>mean</sub>:',round(Tmeans_pheno$Tmean_heat, digits = 2),'°C',
+                          '</br>Chill T<sub>mean</sub>:',
+                          round(Tmeans_pheno$Tmean_chill, digits = 2),'°C',
+                          '</br>Force T<sub>mean</sub>:',
+                          round(Tmeans_pheno$Tmean_heat, digits = 2),'°C',
                           '</br>Bloom date:',Tmeans_pheno$pheno, 'JDay',
                           '</br>Year:', as.character(Tmeans_pheno$End_year)),
             marker = list(size = 4, color = 'black')) %>%
   colorbar(title = "Bloom date\n(day of the year)") %>% 
   layout(
     scene = list(
-      xaxis = list(title = "Chilling phase T<sub>mean</sub> (°C)", showspikes=FALSE),
-      yaxis = list(title = "Forcing phase T<sub>mean</sub> (°C)", showspikes=FALSE),
+      xaxis = list(title = "Chilling phase T<sub>mean</sub> (°C)",
+                   showspikes=FALSE),
+      yaxis = list(title = "Forcing phase T<sub>mean</sub> (°C)",
+                   showspikes=FALSE),
       zaxis = list(title = "Date of Bloom", showspikes=FALSE)
     ))%>% 
   layout(
@@ -216,8 +227,9 @@ fig1 <- plot_ly() %>%
         )
       )
     )
-
-
-fig1
 ```
+
+## We’ve looked at data from a number of locations so far. How would you expect this surface plot to look like in Beijing? And how should it look in Tunisia?
+
+The angles of the contours of the plots show how the ratio of chilling and forcing influences the bloom date. For vertical contours, the chilling phase is the decisive factor, while for horizontal contours, the forcing phase mainly influences the bloom date. In the weather data of the CKA and the phenology data of the Alexander Lukas cultivar, both phases have a certain influence, but the forcing phase is still more dominant. This characteristic depends on the location and the given chilling and forcing conditions. In cold China heat is probably the determining factor while in Tunisia the phenological development is mainly limited by the chilling amount.
 

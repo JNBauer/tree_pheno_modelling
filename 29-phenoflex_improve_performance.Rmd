@@ -1,0 +1,24 @@
+# Can we improve the performance of PhenoFlex?
+
+
+
+```{r, echo=FALSE}
+#https://www.researchgate.net/publication/360936074_Unusually_warm_winter_seasons_may_compromise_the_performance_of_current_phenology_models_-_Predicting_bloom_dates_in_young_apple_trees_with_PhenoFlex
+```
+
+## What was the objective of this work?
+
+The objective of this work was to apply data from earlier collected experimental seasons to the PhenoFlex model.
+The main part of this was to calibrate the PhenoFlex model with normal phenology data and with data that additionally contained also 5 marginal phenology records. This helped to show the impact of the marginal seasons on the performance of the PhenoFlex model.
+
+
+## What was the main conclusion?
+
+The main conclusion is that the model whose calibration also contained the marginal data has a lower performance compared to the calibration without the warm seasons. One possible hypothesis for the decline in model performance is that the bloom in the marginal season occurred through alternative mechanisms compared to the regular chill force process. These alternative mechanisms are not considered by the model. Therefore data outside the validity range can negatively affect the model parameters. 
+
+
+## What experiments could we conduct to test the hypothesis that emerged at the end of the conclusion?
+
+Flowering can be triggered not only by sufficient chill during the chilling phase and heat during the forcing phase, but also by other partly stress-related mechanisms. Producers in growing regions with insufficient chill for example use chemicals that induce stress which eventually can also lead to flowering in trees. In an experiment plant hormones or gene regulation connected to stress could be measured at trees under different climate conditions. Under marginal conditions such stress levels could be increased, which would support the hypothesis that the blossom in marginal seasons is induced by stress for example.
+
+
