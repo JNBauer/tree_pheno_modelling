@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Manual chill analysis | Tree phenology analysis with R - Logbook</title>
+  <title>Chapter 2 Packages | Tree phenology analysis with R - Logbook</title>
   <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
   <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Manual chill analysis | Tree phenology analysis with R - Logbook" />
+  <meta property="og:title" content="Chapter 2 Packages | Tree phenology analysis with R - Logbook" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="The logbook for the Tree phenology analysis with R logbook" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Manual chill analysis | Tree phenology analysis with R - Logbook" />
+  <meta name="twitter:title" content="Chapter 2 Packages | Tree phenology analysis with R - Logbook" />
   
   <meta name="twitter:description" content="The logbook for the Tree phenology analysis with R logbook" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="winter-chill-projections.html"/>
-<link rel="next" href="chill-models.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="tree-dormancy.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -345,399 +345,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="manual-chill-analysis" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Manual chill analysis<a href="manual-chill-analysis.html#manual-chill-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="write-a-basic-function-that-calculates-warm-hours-25c" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Write a basic function that calculates warm hours (&gt;25°C)<a href="manual-chill-analysis.html#write-a-basic-function-that-calculates-warm-hours-25c" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <code>Winters_hours_gaps</code> dataset is part of the ChillR package. It was recorded 2008 in a walnut orchard in Winters, California. The dataset was modified by excluding a not used <code>Temp_gaps</code> column.</p>
-<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
-<caption>
-<span id="tab:unnamed-chunk-4">Table 6.1: </span>Table for the modified <code>Winters_hours_gaps</code> dataset
-</caption>
-<thead>
-<tr>
-<th style="text-align:right;">
-Year
-</th>
-<th style="text-align:right;">
-Month
-</th>
-<th style="text-align:right;">
-Day
-</th>
-<th style="text-align:right;">
-Hour
-</th>
-<th style="text-align:right;">
-Temp
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-15.127
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-17.153
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:right;">
-18.699
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-18.699
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-18.842
-</td>
-</tr>
-</tbody>
-</table>
-<p>The function creates a new column <code>Warming_hours</code> that contains the result of the comparison if <code>hourtemps$Temp</code>is greater than 25.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="manual-chill-analysis.html#cb2-1" aria-hidden="true" tabindex="-1"></a>WH <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps)</span>
-<span id="cb2-2"><a href="manual-chill-analysis.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb2-3"><a href="manual-chill-analysis.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  hourtemps[,<span class="st">&quot;Warming_hours&quot;</span>] <span class="ot">&lt;-</span> hourtemps<span class="sc">$</span>Temp<span class="sc">&gt;</span><span class="dv">25</span></span>
-<span id="cb2-4"><a href="manual-chill-analysis.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(hourtemps)</span>
-<span id="cb2-5"><a href="manual-chill-analysis.html#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="packages" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Packages<a href="packages.html#packages" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="bookdown" class="section level3 hasAnchor" number="2.0.1">
+<h3><span class="header-section-number">2.0.1</span> Bookdown<a href="packages.html#bookdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I chose the bookdown approach for a better organization. The chapters are always in single .rmd files, which makes knitting much faster, if I just want to have a look at the chapter I am currently working on. Sometimes there are problems with packages that have to be reloaded, but I am glad to have transformed the book into the Bookdown format quite early. The great <a href="https://bookdown.org/yihui/bookdown/" title="Yihui&#39;s Bookdown Documentation">documentation</a> made it possible for me to include many special features.</p>
 </div>
-<div id="apply-this-function-to-the-winters_hours_gaps-dataset" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Apply this function to the Winters_hours_gaps dataset<a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="manual-chill-analysis.html#cb3-1" aria-hidden="true" tabindex="-1"></a>Winters_hours_gaps_plus_WH <span class="ot">&lt;-</span> <span class="fu">WH</span>(Winters_hours_gaps)</span>
-<span id="cb3-2"><a href="manual-chill-analysis.html#cb3-2" aria-hidden="true" tabindex="-1"></a>sum_whgpWH <span class="ot">&lt;-</span> <span class="fu">sum</span>(Winters_hours_gaps_plus_WH<span class="sc">$</span>Warming_hours)</span></code></pre></div>
-<p>When applying the function to the Winter_hours_gaps dataset and taking the sum of the <code>Winters_hours_gaps_plus_WH$Warming_hours</code> coloumn, <strong>1275</strong> hours over 25°C occured.<br />
-</p>
-<p>In a table, it could be displayed like this:<br />
-</p>
-<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
-<caption>
-<span id="tab:unnamed-chunk-7">Table 6.2: </span>Table for <code>Winters_hours_gaps_plus_WH</code>
-</caption>
-<thead>
-<tr>
-<th style="text-align:right;">
-Year
-</th>
-<th style="text-align:right;">
-Month
-</th>
-<th style="text-align:right;">
-Day
-</th>
-<th style="text-align:right;">
-Hour
-</th>
-<th style="text-align:right;">
-Temp_gaps
-</th>
-<th style="text-align:left;">
-Temp
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-15.796
-</td>
-<td style="text-align:left;">
-<span style="     color: green !important;">15.796</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-16.225
-</td>
-<td style="text-align:left;">
-<span style="     color: green !important;">16.225</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-17.510
-</td>
-<td style="text-align:left;">
-<span style="     color: green !important;">17.51</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-19.674
-</td>
-<td style="text-align:left;">
-<span style="     color: green !important;">19.674</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-22.082
-</td>
-<td style="text-align:left;">
-<span style="     color: green !important;">22.082</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-24.508
-</td>
-<td style="text-align:left;">
-<span style="     color: green !important;">24.508</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-25.404
-</td>
-<td style="text-align:left;">
-<span style=" font-weight: bold;    color: red !important;">25.404</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:right;">
-26.842
-</td>
-<td style="text-align:left;">
-<span style=" font-weight: bold;    color: red !important;">26.842</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-13
-</td>
-<td style="text-align:right;">
-28.171
-</td>
-<td style="text-align:left;">
-<span style=" font-weight: bold;    color: red !important;">28.171</span>
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2008
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-27.949
-</td>
-<td style="text-align:left;">
-<span style=" font-weight: bold;    color: red !important;">27.949</span>
-</td>
-</tr>
-</tbody>
-</table>
-<p><br />
-</p>
+<div id="chillr" class="section level3 hasAnchor" number="2.0.2">
+<h3><span class="header-section-number">2.0.2</span> chillR<a href="packages.html#chillr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The key package of this logbook contains all important tools to perform phenology analysis. It allows researchers to work flexibly with different agroclimatic metrics. Previous hurdles led to limitations in the choice of chill models, which are overcome with ChillR. The reference <a href="https://cran.r-project.org/web/packages/chillR/chillR.pdf" title="chillR CRAN">CRAN website</a> and the <a href="http://inresgb-lehre.iaas.uni-bonn.de/chillR_book/introduction.html" title="Tree phenology analysis with R - Website">course website</a> provide useful instructions on how to work with the package.</p>
 </div>
-<div id="extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates<a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The following function contains additional input variables for the start and end dates. The variables are used to index the correct rows between which the sum of the warm hours should be taken. The previously created <code>WH</code> function is used to compare the temperature to the threshold.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="manual-chill-analysis.html#cb4-1" aria-hidden="true" tabindex="-1"></a>WH_YEARMODA <span class="ot">&lt;-</span> <span class="cf">function</span>(hourtemps, start_dateYEARMODA,end_dateYEARMODA,</span>
-<span id="cb4-2"><a href="manual-chill-analysis.html#cb4-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">start_hour=</span><span class="dv">12</span>, <span class="at">end_hour=</span><span class="dv">12</span>)</span>
-<span id="cb4-3"><a href="manual-chill-analysis.html#cb4-3" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb4-4"><a href="manual-chill-analysis.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  start_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
-<span id="cb4-5"><a href="manual-chill-analysis.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  start_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
-<span id="cb4-6"><a href="manual-chill-analysis.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  start_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(start_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
-<span id="cb4-7"><a href="manual-chill-analysis.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="manual-chill-analysis.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  end_year <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">1</span>, <span class="dv">4</span>))</span>
-<span id="cb4-9"><a href="manual-chill-analysis.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  end_month <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">5</span>, <span class="dv">6</span>))</span>
-<span id="cb4-10"><a href="manual-chill-analysis.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  end_day <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">substr</span>(end_dateYEARMODA, <span class="dv">7</span>, <span class="dv">8</span>))</span>
-<span id="cb4-11"><a href="manual-chill-analysis.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-12"><a href="manual-chill-analysis.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  start_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>start_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>start_month</span>
-<span id="cb4-13"><a href="manual-chill-analysis.html#cb4-13" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>start_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>start_hour)</span>
-<span id="cb4-14"><a href="manual-chill-analysis.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  end_date <span class="ot">&lt;-</span> <span class="fu">which</span>(hourtemps<span class="sc">$</span>Year<span class="sc">==</span>end_year <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Month<span class="sc">==</span>end_month</span>
-<span id="cb4-15"><a href="manual-chill-analysis.html#cb4-15" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Day<span class="sc">==</span>end_day <span class="sc">&amp;</span> hourtemps<span class="sc">$</span>Hour<span class="sc">==</span>end_hour)</span>
-<span id="cb4-16"><a href="manual-chill-analysis.html#cb4-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-17"><a href="manual-chill-analysis.html#cb4-17" aria-hidden="true" tabindex="-1"></a>  warm_hours <span class="ot">&lt;-</span> <span class="fu">WH</span>(hourtemps)</span>
-<span id="cb4-18"><a href="manual-chill-analysis.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-19"><a href="manual-chill-analysis.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  WHs <span class="ot">&lt;-</span> <span class="fu">sum</span>(warm_hours[start_date<span class="sc">:</span>end_date, <span class="st">&quot;Warming_hours&quot;</span>])</span>
-<span id="cb4-20"><a href="manual-chill-analysis.html#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(WHs)</span>
-<span id="cb4-21"><a href="manual-chill-analysis.html#cb4-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-22"><a href="manual-chill-analysis.html#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="manual-chill-analysis.html#cb4-23" aria-hidden="true" tabindex="-1"></a>warming_hours_for_time_frame <span class="ot">&lt;-</span> <span class="fu">WH_YEARMODA</span>(hourtemps, <span class="dv">20080501</span>, <span class="dv">20080831</span>)</span>
-<span id="cb4-24"><a href="manual-chill-analysis.html#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="manual-chill-analysis.html#cb4-25" aria-hidden="true" tabindex="-1"></a>warming_hours_for_time_frame</span></code></pre></div>
-<pre><code>## [1] 957</code></pre>
-<p>Between the 1th of May 2008 (20080501) and the 31th of August 2008 (20080831), <strong>957</strong> hours over 25°C occurred.</p>
+<div id="dplyr-family" class="section level3 hasAnchor" number="2.0.3">
+<h3><span class="header-section-number">2.0.3</span> dplyr family<a href="packages.html#dplyr-family" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Packages of the tidyverse universe like dplyr or purr can contain very useful functions, which could be solved with base R ocde often only more awkwardly. Whether this means that all data processing steps have to be done with functions from these packages, is something I don’t know. In the end it is important to know that there are always several ways to reach the goal.</p>
+</div>
+<div id="ggplot2" class="section level3 hasAnchor" number="2.0.4">
+<h3><span class="header-section-number">2.0.4</span> ggplot2<a href="packages.html#ggplot2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>ggplot2 is essential for visualizing the data. Achieving the same results with Base R functions is more complicated and often does not visually match the results of ggplot2. Websites like the <a href="https://r-graph-gallery.com/" title="Gallery with ggplot graphs">R graph gallery</a> help to realize own ideas for graphs.</p>
+</div>
+<div id="leaflet" class="section level3 hasAnchor" number="2.0.5">
+<h3><span class="header-section-number">2.0.5</span> leaflet<a href="packages.html#leaflet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The leaflet packages purpose is mainly to create interactive maps for HTML output. The possibilities to display various spatial data are enormous, but in this logbook I only present relatively simple applications.</p>
+</div>
+<div id="kableextra" class="section level3 hasAnchor" number="2.0.6">
+<h3><span class="header-section-number">2.0.6</span> kableExtra<a href="packages.html#kableextra" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The kableExtra package enables the creation of tables. The customization of the formatting and appearance of the data makes it an important part of the logbook. There are also other packages for making tables like <code>DT</code> which I unfortunately could not try out in this module, but which might be even more suitable for HTML.</p>
+</div>
+<div id="plotly" class="section level3 hasAnchor" number="2.0.7">
+<h3><span class="header-section-number">2.0.7</span> plotly<a href="packages.html#plotly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This package allows the creation of interactive graphs, which can be easily used as part of HTML documents.</p>
 <br />
 
 <hr />
@@ -749,8 +385,8 @@ Temp
           </div>
         </div>
       </div>
-<a href="winter-chill-projections.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chill-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tree-dormancy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -781,7 +417,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/JNBauer/tree_pheno_modelling/06-manual_chill_analysis.Rmd",
+"link": "https://github.com/JNBauer/tree_pheno_modelling/02-tools.Rmd",
 "text": "Edit"
 },
 "history": {

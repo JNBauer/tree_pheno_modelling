@@ -1,9 +1,16 @@
 # Climate change and impact projection
 
-```{r, fig.width=12,fig.height=4}
+As introduction to the topic, I created a Warming Stripes plot with `ggplot2`, which is based on the `geom_tile()` function. For the temperature data, I used the record from CKA. With an even longer data set, the rapid change in climate would be even more apparent, although it is already very impressively visible with this short data set.
+\
+<div id="spoiler" style="display:none">
+
+```{r, warning=FALSE, message=FALSE}
+
 library(chillR)
 library(dplyr)
 library(RColorBrewer)
+library(ggplot2)
+
 col_strip <- brewer.pal(11, "RdBu")
 
 weather<-read_tab("data/TMaxTMin1958-2019_patched.csv") %>%
@@ -18,11 +25,41 @@ plot <- aggregate(weather$Tmean, list(weather$Year), FUN=mean) %>%
     geom_tile() +
     scale_fill_gradientn(colors = rev(col_strip), name = "Yearly mean\nTemperature °C") +
     theme_void()
-plot
 ```
 
+</div>
 
+<button title="Click to show/hide the code for the plot." type="button"
+   onclick="if(document.getElementById('spoiler') .style.display=='none')
+              {document.getElementById('spoiler') .style.display=''}
+            else{document.getElementById('spoiler') .style.display='none'}">
+  Show/Hide code
+</button>
 
+```{r, echo=FALSE,fig.width=12,fig.height=4, fig.cap='Warming stripes plotted for data from CKA between 1958 and 2019'}
+
+library(chillR)
+library(dplyr)
+library(RColorBrewer)
+library(ggplot2)
+
+col_strip <- brewer.pal(11, "RdBu")
+
+weather<-read_tab("data/TMaxTMin1958-2019_patched.csv") %>%
+mutate(Tmean = (Tmin + Tmax)/2)
+
+plot <- aggregate(weather$Tmean, list(weather$Year), FUN=mean) %>%
+  mutate(height = 1) %>%
+  rename("Tmean"="x") %>%
+  rename("year"="Group.1") %>%
+  
+  ggplot(aes(x = year, y = 1, fill = Tmean)) +
+    geom_tile() +
+    scale_fill_gradientn(colors = rev(col_strip), name = "Yearly mean\nTemperature °C") +
+    theme_void()
+
+plot
+```
 
 ## List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.
 
@@ -46,18 +83,27 @@ plot
 
 The most important driver at the moment are Greenhouse gases (GHGs) and in particular anthropogenic CO~2~, which is mainly released by burning fossil fuels or by the production of cement. The concentration of CO~2~ in the atmosphere, which was closely correlated with the temperature in the past, is rising steadily and steeply at the moment. GHGs only absorb the reflected radiation coming from the earth and are not affected by direct radiation from the sun. This effect works like a trap, where radiation can enter, but not leave the atmosphere, which leads to an increase in temperature.
 
-
 ## Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.
 
 In the last decades, the temperature rose steadily. The last two decades were the warmest measured since 1880. We are about to live in a world, that has never been so warm for humans or humanlike beings. The climate of the earth was always changing, but the speed of change was never so fast before. When at some point a tipping point is reached the changes cannot be undone.
-
 
 ## What does the abbreviation 'RCP' stand for, how are RCPs defined, and what is their role in projecting future climates?
 
 RCP is the abbreviation for Representative Concentration Pathways, which are defined by the additional radiated forcing in watts per square meter for the year 2100. They serve as scenarios for the future of our climate. A high scenario like RCP8.5 is caused by increasing GHG emissions, while lower scenarios can be achieved with a decrease of GHG emissions. In the case of RCP6.0, additional 6 W m^-2^ are expected for the year 2100. Multiple scenarios should be considered, since one does not know which RCP prediction will occur.
 
+## Briefly describe the 3 climate impact projection methods described in the fourth video.
 
-## Briefly describe the 4 climate impact projection methods described in the fourth video.
+### Statistical models
+
+Statistical models are created from the relationship between two or more variables, from which statements about future conditions are then to be made. Typical statistical model are based on regression for example. Statistical models do not focus on the process behind the data.
+
+### Process-based models
+
+Process-based models try to represent and link the essential processes of a system. In this way, the knowledge of current research can also flow into the results. The creation of such models is often more complicated in comparison to statistical models, since the represented environments are often very complex. It is important to find the right balance that makes a model robust without neglecting significant precise processes.
+
+### Climate analogue models
+
+Climate analogue models orientate on places that experience already different climate conditions. If we expect warmer conditions in the future for our selected location, we can search for regions that already have these conditions in the present. There are often more factors influencing the systems beside the climate, which are usually not considered by climate analogue models. Such climate analogue models can often be applied in a south north gradient, but also on altitude differences.
 
 \
 <hr />

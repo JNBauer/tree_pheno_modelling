@@ -1,17 +1,23 @@
 # Making hourly temperatures
 
-**1. Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength**
+## Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength
 
-The chosen location with the latitude of '32' can be seen below in the leaflet. It is a farm located in the south of Morocco.
-```{r, echo=FALSE, message=FALSE}
+The chosen location with the latitude of 32 °North (`lat = 32``) can be seen below in the leaflet. It is a farm located in the south of Morocco.
+```{r, echo=FALSE, message=FALSE, fig.cap='Leaflet map for the chosen location in Morocco'}
 require(leaflet) 
+require(leafem)
 m <- leaflet() %>% setView(lng = -8, lat = 32, zoom = 16)
 m %>%
   addProviderTiles(providers$Esri.WorldImagery) %>%
   addMiniMap(
     tiles = providers$Esri.WorldStreetMap,
-    toggleDisplay = TRUE)
-  
+    toggleDisplay = TRUE) %>%
+  addLogo("https://symbols.getvecta.com/stencil_317/33_north-arrow-1.060831cef6.svg",
+          position = "bottomleft",
+          offset.x = 15,
+          offset.y = 40,
+          width = 100,
+          height = 100)
 ```
 \
 The `chillR` `daylength` function can be used to get the data for the sunsets and sunrises for a specified latitude. The `melt` command of the `reshape2` package is used to bring the dataset in the "long" format, that is more suitable for the use with `ggplot2`.
@@ -29,16 +35,15 @@ days_df<-melt(days_df, id=c("JDay"))
 ```
 
 The `days_df` data is plotted in 3 line graphs (`geom_line`) split by the factor `variable`.
-```{r, message=FALSE}
+```{r, message=FALSE, fig.cap='Daylength for a location with latitude of 32 °North (Morocco)'}
 require(ggplot2)
 ggplot(days_df, aes(JDay, value)) +
   geom_line(lwd=1.5) + facet_grid(cols=vars(variable)) +
   ylab("Time of Day / Daylength (Hours)") +
   theme_bw(base_size = 20)
 ```
-\
 
-**2. Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)**
+## Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)
 
 The `stack_hourly_temps` function is able to simulate idealized hourly data with daily minimal temperatures, daily maximal temperatures and the latitude of the place of interest.
 
@@ -55,7 +60,9 @@ hourly_temps_KA_df[,"connected_timedate"] <- ISOdate(
                                   month = hourly_temps_KA_df$Month,
                                   day = hourly_temps_KA_df$Day,
                                   hour = hourly_temps_KA_df$Hour)
+```
 
+```{r, echo=TRUE, fig.cap='Hourly modelled temperature for Week 22 in 2002'}
 ggplot(hourly_temps_KA_df[3500:3660,], aes(connected_timedate,Temp)) +
   geom_line(lwd=1.5) +
   labs(x="Date",
@@ -64,7 +71,7 @@ ggplot(hourly_temps_KA_df[3500:3660,], aes(connected_timedate,Temp)) +
   theme_bw(base_size = 14)
 ```
 
-**3. Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)**
+## Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)
 
 The `Empirical_daily_temperature_curve` function is used to extract hourly coefficients for each month from the `Winters_hours_gaps`. The `make_all_day_table` function is used to calculate `Tmin` and `Tmax` values, that are used in combination with the coefficients in the `Empirical_hourly_temperatures` to calculate the hourly temperatures.
 
@@ -73,7 +80,6 @@ coeffs<-Empirical_daily_temperature_curve(Winters_hours_gaps)
 winters_daily<-make_all_day_table(Winters_hours_gaps, input_timestep="hour")
 winters_empirical<-Empirical_hourly_temperatures(winters_daily,coeffs)
 ```
-
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 require(dplyr)
@@ -84,7 +90,9 @@ kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 
 ```
+
 Hourly data with the Empirical and ideal method are compared with the real measured temperature. The `melt` function is again used to bring the dataset into the right shape.
+
 ```{r}
 require(reshape2)
 
@@ -113,6 +121,9 @@ winters_temps_to_plot<-winters_temps_to_plot[200:262,]
 winters_temps_to_plot<-melt(winters_temps_to_plot, id=c("DATE")) 
 colnames(winters_temps_to_plot)<-c("DATE","Method","Temperature")
 
+```
+
+```{r, echo=TRUE, fig.cap='Different temperature methods for Winters dataset'}
 
 ggplot(data=winters_temps_to_plot, aes(DATE,Temperature, colour=Method)) +
   geom_line(lwd=1.3) +
@@ -125,4 +136,5 @@ ggplot(data=winters_temps_to_plot, aes(DATE,Temperature, colour=Method)) +
   theme_bw(base_size = 14)
 ```
 
-------------------------------------------------------------------------
+\
+<hr />

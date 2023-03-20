@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 Plotting future scenarios | Tree phenology analysis with R - Logbook</title>
   <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 Plotting future scenarios | Tree phenology analysis with R - Logbook" />
   <meta property="og:type" content="book" />
@@ -52,7 +52,7 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -65,6 +65,9 @@
 <link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
 <script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
 <script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
 <script src="libs/plotly-binding-4.10.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
@@ -155,34 +158,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Tree phenology Logbook</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
-<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
-<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
-<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
-<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
-<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
-</ul></li>
+<li class="chapter" data-level="2.0.1" data-path="packages.html"><a href="packages.html#bookdown"><i class="fa fa-check"></i><b>2.0.1</b> Bookdown</a></li>
+<li class="chapter" data-level="2.0.2" data-path="packages.html"><a href="packages.html#chillr"><i class="fa fa-check"></i><b>2.0.2</b> chillR</a></li>
+<li class="chapter" data-level="2.0.3" data-path="packages.html"><a href="packages.html#dplyr-family"><i class="fa fa-check"></i><b>2.0.3</b> dplyr family</a></li>
+<li class="chapter" data-level="2.0.4" data-path="packages.html"><a href="packages.html#ggplot2"><i class="fa fa-check"></i><b>2.0.4</b> ggplot2</a></li>
+<li class="chapter" data-level="2.0.5" data-path="packages.html"><a href="packages.html#leaflet"><i class="fa fa-check"></i><b>2.0.5</b> leaflet</a></li>
+<li class="chapter" data-level="2.0.6" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>2.0.6</b> kableExtra</a></li>
+<li class="chapter" data-level="2.0.7" data-path="packages.html"><a href="packages.html#plotly"><i class="fa fa-check"></i><b>2.0.7</b> plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
 <li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
-<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scale"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
 <li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
 <li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
-<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-3-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 3 climate impact projection methods described in the fourth video.</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#statistical-models"><i class="fa fa-check"></i><b>4.4.1</b> Statistical models</a></li>
+<li class="chapter" data-level="4.4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#process-based-models"><i class="fa fa-check"></i><b>4.4.2</b> Process-based models</a></li>
+<li class="chapter" data-level="4.4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#climate-analogue-models"><i class="fa fa-check"></i><b>4.4.3</b> Climate analogue models</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
 <ul>
@@ -195,8 +198,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset"><i class="fa fa-check"></i><b>6.2</b> Apply this function to the Winters_hours_gaps dataset</a></li>
 <li class="chapter" data-level="6.3" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates"><i class="fa fa-check"></i><b>6.3</b> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
-<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
+<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chill-models.html"><a href="chill-models.html#run-the-chilling-function-on-the-winters_hours_gap-dataset"><i class="fa fa-check"></i><b>7.1</b> Run the chilling() function on the Winters_hours_gap dataset</a></li>
+<li class="chapter" data-level="7.2" data-path="chill-models.html"><a href="chill-models.html#create-your-own-temperature-weighting-chill-model-using-the-step_model-function."><i class="fa fa-check"></i><b>7.2</b> Create your own temperature-weighting chill model using the step_model() function.</a></li>
+<li class="chapter" data-level="7.3" data-path="chill-models.html"><a href="chill-models.html#run-this-model-on-the-winters_hours_gaps-dataset-using-the-tempresponse-function."><i class="fa fa-check"></i><b>7.3</b> Run this model on the Winters_hours_gaps dataset using the tempResponse() function.</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#choose-a-location-of-interest-find-out-its-latitude-and-produce-plots-of-daily-sunrise-sunset-and-daylength"><i class="fa fa-check"></i><b>8.1</b> Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength</a></li>
+<li class="chapter" data-level="8.2" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-an-hourly-dataset-based-on-idealized-daily-curves-for-the-ka_weather-dataset-included-in-chillr"><i class="fa fa-check"></i><b>8.2</b> Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)</a></li>
+<li class="chapter" data-level="8.3" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-empirical-temperature-curve-parameters-for-the-winters_hours_gaps-dataset-and-use-them-to-predict-hourly-values-from-daily-temperatures-this-is-very-similar-to-the-example-above-but-please-make-sure-you-understand-whats-going-on"><i class="fa fa-check"></i><b>8.3</b> Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
@@ -237,37 +250,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="16.1" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#perform-a-similar-analysis-for-the-location-youve-chosen-for-your-exercises."><i class="fa fa-check"></i><b>16.1</b> Perform a similar analysis for the location you’ve chosen for your exercises.</a></li>
 <li class="chapter" data-level="16.2" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#make-a-heat-map-illustrating-past-and-future-changes-in-safe-winter-chill-relative-to-a-past-scenario-for-the-13-chill-models-used-here."><i class="fa fa-check"></i><b>16.2</b> Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here.</a></li>
+<li class="chapter" data-level="16.3" data-path="chill-model-comparison.html"><a href="chill-model-comparison.html#produce-an-animated-line-plot-of-your-results-summarizing-safe-winter-chill-across-all-the-gcms."><i class="fa fa-check"></i><b>16.3</b> Produce an animated line plot of your results (summarizing Safe Winter Chill across all the GCMs).</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a></li>
-<li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a></li>
-<li class="chapter" data-level="19" data-path="simple-phenology-analysis.html"><a href="simple-phenology-analysis.html"><i class="fa fa-check"></i><b>19</b> Simple phenology analysis</a></li>
-<li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a></li>
-<li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a></li>
-<li class="chapter" data-level="22" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html"><i class="fa fa-check"></i><b>22</b> Evaluating PLS outputs</a>
+<li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#reproduce-the-analysis-for-the-roter-boskoop-dataset."><i class="fa fa-check"></i><b>22.1</b> Reproduce the analysis for the ‘Roter Boskoop’ dataset.</a></li>
+<li class="chapter" data-level="17.1" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis."><i class="fa fa-check"></i><b>17.1</b> Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.</a></li>
+<li class="chapter" data-level="17.2" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates."><i class="fa fa-check"></i><b>17.2</b> Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.</a></li>
+<li class="chapter" data-level="17.3" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#what-do-we-need-to-know-to-build-a-process-based-model-from-this"><i class="fa fa-check"></i><b>17.3</b> What do we need to know to build a process-based model from this?</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html"><i class="fa fa-check"></i><b>23</b> The relative importance of chill and heat</a>
+<li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html#describe-the-temperature-response-hypothesis-outlined-in-this-chapter."><i class="fa fa-check"></i><b>23.1</b> Describe the temperature response hypothesis outlined in this chapter.</a></li>
+<li class="chapter" data-level="18.1" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#briefly-explain-why-you-shouldnt-take-the-results-of-a-pls-regression-analysis-between-temperature-and-phenology-at-face-value.-what-do-you-need-in-addition-in-order-to-make-sense-of-such-outputs"><i class="fa fa-check"></i><b>18.1</b> Briefly explain why you shouldn’t take the results of a PLS regression analysis between temperature and phenology at face value. What do you need in addition in order to make sense of such outputs?</a></li>
+<li class="chapter" data-level="18.2" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson."><i class="fa fa-check"></i><b>18.2</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
+<li class="chapter" data-level="18.3" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#write-down-your-thoughts-on-why-were-not-seeing-the-temperature-response-pattern-we-may-have-expected.-what-happened-to-the-chill-response"><i class="fa fa-check"></i><b>18.3</b> Write down your thoughts on why we’re not seeing the temperature response pattern we may have expected. What happened to the chill response?</a></li>
 </ul></li>
-<li class="chapter" data-level="24" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html"><i class="fa fa-check"></i><b>24</b> Making valid tree phenology models</a>
+<li class="chapter" data-level="19" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html"><i class="fa fa-check"></i><b>19</b> Successes and limitations of PLS regression analysis</a>
 <ul>
-<li class="chapter" data-level="24.1" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-the-difference-between-output-validation-and-process-validation."><i class="fa fa-check"></i><b>24.1</b> Explain the difference between output validation and process validation.</a></li>
-<li class="chapter" data-level="24.2" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-what-a-validity-domain-is-and-why-it-is-important-to-consider-this-whenever-we-want-to-use-our-model-to-forecast-something."><i class="fa fa-check"></i><b>24.2</b> Explain what a validity domain is and why it is important to consider this whenever we want to use our model to forecast something.</a></li>
-<li class="chapter" data-level="24.3" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#what-is-validation-for-purpose"><i class="fa fa-check"></i><b>24.3</b> What is validation for purpose?</a></li>
-<li class="chapter" data-level="24.4" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#how-can-we-ensure-that-our-model-is-suitable-for-the-predictions-we-want-to-make"><i class="fa fa-check"></i><b>24.4</b> How can we ensure that our model is suitable for the predictions we want to make?</a></li>
+<li class="chapter" data-level="19.1" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html#briefly-explain-in-what-climatic-settings-we-can-expect-pls-regression-to-detect-the-chilling-phase---and-in-what-settings-this-probably-wont-work."><i class="fa fa-check"></i><b>19.1</b> Briefly explain in what climatic settings we can expect PLS regression to detect the chilling phase - and in what settings this probably won’t work.</a></li>
+<li class="chapter" data-level="19.2" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html#how-could-we-overcome-this-problem"><i class="fa fa-check"></i><b>19.2</b> How could we overcome this problem?</a></li>
 </ul></li>
-<li class="chapter" data-level="25" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html"><i class="fa fa-check"></i><b>25</b> The PhenoFlex model</a>
+<li class="chapter" data-level="20" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>20</b> PLS regression with agroclimatic metrics</a>
 <ul>
-<li class="chapter" data-level="25.1" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#parameterize-the-phenoflex-model-for-roter-boskoop-apples."><i class="fa fa-check"></i><b>25.1</b> Parameterize the PhenoFlex model for `Roter Boskoop’ apples.</a></li>
-<li class="chapter" data-level="25.2" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#produce-plots-of-predicted-vs.-observed-bloom-dates-and-distribution-of-prediction-errors."><i class="fa fa-check"></i><b>25.2</b> Produce plots of predicted vs. observed bloom dates and distribution of prediction errors.</a></li>
-<li class="chapter" data-level="25.3" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#compute-the-model-performance-metrics-rmsep-rpiq-mean-error-and-mean-absolute-error."><i class="fa fa-check"></i><b>25.3</b> Compute the model performance metrics RMSEP, RPIQ, mean error and mean absolute error.</a></li>
+<li class="chapter" data-level="20.1" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html#repeat-the-pls_chill_force-procedure-for-the-roter-boskoop-dataset.-include-plots-of-daily-chill-and-heat-accumulation."><i class="fa fa-check"></i><b>20.1</b> Repeat the PLS_chill_force procedure for the ‘Roter Boskoop’ dataset. Include plots of daily chill and heat accumulation.</a></li>
+<li class="chapter" data-level="20.2" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html#run-pls_chill_force-analyses-for-all-three-major-chill-models.-delineate-your-best-estimates-of-chilling-and-forcing-phases-for-all-of-them."><i class="fa fa-check"></i><b>20.2</b> Run PLS_chill_force analyses for all three major chill models. Delineate your best estimates of chilling and forcing phases for all of them.</a></li>
+<li class="chapter" data-level="20.3" data-path="pls-regression-with-agroclimatic-metrics.html"><a href="pls-regression-with-agroclimatic-metrics.html#plot-results-for-all-three-analyses-including-shaded-plot-areas-for-the-chilling-and-forcing-periods-you-estimated."><i class="fa fa-check"></i><b>20.3</b> Plot results for all three analyses, including shaded plot areas for the chilling and forcing periods you estimated.</a></li>
 </ul></li>
-<li class="chapter" data-level="26" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html"><i class="fa fa-check"></i><b>26</b> The PhenoFlex model - a second look</a></li>
-<li class="chapter" data-level="27" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html"><i class="fa fa-check"></i><b>27</b> The PhenoFlex model - a second look</a>
+<li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a>
 <ul>
-<li class="chapter" data-level="27.1" data-path="the-phenoflex-model---a-second-look-1.html"><a href="the-phenoflex-model---a-second-look-1.html#make-chill-and-heat-response-plots-for-the-alexander-lucas-phenoflex-model-for-the-location-you-did-the-earlier-analyses-for."><i class="fa fa-check"></i><b>27.1</b> Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.</a></li>
+<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed"><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?</a></li>
+<li class="chapter" data-level="21.2" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#can-you-think-about-possible-reasons-for-the-success-or-failure-of-pls-analysis-based-on-agroclimatic-metrics-if-so-write-down-your-thoughts"><i class="fa fa-check"></i><b>21.2</b> Can you think about possible reasons for the success or failure of PLS analysis based on agroclimatic metrics (if so, write down your thoughts)?</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html"><i class="fa fa-check"></i><b>22</b> Why PLS doesn’t always work</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html#produce-chill-and-heat-model-sensitivity-plots-for-the-location-you-focused-on-in-previous-exercises."><i class="fa fa-check"></i><b>22.1</b> Produce chill and heat model sensitivity plots for the location you focused on in previous exercises.</a></li>
+<li class="chapter" data-level="22.2" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html#look-at-the-plots-for-the-agroclimate-based-pls-analyses-of-the-alexander-lucas-and-roter-boskoop-datasets.-provide-your-best-estimates-of-the-chilling-and-forcing-phases."><i class="fa fa-check"></i><b>22.2</b> Look at the plots for the agroclimate-based PLS analyses of the ‘Alexander Lucas’ and ‘Roter Boskoop’ datasets. Provide your best estimates of the chilling and forcing phases.</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html"><i class="fa fa-check"></i><b>23</b> Evaluating PLS outputs</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#reproduce-the-analysis-for-the-roter-boskoop-dataset."><i class="fa fa-check"></i><b>23.1</b> Reproduce the analysis for the ‘Roter Boskoop’ dataset.</a></li>
+<li class="chapter" data-level="23.2" data-path="evaluating-pls-outputs.html"><a href="evaluating-pls-outputs.html#weve-looked-at-data-from-a-number-of-locations-so-far.-how-would-you-expect-this-surface-plot-to-look-like-in-beijing-and-how-should-it-look-in-tunisia"><i class="fa fa-check"></i><b>23.2</b> We’ve looked at data from a number of locations so far. How would you expect this surface plot to look like in Beijing? And how should it look in Tunisia?</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html"><i class="fa fa-check"></i><b>24</b> The relative importance of chill and heat</a>
+<ul>
+<li class="chapter" data-level="24.1" data-path="the-relative-importance-of-chill-and-heat.html"><a href="the-relative-importance-of-chill-and-heat.html#describe-the-temperature-response-hypothesis-outlined-in-this-chapter."><i class="fa fa-check"></i><b>24.1</b> Describe the temperature response hypothesis outlined in this chapter.</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html"><i class="fa fa-check"></i><b>25</b> Making valid tree phenology models</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-the-difference-between-output-validation-and-process-validation."><i class="fa fa-check"></i><b>25.1</b> Explain the difference between output validation and process validation.</a></li>
+<li class="chapter" data-level="25.2" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#explain-what-a-validity-domain-is-and-why-it-is-important-to-consider-this-whenever-we-want-to-use-our-model-to-forecast-something."><i class="fa fa-check"></i><b>25.2</b> Explain what a validity domain is and why it is important to consider this whenever we want to use our model to forecast something.</a></li>
+<li class="chapter" data-level="25.3" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#what-is-validation-for-purpose"><i class="fa fa-check"></i><b>25.3</b> What is validation for purpose?</a></li>
+<li class="chapter" data-level="25.4" data-path="making-valid-tree-phenology-models.html"><a href="making-valid-tree-phenology-models.html#how-can-we-ensure-that-our-model-is-suitable-for-the-predictions-we-want-to-make"><i class="fa fa-check"></i><b>25.4</b> How can we ensure that our model is suitable for the predictions we want to make?</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html"><i class="fa fa-check"></i><b>26</b> The PhenoFlex model</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#parameterize-the-phenoflex-model-for-roter-boskoop-apples."><i class="fa fa-check"></i><b>26.1</b> Parameterize the PhenoFlex model for `Roter Boskoop’ apples.</a></li>
+<li class="chapter" data-level="26.2" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#produce-plots-of-predicted-vs.-observed-bloom-dates-and-distribution-of-prediction-errors."><i class="fa fa-check"></i><b>26.2</b> Produce plots of predicted vs. observed bloom dates and distribution of prediction errors.</a></li>
+<li class="chapter" data-level="26.3" data-path="the-phenoflex-model.html"><a href="the-phenoflex-model.html#compute-the-model-performance-metrics-rmsep-rpiq-mean-error-and-mean-absolute-error."><i class="fa fa-check"></i><b>26.3</b> Compute the model performance metrics RMSEP, RPIQ, mean error and mean absolute error.</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html"><i class="fa fa-check"></i><b>27</b> The PhenoFlex model - a second look</a>
+<ul>
+<li class="chapter" data-level="27.1" data-path="the-phenoflex-model---a-second-look.html"><a href="the-phenoflex-model---a-second-look.html#make-chill-and-heat-response-plots-for-the-alexander-lucas-phenoflex-model-for-the-location-you-did-the-earlier-analyses-for."><i class="fa fa-check"></i><b>27.1</b> Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.</a></li>
 </ul></li>
 <li class="chapter" data-level="28" data-path="can-we-improve-the-performance-of-phenoflex.html"><a href="can-we-improve-the-performance-of-phenoflex.html"><i class="fa fa-check"></i><b>28</b> Can we improve the performance of PhenoFlex?</a>
 <ul>
@@ -284,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published by Julian Bauer with bookdown</a></li>
 
 </ul>
 
@@ -307,163 +349,804 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 15</span> Plotting future scenarios<a href="plotting-future-scenarios.html#plotting-future-scenarios" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="produce-similar-plots-for-the-weather-station-you-selected-for-earlier-exercises." class="section level2 hasAnchor" number="15.1">
 <h2><span class="header-section-number">15.1</span> Produce similar plots for the weather station you selected for earlier exercises.<a href="plotting-future-scenarios.html#produce-similar-plots-for-the-weather-station-you-selected-for-earlier-exercises." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="plotting-future-scenarios.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
-<span id="cb47-2"><a href="plotting-future-scenarios.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb47-3"><a href="plotting-future-scenarios.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
-<span id="cb47-4"><a href="plotting-future-scenarios.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb47-5"><a href="plotting-future-scenarios.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpmisc)</span>
-<span id="cb47-6"><a href="plotting-future-scenarios.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="plotting-future-scenarios.html#cb48-1" aria-hidden="true" tabindex="-1"></a>chill_past_scenarios<span class="ot">&lt;-</span><span class="fu">load_temperature_scenarios</span>(</span>
-<span id="cb48-2"><a href="plotting-future-scenarios.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;data/chill&quot;</span>,</span>
-<span id="cb48-3"><a href="plotting-future-scenarios.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;CapeTown_historic&quot;</span>)</span>
-<span id="cb48-4"><a href="plotting-future-scenarios.html#cb48-4" aria-hidden="true" tabindex="-1"></a>chill_observed<span class="ot">&lt;-</span><span class="fu">load_temperature_scenarios</span>(</span>
-<span id="cb48-5"><a href="plotting-future-scenarios.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;data/chill&quot;</span>,</span>
-<span id="cb48-6"><a href="plotting-future-scenarios.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;CapeTown_observed&quot;</span>)</span>
-<span id="cb48-7"><a href="plotting-future-scenarios.html#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-8"><a href="plotting-future-scenarios.html#cb48-8" aria-hidden="true" tabindex="-1"></a>chills <span class="ot">&lt;-</span><span class="fu">make_climate_scenario</span>(</span>
-<span id="cb48-9"><a href="plotting-future-scenarios.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  chill_past_scenarios,</span>
-<span id="cb48-10"><a href="plotting-future-scenarios.html#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Historic&quot;</span>,</span>
-<span id="cb48-11"><a href="plotting-future-scenarios.html#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">historic_data =</span> chill_observed,</span>
-<span id="cb48-12"><a href="plotting-future-scenarios.html#cb48-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_series =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb48-13"><a href="plotting-future-scenarios.html#cb48-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-14"><a href="plotting-future-scenarios.html#cb48-14" aria-hidden="true" tabindex="-1"></a>RCPs<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;rcp45&quot;</span>,<span class="st">&quot;rcp85&quot;</span>)</span>
-<span id="cb48-15"><a href="plotting-future-scenarios.html#cb48-15" aria-hidden="true" tabindex="-1"></a>Times<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2050</span>,<span class="dv">2085</span>)</span>
-<span id="cb48-16"><a href="plotting-future-scenarios.html#cb48-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-17"><a href="plotting-future-scenarios.html#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(RCP <span class="cf">in</span> RCPs)</span>
-<span id="cb48-18"><a href="plotting-future-scenarios.html#cb48-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(Time <span class="cf">in</span> Times)</span>
-<span id="cb48-19"><a href="plotting-future-scenarios.html#cb48-19" aria-hidden="true" tabindex="-1"></a>  { chill<span class="ot">&lt;-</span><span class="fu">load_temperature_scenarios</span>(</span>
-<span id="cb48-20"><a href="plotting-future-scenarios.html#cb48-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;data/chill&quot;</span>,</span>
-<span id="cb48-21"><a href="plotting-future-scenarios.html#cb48-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="st">&quot;CapeTown_&quot;</span>,Time,<span class="st">&quot;_&quot;</span>,RCP))</span>
-<span id="cb48-22"><a href="plotting-future-scenarios.html#cb48-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(RCP<span class="sc">==</span><span class="st">&quot;rcp45&quot;</span>) RCPcaption <span class="ot">&lt;-</span> <span class="st">&quot;RCP4.5&quot;</span></span>
-<span id="cb48-23"><a href="plotting-future-scenarios.html#cb48-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(RCP<span class="sc">==</span><span class="st">&quot;rcp85&quot;</span>) RCPcaption <span class="ot">&lt;-</span> <span class="st">&quot;RCP8.5&quot;</span></span>
-<span id="cb48-24"><a href="plotting-future-scenarios.html#cb48-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(Time<span class="sc">==</span><span class="st">&quot;2050&quot;</span>) Time_caption <span class="ot">&lt;-</span> <span class="st">&quot;2050&quot;</span></span>
-<span id="cb48-25"><a href="plotting-future-scenarios.html#cb48-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(Time<span class="sc">==</span><span class="st">&quot;2085&quot;</span>) Time_caption <span class="ot">&lt;-</span> <span class="st">&quot;2085&quot;</span></span>
-<span id="cb48-26"><a href="plotting-future-scenarios.html#cb48-26" aria-hidden="true" tabindex="-1"></a>    chills <span class="ot">&lt;-</span><span class="fu">make_climate_scenario</span>(</span>
-<span id="cb48-27"><a href="plotting-future-scenarios.html#cb48-27" aria-hidden="true" tabindex="-1"></a>      chill,</span>
-<span id="cb48-28"><a href="plotting-future-scenarios.html#cb48-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span><span class="fu">c</span>(RCPcaption, Time_caption),</span>
-<span id="cb48-29"><a href="plotting-future-scenarios.html#cb48-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">add_to =</span> chills)</span>
-<span id="cb48-30"><a href="plotting-future-scenarios.html#cb48-30" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="plotting-future-scenarios.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(nam <span class="cf">in</span> <span class="fu">names</span>(chills[[<span class="dv">1</span>]]<span class="sc">$</span>data))</span>
-<span id="cb49-2"><a href="plotting-future-scenarios.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb49-3"><a href="plotting-future-scenarios.html#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="plotting-future-scenarios.html#cb49-4" aria-hidden="true" tabindex="-1"></a>   ch<span class="ot">&lt;-</span>chills[[<span class="dv">1</span>]]<span class="sc">$</span>data[[nam]]</span>
-<span id="cb49-5"><a href="plotting-future-scenarios.html#cb49-5" aria-hidden="true" tabindex="-1"></a>   ch[,<span class="st">&quot;GCM&quot;</span>]<span class="ot">&lt;-</span><span class="st">&quot;none&quot;</span></span>
-<span id="cb49-6"><a href="plotting-future-scenarios.html#cb49-6" aria-hidden="true" tabindex="-1"></a>   ch[,<span class="st">&quot;RCP&quot;</span>]<span class="ot">&lt;-</span><span class="st">&quot;none&quot;</span></span>
-<span id="cb49-7"><a href="plotting-future-scenarios.html#cb49-7" aria-hidden="true" tabindex="-1"></a>   ch[,<span class="st">&quot;Year&quot;</span>]<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(nam)</span>
-<span id="cb49-8"><a href="plotting-future-scenarios.html#cb49-8" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb49-9"><a href="plotting-future-scenarios.html#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(nam<span class="sc">==</span><span class="fu">names</span>(chills[[<span class="dv">1</span>]]<span class="sc">$</span>data)[<span class="dv">1</span>])</span>
-<span id="cb49-10"><a href="plotting-future-scenarios.html#cb49-10" aria-hidden="true" tabindex="-1"></a>    past_simulated<span class="ot">&lt;-</span>ch <span class="cf">else</span></span>
-<span id="cb49-11"><a href="plotting-future-scenarios.html#cb49-11" aria-hidden="true" tabindex="-1"></a>      past_simulated<span class="ot">&lt;-</span><span class="fu">rbind</span>(past_simulated,ch)</span>
-<span id="cb49-12"><a href="plotting-future-scenarios.html#cb49-12" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="plotting-future-scenarios.html#cb50-1" aria-hidden="true" tabindex="-1"></a>past_simulated[<span class="st">&quot;Scenario&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Historic&quot;</span></span>
-<span id="cb50-2"><a href="plotting-future-scenarios.html#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-3"><a href="plotting-future-scenarios.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(past_simulated[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])  <span class="sc">%&gt;%</span></span>
-<span id="cb50-4"><a href="plotting-future-scenarios.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span>
-<span id="cb50-5"><a href="plotting-future-scenarios.html#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-6"><a href="plotting-future-scenarios.html#cb50-6" aria-hidden="true" tabindex="-1"></a>past_observed <span class="ot">&lt;-</span> chills[[<span class="dv">1</span>]][[<span class="st">&quot;historic_data&quot;</span>]] <span class="co">#simplyfying pointer</span></span>
-<span id="cb50-7"><a href="plotting-future-scenarios.html#cb50-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-8"><a href="plotting-future-scenarios.html#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(past_observed[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])  <span class="sc">%&gt;%</span></span>
-<span id="cb50-9"><a href="plotting-future-scenarios.html#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="plotting-future-scenarios.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(chills))</span>
-<span id="cb51-2"><a href="plotting-future-scenarios.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(nam <span class="cf">in</span> <span class="fu">names</span>(chills[[i]]<span class="sc">$</span>data))</span>
-<span id="cb51-3"><a href="plotting-future-scenarios.html#cb51-3" aria-hidden="true" tabindex="-1"></a>    {ch<span class="ot">&lt;-</span>chills[[i]]<span class="sc">$</span>data[[nam]]</span>
-<span id="cb51-4"><a href="plotting-future-scenarios.html#cb51-4" aria-hidden="true" tabindex="-1"></a>     ch[,<span class="st">&quot;GCM&quot;</span>]<span class="ot">&lt;-</span>nam</span>
-<span id="cb51-5"><a href="plotting-future-scenarios.html#cb51-5" aria-hidden="true" tabindex="-1"></a>     ch[,<span class="st">&quot;RCP&quot;</span>]<span class="ot">&lt;-</span>chills[[i]]<span class="sc">$</span>caption[<span class="dv">1</span>]</span>
-<span id="cb51-6"><a href="plotting-future-scenarios.html#cb51-6" aria-hidden="true" tabindex="-1"></a>     ch[,<span class="st">&quot;Year&quot;</span>]<span class="ot">&lt;-</span>chills[[i]]<span class="sc">$</span>caption[<span class="dv">2</span>]</span>
-<span id="cb51-7"><a href="plotting-future-scenarios.html#cb51-7" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span>(i<span class="sc">==</span><span class="dv">2</span><span class="sc">&amp;</span>nam<span class="sc">==</span><span class="fu">names</span>(chills[[i]]<span class="sc">$</span>data)[<span class="dv">1</span>])</span>
-<span id="cb51-8"><a href="plotting-future-scenarios.html#cb51-8" aria-hidden="true" tabindex="-1"></a>       future_data<span class="ot">&lt;-</span>ch <span class="cf">else</span></span>
-<span id="cb51-9"><a href="plotting-future-scenarios.html#cb51-9" aria-hidden="true" tabindex="-1"></a>         future_data<span class="ot">&lt;-</span><span class="fu">rbind</span>(future_data,ch)</span>
-<span id="cb51-10"><a href="plotting-future-scenarios.html#cb51-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb51-11"><a href="plotting-future-scenarios.html#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-12"><a href="plotting-future-scenarios.html#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(future_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])  <span class="sc">%&gt;%</span></span>
-<span id="cb51-13"><a href="plotting-future-scenarios.html#cb51-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, <span class="at">position =</span> <span class="st">&quot;left&quot;</span>,<span class="at">font_size =</span> <span class="dv">8</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="plotting-future-scenarios.html#cb52-1" aria-hidden="true" tabindex="-1"></a>plot_scenarios_gg<span class="ot">&lt;-</span><span class="cf">function</span>(past_observed,</span>
-<span id="cb52-2"><a href="plotting-future-scenarios.html#cb52-2" aria-hidden="true" tabindex="-1"></a>                            past_simulated,</span>
-<span id="cb52-3"><a href="plotting-future-scenarios.html#cb52-3" aria-hidden="true" tabindex="-1"></a>                            future_data,</span>
-<span id="cb52-4"><a href="plotting-future-scenarios.html#cb52-4" aria-hidden="true" tabindex="-1"></a>                            metric,</span>
-<span id="cb52-5"><a href="plotting-future-scenarios.html#cb52-5" aria-hidden="true" tabindex="-1"></a>                            axis_label)</span>
-<span id="cb52-6"><a href="plotting-future-scenarios.html#cb52-6" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb52-7"><a href="plotting-future-scenarios.html#cb52-7" aria-hidden="true" tabindex="-1"></a>  rng<span class="ot">&lt;-</span><span class="fu">range</span>(past_observed[[metric]],</span>
-<span id="cb52-8"><a href="plotting-future-scenarios.html#cb52-8" aria-hidden="true" tabindex="-1"></a>             past_simulated[[metric]],</span>
-<span id="cb52-9"><a href="plotting-future-scenarios.html#cb52-9" aria-hidden="true" tabindex="-1"></a>             future_data[[metric]])  </span>
-<span id="cb52-10"><a href="plotting-future-scenarios.html#cb52-10" aria-hidden="true" tabindex="-1"></a>  past_plot<span class="ot">&lt;-</span><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb52-11"><a href="plotting-future-scenarios.html#cb52-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">data =</span> past_simulated,</span>
-<span id="cb52-12"><a href="plotting-future-scenarios.html#cb52-12" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">aes_string</span>(<span class="st">&quot;as.numeric(Year)&quot;</span>,metric,<span class="at">group=</span><span class="st">&quot;Year&quot;</span>),</span>
-<span id="cb52-13"><a href="plotting-future-scenarios.html#cb52-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">&quot;skyblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb52-14"><a href="plotting-future-scenarios.html#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="fu">round</span>(<span class="fl">1.1</span><span class="sc">*</span>rng[<span class="dv">2</span>])))) <span class="sc">+</span></span>
-<span id="cb52-15"><a href="plotting-future-scenarios.html#cb52-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> axis_label) <span class="sc">+</span></span>
-<span id="cb52-16"><a href="plotting-future-scenarios.html#cb52-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span> Scenario) <span class="sc">+</span></span>
-<span id="cb52-17"><a href="plotting-future-scenarios.html#cb52-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span>  </span>
-<span id="cb52-18"><a href="plotting-future-scenarios.html#cb52-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb52-19"><a href="plotting-future-scenarios.html#cb52-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb52-20"><a href="plotting-future-scenarios.html#cb52-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb52-21"><a href="plotting-future-scenarios.html#cb52-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> past_observed,</span>
-<span id="cb52-22"><a href="plotting-future-scenarios.html#cb52-22" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes_string</span>(<span class="st">&quot;End_year&quot;</span>,metric),</span>
-<span id="cb52-23"><a href="plotting-future-scenarios.html#cb52-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb52-24"><a href="plotting-future-scenarios.html#cb52-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-25"><a href="plotting-future-scenarios.html#cb52-25" aria-hidden="true" tabindex="-1"></a>  future_plot_list<span class="ot">&lt;-</span><span class="fu">list</span>()</span>
-<span id="cb52-26"><a href="plotting-future-scenarios.html#cb52-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-27"><a href="plotting-future-scenarios.html#cb52-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(y <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">2050</span>,<span class="dv">2085</span>))</span>
-<span id="cb52-28"><a href="plotting-future-scenarios.html#cb52-28" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb52-29"><a href="plotting-future-scenarios.html#cb52-29" aria-hidden="true" tabindex="-1"></a>    future_plot_list[[<span class="fu">which</span>(y <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">2050</span>,<span class="dv">2085</span>))]] <span class="ot">&lt;-</span></span>
-<span id="cb52-30"><a href="plotting-future-scenarios.html#cb52-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="at">data=</span> future_data[<span class="fu">which</span>(future_data<span class="sc">$</span>Year<span class="sc">==</span>y),]) <span class="sc">+</span></span>
-<span id="cb52-31"><a href="plotting-future-scenarios.html#cb52-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="fu">aes_string</span>(<span class="st">&quot;GCM&quot;</span>, metric, <span class="at">fill=</span><span class="st">&quot;GCM&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb52-32"><a href="plotting-future-scenarios.html#cb52-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(RCP)) <span class="sc">+</span></span>
-<span id="cb52-33"><a href="plotting-future-scenarios.html#cb52-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb52-34"><a href="plotting-future-scenarios.html#cb52-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="fu">round</span>(<span class="fl">1.1</span><span class="sc">*</span>rng[<span class="dv">2</span>])))) <span class="sc">+</span></span>
-<span id="cb52-35"><a href="plotting-future-scenarios.html#cb52-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_text_npc</span>(<span class="fu">aes</span>(<span class="at">npcx =</span> <span class="st">&quot;center&quot;</span>, <span class="at">npcy =</span> <span class="st">&quot;top&quot;</span>, <span class="at">label =</span> Year),</span>
-<span id="cb52-36"><a href="plotting-future-scenarios.html#cb52-36" aria-hidden="true" tabindex="-1"></a>                    <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb52-37"><a href="plotting-future-scenarios.html#cb52-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
-<span id="cb52-38"><a href="plotting-future-scenarios.html#cb52-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb52-39"><a href="plotting-future-scenarios.html#cb52-39" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb52-40"><a href="plotting-future-scenarios.html#cb52-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb52-41"><a href="plotting-future-scenarios.html#cb52-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb52-42"><a href="plotting-future-scenarios.html#cb52-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb52-43"><a href="plotting-future-scenarios.html#cb52-43" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.background =</span> <span class="fu">element_rect</span>(),</span>
-<span id="cb52-44"><a href="plotting-future-scenarios.html#cb52-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb52-45"><a href="plotting-future-scenarios.html#cb52-45" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb52-46"><a href="plotting-future-scenarios.html#cb52-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.box.spacing =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb52-47"><a href="plotting-future-scenarios.html#cb52-47" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>,</span>
-<span id="cb52-48"><a href="plotting-future-scenarios.html#cb52-48" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb52-49"><a href="plotting-future-scenarios.html#cb52-49" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">size =</span> <span class="dv">15</span> <span class="sc">*</span> <span class="fl">1.05</span>,</span>
-<span id="cb52-50"><a href="plotting-future-scenarios.html#cb52-50" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) </span>
-<span id="cb52-51"><a href="plotting-future-scenarios.html#cb52-51" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb52-52"><a href="plotting-future-scenarios.html#cb52-52" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-53"><a href="plotting-future-scenarios.html#cb52-53" aria-hidden="true" tabindex="-1"></a>  plot<span class="ot">&lt;-</span> (past_plot <span class="sc">+</span></span>
-<span id="cb52-54"><a href="plotting-future-scenarios.html#cb52-54" aria-hidden="true" tabindex="-1"></a>            future_plot_list <span class="sc">+</span></span>
-<span id="cb52-55"><a href="plotting-future-scenarios.html#cb52-55" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>,</span>
-<span id="cb52-56"><a href="plotting-future-scenarios.html#cb52-56" aria-hidden="true" tabindex="-1"></a>                        <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="fu">rep</span>(<span class="fl">1.8</span>,<span class="fu">length</span>(future_plot_list))))) <span class="sc">+</span></span>
-<span id="cb52-57"><a href="plotting-future-scenarios.html#cb52-57" aria-hidden="true" tabindex="-1"></a>          <span class="fu">plot_annotation</span>(<span class="at">theme =</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">24</span>))) <span class="sc">&amp;</span> </span>
-<span id="cb52-58"><a href="plotting-future-scenarios.html#cb52-58" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb52-59"><a href="plotting-future-scenarios.html#cb52-59" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
-<span id="cb52-60"><a href="plotting-future-scenarios.html#cb52-60" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
-<span id="cb52-61"><a href="plotting-future-scenarios.html#cb52-61" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.title.x=</span><span class="fu">element_blank</span>())</span>
-<span id="cb52-62"><a href="plotting-future-scenarios.html#cb52-62" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb52-63"><a href="plotting-future-scenarios.html#cb52-63" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="plotting-future-scenarios.html#cb53-1" aria-hidden="true" tabindex="-1"></a>CapeTown_Heat_GDH <span class="ot">&lt;-</span> <span class="fu">plot_scenarios_gg</span>(<span class="at">past_observed=</span>past_observed,</span>
-<span id="cb53-2"><a href="plotting-future-scenarios.html#cb53-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">past_simulated=</span>past_simulated,</span>
-<span id="cb53-3"><a href="plotting-future-scenarios.html#cb53-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">future_data=</span>future_data,</span>
-<span id="cb53-4"><a href="plotting-future-scenarios.html#cb53-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric=</span><span class="st">&quot;Heat_GDH&quot;</span>,</span>
-<span id="cb53-5"><a href="plotting-future-scenarios.html#cb53-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis_label=</span><span class="st">&quot;Heat (in Growing Degree Hours)&quot;</span>)</span>
-<span id="cb53-6"><a href="plotting-future-scenarios.html#cb53-6" aria-hidden="true" tabindex="-1"></a>CapeTown_Heat_GDH</span>
-<span id="cb53-7"><a href="plotting-future-scenarios.html#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-8"><a href="plotting-future-scenarios.html#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-9"><a href="plotting-future-scenarios.html#cb53-9" aria-hidden="true" tabindex="-1"></a>CapeTown_Chill_CP <span class="ot">&lt;-</span> <span class="fu">plot_scenarios_gg</span>(<span class="at">past_observed=</span>past_observed,</span>
-<span id="cb53-10"><a href="plotting-future-scenarios.html#cb53-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">past_simulated=</span>past_simulated,</span>
-<span id="cb53-11"><a href="plotting-future-scenarios.html#cb53-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">future_data=</span>future_data,</span>
-<span id="cb53-12"><a href="plotting-future-scenarios.html#cb53-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric=</span><span class="st">&quot;Chill_CP&quot;</span>,</span>
-<span id="cb53-13"><a href="plotting-future-scenarios.html#cb53-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis_label=</span><span class="st">&quot;Chill (in Chill Portions)&quot;</span>)</span>
-<span id="cb53-14"><a href="plotting-future-scenarios.html#cb53-14" aria-hidden="true" tabindex="-1"></a>CapeTown_Chill_CP</span>
-<span id="cb53-15"><a href="plotting-future-scenarios.html#cb53-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-16"><a href="plotting-future-scenarios.html#cb53-16" aria-hidden="true" tabindex="-1"></a>CapeTown_Frost_H <span class="ot">&lt;-</span> <span class="fu">plot_scenarios_gg</span>(<span class="at">past_observed=</span>past_observed,</span>
-<span id="cb53-17"><a href="plotting-future-scenarios.html#cb53-17" aria-hidden="true" tabindex="-1"></a>                  <span class="at">past_simulated=</span>past_simulated,</span>
-<span id="cb53-18"><a href="plotting-future-scenarios.html#cb53-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">future_data=</span>future_data,</span>
-<span id="cb53-19"><a href="plotting-future-scenarios.html#cb53-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric=</span><span class="st">&quot;Frost_H&quot;</span>,</span>
-<span id="cb53-20"><a href="plotting-future-scenarios.html#cb53-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis_label=</span><span class="st">&quot;Frost duration (in hours)&quot;</span>)</span>
-<span id="cb53-21"><a href="plotting-future-scenarios.html#cb53-21" aria-hidden="true" tabindex="-1"></a>CapeTown_Frost_H</span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="plotting-future-scenarios.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave(&quot;plots/CapeTownPlot_Heat_GDH.png&quot;, CapeTown_Heat_GDH, width = 10, height = 5, dpi = 800)</span></span>
-<span id="cb54-2"><a href="plotting-future-scenarios.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave(&quot;plots/CapeTownPlot_Chill_CP.png&quot;, CapeTown_Chill_CP, width = 10, height = 5, dpi = 800)</span></span>
-<span id="cb54-3"><a href="plotting-future-scenarios.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co">#ggsave(&quot;plots/CapeTownPlots_Frost_H_RED.png&quot;, CapeTown_Frost_H, width = 10, height = 5, dpi = 800)</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="plotting-future-scenarios.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb52-2"><a href="plotting-future-scenarios.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb52-3"><a href="plotting-future-scenarios.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb52-4"><a href="plotting-future-scenarios.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpmisc)</span>
+<span id="cb52-5"><a href="plotting-future-scenarios.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb52-6"><a href="plotting-future-scenarios.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb52-7"><a href="plotting-future-scenarios.html#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="plotting-future-scenarios.html#cb52-8" aria-hidden="true" tabindex="-1"></a>chill_past_scenarios <span class="ot">&lt;-</span> <span class="fu">load_temperature_scenarios</span>(</span>
+<span id="cb52-9"><a href="plotting-future-scenarios.html#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;data/chill&quot;</span>,</span>
+<span id="cb52-10"><a href="plotting-future-scenarios.html#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;CapeTown_historic&quot;</span>)</span>
+<span id="cb52-11"><a href="plotting-future-scenarios.html#cb52-11" aria-hidden="true" tabindex="-1"></a>chill_observed <span class="ot">&lt;-</span> <span class="fu">load_temperature_scenarios</span>(</span>
+<span id="cb52-12"><a href="plotting-future-scenarios.html#cb52-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;data/chill&quot;</span>,</span>
+<span id="cb52-13"><a href="plotting-future-scenarios.html#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;CapeTown_observed&quot;</span>)</span>
+<span id="cb52-14"><a href="plotting-future-scenarios.html#cb52-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-15"><a href="plotting-future-scenarios.html#cb52-15" aria-hidden="true" tabindex="-1"></a>chills <span class="ot">&lt;-</span><span class="fu">make_climate_scenario</span>(</span>
+<span id="cb52-16"><a href="plotting-future-scenarios.html#cb52-16" aria-hidden="true" tabindex="-1"></a>  chill_past_scenarios,</span>
+<span id="cb52-17"><a href="plotting-future-scenarios.html#cb52-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Historic&quot;</span>,</span>
+<span id="cb52-18"><a href="plotting-future-scenarios.html#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">historic_data =</span> chill_observed,</span>
+<span id="cb52-19"><a href="plotting-future-scenarios.html#cb52-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">time_series =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb52-20"><a href="plotting-future-scenarios.html#cb52-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-21"><a href="plotting-future-scenarios.html#cb52-21" aria-hidden="true" tabindex="-1"></a>RCPs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;rcp45&quot;</span>,<span class="st">&quot;rcp85&quot;</span>)</span>
+<span id="cb52-22"><a href="plotting-future-scenarios.html#cb52-22" aria-hidden="true" tabindex="-1"></a>Times <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2050</span>,<span class="dv">2085</span>)</span>
+<span id="cb52-23"><a href="plotting-future-scenarios.html#cb52-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-24"><a href="plotting-future-scenarios.html#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(RCP <span class="cf">in</span> RCPs)</span>
+<span id="cb52-25"><a href="plotting-future-scenarios.html#cb52-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(Time <span class="cf">in</span> Times)</span>
+<span id="cb52-26"><a href="plotting-future-scenarios.html#cb52-26" aria-hidden="true" tabindex="-1"></a>  {chill <span class="ot">&lt;-</span> <span class="fu">load_temperature_scenarios</span>(</span>
+<span id="cb52-27"><a href="plotting-future-scenarios.html#cb52-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;data/chill&quot;</span>,</span>
+<span id="cb52-28"><a href="plotting-future-scenarios.html#cb52-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="st">&quot;CapeTown_&quot;</span>,Time,<span class="st">&quot;_&quot;</span>,RCP))</span>
+<span id="cb52-29"><a href="plotting-future-scenarios.html#cb52-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(RCP <span class="sc">==</span> <span class="st">&quot;rcp45&quot;</span>) RCPcaption <span class="ot">&lt;-</span> <span class="st">&quot;RCP4.5&quot;</span></span>
+<span id="cb52-30"><a href="plotting-future-scenarios.html#cb52-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(RCP <span class="sc">==</span> <span class="st">&quot;rcp85&quot;</span>) RCPcaption <span class="ot">&lt;-</span> <span class="st">&quot;RCP8.5&quot;</span></span>
+<span id="cb52-31"><a href="plotting-future-scenarios.html#cb52-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(Time <span class="sc">==</span> <span class="st">&quot;2050&quot;</span>) Time_caption <span class="ot">&lt;-</span> <span class="st">&quot;2050&quot;</span></span>
+<span id="cb52-32"><a href="plotting-future-scenarios.html#cb52-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(Time <span class="sc">==</span> <span class="st">&quot;2085&quot;</span>) Time_caption <span class="ot">&lt;-</span> <span class="st">&quot;2085&quot;</span></span>
+<span id="cb52-33"><a href="plotting-future-scenarios.html#cb52-33" aria-hidden="true" tabindex="-1"></a>    chills <span class="ot">&lt;-</span> <span class="fu">make_climate_scenario</span>(</span>
+<span id="cb52-34"><a href="plotting-future-scenarios.html#cb52-34" aria-hidden="true" tabindex="-1"></a>      chill,</span>
+<span id="cb52-35"><a href="plotting-future-scenarios.html#cb52-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="fu">c</span>(RCPcaption, Time_caption),</span>
+<span id="cb52-36"><a href="plotting-future-scenarios.html#cb52-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">add_to =</span> chills)</span>
+<span id="cb52-37"><a href="plotting-future-scenarios.html#cb52-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb52-38"><a href="plotting-future-scenarios.html#cb52-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-39"><a href="plotting-future-scenarios.html#cb52-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(nam <span class="cf">in</span> <span class="fu">names</span>(chills[[<span class="dv">1</span>]]<span class="sc">$</span>data))</span>
+<span id="cb52-40"><a href="plotting-future-scenarios.html#cb52-40" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb52-41"><a href="plotting-future-scenarios.html#cb52-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-42"><a href="plotting-future-scenarios.html#cb52-42" aria-hidden="true" tabindex="-1"></a>   ch<span class="ot">&lt;-</span>chills[[<span class="dv">1</span>]]<span class="sc">$</span>data[[nam]]</span>
+<span id="cb52-43"><a href="plotting-future-scenarios.html#cb52-43" aria-hidden="true" tabindex="-1"></a>   ch[,<span class="st">&quot;GCM&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;none&quot;</span></span>
+<span id="cb52-44"><a href="plotting-future-scenarios.html#cb52-44" aria-hidden="true" tabindex="-1"></a>   ch[,<span class="st">&quot;RCP&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;none&quot;</span></span>
+<span id="cb52-45"><a href="plotting-future-scenarios.html#cb52-45" aria-hidden="true" tabindex="-1"></a>   ch[,<span class="st">&quot;Year&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(nam)</span>
+<span id="cb52-46"><a href="plotting-future-scenarios.html#cb52-46" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb52-47"><a href="plotting-future-scenarios.html#cb52-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(nam <span class="sc">==</span> <span class="fu">names</span>(chills[[<span class="dv">1</span>]]<span class="sc">$</span>data)[<span class="dv">1</span>])</span>
+<span id="cb52-48"><a href="plotting-future-scenarios.html#cb52-48" aria-hidden="true" tabindex="-1"></a>    past_simulated <span class="ot">&lt;-</span> ch <span class="cf">else</span></span>
+<span id="cb52-49"><a href="plotting-future-scenarios.html#cb52-49" aria-hidden="true" tabindex="-1"></a>      past_simulated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(past_simulated,ch)</span>
+<span id="cb52-50"><a href="plotting-future-scenarios.html#cb52-50" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb52-51"><a href="plotting-future-scenarios.html#cb52-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-52"><a href="plotting-future-scenarios.html#cb52-52" aria-hidden="true" tabindex="-1"></a>past_simulated[<span class="st">&quot;Scenario&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Historic&quot;</span></span>
+<span id="cb52-53"><a href="plotting-future-scenarios.html#cb52-53" aria-hidden="true" tabindex="-1"></a>past_observed <span class="ot">&lt;-</span> chills[[<span class="dv">1</span>]][[<span class="st">&quot;historic_data&quot;</span>]] <span class="co">#simplyfying pointer</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="plotting-future-scenarios.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(chills))</span>
+<span id="cb53-2"><a href="plotting-future-scenarios.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(nam <span class="cf">in</span> <span class="fu">names</span>(chills[[i]]<span class="sc">$</span>data))</span>
+<span id="cb53-3"><a href="plotting-future-scenarios.html#cb53-3" aria-hidden="true" tabindex="-1"></a>    {ch<span class="ot">&lt;-</span>chills[[i]]<span class="sc">$</span>data[[nam]]</span>
+<span id="cb53-4"><a href="plotting-future-scenarios.html#cb53-4" aria-hidden="true" tabindex="-1"></a>     ch[,<span class="st">&quot;GCM&quot;</span>] <span class="ot">&lt;-</span> nam</span>
+<span id="cb53-5"><a href="plotting-future-scenarios.html#cb53-5" aria-hidden="true" tabindex="-1"></a>     ch[,<span class="st">&quot;RCP&quot;</span>] <span class="ot">&lt;-</span> chills[[i]]<span class="sc">$</span>caption[<span class="dv">1</span>]</span>
+<span id="cb53-6"><a href="plotting-future-scenarios.html#cb53-6" aria-hidden="true" tabindex="-1"></a>     ch[,<span class="st">&quot;Year&quot;</span>] <span class="ot">&lt;-</span> chills[[i]]<span class="sc">$</span>caption[<span class="dv">2</span>]</span>
+<span id="cb53-7"><a href="plotting-future-scenarios.html#cb53-7" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">2</span><span class="sc">&amp;</span>nam <span class="sc">==</span> <span class="fu">names</span>(chills[[i]]<span class="sc">$</span>data)[<span class="dv">1</span>])</span>
+<span id="cb53-8"><a href="plotting-future-scenarios.html#cb53-8" aria-hidden="true" tabindex="-1"></a>       future_data <span class="ot">&lt;-</span> ch <span class="cf">else</span></span>
+<span id="cb53-9"><a href="plotting-future-scenarios.html#cb53-9" aria-hidden="true" tabindex="-1"></a>         future_data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(future_data,ch)</span>
+<span id="cb53-10"><a href="plotting-future-scenarios.html#cb53-10" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<p>This is are the three different dataframes we need to plot the full graph. For the historic data, we have the metrics calculated from the simulated weather and extra data for the <code>geom_point()</code> plot. The dataframe for the future part of the plot, contains all the information, so that we can easily split it into the subplots with the <code>facet_grid()</code> function.</p>
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
+<caption>
+<span id="tab:unnamed-chunk-52">Table 15.1: </span>Final dataframe for plotting the historic boxplots
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Season
+</th>
+<th style="text-align:right;">
+End_year
+</th>
+<th style="text-align:right;">
+Season_days
+</th>
+<th style="text-align:right;">
+Data_days
+</th>
+<th style="text-align:right;">
+Perc_complete
+</th>
+<th style="text-align:right;">
+Chill_CP
+</th>
+<th style="text-align:right;">
+Heat_GDH
+</th>
+<th style="text-align:right;">
+Frost_H
+</th>
+<th style="text-align:left;">
+GCM
+</th>
+<th style="text-align:left;">
+RCP
+</th>
+<th style="text-align:right;">
+Year
+</th>
+<th style="text-align:left;">
+Scenario
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2000/2001
+</td>
+<td style="text-align:right;">
+2001
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+40.01651
+</td>
+<td style="text-align:right;">
+25461.99
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:right;">
+1980
+</td>
+<td style="text-align:left;">
+Historic
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001/2002
+</td>
+<td style="text-align:right;">
+2002
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+36.19151
+</td>
+<td style="text-align:right;">
+26279.66
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:right;">
+1980
+</td>
+<td style="text-align:left;">
+Historic
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002/2003
+</td>
+<td style="text-align:right;">
+2003
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+43.94242
+</td>
+<td style="text-align:right;">
+25793.20
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:right;">
+1980
+</td>
+<td style="text-align:left;">
+Historic
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003/2004
+</td>
+<td style="text-align:right;">
+2004
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+42.50185
+</td>
+<td style="text-align:right;">
+24986.08
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:right;">
+1980
+</td>
+<td style="text-align:left;">
+Historic
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2004/2005
+</td>
+<td style="text-align:right;">
+2005
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+44.96755
+</td>
+<td style="text-align:right;">
+25097.39
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:right;">
+1980
+</td>
+<td style="text-align:left;">
+Historic
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
+<caption>
+<span id="tab:unnamed-chunk-53">Table 15.2: </span>Final dataframe for plotting the historic point plot
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Season
+</th>
+<th style="text-align:right;">
+End_year
+</th>
+<th style="text-align:right;">
+Season_days
+</th>
+<th style="text-align:right;">
+Data_days
+</th>
+<th style="text-align:right;">
+Interpolated_days
+</th>
+<th style="text-align:right;">
+Perc_complete
+</th>
+<th style="text-align:right;">
+Chill_CP
+</th>
+<th style="text-align:right;">
+Heat_GDH
+</th>
+<th style="text-align:right;">
+Frost_H
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1976/1977
+</td>
+<td style="text-align:right;">
+1977
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+99.18699
+</td>
+<td style="text-align:right;">
+47.35204
+</td>
+<td style="text-align:right;">
+24188.96
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1977/1978
+</td>
+<td style="text-align:right;">
+1978
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+<td style="text-align:right;">
+38.61035
+</td>
+<td style="text-align:right;">
+25274.43
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1978/1979
+</td>
+<td style="text-align:right;">
+1979
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+<td style="text-align:right;">
+39.52377
+</td>
+<td style="text-align:right;">
+26679.28
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1979/1980
+</td>
+<td style="text-align:right;">
+1980
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+<td style="text-align:right;">
+45.20518
+</td>
+<td style="text-align:right;">
+23928.95
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1980/1981
+</td>
+<td style="text-align:right;">
+1981
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+<td style="text-align:right;">
+58.06163
+</td>
+<td style="text-align:right;">
+20428.03
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
+<table class=" lightable-paper lightable-hover" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; ">
+<caption>
+<span id="tab:unnamed-chunk-54">Table 15.3: </span>Final dataframe for plotting the future plots
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Season
+</th>
+<th style="text-align:right;">
+End_year
+</th>
+<th style="text-align:right;">
+Season_days
+</th>
+<th style="text-align:right;">
+Data_days
+</th>
+<th style="text-align:right;">
+Perc_complete
+</th>
+<th style="text-align:right;">
+Chill_CP
+</th>
+<th style="text-align:right;">
+Heat_GDH
+</th>
+<th style="text-align:right;">
+Frost_H
+</th>
+<th style="text-align:left;">
+GCM
+</th>
+<th style="text-align:left;">
+RCP
+</th>
+<th style="text-align:left;">
+Year
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2000/2001
+</td>
+<td style="text-align:right;">
+2001
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+26.74566
+</td>
+<td style="text-align:right;">
+27971.20
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+bcc-csm1-1
+</td>
+<td style="text-align:left;">
+RCP4.5
+</td>
+<td style="text-align:left;">
+2050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2001/2002
+</td>
+<td style="text-align:right;">
+2002
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+26.81553
+</td>
+<td style="text-align:right;">
+29202.97
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+bcc-csm1-1
+</td>
+<td style="text-align:left;">
+RCP4.5
+</td>
+<td style="text-align:left;">
+2050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2002/2003
+</td>
+<td style="text-align:right;">
+2003
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+28.98867
+</td>
+<td style="text-align:right;">
+28645.35
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+bcc-csm1-1
+</td>
+<td style="text-align:left;">
+RCP4.5
+</td>
+<td style="text-align:left;">
+2050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003/2004
+</td>
+<td style="text-align:right;">
+2004
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+32.31504
+</td>
+<td style="text-align:right;">
+27616.76
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+bcc-csm1-1
+</td>
+<td style="text-align:left;">
+RCP4.5
+</td>
+<td style="text-align:left;">
+2050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2004/2005
+</td>
+<td style="text-align:right;">
+2005
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+33.57207
+</td>
+<td style="text-align:right;">
+28098.57
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+bcc-csm1-1
+</td>
+<td style="text-align:left;">
+RCP4.5
+</td>
+<td style="text-align:left;">
+2050
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="plotting-future-scenarios.html#cb54-1" aria-hidden="true" tabindex="-1"></a>plot_scenarios_gg <span class="ot">&lt;-</span> <span class="cf">function</span>(past_observed,</span>
+<span id="cb54-2"><a href="plotting-future-scenarios.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                            past_simulated,</span>
+<span id="cb54-3"><a href="plotting-future-scenarios.html#cb54-3" aria-hidden="true" tabindex="-1"></a>                            future_data,</span>
+<span id="cb54-4"><a href="plotting-future-scenarios.html#cb54-4" aria-hidden="true" tabindex="-1"></a>                            metric,</span>
+<span id="cb54-5"><a href="plotting-future-scenarios.html#cb54-5" aria-hidden="true" tabindex="-1"></a>                            axis_label)</span>
+<span id="cb54-6"><a href="plotting-future-scenarios.html#cb54-6" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb54-7"><a href="plotting-future-scenarios.html#cb54-7" aria-hidden="true" tabindex="-1"></a>  rng <span class="ot">&lt;-</span> <span class="fu">range</span>(past_observed[[metric]],</span>
+<span id="cb54-8"><a href="plotting-future-scenarios.html#cb54-8" aria-hidden="true" tabindex="-1"></a>             past_simulated[[metric]],</span>
+<span id="cb54-9"><a href="plotting-future-scenarios.html#cb54-9" aria-hidden="true" tabindex="-1"></a>             future_data[[metric]])  </span>
+<span id="cb54-10"><a href="plotting-future-scenarios.html#cb54-10" aria-hidden="true" tabindex="-1"></a>  past_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb54-11"><a href="plotting-future-scenarios.html#cb54-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>(<span class="at">data =</span> past_simulated,</span>
+<span id="cb54-12"><a href="plotting-future-scenarios.html#cb54-12" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">aes_string</span>(<span class="st">&quot;as.numeric(Year)&quot;</span>,metric,<span class="at">group =</span> <span class="st">&quot;Year&quot;</span>),</span>
+<span id="cb54-13"><a href="plotting-future-scenarios.html#cb54-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">&quot;skyblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb54-14"><a href="plotting-future-scenarios.html#cb54-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="fu">round</span>(<span class="fl">1.1</span><span class="sc">*</span>rng[<span class="dv">2</span>])))) <span class="sc">+</span></span>
+<span id="cb54-15"><a href="plotting-future-scenarios.html#cb54-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">y =</span> axis_label) <span class="sc">+</span></span>
+<span id="cb54-16"><a href="plotting-future-scenarios.html#cb54-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span> Scenario) <span class="sc">+</span></span>
+<span id="cb54-17"><a href="plotting-future-scenarios.html#cb54-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span>  </span>
+<span id="cb54-18"><a href="plotting-future-scenarios.html#cb54-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-19"><a href="plotting-future-scenarios.html#cb54-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb54-20"><a href="plotting-future-scenarios.html#cb54-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb54-21"><a href="plotting-future-scenarios.html#cb54-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> past_observed,</span>
+<span id="cb54-22"><a href="plotting-future-scenarios.html#cb54-22" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes_string</span>(<span class="st">&quot;End_year&quot;</span>,metric),</span>
+<span id="cb54-23"><a href="plotting-future-scenarios.html#cb54-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">col=</span><span class="st">&quot;blue&quot;</span>)</span>
+<span id="cb54-24"><a href="plotting-future-scenarios.html#cb54-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-25"><a href="plotting-future-scenarios.html#cb54-25" aria-hidden="true" tabindex="-1"></a>  future_plot_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb54-26"><a href="plotting-future-scenarios.html#cb54-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-27"><a href="plotting-future-scenarios.html#cb54-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(y <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">2050</span>,<span class="dv">2085</span>))</span>
+<span id="cb54-28"><a href="plotting-future-scenarios.html#cb54-28" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb54-29"><a href="plotting-future-scenarios.html#cb54-29" aria-hidden="true" tabindex="-1"></a>    future_plot_list[[<span class="fu">which</span>(y <span class="sc">==</span> <span class="fu">c</span>(<span class="dv">2050</span>,<span class="dv">2085</span>))]] <span class="ot">&lt;-</span></span>
+<span id="cb54-30"><a href="plotting-future-scenarios.html#cb54-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="at">data=</span> future_data[<span class="fu">which</span>(future_data<span class="sc">$</span>Year <span class="sc">==</span> y),]) <span class="sc">+</span></span>
+<span id="cb54-31"><a href="plotting-future-scenarios.html#cb54-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_boxplot</span>(<span class="fu">aes_string</span>(<span class="st">&quot;GCM&quot;</span>, metric, <span class="at">fill=</span><span class="st">&quot;GCM&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb54-32"><a href="plotting-future-scenarios.html#cb54-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(RCP)) <span class="sc">+</span></span>
+<span id="cb54-33"><a href="plotting-future-scenarios.html#cb54-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="cn">NULL</span>, <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb54-34"><a href="plotting-future-scenarios.html#cb54-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">round</span>(<span class="fu">round</span>(<span class="fl">1.1</span><span class="sc">*</span>rng[<span class="dv">2</span>])))) <span class="sc">+</span></span>
+<span id="cb54-35"><a href="plotting-future-scenarios.html#cb54-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_text_npc</span>(<span class="fu">aes</span>(<span class="at">npcx =</span> <span class="st">&quot;center&quot;</span>, <span class="at">npcy =</span> <span class="st">&quot;top&quot;</span>, <span class="at">label =</span> Year),</span>
+<span id="cb54-36"><a href="plotting-future-scenarios.html#cb54-36" aria-hidden="true" tabindex="-1"></a>                    <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb54-37"><a href="plotting-future-scenarios.html#cb54-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb54-38"><a href="plotting-future-scenarios.html#cb54-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-39"><a href="plotting-future-scenarios.html#cb54-39" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-40"><a href="plotting-future-scenarios.html#cb54-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">axis.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-41"><a href="plotting-future-scenarios.html#cb54-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb54-42"><a href="plotting-future-scenarios.html#cb54-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.margin =</span> <span class="fu">margin</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb54-43"><a href="plotting-future-scenarios.html#cb54-43" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.background =</span> <span class="fu">element_rect</span>(),</span>
+<span id="cb54-44"><a href="plotting-future-scenarios.html#cb54-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb54-45"><a href="plotting-future-scenarios.html#cb54-45" aria-hidden="true" tabindex="-1"></a>            <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb54-46"><a href="plotting-future-scenarios.html#cb54-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.box.spacing =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb54-47"><a href="plotting-future-scenarios.html#cb54-47" aria-hidden="true" tabindex="-1"></a>            <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb54-48"><a href="plotting-future-scenarios.html#cb54-48" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb54-49"><a href="plotting-future-scenarios.html#cb54-49" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">size =</span> <span class="dv">15</span> <span class="sc">*</span> <span class="fl">1.05</span>,</span>
+<span id="cb54-50"><a href="plotting-future-scenarios.html#cb54-50" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) </span>
+<span id="cb54-51"><a href="plotting-future-scenarios.html#cb54-51" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb54-52"><a href="plotting-future-scenarios.html#cb54-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-53"><a href="plotting-future-scenarios.html#cb54-53" aria-hidden="true" tabindex="-1"></a>  plot<span class="ot">&lt;-</span> (past_plot <span class="sc">+</span></span>
+<span id="cb54-54"><a href="plotting-future-scenarios.html#cb54-54" aria-hidden="true" tabindex="-1"></a>            future_plot_list <span class="sc">+</span></span>
+<span id="cb54-55"><a href="plotting-future-scenarios.html#cb54-55" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>,</span>
+<span id="cb54-56"><a href="plotting-future-scenarios.html#cb54-56" aria-hidden="true" tabindex="-1"></a>                        <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="fu">rep</span>(<span class="fl">1.8</span>,<span class="fu">length</span>(future_plot_list))))) <span class="sc">+</span></span>
+<span id="cb54-57"><a href="plotting-future-scenarios.html#cb54-57" aria-hidden="true" tabindex="-1"></a>          <span class="fu">plot_annotation</span>(<span class="at">theme =</span></span>
+<span id="cb54-58"><a href="plotting-future-scenarios.html#cb54-58" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">24</span>))) <span class="sc">&amp;</span> </span>
+<span id="cb54-59"><a href="plotting-future-scenarios.html#cb54-59" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb54-60"><a href="plotting-future-scenarios.html#cb54-60" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>),</span>
+<span id="cb54-61"><a href="plotting-future-scenarios.html#cb54-61" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb54-62"><a href="plotting-future-scenarios.html#cb54-62" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb54-63"><a href="plotting-future-scenarios.html#cb54-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb54-64"><a href="plotting-future-scenarios.html#cb54-64" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The plots show the calculated Growing Degree Hours, Chill Portions and Frost Hours for the historic records and four simulated future scenarios. The simulation reveals that Growing Degree Hours will increase, while the Chill Portions decrease. Some GCMs contradict each other, but due to the use of this GCM ensemble we can still recognize clear trends. In the past, there were only a few frost hours, which will most likely not change in the future except for a few outliers.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="plotting-future-scenarios.html#cb55-1" aria-hidden="true" tabindex="-1"></a>CapeTown_Heat_GDH <span class="ot">&lt;-</span> <span class="fu">plot_scenarios_gg</span>(<span class="at">past_observed=</span>past_observed,</span>
+<span id="cb55-2"><a href="plotting-future-scenarios.html#cb55-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">past_simulated=</span>past_simulated,</span>
+<span id="cb55-3"><a href="plotting-future-scenarios.html#cb55-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">future_data=</span>future_data,</span>
+<span id="cb55-4"><a href="plotting-future-scenarios.html#cb55-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric=</span><span class="st">&quot;Heat_GDH&quot;</span>,</span>
+<span id="cb55-5"><a href="plotting-future-scenarios.html#cb55-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis_label=</span><span class="st">&quot;Heat (in Growing Degree Hours)&quot;</span>)</span>
+<span id="cb55-6"><a href="plotting-future-scenarios.html#cb55-6" aria-hidden="true" tabindex="-1"></a>CapeTown_Heat_GDH</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="plotting-future-scenarios.html#cb56-1" aria-hidden="true" tabindex="-1"></a>CapeTown_Chill_CP <span class="ot">&lt;-</span> <span class="fu">plot_scenarios_gg</span>(<span class="at">past_observed=</span>past_observed,</span>
+<span id="cb56-2"><a href="plotting-future-scenarios.html#cb56-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">past_simulated=</span>past_simulated,</span>
+<span id="cb56-3"><a href="plotting-future-scenarios.html#cb56-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">future_data=</span>future_data,</span>
+<span id="cb56-4"><a href="plotting-future-scenarios.html#cb56-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric=</span><span class="st">&quot;Chill_CP&quot;</span>,</span>
+<span id="cb56-5"><a href="plotting-future-scenarios.html#cb56-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis_label=</span><span class="st">&quot;Chill (in Chill Portions)&quot;</span>)</span>
+<span id="cb56-6"><a href="plotting-future-scenarios.html#cb56-6" aria-hidden="true" tabindex="-1"></a>CapeTown_Chill_CP</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-2.png" width="672" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="plotting-future-scenarios.html#cb57-1" aria-hidden="true" tabindex="-1"></a>CapeTown_Frost_H <span class="ot">&lt;-</span> <span class="fu">plot_scenarios_gg</span>(<span class="at">past_observed=</span>past_observed,</span>
+<span id="cb57-2"><a href="plotting-future-scenarios.html#cb57-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">past_simulated=</span>past_simulated,</span>
+<span id="cb57-3"><a href="plotting-future-scenarios.html#cb57-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">future_data=</span>future_data,</span>
+<span id="cb57-4"><a href="plotting-future-scenarios.html#cb57-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">metric=</span><span class="st">&quot;Frost_H&quot;</span>,</span>
+<span id="cb57-5"><a href="plotting-future-scenarios.html#cb57-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">axis_label=</span><span class="st">&quot;Frost duration (in hours)&quot;</span>)</span>
+<span id="cb57-6"><a href="plotting-future-scenarios.html#cb57-6" aria-hidden="true" tabindex="-1"></a>CapeTown_Frost_H</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-3.png" width="672" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="plotting-future-scenarios.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;plots/CapeTownPlot_Heat_GDH.png&quot;</span>,</span>
+<span id="cb58-2"><a href="plotting-future-scenarios.html#cb58-2" aria-hidden="true" tabindex="-1"></a>       CapeTown_Heat_GDH, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">800</span>)</span>
+<span id="cb58-3"><a href="plotting-future-scenarios.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;plots/CapeTownPlot_Chill_CP.png&quot;</span>,</span>
+<span id="cb58-4"><a href="plotting-future-scenarios.html#cb58-4" aria-hidden="true" tabindex="-1"></a>       CapeTown_Chill_CP, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">800</span>)</span>
+<span id="cb58-5"><a href="plotting-future-scenarios.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;plots/CapeTownPlots_Frost_H_RED.png&quot;</span>,</span>
+<span id="cb58-6"><a href="plotting-future-scenarios.html#cb58-6" aria-hidden="true" tabindex="-1"></a>       CapeTown_Frost_H, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">800</span>)</span></code></pre></div>
+<br />
+
+<hr />
 
 </div>
 </div>
@@ -504,7 +1187,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/15_plotting_future_scenarios.Rmd",
+"link": "https://github.com/JNBauer/tree_pheno_modelling/15_plotting_future_scenarios.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -522,7 +1205,8 @@ gitbook.start({
 },
 "toc": {
 "collapse": "subsection"
-}
+},
+"code_folding": "hide"
 });
 });
 </script>

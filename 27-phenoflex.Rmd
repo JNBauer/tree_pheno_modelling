@@ -1,14 +1,12 @@
 # The PhenoFlex model
 
-
 ## Parameterize the PhenoFlex model for `Roter Boskoop’ apples.
+
 The PhenoFlex model has 12 parameter that can be adjusted to the individual situation. In this example, we will parameterize the model for the "Roter Boskoop" cultivar. For succesful parameterizing, we need the actual time of Bloom of each year and the corresponding temperatures.
-```{r, echo=FALSE}
-library(chillR)
-library(ggplot2)
-```
 
 ```{r}
+library(chillR)
+
 CKA_weather<-read_tab("data/TMaxTMin1958-2019_patched.csv")
 Boskoop<-read_tab("data/Roter_Boskoop_bloom_1958_2019.csv")
 Boskoop_first<-Boskoop[,1:2]
@@ -22,6 +20,7 @@ hourtemps <- stack_hourly_temps(CKA_weather, latitude=50.6)
 ```
 
 For the parameters, we can set a starting point for each variable. Those starting points are already in use and are known to result in plausible predictions. We also specify a range in between which the algorithm searchs for suitable values. The broader the range, the longer the function needs to output its candidates. 
+
 ```{r}
 #          yc,  zc,  s1, Tu,    E0,      E1,     A0,         A1,   Tf, Tc, Tb,  slope
 par <-   c(40, 190, 0.5, 25, 3372.8,  9900.3, 6319.5, 5.939917e13,  4, 36,  4,  1.60)
@@ -30,6 +29,7 @@ lower <- c(38, 180, 0.1, 0 , 3000.0,  9000.0, 6000.0,       5.e13,  0,  0,  0,  
 ```
 
 We use the `phenologyFitter` function for the fitting. The number of maximal iterations is set to 1000 to avoid ending in a local minimum, but finding the best values globally.
+
 ```{r, eval=FALSE}
 SeasonList <- genSeasonList(hourtemps$hourtemps, mrange = c(8, 6), years=c(1959:2018))
 
@@ -44,12 +44,13 @@ Fit_res <- phenologyFitter(par.guess=par,
 Boskoop_par<-Fit_res$par
 
 write.csv(Boskoop_par,"data/PhenoFlex_parameters_Roter_Boskoop.csv")
-
 ```
 
 
 ## Produce plots of predicted vs. observed bloom dates and distribution of prediction errors.
+
 For the previous task, we calculated the best fitting parameters, in the next code chunk, we use this list as input for the `PhenoFlex_GDHwrapper` function and store the results together with the observed data. For the plots we also calculate the difference between prediction and observation for each year.
+
 ```{r}
 Boskoop_par<-read_tab("data/PhenoFlex_parameters_Roter_Boskoop.csv")[,2]
 
@@ -64,8 +65,9 @@ Boskoop_PhenoFlex_predictions$Error<-
   Boskoop_PhenoFlex_predictions$predicted-Boskoop_PhenoFlex_predictions$pheno
 ```
 
-
 ```{r phenoflex-error-point, fig.cap="A graph that shows the relation between the predicted and observed dates of bloom. The line represents a perfect model with no errors."}
+library(ggplot2)
+
 ggplot(Boskoop_PhenoFlex_predictions,aes(x=pheno,y=predicted)) +
   geom_point() +
   geom_abline(intercept=0, slope=1) +
@@ -75,16 +77,16 @@ ggplot(Boskoop_PhenoFlex_predictions,aes(x=pheno,y=predicted)) +
   ggtitle("Predicted vs. observed bloom dates")
 ```
 
-
 ```{r phenoflex-error-histo, fig.cap="A histogram that shows distribution of the errors. We can see that the models predicts the blooming dates more often too early."}
 ggplot(Boskoop_PhenoFlex_predictions,aes(Error)) +
   geom_histogram(binwidth = 2) +
   ggtitle("Distribution of prediction errors")
 ```
 
-
 ## Compute the model performance metrics RMSEP, RPIQ, mean error and mean absolute error.
+
 With the following commands from the `chillR` package and from base R, we can calculate standard performance metrics.
+
 ```{r 27-performance-metric-calc, message=FALSE}
 boskoop_RMSEP <- RMSEP(Boskoop_PhenoFlex_predictions$predicted,Boskoop_PhenoFlex_predictions$pheno)
 boskoop_RPIQ <- RPIQ(Boskoop_PhenoFlex_predictions$predicted,Boskoop_PhenoFlex_predictions$pheno)
@@ -93,3 +95,6 @@ boskoop_absolute_error <- mean(abs(Boskoop_PhenoFlex_predictions$Error))
 ```
 
 A RMSEP of **`r round(boskoop_RMSEP, 2)`** and a RPIQ of **`r round(boskoop_RPIQ, 2)`** are good results for the performance of our model. Compared to the RMSEP, the RPIQ not only includes the error, but also the observed variation. The mean error of **`r round(boskoop_mean, 2)`** shows that the model tends to predict the  and the absolute error of **`r round(boskoop_absolute_error, 2)`**
+
+\
+<hr />

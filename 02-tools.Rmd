@@ -1,20 +1,25 @@
-# Tools
-
-## Organization
+# Packages
 
 ### Bookdown
-I chose the markdown+bookdown approach for a better organization
-
-## Packages
+I chose the bookdown approach for a better organization. The chapters are always in single .rmd files, which makes knitting much faster, if I just want to have a look at the chapter I am currently working on. Sometimes there are problems with packages that have to be reloaded, but I am glad to have transformed the book into the Bookdown format quite early. The great [documentation](https://bookdown.org/yihui/bookdown/ "Yihui's Bookdown Documentation") made it possible for me to include many special features.
 
 ### chillR
+The key package of this logbook contains all important tools to perform phenology analysis. It allows researchers to work flexibly with different agroclimatic metrics. Previous hurdles led to limitations in the choice of chill models, which are overcome with ChillR. The reference [CRAN website](https://cran.r-project.org/web/packages/chillR/chillR.pdf "chillR CRAN") and the [course website](http://inresgb-lehre.iaas.uni-bonn.de/chillR_book/introduction.html "Tree phenology analysis with R - Website") provide useful instructions on how to work with the package.
 
 ### dplyr family
+Packages of the tidyverse universe like dplyr or purr can contain very useful functions, which could be solved with base R ocde often only more awkwardly. Whether this means that all data processing steps have to be done with functions from these packages, is something I don't know. In the end it is important to know that there are always several ways to reach the goal.
 
 ### ggplot2
-
-### plotly
+ggplot2 is essential for visualizing the data. Achieving the same results with Base R functions is more complicated and often does not visually match the results of ggplot2. Websites like the [R graph gallery](https://r-graph-gallery.com/ "Gallery with ggplot graphs") help to realize own ideas for graphs.
 
 ### leaflet
+The leaflet packages purpose is mainly to create interactive maps for HTML output. The possibilities to display various spatial data are enormous, but in this logbook I only present relatively simple applications.
 
+### kableExtra
+The kableExtra package enables the creation of tables. The customization of the formatting and appearance of the data makes it an important part of the logbook. There are also other packages for making tables like `DT` which I unfortunately could not try out in this module, but which might be even more suitable for HTML.
 
+### plotly
+This package allows the creation of interactive graphs, which can be easily used as part of HTML documents.
+
+\
+<hr />

@@ -4,6 +4,8 @@
 
 ```{r, echo=FALSE, message=FALSE}
 library(chillR)
+require(devtools)
+install_github("EduardoFernandezC/dormancyR")
 library(dormancyR)
 library(dplyr)
 library(kableExtra)
@@ -52,8 +54,9 @@ kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```
 
-In the next code chunk, we apply the whole list of chill metrics to all our past scenarios. And save our newly calculated data as `CapeTown_multichill_historic'
-```{r create chill metrics for all past scenarios,  eval = FALSE}
+In the next code chunk, we apply the whole list of chill metrics to all our past scenarios. And save our newly calculated data as `CapeTown_multichill_historic`
+
+```{r create chill metrics for all past scenarios,  eval=FALSE}
 CapeTown_temps<-read_tab("data/CapeTown_weather.csv")
 Temps<-load_temperature_scenarios("data/Weather","CapeTown_historic")
 
@@ -113,6 +116,7 @@ write.csv(past_observed,
 ```
 
 In the next code chunk, we apply the whole list of chill metrics to all our future scenarios. And save our newly calculated data in multiple files depending on their RCP and date.
+
 ```{r create chill metrics for all future scenarios, eval=FALSE}
 RCPs<-c("rcp45","rcp85")
 Times<-c(2050,2085)
@@ -157,8 +161,7 @@ for(RCP in RCPs)
 }
 ```
 
-The following code chunk is needed to combine 
-```{r, adapt the structure of the data}
+```{r, adapt the structure of the data, warning=FALSE, message=FALSE}
 chill_past_scenarios<-load_temperature_scenarios(
   "data/chill",
   "CapeTown_multichill_historic")
@@ -187,10 +190,9 @@ for(RCP in RCPs)
 }
 ```
 
-
 ## Make a heat map illustrating past and future changes in Safe Winter Chill, relative to a past scenario, for the 13 chill models used here.
 
-```{r prepare the dataset for plotting}
+```{r prepare the dataset for plotting, warning=FALSE, message=FALSE}
 for(i in 1:length(chills))
    {ch<-chills[[i]]
     if(ch$caption[1]=="Historic")
@@ -221,55 +223,36 @@ for(met in metrics)
       results[which(results$Metric==met&results$Year==1980),"Result"]-1
 ```
 
-```{r simple heatmap for SWC in future scenarios}
+We first create a single heatmap for the SWC for all future scenarios together. After that we separate the plots by RCP and year with the `facet_grid()` function. To prepare the graph for the combination with the graph with data from the past, we need to adjust the size and apply some theme changes. Labels and an adjusted color map help for a better understanding.
+
+```{r simple heatmap for SWC in future scenarios, warning=FALSE, message=FALSE}
 require(ggplot2)
 require(patchwork)
+require(colorRamps)
 
 rng = range(results$SWC)
 
-p_future<-ggplot(results[which(!results$GCM=="none"),],
+p_future <- ggplot(results[which(!results$GCM=="none"),],
                  aes(GCM, y=factor(Metric, levels=metrics),
                      fill = SWC)) +
-  geom_tile()
-
-p_future
-```
-
-```{r separate plots by RCP and year}
-p_future <-
-  p_future +
-  facet_grid(RCP ~ Year) 
-p_future
-```
-
-```{r size and theme changes}
-p_future <-
-  p_future +
-  theme_bw(base_size = 15) +
-  theme(axis.text = element_text(size=8))
-
-p_future
-```
-```{r color gradient modification}
-library(colorRamps)
-p_future <-
-  p_future +
-  scale_fill_gradientn(colours=matlab.like(15),
+            geom_tile() +
+            facet_grid(RCP ~ Year) +
+            theme_bw(base_size = 15) +
+            theme(axis.text = element_text(size=8)) +
+            scale_fill_gradientn(colours=matlab.like(15),
                        labels = scales::percent,
-                       limits=rng)
-p_future
-```
-```{r adding labels}
-p_future <-
-  p_future  +
-  theme(axis.text.x = element_text(angle = 75, hjust = 1, vjust = 1)) +
-  labs(fill = "Change in\nSafe Winter Chill\nsince 1980") +
-  scale_y_discrete(labels=model_labels) +
-  ylab("Chill metric")
-p_future
+                       limits=rng) +
+            theme(axis.text.x = element_text(angle = 75,
+                                             hjust = 1,
+                                             vjust = 1)) +
+            labs(fill = "Change in\nSafe Winter Chill\nsince 1980") +
+            scale_y_discrete(labels=model_labels) +
+            ylab("Chill metric")
 ```
 
-```{r prepare past and future plots for combining}
+We do a similar procedure for the past data by filtering it out with `GCM=="none"`.
+
+```{r prepare past and future plots for combining, warning=FALSE, message=FALSE}
 p_past<-
   ggplot(results[which(results$GCM=="none"),],
          aes(Year, y=factor(Metric, levels=metrics),
@@ -279,39 +262,155 @@ p_past<-
 p_past<-
   p_past +
   theme_bw(base_size = 15) +
-  theme(axis.text = element_text(size=8))
-
-p_past<-
-  p_past +
+  theme(axis.text = element_text(size=8)) +
   scale_fill_gradientn(colours=matlab.like(15),
                        labels = scales::percent,
-                       limits=rng)
-
-p_past<-
-  p_past +
-  scale_x_continuous(position = "top") 
-
-p_past<-
-  p_past +
+                       limits=rng) +
+  scale_x_continuous(position = "top") +
   labs(fill = "Change in\nSafe Winter Chill\nsince 1980") +
   scale_y_discrete(labels=model_labels) +
   ylab("Chill metric")
 ```
 
+With the patchwork package, we can combine the previously created plots into one graph. With `nrow` we can determine the formation and with ´guides = "collect"´ we create only one legend for both plots.
 
-```{r, combine past and future plots with patchwork}
-chill_comp_plot<-
-  (p_past +
-     p_future +
+```{r, warning=FALSE, message=FALSE , fig.cap='Heatmap for change in SWC for different chill metrics for the past and four future scenarios'}
+chill_comp_plot <-
+  (p_past + p_future +
      plot_layout(guides = "collect",nrow=2, heights=c(1,2))) &
-  theme(plot.margin = margin(1, 1, 12, 1), legend.position = "right",strip.background = element_blank(),
+  theme(plot.margin = margin(1, 1, 12, 1),
+        legend.position = "right",
+        strip.background = element_blank(),
         strip.text = element_text(face = "bold"))
 
 chill_comp_plot
 ```
+
+The plot shows the Safe Winter chill depending on different scenarios from the past and for the future. The best we can see in this plot is that the North Carolina Chill model should not be applied in South Africa. The model goes completely crazy and predicts changes of several thousand percent. This causes the problem that the scaling is also increasing and the predicted changes from the other models do not show up well.
+I made another plot below where I this time filtered out the North Carolina model. A few models still show some peculiarities, but overall we can now see the results of the other models more clearly. The predictions of the models generally indicate a decrease in available chill. 
+
 \
+<div id="spoiler" style="display:none">
+
+```{r, warning=FALSE, message=FALSE}
+results_wo_North <- filter(results, !Metric=="North_Carolina")
+rng = range(results_wo_North$SWC)
+
+
+p_future2 <- ggplot(results_wo_North[which(!results_wo_North$GCM=="none"),],
+                 aes(GCM, y=factor(Metric, levels=metrics[metrics!= "North_Carolina"]),
+                     fill = SWC)) +
+            geom_tile() +
+            facet_grid(RCP ~ Year) +
+            theme_bw(base_size = 15) +
+            theme(axis.text = element_text(size=8)) +
+            scale_fill_gradientn(colours=matlab.like(15),
+                       labels = scales::percent,
+                       limits=rng) +
+            theme(axis.text.x = element_text(angle = 75,
+                                             hjust = 1,
+                                             vjust = 1)) +
+            labs(fill = "Change in\nSafe Winter Chill\nsince 1980") +
+            scale_y_discrete(labels=model_labels[model_labels!= "North Carolina Chill Units"]) +
+            ylab("Chill metric")
+
+p2_past <-
+  ggplot(results_wo_North[which(results_wo_North$GCM=="none"),],
+         aes(Year, y=factor(Metric, levels=metrics[metrics!= "North_Carolina"]),
+             fill = SWC)) +
+  geom_tile()
+
+p2_past<-
+  p2_past +
+  theme_bw(base_size = 15) +
+  theme(axis.text = element_text(size=8)) +
+  scale_fill_gradientn(colours=matlab.like(15),
+                       labels = scales::percent,
+                       limits=rng) +
+  scale_x_continuous(position = "top") +
+  labs(fill = "Change in\nSafe Winter Chill\nsince 1980") +
+  scale_y_discrete(labels=model_labels[model_labels!= "North Carolina Chill Units"]) +
+  ylab("Chill metric")
+
+
+chill_comp_plot2 <-
+  (p2_past + p_future2 +
+     plot_layout(guides = "collect",nrow=2, heights=c(1,2))) &
+  theme(plot.margin = margin(1, 1, 12, 1),
+        legend.position = "right",
+        strip.background = element_blank(),
+        strip.text = element_text(face = "bold"))
+```
+
+</div>
+
+<button title="Click to show/hide the code for the new plot" type="button"
+   onclick="if(document.getElementById('spoiler') .style.display=='none')
+              {document.getElementById('spoiler') .style.display=''}
+            else{document.getElementById('spoiler') .style.display='none'}">
+  Show/Hide code
+</button>
+\
+
+
+```{r, echo=FALSE, fig.cap='Adjusted heatmap for change in SWC for different chill metrics for the past and four future scenarios'}
+results_wo_North <- filter(results, !Metric=="North_Carolina")
+rng = range(results_wo_North$SWC)
+
+
+p_future2 <- ggplot(results_wo_North[which(!results_wo_North$GCM=="none"),],
+                 aes(GCM, y=factor(Metric, levels=metrics[metrics!= "North_Carolina"]),
+                     fill = SWC)) +
+            geom_tile() +
+            facet_grid(RCP ~ Year) +
+            theme_bw(base_size = 15) +
+            theme(axis.text = element_text(size=8)) +
+            scale_fill_gradientn(colours=matlab.like(15),
+                       labels = scales::percent,
+                       limits=rng) +
+            theme(axis.text.x = element_text(angle = 75,
+                                             hjust = 1,
+                                             vjust = 1)) +
+            labs(fill = "Change in\nSafe Winter Chill\nsince 1980") +
+            scale_y_discrete(labels=model_labels[model_labels!= "North Carolina Chill Units"]) +
+            ylab("Chill metric")
+
+p2_past <-
+  ggplot(results_wo_North[which(results_wo_North$GCM=="none"),],
+         aes(Year, y=factor(Metric, levels=metrics[metrics!= "North_Carolina"]),
+             fill = SWC)) +
+  geom_tile()
+
+p2_past<-
+  p2_past +
+  theme_bw(base_size = 15) +
+  theme(axis.text = element_text(size=8)) +
+  scale_fill_gradientn(colours=matlab.like(15),
+                       labels = scales::percent,
+                       limits=rng) +
+  scale_x_continuous(position = "top") +
+  labs(fill = "Change in\nSafe Winter Chill\nsince 1980") +
+  scale_y_discrete(labels=model_labels[model_labels!= "North Carolina Chill Units"]) +
+  ylab("Chill metric")
+
+
+chill_comp_plot2 <-
+  (p2_past + p_future2 +
+     plot_layout(guides = "collect",nrow=2, heights=c(1,2))) &
+  theme(plot.margin = margin(1, 1, 12, 1),
+        legend.position = "right",
+        strip.background = element_blank(),
+        strip.text = element_text(face = "bold"))
+
+chill_comp_plot2
+
+```
+
 ## Produce an animated line plot of your results (summarizing Safe Winter Chill across all the GCMs).
-```{r data preparation for line graph arrangement}
+
+The animated plot is based on a line plot, that was animated with `transition_reveal(Year)` from the `gganimate` package. The line plot is revealed in order of the ´Year´ variable. Instead of plotting the graph directly in the markdown document, I decided to save it as a file and import it. This allowed me to knit the document faster.
+
+```{r data preparation for line graph arrangement, warning=FALSE, message=FALSE}
 hist_results<-results[which(results$GCM=="none"),]
 hist_results$RCP<-"RCP4.5"
 hist_results_2<-hist_results
@@ -329,8 +428,8 @@ RCP_Time_series<-rbind(hist_results[,c("Metric","RCP","Year","SWC")],
                        GCM_aggregate)
 ```
 
-```{r plotting chill_change as line plot}
-chill_change_plot<-
+```{r createing the plot for chill_change as line plot, warning=FALSE, message=FALSE}
+chill_change_plot <-
   ggplot(data=RCP_Time_series,
          aes(x=Year,y=SWC,col=factor(Metric,levels=metrics))) +
   geom_line(lwd=1.3) +
@@ -342,14 +441,24 @@ chill_change_plot<-
   theme(strip.background = element_blank(),
         strip.text = element_text(face = "bold")) +
   ylab("Safe Winter Chill")
-
-chill_change_plot
 ```
 
-```{r using gganimate to animate chill_change plot}
+```{r using gganimate to animate chill_change plot, warning=FALSE, message=FALSE, eval=FALSE}
 library(gganimate)
-chill_change_plot + transition_reveal(Year)
+library(gifski)
 
+myPlot <- chill_change_plot + transition_reveal(Year)
+
+animate(myPlot, renderer = gifski_renderer())
 anim_save("plots/chill_comparison_animation.gif", animation = last_animation())
 ```
 
+The line plot also shows again clearly that the North Carolina Chill model is not suitable for South Africa. For the other models, we can see that the SWC will decrease.
+
+```{r, echo=FALSE, out.width="100%", fig.cap='Animated line plot for the change in SWC depending on different chill models for Cape Town, South Africa since 1980'}
+knitr::include_graphics("plots/chill_comparison_animation.gif")
+```
+
+
+\
+<hr />

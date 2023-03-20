@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 19 Successes and limitations of PLS regression analysis | Tree phenology analysis with R - Logbook</title>
   <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 19 Successes and limitations of PLS regression analysis | Tree phenology analysis with R - Logbook" />
   <meta property="og:type" content="book" />
@@ -50,8 +50,96 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -70,34 +158,34 @@
 <li><a href="./">Tree phenology Logbook</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
-<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
-<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
-<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
-<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
-<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
-</ul></li>
+<li class="chapter" data-level="2.0.1" data-path="packages.html"><a href="packages.html#bookdown"><i class="fa fa-check"></i><b>2.0.1</b> Bookdown</a></li>
+<li class="chapter" data-level="2.0.2" data-path="packages.html"><a href="packages.html#chillr"><i class="fa fa-check"></i><b>2.0.2</b> chillR</a></li>
+<li class="chapter" data-level="2.0.3" data-path="packages.html"><a href="packages.html#dplyr-family"><i class="fa fa-check"></i><b>2.0.3</b> dplyr family</a></li>
+<li class="chapter" data-level="2.0.4" data-path="packages.html"><a href="packages.html#ggplot2"><i class="fa fa-check"></i><b>2.0.4</b> ggplot2</a></li>
+<li class="chapter" data-level="2.0.5" data-path="packages.html"><a href="packages.html#leaflet"><i class="fa fa-check"></i><b>2.0.5</b> leaflet</a></li>
+<li class="chapter" data-level="2.0.6" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>2.0.6</b> kableExtra</a></li>
+<li class="chapter" data-level="2.0.7" data-path="packages.html"><a href="packages.html#plotly"><i class="fa fa-check"></i><b>2.0.7</b> plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
 <li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
-<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scale"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
 <li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
 <li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
-<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-3-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 3 climate impact projection methods described in the fourth video.</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#statistical-models"><i class="fa fa-check"></i><b>4.4.1</b> Statistical models</a></li>
+<li class="chapter" data-level="4.4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#process-based-models"><i class="fa fa-check"></i><b>4.4.2</b> Process-based models</a></li>
+<li class="chapter" data-level="4.4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#climate-analogue-models"><i class="fa fa-check"></i><b>4.4.3</b> Climate analogue models</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
 <ul>
@@ -110,8 +198,18 @@
 <li class="chapter" data-level="6.2" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset"><i class="fa fa-check"></i><b>6.2</b> Apply this function to the Winters_hours_gaps dataset</a></li>
 <li class="chapter" data-level="6.3" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates"><i class="fa fa-check"></i><b>6.3</b> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
-<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
+<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chill-models.html"><a href="chill-models.html#run-the-chilling-function-on-the-winters_hours_gap-dataset"><i class="fa fa-check"></i><b>7.1</b> Run the chilling() function on the Winters_hours_gap dataset</a></li>
+<li class="chapter" data-level="7.2" data-path="chill-models.html"><a href="chill-models.html#create-your-own-temperature-weighting-chill-model-using-the-step_model-function."><i class="fa fa-check"></i><b>7.2</b> Create your own temperature-weighting chill model using the step_model() function.</a></li>
+<li class="chapter" data-level="7.3" data-path="chill-models.html"><a href="chill-models.html#run-this-model-on-the-winters_hours_gaps-dataset-using-the-tempresponse-function."><i class="fa fa-check"></i><b>7.3</b> Run this model on the Winters_hours_gaps dataset using the tempResponse() function.</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#choose-a-location-of-interest-find-out-its-latitude-and-produce-plots-of-daily-sunrise-sunset-and-daylength"><i class="fa fa-check"></i><b>8.1</b> Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength</a></li>
+<li class="chapter" data-level="8.2" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-an-hourly-dataset-based-on-idealized-daily-curves-for-the-ka_weather-dataset-included-in-chillr"><i class="fa fa-check"></i><b>8.2</b> Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)</a></li>
+<li class="chapter" data-level="8.3" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-empirical-temperature-curve-parameters-for-the-winters_hours_gaps-dataset-and-use-them-to-predict-hourly-values-from-daily-temperatures-this-is-very-similar-to-the-example-above-but-please-make-sure-you-understand-whats-going-on"><i class="fa fa-check"></i><b>8.3</b> Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
@@ -162,8 +260,8 @@
 </ul></li>
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson."><i class="fa fa-check"></i><b>18.1</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
-<li class="chapter" data-level="18.2" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson.-1"><i class="fa fa-check"></i><b>18.2</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
+<li class="chapter" data-level="18.1" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#briefly-explain-why-you-shouldnt-take-the-results-of-a-pls-regression-analysis-between-temperature-and-phenology-at-face-value.-what-do-you-need-in-addition-in-order-to-make-sense-of-such-outputs"><i class="fa fa-check"></i><b>18.1</b> Briefly explain why you shouldn’t take the results of a PLS regression analysis between temperature and phenology at face value. What do you need in addition in order to make sense of such outputs?</a></li>
+<li class="chapter" data-level="18.2" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson."><i class="fa fa-check"></i><b>18.2</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
 <li class="chapter" data-level="18.3" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#write-down-your-thoughts-on-why-were-not-seeing-the-temperature-response-pattern-we-may-have-expected.-what-happened-to-the-chill-response"><i class="fa fa-check"></i><b>18.3</b> Write down your thoughts on why we’re not seeing the temperature response pattern we may have expected. What happened to the chill response?</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html"><i class="fa fa-check"></i><b>19</b> Successes and limitations of PLS regression analysis</a>
@@ -179,7 +277,8 @@
 </ul></li>
 <li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed."><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?.</a></li>
+<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed"><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?</a></li>
+<li class="chapter" data-level="21.2" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#can-you-think-about-possible-reasons-for-the-success-or-failure-of-pls-analysis-based-on-agroclimatic-metrics-if-so-write-down-your-thoughts"><i class="fa fa-check"></i><b>21.2</b> Can you think about possible reasons for the success or failure of PLS analysis based on agroclimatic metrics (if so, write down your thoughts)?</a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html"><i class="fa fa-check"></i><b>22</b> Why PLS doesn’t always work</a>
 <ul>
@@ -227,7 +326,7 @@
 <li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published by Julian Bauer with bookdown</a></li>
 
 </ul>
 
@@ -251,17 +350,190 @@
 <div id="briefly-explain-in-what-climatic-settings-we-can-expect-pls-regression-to-detect-the-chilling-phase---and-in-what-settings-this-probably-wont-work." class="section level2 hasAnchor" number="19.1">
 <h2><span class="header-section-number">19.1</span> Briefly explain in what climatic settings we can expect PLS regression to detect the chilling phase - and in what settings this probably won’t work.<a href="successes-and-limitations-of-pls-regression-analysis.html#briefly-explain-in-what-climatic-settings-we-can-expect-pls-regression-to-detect-the-chilling-phase---and-in-what-settings-this-probably-wont-work." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can expect PLS regression to detect the chilling phase, when the setting features a continuous monotonic relationship in temperature and generation of chill. In climate settings such as China or Germany a change in temperature can lead to more or less chill dependent on the initial temperature before the change. An increase in temperature from -5°C to 5°C leads to an increase in chill accumulation, while the same increase in the same direction from 5°C to 15°C leads to a decrease in chill accumulation. In California for example PLS detects the chilling phase, because chill accumulation monotonically declines with warmer temperatures or increases with colder temperatures. A decrease in chill due to too cold temperatures is less common.</p>
-<p>In the graph below I have added the temperatures for Tunisia. Robin kindly provided me with his temperature data from there. In Tunisia, as already seen in California, there is a monotonic relationship between temperature and chill accumulation. Thus, a PLS regression can be successfully performed there as well, as we will later see in Chapter 21.<br />
-</p>
+<p>In the graph below I have added the temperatures for Tunisia. Robin kindly provided me with his temperature data from there. In Tunisia, as already seen in California, there is a monotonic relationship between temperature and chill accumulation. Thus, a PLS regression can be successfully performed there as well, as we will later see in Chapter 21.</p>
+<br />
+
+<div id="spoiler" style="display:none">
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(chillR)</span>
+<span id="cb77-2"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dormancyR)</span>
+<span id="cb77-3"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb77-4"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reshape2)</span>
+<span id="cb77-5"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb77-6"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-7"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-8"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-8" aria-hidden="true" tabindex="-1"></a>hourly_models <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Chilling_units =</span> chilling_units,</span>
+<span id="cb77-9"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">Low_chill =</span> low_chill_model,</span>
+<span id="cb77-10"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">Modified_Utah =</span> modified_utah_model,</span>
+<span id="cb77-11"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">North_Carolina =</span> north_carolina_model,</span>
+<span id="cb77-12"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">Positive_Utah =</span> positive_utah_model,</span>
+<span id="cb77-13"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">Chilling_Hours =</span> Chilling_Hours,</span>
+<span id="cb77-14"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">Utah_Chill_Units =</span> Utah_Model,</span>
+<span id="cb77-15"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">Chill_Portions =</span> Dynamic_Model)</span>
+<span id="cb77-16"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-16" aria-hidden="true" tabindex="-1"></a>daily_models<span class="ot">&lt;-</span><span class="fu">list</span>(<span class="at">Rate_of_Chill =</span> rate_of_chill, </span>
+<span id="cb77-17"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">Exponential_Chill =</span> exponential_chill,</span>
+<span id="cb77-18"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Triangula_Chill_Haninnen =</span> triangular_chill_1,</span>
+<span id="cb77-19"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">Triangular_Chill_Legave =</span> triangular_chill_2)</span>
+<span id="cb77-20"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-21"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-21" aria-hidden="true" tabindex="-1"></a>metrics<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fu">names</span>(daily_models),<span class="fu">names</span>(hourly_models))</span>
+<span id="cb77-22"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-23"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-23" aria-hidden="true" tabindex="-1"></a>model_labels<span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;Rate of Chill&quot;</span>,</span>
+<span id="cb77-24"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-24" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Exponential Chill&quot;</span>,</span>
+<span id="cb77-25"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-25" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Triangular Chill (Häninnen)&quot;</span>,</span>
+<span id="cb77-26"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-26" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Triangular Chill (Legave)&quot;</span>,</span>
+<span id="cb77-27"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-27" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Chilling Units&quot;</span>,</span>
+<span id="cb77-28"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-28" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Low-Chill Chill Units&quot;</span>,</span>
+<span id="cb77-29"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-29" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Modified Utah Chill Units&quot;</span>,</span>
+<span id="cb77-30"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-30" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;North Carolina Chill Units&quot;</span>,</span>
+<span id="cb77-31"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-31" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Positive Utah Chill Units&quot;</span>,</span>
+<span id="cb77-32"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-32" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Chilling Hours&quot;</span>,</span>
+<span id="cb77-33"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-33" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Utah Chill Units&quot;</span>,</span>
+<span id="cb77-34"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-34" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;Chill Portions&quot;</span>)</span>
+<span id="cb77-35"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-36"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-37"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-38"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(T <span class="cf">in</span> <span class="sc">-</span><span class="dv">20</span><span class="sc">:</span><span class="dv">30</span>)</span>
+<span id="cb77-39"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-39" aria-hidden="true" tabindex="-1"></a> {hourly<span class="ot">&lt;-</span><span class="fu">sapply</span>(hourly_models, <span class="cf">function</span>(x) <span class="fu">x</span>(<span class="fu">rep</span>(T,<span class="dv">1000</span>)))[<span class="dv">1000</span>,]</span>
+<span id="cb77-40"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-40" aria-hidden="true" tabindex="-1"></a>  temp_frame<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Tmin=</span><span class="fu">rep</span>(T,<span class="dv">1000</span>),</span>
+<span id="cb77-41"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-41" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Tmax=</span><span class="fu">rep</span>(T,<span class="dv">1000</span>),</span>
+<span id="cb77-42"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-42" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Tmean=</span><span class="fu">rep</span>(T,<span class="dv">1000</span>))</span>
+<span id="cb77-43"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-43" aria-hidden="true" tabindex="-1"></a>  daily<span class="ot">&lt;-</span><span class="fu">sapply</span>(daily_models, <span class="cf">function</span>(x) <span class="fu">x</span>(temp_frame))[<span class="dv">1000</span>,]</span>
+<span id="cb77-44"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-44" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb77-45"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(T<span class="sc">==-</span><span class="dv">20</span>) sensitivity<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="at">T=</span>T,daily,hourly) <span class="cf">else</span></span>
+<span id="cb77-46"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-46" aria-hidden="true" tabindex="-1"></a>    sensitivity<span class="ot">&lt;-</span><span class="fu">rbind</span>(sensitivity,<span class="fu">c</span>(<span class="at">T=</span>T,daily,hourly))</span>
+<span id="cb77-47"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb77-48"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-49"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-49" aria-hidden="true" tabindex="-1"></a>sensitivity_normal<span class="ot">&lt;-</span></span>
+<span id="cb77-50"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(sensitivity[,<span class="dv">1</span>],</span>
+<span id="cb77-51"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-51" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">sapply</span>(<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(sensitivity),</span>
+<span id="cb77-52"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-52" aria-hidden="true" tabindex="-1"></a>                             <span class="cf">function</span>(x)</span>
+<span id="cb77-53"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-53" aria-hidden="true" tabindex="-1"></a>                               sensitivity[,x]<span class="sc">/</span><span class="fu">max</span>(sensitivity[,x]))))</span>
+<span id="cb77-54"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-54" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sensitivity_normal)<span class="ot">&lt;-</span><span class="fu">colnames</span>(sensitivity)</span>
+<span id="cb77-55"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-55" aria-hidden="true" tabindex="-1"></a>sensitivity_gg<span class="ot">&lt;-</span><span class="fu">melt</span>(sensitivity_normal,<span class="at">id.vars=</span><span class="st">&quot;T&quot;</span>)</span>
+<span id="cb77-56"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-56" aria-hidden="true" tabindex="-1"></a>sensitivity_gg<span class="sc">$</span>value[<span class="fu">which</span>(sensitivity_gg<span class="sc">$</span>value<span class="sc">&lt;=</span><span class="fl">0.001</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb77-57"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-58"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-59"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-59" aria-hidden="true" tabindex="-1"></a>chill<span class="ot">&lt;-</span></span>
+<span id="cb77-60"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(sensitivity_gg,<span class="fu">aes</span>(<span class="at">x=</span>T,<span class="at">y=</span><span class="fu">factor</span>(variable),<span class="at">size=</span>value)) <span class="sc">+</span></span>
+<span id="cb77-61"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">col=</span><span class="st">&quot;light blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-62"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels=</span> model_labels) <span class="sc">+</span></span>
+<span id="cb77-63"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Chill model&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-64"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Temperature (assumed constant, °C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-65"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span>,<span class="dv">40</span>)) <span class="sc">+</span></span>
+<span id="cb77-66"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb77-67"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Chill </span><span class="sc">\n</span><span class="st">Weight&quot;</span>)</span>
+<span id="cb77-68"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-69"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature data</span></span>
+<span id="cb77-70"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-70" aria-hidden="true" tabindex="-1"></a>KA_temps_JD<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(<span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>))</span>
+<span id="cb77-71"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-71" aria-hidden="true" tabindex="-1"></a>temps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(</span>
+<span id="cb77-72"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-72" aria-hidden="true" tabindex="-1"></a>  KA_temps_JD[<span class="fu">which</span>(KA_temps_JD<span class="sc">$</span>JDay<span class="sc">&gt;</span><span class="dv">305</span><span class="sc">|</span>KA_temps_JD<span class="sc">$</span>JDay<span class="sc">&lt;</span><span class="dv">90</span>),],</span>
+<span id="cb77-73"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">latitude=</span><span class="fl">50.6</span>)</span>
+<span id="cb77-74"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-74" aria-hidden="true" tabindex="-1"></a>hh<span class="ot">&lt;-</span><span class="fu">hist</span>(temps<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp,<span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span><span class="sc">:</span><span class="dv">30</span>), <span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb77-75"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-75" aria-hidden="true" tabindex="-1"></a>hh_df<span class="ot">&lt;-</span><span class="fu">data.frame</span>(</span>
+<span id="cb77-76"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">T=</span>hh<span class="sc">$</span>mids,</span>
+<span id="cb77-77"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-77" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable=</span><span class="st">&quot;Klein-Altendorf, Germany&quot;</span>,</span>
+<span id="cb77-78"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-78" aria-hidden="true" tabindex="-1"></a>  <span class="at">value=</span>hh<span class="sc">$</span>counts<span class="sc">/</span><span class="fu">max</span>(hh<span class="sc">$</span>counts))</span>
+<span id="cb77-79"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-79" aria-hidden="true" tabindex="-1"></a>hh_df<span class="sc">$</span>value[<span class="fu">which</span>(hh_df<span class="sc">$</span>value<span class="sc">==</span><span class="dv">0</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb77-80"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-81"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-81" aria-hidden="true" tabindex="-1"></a>Beijing_temps_JD<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(<span class="fu">read_tab</span>(<span class="st">&quot;data/Beijing_weather.csv&quot;</span>))</span>
+<span id="cb77-82"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-82" aria-hidden="true" tabindex="-1"></a>temps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(</span>
+<span id="cb77-83"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-83" aria-hidden="true" tabindex="-1"></a>  Beijing_temps_JD[<span class="fu">which</span>(Beijing_temps_JD<span class="sc">$</span>JDay<span class="sc">&gt;</span><span class="dv">305</span><span class="sc">|</span>Beijing_temps_JD<span class="sc">$</span>JDay<span class="sc">&lt;</span><span class="dv">90</span>),]</span>
+<span id="cb77-84"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-84" aria-hidden="true" tabindex="-1"></a>  ,<span class="at">latitude=</span><span class="fl">39.9</span>)</span>
+<span id="cb77-85"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-85" aria-hidden="true" tabindex="-1"></a>hh<span class="ot">&lt;-</span><span class="fu">hist</span>(temps<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp,<span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span><span class="sc">:</span><span class="dv">30</span>), <span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb77-86"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-86" aria-hidden="true" tabindex="-1"></a>hh_df_2<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">T=</span>hh<span class="sc">$</span>mids,</span>
+<span id="cb77-87"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-87" aria-hidden="true" tabindex="-1"></a>                    <span class="at">variable=</span><span class="st">&quot;Beijing, China&quot;</span>,<span class="at">value=</span>hh<span class="sc">$</span>counts<span class="sc">/</span><span class="fu">max</span>(hh<span class="sc">$</span>counts))</span>
+<span id="cb77-88"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-88" aria-hidden="true" tabindex="-1"></a>hh_df_2<span class="sc">$</span>value[<span class="fu">which</span>(hh_df_2<span class="sc">$</span>value<span class="sc">==</span><span class="dv">0</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb77-89"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-90"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-90" aria-hidden="true" tabindex="-1"></a>Davis_temps_JD<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(<span class="fu">read_tab</span>(<span class="st">&quot;data/Davis_weather.csv&quot;</span>))</span>
+<span id="cb77-91"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-91" aria-hidden="true" tabindex="-1"></a>temps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(</span>
+<span id="cb77-92"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-92" aria-hidden="true" tabindex="-1"></a>  Davis_temps_JD[<span class="fu">which</span>(Davis_temps_JD<span class="sc">$</span>JDay<span class="sc">&gt;</span><span class="dv">305</span><span class="sc">|</span>Davis_temps_JD<span class="sc">$</span>JDay<span class="sc">&lt;</span><span class="dv">90</span>),],</span>
+<span id="cb77-93"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">latitude=</span><span class="fl">38.5</span>)</span>
+<span id="cb77-94"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-94" aria-hidden="true" tabindex="-1"></a>hh<span class="ot">&lt;-</span><span class="fu">hist</span>(temps<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp,<span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span><span class="sc">:</span><span class="dv">40</span>), <span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb77-95"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-95" aria-hidden="true" tabindex="-1"></a>hh_df_3<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">T=</span>hh<span class="sc">$</span>mids,</span>
+<span id="cb77-96"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-96" aria-hidden="true" tabindex="-1"></a>                    <span class="at">variable=</span><span class="st">&quot;Davis, California&quot;</span>,</span>
+<span id="cb77-97"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-97" aria-hidden="true" tabindex="-1"></a>                    <span class="at">value=</span>hh<span class="sc">$</span>counts<span class="sc">/</span><span class="fu">max</span>(hh<span class="sc">$</span>counts))</span>
+<span id="cb77-98"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-98" aria-hidden="true" tabindex="-1"></a>hh_df_3<span class="sc">$</span>value[<span class="fu">which</span>(hh_df_3<span class="sc">$</span>value<span class="sc">==</span><span class="dv">0</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb77-99"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-100"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-100" aria-hidden="true" tabindex="-1"></a><span class="co"># added</span></span>
+<span id="cb77-101"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-101" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.8148</span>, <span class="sc">-</span><span class="fl">33.9575</span>)</span>
+<span id="cb77-102"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-102" aria-hidden="true" tabindex="-1"></a>CT_temps_JD<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(<span class="fu">read_tab</span>(<span class="st">&quot;data/CapeTown_chillR_weather2.csv&quot;</span>))</span>
+<span id="cb77-103"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-103" aria-hidden="true" tabindex="-1"></a>temps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(</span>
+<span id="cb77-104"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-104" aria-hidden="true" tabindex="-1"></a>  CT_temps_JD[<span class="fu">which</span>(CT_temps_JD<span class="sc">$</span>JDay<span class="sc">&gt;</span><span class="dv">121</span><span class="sc">|</span>CT_temps_JD<span class="sc">$</span>JDay<span class="sc">&lt;</span><span class="dv">273</span>),],</span>
+<span id="cb77-105"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-105" aria-hidden="true" tabindex="-1"></a>  <span class="at">latitude=</span>coords[<span class="dv">2</span>])</span>
+<span id="cb77-106"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-106" aria-hidden="true" tabindex="-1"></a>hh<span class="ot">&lt;-</span><span class="fu">hist</span>(temps<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp,<span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb77-107"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-107" aria-hidden="true" tabindex="-1"></a>hh_df_4<span class="ot">&lt;-</span><span class="fu">data.frame</span>(</span>
+<span id="cb77-108"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-108" aria-hidden="true" tabindex="-1"></a>  <span class="at">T=</span>hh<span class="sc">$</span>mids,</span>
+<span id="cb77-109"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-109" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable=</span><span class="st">&quot;Cape Town, South Africa&quot;</span>,</span>
+<span id="cb77-110"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-110" aria-hidden="true" tabindex="-1"></a>  <span class="at">value=</span>hh<span class="sc">$</span>counts<span class="sc">/</span><span class="fu">max</span>(hh<span class="sc">$</span>counts))</span>
+<span id="cb77-111"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-111" aria-hidden="true" tabindex="-1"></a>hh_df_4<span class="sc">$</span>value[<span class="fu">which</span>(hh_df_4<span class="sc">$</span>value<span class="sc">==</span><span class="dv">0</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb77-112"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-113"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-113" aria-hidden="true" tabindex="-1"></a><span class="co"># added</span></span>
+<span id="cb77-114"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-114" aria-hidden="true" tabindex="-1"></a>TT_temps_JD<span class="ot">&lt;-</span><span class="fu">make_JDay</span>(<span class="fu">read_tab</span>(<span class="st">&quot;data/Tunis_weather_fixed.csv&quot;</span>))</span>
+<span id="cb77-115"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-115" aria-hidden="true" tabindex="-1"></a>temps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(</span>
+<span id="cb77-116"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-116" aria-hidden="true" tabindex="-1"></a>  TT_temps_JD[<span class="fu">which</span>(TT_temps_JD<span class="sc">$</span>JDay<span class="sc">&gt;</span><span class="dv">305</span><span class="sc">|</span>TT_temps_JD<span class="sc">$</span>JDay<span class="sc">&lt;</span><span class="dv">90</span>),],</span>
+<span id="cb77-117"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">latitude=</span><span class="fl">36.78</span>)</span>
+<span id="cb77-118"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-118" aria-hidden="true" tabindex="-1"></a>hh<span class="ot">&lt;-</span><span class="fu">hist</span>(temps<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp,<span class="at">breaks=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span><span class="sc">:</span><span class="dv">50</span>), <span class="at">plot=</span><span class="cn">FALSE</span>)</span>
+<span id="cb77-119"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-119" aria-hidden="true" tabindex="-1"></a>hh_df_5<span class="ot">&lt;-</span><span class="fu">data.frame</span>(</span>
+<span id="cb77-120"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-120" aria-hidden="true" tabindex="-1"></a>  <span class="at">T=</span>hh<span class="sc">$</span>mids,</span>
+<span id="cb77-121"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-121" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable=</span><span class="st">&quot;Tunis, Tunisia&quot;</span>,</span>
+<span id="cb77-122"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-122" aria-hidden="true" tabindex="-1"></a>  <span class="at">value=</span>hh<span class="sc">$</span>counts<span class="sc">/</span><span class="fu">max</span>(hh<span class="sc">$</span>counts))</span>
+<span id="cb77-123"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-123" aria-hidden="true" tabindex="-1"></a>hh_df_5<span class="sc">$</span>value[<span class="fu">which</span>(hh_df_5<span class="sc">$</span>value<span class="sc">==</span><span class="dv">0</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb77-124"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-125"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-125" aria-hidden="true" tabindex="-1"></a>hh_df<span class="ot">&lt;-</span><span class="fu">rbind</span>(hh_df,hh_df_2,hh_df_3,hh_df_5)</span>
+<span id="cb77-126"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-126" aria-hidden="true" tabindex="-1"></a><span class="co"># not plotting South Africa, because location on southern hemisphere</span></span>
+<span id="cb77-127"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-128"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-128" aria-hidden="true" tabindex="-1"></a><span class="co"># plot for the locations</span></span>
+<span id="cb77-129"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-129" aria-hidden="true" tabindex="-1"></a>locations<span class="ot">&lt;-</span></span>
+<span id="cb77-130"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>hh_df,<span class="fu">aes</span>(<span class="at">x=</span>T,<span class="at">y=</span>variable,<span class="at">size=</span>value)) <span class="sc">+</span></span>
+<span id="cb77-131"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">col=</span><span class="st">&quot;coral2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-132"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Location&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-133"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Temperature (between November and March, °C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb77-134"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span>,<span class="dv">40</span>)) <span class="sc">+</span></span>
+<span id="cb77-135"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb77-136"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Relative </span><span class="sc">\n</span><span class="st">frequency&quot;</span>)</span>
+<span id="cb77-137"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-138"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-139"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-139" aria-hidden="true" tabindex="-1"></a><span class="co"># plot for the Dynamic model sensitivity</span></span>
+<span id="cb77-140"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-140" aria-hidden="true" tabindex="-1"></a>chill<span class="ot">&lt;-</span></span>
+<span id="cb77-141"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(sensitivity_gg[<span class="fu">which</span>(sensitivity_gg<span class="sc">$</span>variable<span class="sc">==</span><span class="st">&quot;Chill_Portions&quot;</span>),],</span>
+<span id="cb77-142"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-142" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x=</span>T,<span class="at">y=</span><span class="fu">factor</span>(variable),</span>
+<span id="cb77-143"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-143" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span>value)) <span class="sc">+</span></span>
+<span id="cb77-144"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">col=</span><span class="st">&quot;light blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-145"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels=</span> <span class="st">&quot;Chill Portions&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-146"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Chill model&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-147"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Temperature (assumed constant, °C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-148"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">30</span>,<span class="dv">40</span>)) <span class="sc">+</span></span>
+<span id="cb77-149"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb77-150"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">size =</span> <span class="st">&quot;Chill </span><span class="sc">\n</span><span class="st">Weight&quot;</span>)</span>
+<span id="cb77-151"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-152"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-152" aria-hidden="true" tabindex="-1"></a>  plot<span class="ot">&lt;-</span> (chill <span class="sc">+</span></span>
+<span id="cb77-153"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-153" aria-hidden="true" tabindex="-1"></a>            locations <span class="sc">+</span></span>
+<span id="cb77-154"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-154" aria-hidden="true" tabindex="-1"></a>            <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">&quot;collect&quot;</span>,</span>
+<span id="cb77-155"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-155" aria-hidden="true" tabindex="-1"></a>                        <span class="at">heights =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="dv">1</span>))</span>
+<span id="cb77-156"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-156" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">&amp;</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>,</span>
+<span id="cb77-157"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-157" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">10</span>),</span>
+<span id="cb77-158"><a href="successes-and-limitations-of-pls-regression-analysis.html#cb77-158" aria-hidden="true" tabindex="-1"></a>                  <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">12</span>))</span></code></pre></div>
+</div>
+<button title="Click to show/hide the code for the modified plot" type="button" onclick="if(document.getElementById(&#39;spoiler&#39;) .style.display==&#39;none&#39;)
+              {document.getElementById(&#39;spoiler&#39;) .style.display=&#39;&#39;}
+            else{document.getElementById(&#39;spoiler&#39;) .style.display=&#39;none&#39;}">
+Show/Hide code
+</button>
 <p><br />
 </p>
-<p><img src="_main_files/figure-html/unnamed-chunk-1-1.png" width="672" /><br />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-74"></span>
+<img src="_main_files/figure-html/unnamed-chunk-74-1.png" alt="Comparison between model sensitivity and temperatures prevailing at the locations" width="672" />
+<p class="caption">
+Figure 19.1: Comparison between model sensitivity and temperatures prevailing at the locations
 </p>
+</div>
 </div>
 <div id="how-could-we-overcome-this-problem" class="section level2 hasAnchor" number="19.2">
 <h2><span class="header-section-number">19.2</span> How could we overcome this problem?<a href="successes-and-limitations-of-pls-regression-analysis.html#how-could-we-overcome-this-problem" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To overcome this problem, we should not perform PLS analysis on temperature but directly from the chill accumulation. This filters out the problems caused by the double-sided effect at cool temperatures.
 Because the chill models are not exactly accurate, we introduce a certain error into our data, which would not have been present with the temperature alone. On the other hand, this allows us to delineated the phases, especially the chilling phase, easier.</p>
+<br />
+
+<hr />
 
 </div>
 </div>
@@ -302,7 +574,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/19-pls_successes_and_limits.Rmd",
+"link": "https://github.com/JNBauer/tree_pheno_modelling/19-pls_successes_and_limits.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -320,7 +592,8 @@ gitbook.start({
 },
 "toc": {
 "collapse": "subsection"
-}
+},
+"code_folding": "hide"
 });
 });
 </script>

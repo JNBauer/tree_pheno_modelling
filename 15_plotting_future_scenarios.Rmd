@@ -2,20 +2,18 @@
 
 ## Produce similar plots for the weather station you selected for earlier exercises.
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 library(chillR)
-library(ggplot2)
 library(reshape2)
-library(kableExtra)
+library(ggplot2)
 library(ggpmisc)
 library(patchwork)
-```
+library(kableExtra)
 
-```{r, eval=FALSE}
-chill_past_scenarios<-load_temperature_scenarios(
+chill_past_scenarios <- load_temperature_scenarios(
   "data/chill",
   "CapeTown_historic")
-chill_observed<-load_temperature_scenarios(
+chill_observed <- load_temperature_scenarios(
   "data/chill",
   "CapeTown_observed")
 
@@ -25,82 +23,91 @@ chills <-make_climate_scenario(
   historic_data = chill_observed,
   time_series = TRUE)
 
-RCPs<-c("rcp45","rcp85")
-Times<-c(2050,2085)
+RCPs <- c("rcp45","rcp85")
+Times <- c(2050,2085)
 
 for(RCP in RCPs)
   for(Time in Times)
-  { chill<-load_temperature_scenarios(
+  {chill <- load_temperature_scenarios(
     "data/chill",
     paste0("CapeTown_",Time,"_",RCP))
-    if(RCP=="rcp45") RCPcaption <- "RCP4.5"
-    if(RCP=="rcp85") RCPcaption <- "RCP8.5"
-    if(Time=="2050") Time_caption <- "2050"
-    if(Time=="2085") Time_caption <- "2085"
-    chills <-make_climate_scenario(
+    if(RCP == "rcp45") RCPcaption <- "RCP4.5"
+    if(RCP == "rcp85") RCPcaption <- "RCP8.5"
+    if(Time == "2050") Time_caption <- "2050"
+    if(Time == "2085") Time_caption <- "2085"
+    chills <- make_climate_scenario(
       chill,
-      caption =c(RCPcaption, Time_caption),
+      caption = c(RCPcaption, Time_caption),
       add_to = chills)
   }
-```
 
-```{r, eval=FALSE}
 for(nam in names(chills[[1]]$data))
   {
 
    ch<-chills[[1]]$data[[nam]]
-   ch[,"GCM"]<-"none"
-   ch[,"RCP"]<-"none"
-   ch[,"Year"]<-as.numeric(nam)
+   ch[,"GCM"] <- "none"
+   ch[,"RCP"] <- "none"
+   ch[,"Year"] <- as.numeric(nam)
    
-  if(nam==names(chills[[1]]$data)[1])
-    past_simulated<-ch else
-      past_simulated<-rbind(past_simulated,ch)
+  if(nam == names(chills[[1]]$data)[1])
+    past_simulated <- ch else
+      past_simulated <- rbind(past_simulated,ch)
   }
-```
 
-```{r, eval=FALSE}
 past_simulated["Scenario"] <- "Historic"
-
-kable(past_simulated[1:5,])  %>%
-  kable_styling("striped", position = "left",font_size = 8)
-
 past_observed <- chills[[1]][["historic_data"]] #simplyfying pointer
-
-kable(past_observed[1:5,])  %>%
-  kable_styling("striped", position = "left",font_size = 8)
 ```
 
-```{r, eval=FALSE}
+```{r, message=FALSE, warning=FALSE}
 for(i in 2:length(chills))
   for(nam in names(chills[[i]]$data))
     {ch<-chills[[i]]$data[[nam]]
-     ch[,"GCM"]<-nam
-     ch[,"RCP"]<-chills[[i]]$caption[1]
-     ch[,"Year"]<-chills[[i]]$caption[2]
-     if(i==2&nam==names(chills[[i]]$data)[1])
-       future_data<-ch else
-         future_data<-rbind(future_data,ch)
+     ch[,"GCM"] <- nam
+     ch[,"RCP"] <- chills[[i]]$caption[1]
+     ch[,"Year"] <- chills[[i]]$caption[2]
+     if(i == 2&nam == names(chills[[i]]$data)[1])
+       future_data <- ch else
+         future_data <- rbind(future_data,ch)
   }
-
-kable(future_data[1:5,])  %>%
-  kable_styling("striped", position = "left",font_size = 8)
 ```
 
-```{r, eval=FALSE}
-plot_scenarios_gg<-function(past_observed,
+This is are the three different dataframes we need to plot the full graph. For the historic data, we have the metrics calculated from the simulated weather and extra data for the `geom_point()` plot. The dataframe for the future part of the plot, contains all the information, so that we can easily split it into the subplots with the `facet_grid()` function.
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+title <- "Final dataframe for plotting the historic boxplots"
+data.frame(past_simulated[1:5,]) %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
+```
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+title <- "Final dataframe for plotting the historic point plot"
+data.frame(past_observed[1:5,]) %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
+```
+
+```{r, echo=FALSE,message=FALSE, warning=FALSE}
+title <- "Final dataframe for plotting the future plots"
+data.frame(future_data[1:5,]) %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")
+```
+
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
+plot_scenarios_gg <- function(past_observed,
                             past_simulated,
                             future_data,
                             metric,
                             axis_label)
 {
-  rng<-range(past_observed[[metric]],
+  rng <- range(past_observed[[metric]],
              past_simulated[[metric]],
              future_data[[metric]])  
-  past_plot<-ggplot() +
+  past_plot <- ggplot() +
     geom_boxplot(data = past_simulated,
-                 aes_string("as.numeric(Year)",metric,group="Year"),
-                 fill="skyblue") +
+                 aes_string("as.numeric(Year)",metric,group = "Year"),
+                 fill = "skyblue") +
     scale_y_continuous(limits = c(0, round(round(1.1*rng[2])))) +
     labs(x = "Year", y = axis_label) +
     facet_grid(~ Scenario) +
@@ -112,12 +119,12 @@ plot_scenarios_gg<-function(past_observed,
                aes_string("End_year",metric),
                col="blue")
   
-  future_plot_list<-list()
+  future_plot_list <- list()
   
   for(y in c(2050,2085))
   {
     future_plot_list[[which(y == c(2050,2085))]] <-
-      ggplot(data= future_data[which(future_data$Year==y),]) +
+      ggplot(data= future_data[which(future_data$Year == y),]) +
       geom_boxplot(aes_string("GCM", metric, fill="GCM")) +
       facet_wrap(vars(RCP)) +
       scale_x_discrete(labels = NULL, expand = expansion(add = 1)) +
@@ -144,17 +151,19 @@ plot_scenarios_gg<-function(past_observed,
             future_plot_list +
             plot_layout(guides = "collect",
                         widths = c(1,rep(1.8,length(future_plot_list))))) +
-          plot_annotation(theme = theme(plot.title = element_text(size = 24))) & 
+          plot_annotation(theme =
+                  theme(plot.title = element_text(size = 24))) & 
                   theme(legend.position = "bottom",
                   legend.text = element_text(size=8),
                   legend.title = element_text(size=10),
-                  axis.title.x=element_blank())
+                  axis.title.x = element_blank())
   
 }
 ```
 
+The plots show the calculated Growing Degree Hours, Chill Portions and Frost Hours for the historic records and four simulated future scenarios. The simulation reveals that Growing Degree Hours will increase, while the Chill Portions decrease. Some GCMs contradict each other, but due to the use of this GCM ensemble we can still recognize clear trends. In the past, there were only a few frost hours, which will most likely not change in the future except for a few outliers.
 
-```{r, eval=FALSE}
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
 CapeTown_Heat_GDH <- plot_scenarios_gg(past_observed=past_observed,
                   past_simulated=past_simulated,
                   future_data=future_data,
@@ -178,10 +187,14 @@ CapeTown_Frost_H <- plot_scenarios_gg(past_observed=past_observed,
 CapeTown_Frost_H
 ```
 
-
-```{r}
-#ggsave("plots/CapeTownPlot_Heat_GDH.png", CapeTown_Heat_GDH, width = 10, height = 5, dpi = 800)
-#ggsave("plots/CapeTownPlot_Chill_CP.png", CapeTown_Chill_CP, width = 10, height = 5, dpi = 800)
-#ggsave("plots/CapeTownPlots_Frost_H_RED.png", CapeTown_Frost_H, width = 10, height = 5, dpi = 800)
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+ggsave("plots/CapeTownPlot_Heat_GDH.png",
+       CapeTown_Heat_GDH, width = 10, height = 5, dpi = 800)
+ggsave("plots/CapeTownPlot_Chill_CP.png",
+       CapeTown_Chill_CP, width = 10, height = 5, dpi = 800)
+ggsave("plots/CapeTownPlots_Frost_H_RED.png",
+       CapeTown_Frost_H, width = 10, height = 5, dpi = 800)
 ```
 
+\
+<hr />

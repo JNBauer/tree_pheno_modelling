@@ -3,22 +3,20 @@
 ## Make chill and heat response plots for the ‘Alexander Lucas’ PhenoFlex model for the location you did the earlier analyses for.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(ggplot2)
-library(colorRamps)
-library(tidyr)
-require(reshape2)
-library(chillR)
-library(lubridate)
 
-source("functions/chill_model_sensitivity.R")
 
-coords <- c(18.8148, -33.9575)
+
 ```
 
 First we need to set some parameters for the generation of the different temperatures. In the case of South Africa, we set the latitude to 33.95° South. Because of the location in the southern hemisphere it is also important to change the range of the month from April to September.
-```{r}
+
+```{r, warning=FALSE, message=FALSE}
+require(chillR)
+require(lubridate)
+
 PhenoFlex_parameters_Alex <- read_tab("data/PhenoFlex_parameters_Alexander_Lucas.csv")[,2]
 
+coords <- c(18.8148, -33.9575)
 latitude<-coords[2]
 
 #month_range<-c(10,11,12,1,2,3)
@@ -33,9 +31,9 @@ chill_eff<-NA
 heat_eff<-NA
 month<-NA
 ```
-\
 
 With the parameters set, we can calculate the model sensitivity to our generated temperature dataframe. The result is saved to be imported later.
+
 ```{r, eval=FALSE}
 for(mon in month_range)
     {
@@ -78,17 +76,26 @@ for(mon in month_range)
 results<-data.frame(Month=month,Tmin=mins,Tmax=maxs,Chill_eff=chill_eff,Heat_eff=heat_eff)
 results<-results[!is.na(results$Month),]
 
-
 write.csv(results,"data/model_sensitivity_PhenoFlex.csv")
 ```
-\
 
 For the chill and heat response plots, we use the functions created in the earlier chapter, where we already conducted similar analysis.
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap='PhenoFlex chill sensitivity for the "Alexander Lucas" parameters'}
+require(ggplot2)
+require(colorRamps)
+require(tidyr)
+require(reshape2)
+
+source("functions/chill_sensitivity_temps.R")
+
 model_sens_PhenoFlex <- read.csv("data/model_sensitivity_PhenoFlex.csv")
 CapeTown_weather <- read_tab("data/CapeTown_chillR_weather.csv")
+```
 
+We can see that the calibrated PhenoFlex parameters of the "Alexander Lucas" cultivar have almost no overlap regarding the chill sensitivity with the observed temperatures at Cape Town. Fulfilling the heat requirements however would not be a problem.
+
+```{r, warning=FALSE, message=FALSE, fig.cap='PhenoFlex chill sensitivity for the "Alexander Lucas" parameters'}
 chill_sensitivity_temps(model_sens_PhenoFlex,
                         CapeTown_weather,
                         temp_model="Chill_eff",
@@ -96,11 +103,10 @@ chill_sensitivity_temps(model_sens_PhenoFlex,
                         Tmins=c(-20:20),
                         Tmaxs=c(-15:30),
                         legend_label="Chill per day \n(arbitrary)") +
-  ggtitle("PhenoFlex chill efficiency ('Alexander Lucas')")
+  ggtitle("PhenoFlex chill sensitivity ('Alexander Lucas')")
 ```
 
-
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap='PhenoFlex heat sensitivity for the "Alexander Lucas" parameters'}
 chill_sensitivity_temps(model_sens_PhenoFlex,
                         CapeTown_weather,
                         temp_model="Heat_eff",
@@ -108,7 +114,8 @@ chill_sensitivity_temps(model_sens_PhenoFlex,
                         Tmins=c(-20:20),
                         Tmaxs=c(-15:30),
                         legend_label="Heat per day \n(arbitrary)") +
-  ggtitle("PhenoFlex heat efficiency ('Alexander Lucas')")
+  ggtitle("PhenoFlex heat sensitivity ('Alexander Lucas')")
 ```
 
-
+\
+<hr />

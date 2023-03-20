@@ -13,14 +13,14 @@ pre code {
   white-space: inherit;
 }
 
-/* This change the style of the main container that wraps the whole R Markdown document. It allows the parallax image to be full width */
+
 .main-container {
     max-width: 100% !important;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Then we place our content with this style because we don't want it to be full width */
+
 .mycontent{
       max-width: 900px !important;
       margin-left: auto;
@@ -35,7 +35,7 @@ pre code {
 
 
 
-/* Just for fun, a bit of customization for title and text.. */
+
 .mytitle{
   text-transform: uppercase;
   font-family: 'Montserrat';

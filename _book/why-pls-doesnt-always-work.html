@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 22 Why PLS doesn’t always work | Tree phenology analysis with R - Logbook</title>
   <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 22 Why PLS doesn’t always work | Tree phenology analysis with R - Logbook" />
   <meta property="og:type" content="book" />
@@ -50,6 +50,30 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -134,34 +158,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Tree phenology Logbook</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
-<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
-<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
-<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
-<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
-<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
-</ul></li>
+<li class="chapter" data-level="2.0.1" data-path="packages.html"><a href="packages.html#bookdown"><i class="fa fa-check"></i><b>2.0.1</b> Bookdown</a></li>
+<li class="chapter" data-level="2.0.2" data-path="packages.html"><a href="packages.html#chillr"><i class="fa fa-check"></i><b>2.0.2</b> chillR</a></li>
+<li class="chapter" data-level="2.0.3" data-path="packages.html"><a href="packages.html#dplyr-family"><i class="fa fa-check"></i><b>2.0.3</b> dplyr family</a></li>
+<li class="chapter" data-level="2.0.4" data-path="packages.html"><a href="packages.html#ggplot2"><i class="fa fa-check"></i><b>2.0.4</b> ggplot2</a></li>
+<li class="chapter" data-level="2.0.5" data-path="packages.html"><a href="packages.html#leaflet"><i class="fa fa-check"></i><b>2.0.5</b> leaflet</a></li>
+<li class="chapter" data-level="2.0.6" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>2.0.6</b> kableExtra</a></li>
+<li class="chapter" data-level="2.0.7" data-path="packages.html"><a href="packages.html#plotly"><i class="fa fa-check"></i><b>2.0.7</b> plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
 <li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
-<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scale"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
 <li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
 <li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
-<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-3-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 3 climate impact projection methods described in the fourth video.</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#statistical-models"><i class="fa fa-check"></i><b>4.4.1</b> Statistical models</a></li>
+<li class="chapter" data-level="4.4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#process-based-models"><i class="fa fa-check"></i><b>4.4.2</b> Process-based models</a></li>
+<li class="chapter" data-level="4.4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#climate-analogue-models"><i class="fa fa-check"></i><b>4.4.3</b> Climate analogue models</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
 <ul>
@@ -174,8 +198,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset"><i class="fa fa-check"></i><b>6.2</b> Apply this function to the Winters_hours_gaps dataset</a></li>
 <li class="chapter" data-level="6.3" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates"><i class="fa fa-check"></i><b>6.3</b> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
-<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
+<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chill-models.html"><a href="chill-models.html#run-the-chilling-function-on-the-winters_hours_gap-dataset"><i class="fa fa-check"></i><b>7.1</b> Run the chilling() function on the Winters_hours_gap dataset</a></li>
+<li class="chapter" data-level="7.2" data-path="chill-models.html"><a href="chill-models.html#create-your-own-temperature-weighting-chill-model-using-the-step_model-function."><i class="fa fa-check"></i><b>7.2</b> Create your own temperature-weighting chill model using the step_model() function.</a></li>
+<li class="chapter" data-level="7.3" data-path="chill-models.html"><a href="chill-models.html#run-this-model-on-the-winters_hours_gaps-dataset-using-the-tempresponse-function."><i class="fa fa-check"></i><b>7.3</b> Run this model on the Winters_hours_gaps dataset using the tempResponse() function.</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#choose-a-location-of-interest-find-out-its-latitude-and-produce-plots-of-daily-sunrise-sunset-and-daylength"><i class="fa fa-check"></i><b>8.1</b> Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength</a></li>
+<li class="chapter" data-level="8.2" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-an-hourly-dataset-based-on-idealized-daily-curves-for-the-ka_weather-dataset-included-in-chillr"><i class="fa fa-check"></i><b>8.2</b> Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)</a></li>
+<li class="chapter" data-level="8.3" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-empirical-temperature-curve-parameters-for-the-winters_hours_gaps-dataset-and-use-them-to-predict-hourly-values-from-daily-temperatures-this-is-very-similar-to-the-example-above-but-please-make-sure-you-understand-whats-going-on"><i class="fa fa-check"></i><b>8.3</b> Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
@@ -226,8 +260,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson."><i class="fa fa-check"></i><b>18.1</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
-<li class="chapter" data-level="18.2" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson.-1"><i class="fa fa-check"></i><b>18.2</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
+<li class="chapter" data-level="18.1" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#briefly-explain-why-you-shouldnt-take-the-results-of-a-pls-regression-analysis-between-temperature-and-phenology-at-face-value.-what-do-you-need-in-addition-in-order-to-make-sense-of-such-outputs"><i class="fa fa-check"></i><b>18.1</b> Briefly explain why you shouldn’t take the results of a PLS regression analysis between temperature and phenology at face value. What do you need in addition in order to make sense of such outputs?</a></li>
+<li class="chapter" data-level="18.2" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#replicate-the-pls-analysis-for-the-roter-boskoop-dataset-that-you-used-in-a-previous-lesson."><i class="fa fa-check"></i><b>18.2</b> Replicate the PLS analysis for the Roter Boskoop dataset that you used in a previous lesson.</a></li>
 <li class="chapter" data-level="18.3" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html#write-down-your-thoughts-on-why-were-not-seeing-the-temperature-response-pattern-we-may-have-expected.-what-happened-to-the-chill-response"><i class="fa fa-check"></i><b>18.3</b> Write down your thoughts on why we’re not seeing the temperature response pattern we may have expected. What happened to the chill response?</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="successes-and-limitations-of-pls-regression-analysis.html"><a href="successes-and-limitations-of-pls-regression-analysis.html"><i class="fa fa-check"></i><b>19</b> Successes and limitations of PLS regression analysis</a>
@@ -243,7 +277,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed."><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?.</a></li>
+<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed"><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?</a></li>
+<li class="chapter" data-level="21.2" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#can-you-think-about-possible-reasons-for-the-success-or-failure-of-pls-analysis-based-on-agroclimatic-metrics-if-so-write-down-your-thoughts"><i class="fa fa-check"></i><b>21.2</b> Can you think about possible reasons for the success or failure of PLS analysis based on agroclimatic metrics (if so, write down your thoughts)?</a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html"><i class="fa fa-check"></i><b>22</b> Why PLS doesn’t always work</a>
 <ul>
@@ -291,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published by Julian Bauer with bookdown</a></li>
 
 </ul>
 
@@ -312,287 +347,319 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="why-pls-doesnt-always-work" class="section level1 hasAnchor" number="22">
 <h1><span class="header-section-number">Chapter 22</span> Why PLS doesn’t always work<a href="why-pls-doesnt-always-work.html#why-pls-doesnt-always-work" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><br />
-</p>
 <div id="produce-chill-and-heat-model-sensitivity-plots-for-the-location-you-focused-on-in-previous-exercises." class="section level2 hasAnchor" number="22.1">
 <h2><span class="header-section-number">22.1</span> Produce chill and heat model sensitivity plots for the location you focused on in previous exercises.<a href="why-pls-doesnt-always-work.html#produce-chill-and-heat-model-sensitivity-plots-for-the-location-you-focused-on-in-previous-exercises." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following loops create a data frame, that contains all the information to visualize the sensitivity of the Dynamic model to different temperature combinations. Since chilling is mainly relevant during dormancy, we calculate the model sensitivity only for the winter months. Cape Town, the place whose weather data I have already used for the previous tasks, is located in the southern hemisphere. This means that the summer and winter months are swapped with those of the northern hemisphere.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="why-pls-doesnt-always-work.html#cb1-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.8148</span>, <span class="sc">-</span><span class="fl">33.9575</span>)</span>
-<span id="cb1-2"><a href="why-pls-doesnt-always-work.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="why-pls-doesnt-always-work.html#cb1-3" aria-hidden="true" tabindex="-1"></a>latitude<span class="ot">&lt;-</span>coords[<span class="dv">2</span>]</span>
-<span id="cb1-4"><a href="why-pls-doesnt-always-work.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="why-pls-doesnt-always-work.html#cb1-5" aria-hidden="true" tabindex="-1"></a>month_range<span class="ot">=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
-<span id="cb1-6"><a href="why-pls-doesnt-always-work.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="why-pls-doesnt-always-work.html#cb1-7" aria-hidden="true" tabindex="-1"></a>Tmins<span class="ot">=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span><span class="sc">:</span><span class="dv">20</span>)</span>
-<span id="cb1-8"><a href="why-pls-doesnt-always-work.html#cb1-8" aria-hidden="true" tabindex="-1"></a>Tmaxs<span class="ot">=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">30</span>)</span>
-<span id="cb1-9"><a href="why-pls-doesnt-always-work.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="why-pls-doesnt-always-work.html#cb1-10" aria-hidden="true" tabindex="-1"></a>mins<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb1-11"><a href="why-pls-doesnt-always-work.html#cb1-11" aria-hidden="true" tabindex="-1"></a>maxs<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb1-12"><a href="why-pls-doesnt-always-work.html#cb1-12" aria-hidden="true" tabindex="-1"></a>CP<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb1-13"><a href="why-pls-doesnt-always-work.html#cb1-13" aria-hidden="true" tabindex="-1"></a>month<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb1-14"><a href="why-pls-doesnt-always-work.html#cb1-14" aria-hidden="true" tabindex="-1"></a>temp_model<span class="ot">&lt;-</span>Dynamic_Model</span>
-<span id="cb1-15"><a href="why-pls-doesnt-always-work.html#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="why-pls-doesnt-always-work.html#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(mon <span class="cf">in</span> month_range)</span>
-<span id="cb1-17"><a href="why-pls-doesnt-always-work.html#cb1-17" aria-hidden="true" tabindex="-1"></a>    {days_month<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">difftime</span>( <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon<span class="sc">+</span><span class="dv">1</span>,<span class="dv">1</span>),</span>
-<span id="cb1-18"><a href="why-pls-doesnt-always-work.html#cb1-18" aria-hidden="true" tabindex="-1"></a>                                           <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon,<span class="dv">1</span>) ))</span>
-<span id="cb1-19"><a href="why-pls-doesnt-always-work.html#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(mon<span class="sc">==</span><span class="dv">12</span>) days_month<span class="ot">&lt;-</span><span class="dv">31</span></span>
-<span id="cb1-20"><a href="why-pls-doesnt-always-work.html#cb1-20" aria-hidden="true" tabindex="-1"></a>    weather<span class="ot">&lt;-</span><span class="fu">make_all_day_table</span>(<span class="fu">data.frame</span>(<span class="at">Year=</span><span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2002</span>),</span>
-<span id="cb1-21"><a href="why-pls-doesnt-always-work.html#cb1-21" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Month=</span><span class="fu">c</span>(mon,mon),</span>
-<span id="cb1-22"><a href="why-pls-doesnt-always-work.html#cb1-22" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Day=</span><span class="fu">c</span>(<span class="dv">1</span>,days_month),<span class="at">Tmin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">Tmax=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)))</span>
-<span id="cb1-23"><a href="why-pls-doesnt-always-work.html#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(tmin <span class="cf">in</span> Tmins)</span>
-<span id="cb1-24"><a href="why-pls-doesnt-always-work.html#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(tmax <span class="cf">in</span> Tmaxs)</span>
-<span id="cb1-25"><a href="why-pls-doesnt-always-work.html#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(tmax<span class="sc">&gt;=</span>tmin)</span>
-<span id="cb1-26"><a href="why-pls-doesnt-always-work.html#cb1-26" aria-hidden="true" tabindex="-1"></a>          {</span>
-<span id="cb1-27"><a href="why-pls-doesnt-always-work.html#cb1-27" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmin<span class="ot">&lt;-</span>tmin</span>
-<span id="cb1-28"><a href="why-pls-doesnt-always-work.html#cb1-28" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmax<span class="ot">&lt;-</span>tmax</span>
-<span id="cb1-29"><a href="why-pls-doesnt-always-work.html#cb1-29" aria-hidden="true" tabindex="-1"></a>          hourtemps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(weather,</span>
-<span id="cb1-30"><a href="why-pls-doesnt-always-work.html#cb1-30" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">latitude=</span>latitude)<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp</span>
-<span id="cb1-31"><a href="why-pls-doesnt-always-work.html#cb1-31" aria-hidden="true" tabindex="-1"></a>          CP<span class="ot">&lt;-</span><span class="fu">c</span>(CP,<span class="fu">do.call</span>(Dynamic_Model,</span>
-<span id="cb1-32"><a href="why-pls-doesnt-always-work.html#cb1-32" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">list</span>(hourtemps))[<span class="fu">length</span>(hourtemps)]<span class="sc">/</span>(<span class="fu">length</span>(hourtemps)<span class="sc">/</span><span class="dv">24</span>))</span>
-<span id="cb1-33"><a href="why-pls-doesnt-always-work.html#cb1-33" aria-hidden="true" tabindex="-1"></a>          mins<span class="ot">&lt;-</span><span class="fu">c</span>(mins,tmin)</span>
-<span id="cb1-34"><a href="why-pls-doesnt-always-work.html#cb1-34" aria-hidden="true" tabindex="-1"></a>          maxs<span class="ot">&lt;-</span><span class="fu">c</span>(maxs,tmax)</span>
-<span id="cb1-35"><a href="why-pls-doesnt-always-work.html#cb1-35" aria-hidden="true" tabindex="-1"></a>          month<span class="ot">&lt;-</span><span class="fu">c</span>(month,mon)</span>
-<span id="cb1-36"><a href="why-pls-doesnt-always-work.html#cb1-36" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb1-37"><a href="why-pls-doesnt-always-work.html#cb1-37" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-38"><a href="why-pls-doesnt-always-work.html#cb1-38" aria-hidden="true" tabindex="-1"></a>results<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Month=</span>month,<span class="at">Tmin=</span>mins,<span class="at">Tmax=</span>maxs,CP)</span>
-<span id="cb1-39"><a href="why-pls-doesnt-always-work.html#cb1-39" aria-hidden="true" tabindex="-1"></a>results<span class="ot">&lt;-</span>results[<span class="sc">!</span><span class="fu">is.na</span>(results<span class="sc">$</span>Month),]</span>
-<span id="cb1-40"><a href="why-pls-doesnt-always-work.html#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="why-pls-doesnt-always-work.html#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="why-pls-doesnt-always-work.html#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(results,<span class="st">&quot;data/model_sensitivity_development.csv&quot;</span>,<span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="why-pls-doesnt-always-work.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-2"><a href="why-pls-doesnt-always-work.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorRamps)</span>
-<span id="cb2-3"><a href="why-pls-doesnt-always-work.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="why-pls-doesnt-always-work.html#cb2-4" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/model_sensitivity_development.csv&quot;</span>)</span>
-<span id="cb2-5"><a href="why-pls-doesnt-always-work.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="why-pls-doesnt-always-work.html#cb2-6" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>Month_names<span class="ot">&lt;-</span> <span class="fu">factor</span>(results<span class="sc">$</span>Month, <span class="at">levels=</span>month_range,</span>
-<span id="cb2-7"><a href="why-pls-doesnt-always-work.html#cb2-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels=</span>month.name[month_range])  </span>
-<span id="cb2-8"><a href="why-pls-doesnt-always-work.html#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="why-pls-doesnt-always-work.html#cb2-9" aria-hidden="true" tabindex="-1"></a>DM_sensitivity<span class="ot">&lt;-</span><span class="fu">ggplot</span>(results,<span class="fu">aes</span>(<span class="at">x=</span>Tmin,<span class="at">y=</span>Tmax,<span class="at">fill=</span>CP)) <span class="sc">+</span></span>
-<span id="cb2-10"><a href="why-pls-doesnt-always-work.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb2-11"><a href="why-pls-doesnt-always-work.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours=</span><span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="at">alpha =</span> .<span class="dv">5</span>),</span>
-<span id="cb2-12"><a href="why-pls-doesnt-always-work.html#cb2-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name=</span><span class="st">&quot;Chill/day (CP)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb2-13"><a href="why-pls-doesnt-always-work.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmax),<span class="fu">max</span>(results<span class="sc">$</span>Tmax)) <span class="sc">+</span></span>
-<span id="cb2-14"><a href="why-pls-doesnt-always-work.html#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmin),<span class="fu">max</span>(results<span class="sc">$</span>Tmin))</span>
-<span id="cb2-15"><a href="why-pls-doesnt-always-work.html#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="why-pls-doesnt-always-work.html#cb2-16" aria-hidden="true" tabindex="-1"></a>DM_sensitivity <span class="ot">&lt;-</span> DM_sensitivity <span class="sc">+</span></span>
-<span id="cb2-17"><a href="why-pls-doesnt-always-work.html#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
-<span id="cb2-18"><a href="why-pls-doesnt-always-work.html#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmax),<span class="fu">max</span>(results<span class="sc">$</span>Tmax)) <span class="sc">+</span></span>
-<span id="cb2-19"><a href="why-pls-doesnt-always-work.html#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmin),<span class="fu">max</span>(results<span class="sc">$</span>Tmin))</span>
-<span id="cb2-20"><a href="why-pls-doesnt-always-work.html#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="why-pls-doesnt-always-work.html#cb2-21" aria-hidden="true" tabindex="-1"></a>DM_sensitivity</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="why-pls-doesnt-always-work.html#cb90-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.8148</span>, <span class="sc">-</span><span class="fl">33.9575</span>)</span>
+<span id="cb90-2"><a href="why-pls-doesnt-always-work.html#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="why-pls-doesnt-always-work.html#cb90-3" aria-hidden="true" tabindex="-1"></a>latitude<span class="ot">&lt;-</span>coords[<span class="dv">2</span>]</span>
+<span id="cb90-4"><a href="why-pls-doesnt-always-work.html#cb90-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-5"><a href="why-pls-doesnt-always-work.html#cb90-5" aria-hidden="true" tabindex="-1"></a>month_range<span class="ot">=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>) <span class="co"># South African winter</span></span>
+<span id="cb90-6"><a href="why-pls-doesnt-always-work.html#cb90-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-7"><a href="why-pls-doesnt-always-work.html#cb90-7" aria-hidden="true" tabindex="-1"></a>Tmins<span class="ot">=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">20</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb90-8"><a href="why-pls-doesnt-always-work.html#cb90-8" aria-hidden="true" tabindex="-1"></a>Tmaxs<span class="ot">=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span><span class="sc">:</span><span class="dv">30</span>)</span>
+<span id="cb90-9"><a href="why-pls-doesnt-always-work.html#cb90-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-10"><a href="why-pls-doesnt-always-work.html#cb90-10" aria-hidden="true" tabindex="-1"></a>mins<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb90-11"><a href="why-pls-doesnt-always-work.html#cb90-11" aria-hidden="true" tabindex="-1"></a>maxs<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb90-12"><a href="why-pls-doesnt-always-work.html#cb90-12" aria-hidden="true" tabindex="-1"></a>CP<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb90-13"><a href="why-pls-doesnt-always-work.html#cb90-13" aria-hidden="true" tabindex="-1"></a>month<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb90-14"><a href="why-pls-doesnt-always-work.html#cb90-14" aria-hidden="true" tabindex="-1"></a>temp_model<span class="ot">&lt;-</span>Dynamic_Model</span>
+<span id="cb90-15"><a href="why-pls-doesnt-always-work.html#cb90-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-16"><a href="why-pls-doesnt-always-work.html#cb90-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(mon <span class="cf">in</span> month_range)</span>
+<span id="cb90-17"><a href="why-pls-doesnt-always-work.html#cb90-17" aria-hidden="true" tabindex="-1"></a>    {days_month<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">difftime</span>( <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon<span class="sc">+</span><span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb90-18"><a href="why-pls-doesnt-always-work.html#cb90-18" aria-hidden="true" tabindex="-1"></a>                                           <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon,<span class="dv">1</span>) ))</span>
+<span id="cb90-19"><a href="why-pls-doesnt-always-work.html#cb90-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(mon<span class="sc">==</span><span class="dv">12</span>) days_month<span class="ot">&lt;-</span><span class="dv">31</span></span>
+<span id="cb90-20"><a href="why-pls-doesnt-always-work.html#cb90-20" aria-hidden="true" tabindex="-1"></a>    weather<span class="ot">&lt;-</span><span class="fu">make_all_day_table</span>(<span class="fu">data.frame</span>(<span class="at">Year=</span><span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2002</span>),</span>
+<span id="cb90-21"><a href="why-pls-doesnt-always-work.html#cb90-21" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Month=</span><span class="fu">c</span>(mon,mon),</span>
+<span id="cb90-22"><a href="why-pls-doesnt-always-work.html#cb90-22" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Day=</span><span class="fu">c</span>(<span class="dv">1</span>,days_month),<span class="at">Tmin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">Tmax=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)))</span>
+<span id="cb90-23"><a href="why-pls-doesnt-always-work.html#cb90-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(tmin <span class="cf">in</span> Tmins)</span>
+<span id="cb90-24"><a href="why-pls-doesnt-always-work.html#cb90-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(tmax <span class="cf">in</span> Tmaxs)</span>
+<span id="cb90-25"><a href="why-pls-doesnt-always-work.html#cb90-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(tmax<span class="sc">&gt;=</span>tmin)</span>
+<span id="cb90-26"><a href="why-pls-doesnt-always-work.html#cb90-26" aria-hidden="true" tabindex="-1"></a>          {</span>
+<span id="cb90-27"><a href="why-pls-doesnt-always-work.html#cb90-27" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmin<span class="ot">&lt;-</span>tmin</span>
+<span id="cb90-28"><a href="why-pls-doesnt-always-work.html#cb90-28" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmax<span class="ot">&lt;-</span>tmax</span>
+<span id="cb90-29"><a href="why-pls-doesnt-always-work.html#cb90-29" aria-hidden="true" tabindex="-1"></a>          hourtemps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(weather,</span>
+<span id="cb90-30"><a href="why-pls-doesnt-always-work.html#cb90-30" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">latitude=</span>latitude)<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp</span>
+<span id="cb90-31"><a href="why-pls-doesnt-always-work.html#cb90-31" aria-hidden="true" tabindex="-1"></a>          CP<span class="ot">&lt;-</span><span class="fu">c</span>(CP,<span class="fu">do.call</span>(Dynamic_Model,</span>
+<span id="cb90-32"><a href="why-pls-doesnt-always-work.html#cb90-32" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">list</span>(hourtemps))[<span class="fu">length</span>(hourtemps)]<span class="sc">/</span>(<span class="fu">length</span>(hourtemps)<span class="sc">/</span><span class="dv">24</span>))</span>
+<span id="cb90-33"><a href="why-pls-doesnt-always-work.html#cb90-33" aria-hidden="true" tabindex="-1"></a>          mins<span class="ot">&lt;-</span><span class="fu">c</span>(mins,tmin)</span>
+<span id="cb90-34"><a href="why-pls-doesnt-always-work.html#cb90-34" aria-hidden="true" tabindex="-1"></a>          maxs<span class="ot">&lt;-</span><span class="fu">c</span>(maxs,tmax)</span>
+<span id="cb90-35"><a href="why-pls-doesnt-always-work.html#cb90-35" aria-hidden="true" tabindex="-1"></a>          month<span class="ot">&lt;-</span><span class="fu">c</span>(month,mon)</span>
+<span id="cb90-36"><a href="why-pls-doesnt-always-work.html#cb90-36" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb90-37"><a href="why-pls-doesnt-always-work.html#cb90-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb90-38"><a href="why-pls-doesnt-always-work.html#cb90-38" aria-hidden="true" tabindex="-1"></a>results<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Month=</span>month,<span class="at">Tmin=</span>mins,<span class="at">Tmax=</span>maxs,CP)</span>
+<span id="cb90-39"><a href="why-pls-doesnt-always-work.html#cb90-39" aria-hidden="true" tabindex="-1"></a>results<span class="ot">&lt;-</span>results[<span class="sc">!</span><span class="fu">is.na</span>(results<span class="sc">$</span>Month),]</span>
+<span id="cb90-40"><a href="why-pls-doesnt-always-work.html#cb90-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-41"><a href="why-pls-doesnt-always-work.html#cb90-41" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(results,<span class="st">&quot;data/model_sensitivity_development.csv&quot;</span>,<span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="why-pls-doesnt-always-work.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb91-2"><a href="why-pls-doesnt-always-work.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(colorRamps)</span>
+<span id="cb91-3"><a href="why-pls-doesnt-always-work.html#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-4"><a href="why-pls-doesnt-always-work.html#cb91-4" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/model_sensitivity_development.csv&quot;</span>)</span>
+<span id="cb91-5"><a href="why-pls-doesnt-always-work.html#cb91-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-6"><a href="why-pls-doesnt-always-work.html#cb91-6" aria-hidden="true" tabindex="-1"></a>results<span class="sc">$</span>Month_names<span class="ot">&lt;-</span> <span class="fu">factor</span>(results<span class="sc">$</span>Month, <span class="at">levels=</span>month_range,</span>
+<span id="cb91-7"><a href="why-pls-doesnt-always-work.html#cb91-7" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels=</span>month.name[month_range])  </span>
+<span id="cb91-8"><a href="why-pls-doesnt-always-work.html#cb91-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-9"><a href="why-pls-doesnt-always-work.html#cb91-9" aria-hidden="true" tabindex="-1"></a>DM_sensitivity<span class="ot">&lt;-</span><span class="fu">ggplot</span>(results,<span class="fu">aes</span>(<span class="at">x=</span>Tmin,<span class="at">y=</span>Tmax,<span class="at">fill=</span>CP)) <span class="sc">+</span></span>
+<span id="cb91-10"><a href="why-pls-doesnt-always-work.html#cb91-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb91-11"><a href="why-pls-doesnt-always-work.html#cb91-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours=</span><span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="at">alpha =</span> .<span class="dv">5</span>),</span>
+<span id="cb91-12"><a href="why-pls-doesnt-always-work.html#cb91-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name=</span><span class="st">&quot;Chill/day (CP)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb91-13"><a href="why-pls-doesnt-always-work.html#cb91-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmax),<span class="fu">max</span>(results<span class="sc">$</span>Tmax)) <span class="sc">+</span></span>
+<span id="cb91-14"><a href="why-pls-doesnt-always-work.html#cb91-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmin),<span class="fu">max</span>(results<span class="sc">$</span>Tmin))</span>
+<span id="cb91-15"><a href="why-pls-doesnt-always-work.html#cb91-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-16"><a href="why-pls-doesnt-always-work.html#cb91-16" aria-hidden="true" tabindex="-1"></a>DM_sensitivity <span class="ot">&lt;-</span> DM_sensitivity <span class="sc">+</span></span>
+<span id="cb91-17"><a href="why-pls-doesnt-always-work.html#cb91-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
+<span id="cb91-18"><a href="why-pls-doesnt-always-work.html#cb91-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmax),<span class="fu">max</span>(results<span class="sc">$</span>Tmax)) <span class="sc">+</span></span>
+<span id="cb91-19"><a href="why-pls-doesnt-always-work.html#cb91-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">min</span>(results<span class="sc">$</span>Tmin),<span class="fu">max</span>(results<span class="sc">$</span>Tmin))</span></code></pre></div>
 <p>In order to link the plot with Cape Town, real weather recordings are included as points in the existing sensitivity plots. This visualizes how effective the recorded temperatures have been to generate chill.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="why-pls-doesnt-always-work.html#cb3-1" aria-hidden="true" tabindex="-1"></a>CT_temperatures<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/CapeTown_weather.csv&quot;</span>)</span>
-<span id="cb3-2"><a href="why-pls-doesnt-always-work.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="why-pls-doesnt-always-work.html#cb3-3" aria-hidden="true" tabindex="-1"></a>CT_temperatures<span class="ot">&lt;-</span>CT_temperatures[<span class="fu">which</span>(CT_temperatures<span class="sc">$</span>Month <span class="sc">%in%</span> month_range),]</span>
-<span id="cb3-4"><a href="why-pls-doesnt-always-work.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="why-pls-doesnt-always-work.html#cb3-5" aria-hidden="true" tabindex="-1"></a>CT_temperatures[<span class="fu">which</span>(CT_temperatures<span class="sc">$</span>Tmax<span class="sc">&lt;</span>CT_temperatures<span class="sc">$</span>Tmin),</span>
-<span id="cb3-6"><a href="why-pls-doesnt-always-work.html#cb3-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">c</span>(<span class="st">&quot;Tmax&quot;</span>,<span class="st">&quot;Tmin&quot;</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb3-7"><a href="why-pls-doesnt-always-work.html#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="why-pls-doesnt-always-work.html#cb3-8" aria-hidden="true" tabindex="-1"></a>CT_temperatures<span class="sc">$</span>Month_names <span class="ot">=</span> <span class="fu">factor</span>(CT_temperatures<span class="sc">$</span>Month,</span>
-<span id="cb3-9"><a href="why-pls-doesnt-always-work.html#cb3-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">levels=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
-<span id="cb3-10"><a href="why-pls-doesnt-always-work.html#cb3-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;April&quot;</span>,<span class="st">&quot;May&quot;</span>,</span>
-<span id="cb3-11"><a href="why-pls-doesnt-always-work.html#cb3-11" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;June&quot;</span>,<span class="st">&quot;July&quot;</span>,</span>
-<span id="cb3-12"><a href="why-pls-doesnt-always-work.html#cb3-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;August&quot;</span>,<span class="st">&quot;September&quot;</span>)) </span>
-<span id="cb3-13"><a href="why-pls-doesnt-always-work.html#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="why-pls-doesnt-always-work.html#cb3-14" aria-hidden="true" tabindex="-1"></a>DM_sensitivity <span class="sc">+</span></span>
-<span id="cb3-15"><a href="why-pls-doesnt-always-work.html#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>CT_temperatures,<span class="fu">aes</span>(<span class="at">x=</span>Tmin,<span class="at">y=</span>Tmax,<span class="at">fill=</span><span class="cn">NULL</span>,</span>
-<span id="cb3-16"><a href="why-pls-doesnt-always-work.html#cb3-16" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">color=</span><span class="st">&quot;Temperature&quot;</span>),<span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb3-17"><a href="why-pls-doesnt-always-work.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
-<span id="cb3-18"><a href="why-pls-doesnt-always-work.html#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb3-19"><a href="why-pls-doesnt-always-work.html#cb3-19" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="st">&quot;Daily temperature </span><span class="sc">\n</span><span class="st">extremes (°C)&quot;</span>,</span>
-<span id="cb3-20"><a href="why-pls-doesnt-always-work.html#cb3-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">name=</span><span class="st">&quot;Observed at site&quot;</span> ) <span class="sc">+</span></span>
-<span id="cb3-21"><a href="why-pls-doesnt-always-work.html#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colorbar</span>(<span class="at">order =</span> <span class="dv">1</span>),</span>
-<span id="cb3-22"><a href="why-pls-doesnt-always-work.html#cb3-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb3-23"><a href="why-pls-doesnt-always-work.html#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb3-24"><a href="why-pls-doesnt-always-work.html#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tmin (°C)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb3-25"><a href="why-pls-doesnt-always-work.html#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Compared to other regions where low temperatures result in enough chill, this is not the case in Cape Town. The plotted actual weather records in the plots overlap only to a small extent with the area in which chill is generated at all. Additionally, the generation of chill per day is significantly lower in the majority of the overlapping areas because the temperatures are too warm in general.<br />
-The code to create the sensitivity data frames and the sensitivity plots is easier to handle within in functions. This also allows to import the functions at a later point in time.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="why-pls-doesnt-always-work.html#cb4-1" aria-hidden="true" tabindex="-1"></a>chill_model_sensitivity <span class="ot">&lt;-</span> </span>
-<span id="cb4-2"><a href="why-pls-doesnt-always-work.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(latitude,</span>
-<span id="cb4-3"><a href="why-pls-doesnt-always-work.html#cb4-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">temp_models=</span><span class="fu">list</span>(<span class="at">Dynamic_Model=</span>Dynamic_Model,<span class="at">GDH=</span>GDH),</span>
-<span id="cb4-4"><a href="why-pls-doesnt-always-work.html#cb4-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
-<span id="cb4-5"><a href="why-pls-doesnt-always-work.html#cb4-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">Tmins=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>),</span>
-<span id="cb4-6"><a href="why-pls-doesnt-always-work.html#cb4-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">Tmaxs=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>))</span>
-<span id="cb4-7"><a href="why-pls-doesnt-always-work.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb4-8"><a href="why-pls-doesnt-always-work.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  mins<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb4-9"><a href="why-pls-doesnt-always-work.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  maxs<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb4-10"><a href="why-pls-doesnt-always-work.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  metrics<span class="ot">&lt;-</span><span class="fu">as.list</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">length</span>(temp_models)))</span>
-<span id="cb4-11"><a href="why-pls-doesnt-always-work.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(metrics)<span class="ot">&lt;-</span><span class="fu">names</span>(temp_models)</span>
-<span id="cb4-12"><a href="why-pls-doesnt-always-work.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  month<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb4-13"><a href="why-pls-doesnt-always-work.html#cb4-13" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb4-14"><a href="why-pls-doesnt-always-work.html#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(mon <span class="cf">in</span> month_range)</span>
-<span id="cb4-15"><a href="why-pls-doesnt-always-work.html#cb4-15" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb4-16"><a href="why-pls-doesnt-always-work.html#cb4-16" aria-hidden="true" tabindex="-1"></a>    days_month<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">difftime</span>( <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon<span class="sc">+</span><span class="dv">1</span>,<span class="dv">1</span>),</span>
-<span id="cb4-17"><a href="why-pls-doesnt-always-work.html#cb4-17" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon,<span class="dv">1</span>) ))</span>
-<span id="cb4-18"><a href="why-pls-doesnt-always-work.html#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(mon<span class="sc">==</span><span class="dv">12</span>) days_month<span class="ot">&lt;-</span><span class="dv">31</span></span>
-<span id="cb4-19"><a href="why-pls-doesnt-always-work.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    weather<span class="ot">&lt;-</span><span class="fu">make_all_day_table</span>(<span class="fu">data.frame</span>(<span class="at">Year=</span><span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2002</span>),</span>
-<span id="cb4-20"><a href="why-pls-doesnt-always-work.html#cb4-20" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">Month=</span><span class="fu">c</span>(mon,mon),</span>
-<span id="cb4-21"><a href="why-pls-doesnt-always-work.html#cb4-21" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">Day=</span><span class="fu">c</span>(<span class="dv">1</span>,days_month),</span>
-<span id="cb4-22"><a href="why-pls-doesnt-always-work.html#cb4-22" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">Tmin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">Tmax=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)))</span>
-<span id="cb4-23"><a href="why-pls-doesnt-always-work.html#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="why-pls-doesnt-always-work.html#cb4-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-25"><a href="why-pls-doesnt-always-work.html#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(tmin <span class="cf">in</span> Tmins)</span>
-<span id="cb4-26"><a href="why-pls-doesnt-always-work.html#cb4-26" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(tmax <span class="cf">in</span> Tmaxs)</span>
-<span id="cb4-27"><a href="why-pls-doesnt-always-work.html#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(tmax<span class="sc">&gt;=</span>tmin)</span>
-<span id="cb4-28"><a href="why-pls-doesnt-always-work.html#cb4-28" aria-hidden="true" tabindex="-1"></a>          {</span>
-<span id="cb4-29"><a href="why-pls-doesnt-always-work.html#cb4-29" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmin<span class="ot">&lt;-</span>tmin</span>
-<span id="cb4-30"><a href="why-pls-doesnt-always-work.html#cb4-30" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmax<span class="ot">&lt;-</span>tmax</span>
-<span id="cb4-31"><a href="why-pls-doesnt-always-work.html#cb4-31" aria-hidden="true" tabindex="-1"></a>          hourtemps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(weather,</span>
-<span id="cb4-32"><a href="why-pls-doesnt-always-work.html#cb4-32" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">latitude=</span>latitude)<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp</span>
-<span id="cb4-33"><a href="why-pls-doesnt-always-work.html#cb4-33" aria-hidden="true" tabindex="-1"></a>          <span class="cf">for</span>(tm <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(temp_models))</span>
-<span id="cb4-34"><a href="why-pls-doesnt-always-work.html#cb4-34" aria-hidden="true" tabindex="-1"></a>           metrics[[tm]]<span class="ot">&lt;-</span><span class="fu">c</span>(metrics[[tm]],</span>
-<span id="cb4-35"><a href="why-pls-doesnt-always-work.html#cb4-35" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">do.call</span>(temp_models[[tm]],</span>
-<span id="cb4-36"><a href="why-pls-doesnt-always-work.html#cb4-36" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">list</span>(hourtemps))[<span class="fu">length</span>(hourtemps)]<span class="sc">/</span></span>
-<span id="cb4-37"><a href="why-pls-doesnt-always-work.html#cb4-37" aria-hidden="true" tabindex="-1"></a>                              (<span class="fu">length</span>(hourtemps)<span class="sc">/</span><span class="dv">24</span>))</span>
-<span id="cb4-38"><a href="why-pls-doesnt-always-work.html#cb4-38" aria-hidden="true" tabindex="-1"></a>          mins<span class="ot">&lt;-</span><span class="fu">c</span>(mins,tmin)</span>
-<span id="cb4-39"><a href="why-pls-doesnt-always-work.html#cb4-39" aria-hidden="true" tabindex="-1"></a>          maxs<span class="ot">&lt;-</span><span class="fu">c</span>(maxs,tmax)</span>
-<span id="cb4-40"><a href="why-pls-doesnt-always-work.html#cb4-40" aria-hidden="true" tabindex="-1"></a>          month<span class="ot">&lt;-</span><span class="fu">c</span>(month,mon)</span>
-<span id="cb4-41"><a href="why-pls-doesnt-always-work.html#cb4-41" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb4-42"><a href="why-pls-doesnt-always-work.html#cb4-42" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb4-43"><a href="why-pls-doesnt-always-work.html#cb4-43" aria-hidden="true" tabindex="-1"></a>  results<span class="ot">&lt;-</span><span class="fu">cbind</span>(<span class="fu">data.frame</span>(<span class="at">Month=</span>month,<span class="at">Tmin=</span>mins,<span class="at">Tmax=</span>maxs),</span>
-<span id="cb4-44"><a href="why-pls-doesnt-always-work.html#cb4-44" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">as.data.frame</span>(metrics))</span>
-<span id="cb4-45"><a href="why-pls-doesnt-always-work.html#cb4-45" aria-hidden="true" tabindex="-1"></a>  results<span class="ot">&lt;-</span>results[<span class="sc">!</span><span class="fu">is.na</span>(results<span class="sc">$</span>Month),]</span>
-<span id="cb4-46"><a href="why-pls-doesnt-always-work.html#cb4-46" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="why-pls-doesnt-always-work.html#cb5-1" aria-hidden="true" tabindex="-1"></a>chill_sensitivity_temps <span class="ot">&lt;-</span> <span class="cf">function</span>(chill_model_sensitivity_table,</span>
-<span id="cb5-2"><a href="why-pls-doesnt-always-work.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                                  temperatures,</span>
-<span id="cb5-3"><a href="why-pls-doesnt-always-work.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                                  temp_model,</span>
-<span id="cb5-4"><a href="why-pls-doesnt-always-work.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
-<span id="cb5-5"><a href="why-pls-doesnt-always-work.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">Tmins=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>),</span>
-<span id="cb5-6"><a href="why-pls-doesnt-always-work.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">Tmaxs=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>),</span>
-<span id="cb5-7"><a href="why-pls-doesnt-always-work.html#cb5-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend_label=</span><span class="st">&quot;Chill/day (CP)&quot;</span>)</span>
-<span id="cb5-8"><a href="why-pls-doesnt-always-work.html#cb5-8" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb5-9"><a href="why-pls-doesnt-always-work.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-10"><a href="why-pls-doesnt-always-work.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(colorRamps)</span>
-<span id="cb5-11"><a href="why-pls-doesnt-always-work.html#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="why-pls-doesnt-always-work.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  cmst<span class="ot">&lt;-</span>chill_model_sensitivity_table</span>
-<span id="cb5-13"><a href="why-pls-doesnt-always-work.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  cmst<span class="ot">&lt;-</span>cmst[<span class="fu">which</span>(cmst<span class="sc">$</span>Month <span class="sc">%in%</span> month_range),]</span>
-<span id="cb5-14"><a href="why-pls-doesnt-always-work.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  cmst<span class="sc">$</span>Month_names<span class="ot">&lt;-</span> <span class="fu">factor</span>(cmst<span class="sc">$</span>Month, <span class="at">levels=</span>month_range,</span>
-<span id="cb5-15"><a href="why-pls-doesnt-always-work.html#cb5-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels=</span>month.name[month_range])  </span>
-<span id="cb5-16"><a href="why-pls-doesnt-always-work.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-17"><a href="why-pls-doesnt-always-work.html#cb5-17" aria-hidden="true" tabindex="-1"></a>  DM_sensitivity<span class="ot">&lt;-</span></span>
-<span id="cb5-18"><a href="why-pls-doesnt-always-work.html#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(cmst,</span>
-<span id="cb5-19"><a href="why-pls-doesnt-always-work.html#cb5-19" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">&quot;Tmin&quot;</span>,<span class="at">y=</span><span class="st">&quot;Tmax&quot;</span>,<span class="at">fill=</span>temp_model)) <span class="sc">+</span></span>
-<span id="cb5-20"><a href="why-pls-doesnt-always-work.html#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb5-21"><a href="why-pls-doesnt-always-work.html#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradientn</span>(<span class="at">colours=</span><span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="at">alpha =</span> .<span class="dv">5</span>),</span>
-<span id="cb5-22"><a href="why-pls-doesnt-always-work.html#cb5-22" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name=</span>legend_label) <span class="sc">+</span></span>
-<span id="cb5-23"><a href="why-pls-doesnt-always-work.html#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(Tmins[<span class="dv">1</span>],Tmins[<span class="fu">length</span>(Tmins)]) <span class="sc">+</span></span>
-<span id="cb5-24"><a href="why-pls-doesnt-always-work.html#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(Tmaxs[<span class="dv">1</span>],Tmaxs[<span class="fu">length</span>(Tmaxs)])</span>
-<span id="cb5-25"><a href="why-pls-doesnt-always-work.html#cb5-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-26"><a href="why-pls-doesnt-always-work.html#cb5-26" aria-hidden="true" tabindex="-1"></a>  temperatures<span class="ot">&lt;-</span></span>
-<span id="cb5-27"><a href="why-pls-doesnt-always-work.html#cb5-27" aria-hidden="true" tabindex="-1"></a>    temperatures[<span class="fu">which</span>(temperatures<span class="sc">$</span>Month <span class="sc">%in%</span> month_range),]</span>
-<span id="cb5-28"><a href="why-pls-doesnt-always-work.html#cb5-28" aria-hidden="true" tabindex="-1"></a>  temperatures[<span class="fu">which</span>(temperatures<span class="sc">$</span>Tmax<span class="sc">&lt;</span>temperatures<span class="sc">$</span>Tmin),</span>
-<span id="cb5-29"><a href="why-pls-doesnt-always-work.html#cb5-29" aria-hidden="true" tabindex="-1"></a>               <span class="fu">c</span>(<span class="st">&quot;Tmax&quot;</span>,<span class="st">&quot;Tmin&quot;</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
-<span id="cb5-30"><a href="why-pls-doesnt-always-work.html#cb5-30" aria-hidden="true" tabindex="-1"></a>  temperatures<span class="sc">$</span>Month_names <span class="ot">&lt;-</span></span>
-<span id="cb5-31"><a href="why-pls-doesnt-always-work.html#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">factor</span>(temperatures<span class="sc">$</span>Month,</span>
-<span id="cb5-32"><a href="why-pls-doesnt-always-work.html#cb5-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">levels=</span>month_range,</span>
-<span id="cb5-33"><a href="why-pls-doesnt-always-work.html#cb5-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">labels=</span>month.name[month_range])  </span>
-<span id="cb5-34"><a href="why-pls-doesnt-always-work.html#cb5-34" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-35"><a href="why-pls-doesnt-always-work.html#cb5-35" aria-hidden="true" tabindex="-1"></a>  DM_sensitivity <span class="sc">+</span></span>
-<span id="cb5-36"><a href="why-pls-doesnt-always-work.html#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data=</span>temperatures,</span>
-<span id="cb5-37"><a href="why-pls-doesnt-always-work.html#cb5-37" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>Tmin,<span class="at">y=</span>Tmax,<span class="at">fill=</span><span class="cn">NULL</span>,<span class="at">color=</span><span class="st">&quot;Temperature&quot;</span>),</span>
-<span id="cb5-38"><a href="why-pls-doesnt-always-work.html#cb5-38" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb5-39"><a href="why-pls-doesnt-always-work.html#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
-<span id="cb5-40"><a href="why-pls-doesnt-always-work.html#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb5-41"><a href="why-pls-doesnt-always-work.html#cb5-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="st">&quot;Daily temperature </span><span class="sc">\n</span><span class="st">extremes (°C)&quot;</span>,</span>
-<span id="cb5-42"><a href="why-pls-doesnt-always-work.html#cb5-42" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name=</span><span class="st">&quot;Observed at site&quot;</span> ) <span class="sc">+</span></span>
-<span id="cb5-43"><a href="why-pls-doesnt-always-work.html#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colorbar</span>(<span class="at">order =</span> <span class="dv">1</span>),</span>
-<span id="cb5-44"><a href="why-pls-doesnt-always-work.html#cb5-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb5-45"><a href="why-pls-doesnt-always-work.html#cb5-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb5-46"><a href="why-pls-doesnt-always-work.html#cb5-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;Tmin (°C)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb5-47"><a href="why-pls-doesnt-always-work.html#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>)</span>
-<span id="cb5-48"><a href="why-pls-doesnt-always-work.html#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="why-pls-doesnt-always-work.html#cb5-49" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>In the following code chunk, I create again a sensitivity data frame. This time I also add the Growing Degree Hours to the function. This allows me to use the <code>chill_sensitivity_temps()</code> to create plots for chill and heat model sensitivity as seen below.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="why-pls-doesnt-always-work.html#cb6-1" aria-hidden="true" tabindex="-1"></a>model_sensitivities_CT <span class="ot">&lt;-</span> </span>
-<span id="cb6-2"><a href="why-pls-doesnt-always-work.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chill_model_sensitivity</span>(<span class="at">latitude =</span> coords[<span class="dv">2</span>],</span>
-<span id="cb6-3"><a href="why-pls-doesnt-always-work.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">temp_models =</span> <span class="fu">list</span>(<span class="at">Dynamic_Model=</span>Dynamic_Model,</span>
-<span id="cb6-4"><a href="why-pls-doesnt-always-work.html#cb6-4" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">GDH=</span>GDH),</span>
-<span id="cb6-5"><a href="why-pls-doesnt-always-work.html#cb6-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">month_range =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>))</span>
-<span id="cb6-6"><a href="why-pls-doesnt-always-work.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="why-pls-doesnt-always-work.html#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="why-pls-doesnt-always-work.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(model_sensitivities_CT,</span>
-<span id="cb6-9"><a href="why-pls-doesnt-always-work.html#cb6-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;data/model_sensitivities_CT.csv&quot;</span>,<span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="why-pls-doesnt-always-work.html#cb7-1" aria-hidden="true" tabindex="-1"></a>model_sensitivities_CT <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/model_sensitivities_CT.csv&quot;</span>)</span>
-<span id="cb7-2"><a href="why-pls-doesnt-always-work.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="why-pls-doesnt-always-work.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chill_sensitivity_temps</span>(model_sensitivities_CT,</span>
-<span id="cb7-4"><a href="why-pls-doesnt-always-work.html#cb7-4" aria-hidden="true" tabindex="-1"></a>                        CT_temperatures,</span>
-<span id="cb7-5"><a href="why-pls-doesnt-always-work.html#cb7-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">temp_model=</span><span class="st">&quot;Dynamic_Model&quot;</span>,</span>
-<span id="cb7-6"><a href="why-pls-doesnt-always-work.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
-<span id="cb7-7"><a href="why-pls-doesnt-always-work.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend_label=</span><span class="st">&quot;Chill per day </span><span class="sc">\n</span><span class="st">(Dynamic Model)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-8"><a href="why-pls-doesnt-always-work.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Chill model sensitivity at Cape Town, South Africa&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="why-pls-doesnt-always-work.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chill_sensitivity_temps</span>(model_sensitivities_CT,</span>
-<span id="cb8-2"><a href="why-pls-doesnt-always-work.html#cb8-2" aria-hidden="true" tabindex="-1"></a>                        CT_temperatures,</span>
-<span id="cb8-3"><a href="why-pls-doesnt-always-work.html#cb8-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">temp_model=</span><span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb8-4"><a href="why-pls-doesnt-always-work.html#cb8-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
-<span id="cb8-5"><a href="why-pls-doesnt-always-work.html#cb8-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend_label=</span><span class="st">&quot;Heat per day </span><span class="sc">\n</span><span class="st">(GDH)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="why-pls-doesnt-always-work.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Heat model sensitivity at Cape Town, South Africa&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="why-pls-doesnt-always-work.html#cb92-1" aria-hidden="true" tabindex="-1"></a>CT_temperatures<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/CapeTown_weather.csv&quot;</span>)</span>
+<span id="cb92-2"><a href="why-pls-doesnt-always-work.html#cb92-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="why-pls-doesnt-always-work.html#cb92-3" aria-hidden="true" tabindex="-1"></a>CT_temperatures<span class="ot">&lt;-</span>CT_temperatures[<span class="fu">which</span>(CT_temperatures<span class="sc">$</span>Month <span class="sc">%in%</span> month_range),]</span>
+<span id="cb92-4"><a href="why-pls-doesnt-always-work.html#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-5"><a href="why-pls-doesnt-always-work.html#cb92-5" aria-hidden="true" tabindex="-1"></a>CT_temperatures[<span class="fu">which</span>(CT_temperatures<span class="sc">$</span>Tmax<span class="sc">&lt;</span>CT_temperatures<span class="sc">$</span>Tmin),</span>
+<span id="cb92-6"><a href="why-pls-doesnt-always-work.html#cb92-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">c</span>(<span class="st">&quot;Tmax&quot;</span>,<span class="st">&quot;Tmin&quot;</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb92-7"><a href="why-pls-doesnt-always-work.html#cb92-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-8"><a href="why-pls-doesnt-always-work.html#cb92-8" aria-hidden="true" tabindex="-1"></a>CT_temperatures<span class="sc">$</span>Month_names <span class="ot">=</span> <span class="fu">factor</span>(CT_temperatures<span class="sc">$</span>Month,</span>
+<span id="cb92-9"><a href="why-pls-doesnt-always-work.html#cb92-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">levels=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
+<span id="cb92-10"><a href="why-pls-doesnt-always-work.html#cb92-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;April&quot;</span>,<span class="st">&quot;May&quot;</span>,</span>
+<span id="cb92-11"><a href="why-pls-doesnt-always-work.html#cb92-11" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;June&quot;</span>,<span class="st">&quot;July&quot;</span>,</span>
+<span id="cb92-12"><a href="why-pls-doesnt-always-work.html#cb92-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;August&quot;</span>,<span class="st">&quot;September&quot;</span>)) </span>
+<span id="cb92-13"><a href="why-pls-doesnt-always-work.html#cb92-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-14"><a href="why-pls-doesnt-always-work.html#cb92-14" aria-hidden="true" tabindex="-1"></a>DM_sensitivity <span class="sc">+</span></span>
+<span id="cb92-15"><a href="why-pls-doesnt-always-work.html#cb92-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>CT_temperatures,<span class="fu">aes</span>(<span class="at">x=</span>Tmin,<span class="at">y=</span>Tmax,<span class="at">fill=</span><span class="cn">NULL</span>,</span>
+<span id="cb92-16"><a href="why-pls-doesnt-always-work.html#cb92-16" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">color=</span><span class="st">&quot;Temperature&quot;</span>),<span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb92-17"><a href="why-pls-doesnt-always-work.html#cb92-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
+<span id="cb92-18"><a href="why-pls-doesnt-always-work.html#cb92-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb92-19"><a href="why-pls-doesnt-always-work.html#cb92-19" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="st">&quot;Daily temperature </span><span class="sc">\n</span><span class="st">extremes (°C)&quot;</span>,</span>
+<span id="cb92-20"><a href="why-pls-doesnt-always-work.html#cb92-20" aria-hidden="true" tabindex="-1"></a>                     <span class="at">name=</span><span class="st">&quot;Observed at site&quot;</span> ) <span class="sc">+</span></span>
+<span id="cb92-21"><a href="why-pls-doesnt-always-work.html#cb92-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colorbar</span>(<span class="at">order =</span> <span class="dv">1</span>),</span>
+<span id="cb92-22"><a href="why-pls-doesnt-always-work.html#cb92-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb92-23"><a href="why-pls-doesnt-always-work.html#cb92-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-24"><a href="why-pls-doesnt-always-work.html#cb92-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Tmin (°C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb92-25"><a href="why-pls-doesnt-always-work.html#cb92-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-97"></span>
+<img src="_main_files/figure-html/unnamed-chunk-97-1.png" alt="Chill model sensitivity plot for Cape Town" width="672" />
+<p class="caption">
+Figure 22.1: Chill model sensitivity plot for Cape Town
+</p>
+</div>
+<p>Compared to other regions where low temperatures result in enough chill, this is not the case in Cape Town. The plotted actual weather records in the plots overlap only to a small extent with the area in which chill is generated at all. Additionally, the generation of chill per day is significantly lower in the majority of the overlapping areas because the temperatures are too warm in general.</p>
+<p>The code to create the sensitivity data frames and the sensitivity plots is easier to handle within in functions. This also allows to import the functions at a later point in time. Again I hide the code for the functions to save some space.</p>
+<div id="spoiler" style="display:none">
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="why-pls-doesnt-always-work.html#cb93-1" aria-hidden="true" tabindex="-1"></a>chill_model_sensitivity <span class="ot">&lt;-</span> </span>
+<span id="cb93-2"><a href="why-pls-doesnt-always-work.html#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(latitude,</span>
+<span id="cb93-3"><a href="why-pls-doesnt-always-work.html#cb93-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">temp_models=</span><span class="fu">list</span>(<span class="at">Dynamic_Model=</span>Dynamic_Model,<span class="at">GDH=</span>GDH),</span>
+<span id="cb93-4"><a href="why-pls-doesnt-always-work.html#cb93-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb93-5"><a href="why-pls-doesnt-always-work.html#cb93-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">Tmins=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>),</span>
+<span id="cb93-6"><a href="why-pls-doesnt-always-work.html#cb93-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">Tmaxs=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>))</span>
+<span id="cb93-7"><a href="why-pls-doesnt-always-work.html#cb93-7" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb93-8"><a href="why-pls-doesnt-always-work.html#cb93-8" aria-hidden="true" tabindex="-1"></a>  mins<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb93-9"><a href="why-pls-doesnt-always-work.html#cb93-9" aria-hidden="true" tabindex="-1"></a>  maxs<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb93-10"><a href="why-pls-doesnt-always-work.html#cb93-10" aria-hidden="true" tabindex="-1"></a>  metrics<span class="ot">&lt;-</span><span class="fu">as.list</span>(<span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">length</span>(temp_models)))</span>
+<span id="cb93-11"><a href="why-pls-doesnt-always-work.html#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(metrics)<span class="ot">&lt;-</span><span class="fu">names</span>(temp_models)</span>
+<span id="cb93-12"><a href="why-pls-doesnt-always-work.html#cb93-12" aria-hidden="true" tabindex="-1"></a>  month<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb93-13"><a href="why-pls-doesnt-always-work.html#cb93-13" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb93-14"><a href="why-pls-doesnt-always-work.html#cb93-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(mon <span class="cf">in</span> month_range)</span>
+<span id="cb93-15"><a href="why-pls-doesnt-always-work.html#cb93-15" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb93-16"><a href="why-pls-doesnt-always-work.html#cb93-16" aria-hidden="true" tabindex="-1"></a>    days_month<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(<span class="fu">difftime</span>( <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon<span class="sc">+</span><span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb93-17"><a href="why-pls-doesnt-always-work.html#cb93-17" aria-hidden="true" tabindex="-1"></a>                                      <span class="fu">ISOdate</span>(<span class="dv">2002</span>,mon,<span class="dv">1</span>) ))</span>
+<span id="cb93-18"><a href="why-pls-doesnt-always-work.html#cb93-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(mon<span class="sc">==</span><span class="dv">12</span>) days_month<span class="ot">&lt;-</span><span class="dv">31</span></span>
+<span id="cb93-19"><a href="why-pls-doesnt-always-work.html#cb93-19" aria-hidden="true" tabindex="-1"></a>    weather<span class="ot">&lt;-</span><span class="fu">make_all_day_table</span>(<span class="fu">data.frame</span>(<span class="at">Year=</span><span class="fu">c</span>(<span class="dv">2001</span>,<span class="dv">2002</span>),</span>
+<span id="cb93-20"><a href="why-pls-doesnt-always-work.html#cb93-20" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">Month=</span><span class="fu">c</span>(mon,mon),</span>
+<span id="cb93-21"><a href="why-pls-doesnt-always-work.html#cb93-21" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">Day=</span><span class="fu">c</span>(<span class="dv">1</span>,days_month),</span>
+<span id="cb93-22"><a href="why-pls-doesnt-always-work.html#cb93-22" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">Tmin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),<span class="at">Tmax=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)))</span>
+<span id="cb93-23"><a href="why-pls-doesnt-always-work.html#cb93-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-24"><a href="why-pls-doesnt-always-work.html#cb93-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb93-25"><a href="why-pls-doesnt-always-work.html#cb93-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span>(tmin <span class="cf">in</span> Tmins)</span>
+<span id="cb93-26"><a href="why-pls-doesnt-always-work.html#cb93-26" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span>(tmax <span class="cf">in</span> Tmaxs)</span>
+<span id="cb93-27"><a href="why-pls-doesnt-always-work.html#cb93-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span>(tmax<span class="sc">&gt;=</span>tmin)</span>
+<span id="cb93-28"><a href="why-pls-doesnt-always-work.html#cb93-28" aria-hidden="true" tabindex="-1"></a>          {</span>
+<span id="cb93-29"><a href="why-pls-doesnt-always-work.html#cb93-29" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmin<span class="ot">&lt;-</span>tmin</span>
+<span id="cb93-30"><a href="why-pls-doesnt-always-work.html#cb93-30" aria-hidden="true" tabindex="-1"></a>          weather<span class="sc">$</span>Tmax<span class="ot">&lt;-</span>tmax</span>
+<span id="cb93-31"><a href="why-pls-doesnt-always-work.html#cb93-31" aria-hidden="true" tabindex="-1"></a>          hourtemps<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(weather,</span>
+<span id="cb93-32"><a href="why-pls-doesnt-always-work.html#cb93-32" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">latitude=</span>latitude)<span class="sc">$</span>hourtemps<span class="sc">$</span>Temp</span>
+<span id="cb93-33"><a href="why-pls-doesnt-always-work.html#cb93-33" aria-hidden="true" tabindex="-1"></a>          <span class="cf">for</span>(tm <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(temp_models))</span>
+<span id="cb93-34"><a href="why-pls-doesnt-always-work.html#cb93-34" aria-hidden="true" tabindex="-1"></a>           metrics[[tm]]<span class="ot">&lt;-</span><span class="fu">c</span>(metrics[[tm]],</span>
+<span id="cb93-35"><a href="why-pls-doesnt-always-work.html#cb93-35" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">do.call</span>(temp_models[[tm]],</span>
+<span id="cb93-36"><a href="why-pls-doesnt-always-work.html#cb93-36" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">list</span>(hourtemps))[<span class="fu">length</span>(hourtemps)]<span class="sc">/</span></span>
+<span id="cb93-37"><a href="why-pls-doesnt-always-work.html#cb93-37" aria-hidden="true" tabindex="-1"></a>                              (<span class="fu">length</span>(hourtemps)<span class="sc">/</span><span class="dv">24</span>))</span>
+<span id="cb93-38"><a href="why-pls-doesnt-always-work.html#cb93-38" aria-hidden="true" tabindex="-1"></a>          mins<span class="ot">&lt;-</span><span class="fu">c</span>(mins,tmin)</span>
+<span id="cb93-39"><a href="why-pls-doesnt-always-work.html#cb93-39" aria-hidden="true" tabindex="-1"></a>          maxs<span class="ot">&lt;-</span><span class="fu">c</span>(maxs,tmax)</span>
+<span id="cb93-40"><a href="why-pls-doesnt-always-work.html#cb93-40" aria-hidden="true" tabindex="-1"></a>          month<span class="ot">&lt;-</span><span class="fu">c</span>(month,mon)</span>
+<span id="cb93-41"><a href="why-pls-doesnt-always-work.html#cb93-41" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb93-42"><a href="why-pls-doesnt-always-work.html#cb93-42" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb93-43"><a href="why-pls-doesnt-always-work.html#cb93-43" aria-hidden="true" tabindex="-1"></a>  results<span class="ot">&lt;-</span><span class="fu">cbind</span>(<span class="fu">data.frame</span>(<span class="at">Month=</span>month,<span class="at">Tmin=</span>mins,<span class="at">Tmax=</span>maxs),</span>
+<span id="cb93-44"><a href="why-pls-doesnt-always-work.html#cb93-44" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">as.data.frame</span>(metrics))</span>
+<span id="cb93-45"><a href="why-pls-doesnt-always-work.html#cb93-45" aria-hidden="true" tabindex="-1"></a>  results<span class="ot">&lt;-</span>results[<span class="sc">!</span><span class="fu">is.na</span>(results<span class="sc">$</span>Month),]</span>
+<span id="cb93-46"><a href="why-pls-doesnt-always-work.html#cb93-46" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="why-pls-doesnt-always-work.html#cb94-1" aria-hidden="true" tabindex="-1"></a>chill_sensitivity_temps <span class="ot">&lt;-</span> <span class="cf">function</span>(chill_model_sensitivity_table,</span>
+<span id="cb94-2"><a href="why-pls-doesnt-always-work.html#cb94-2" aria-hidden="true" tabindex="-1"></a>                                  temperatures,</span>
+<span id="cb94-3"><a href="why-pls-doesnt-always-work.html#cb94-3" aria-hidden="true" tabindex="-1"></a>                                  temp_model,</span>
+<span id="cb94-4"><a href="why-pls-doesnt-always-work.html#cb94-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>),</span>
+<span id="cb94-5"><a href="why-pls-doesnt-always-work.html#cb94-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">Tmins=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>),</span>
+<span id="cb94-6"><a href="why-pls-doesnt-always-work.html#cb94-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">Tmaxs=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">30</span>),</span>
+<span id="cb94-7"><a href="why-pls-doesnt-always-work.html#cb94-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend_label=</span><span class="st">&quot;Chill/day (CP)&quot;</span>)</span>
+<span id="cb94-8"><a href="why-pls-doesnt-always-work.html#cb94-8" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb94-9"><a href="why-pls-doesnt-always-work.html#cb94-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb94-10"><a href="why-pls-doesnt-always-work.html#cb94-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(colorRamps)</span>
+<span id="cb94-11"><a href="why-pls-doesnt-always-work.html#cb94-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-12"><a href="why-pls-doesnt-always-work.html#cb94-12" aria-hidden="true" tabindex="-1"></a>  cmst<span class="ot">&lt;-</span>chill_model_sensitivity_table</span>
+<span id="cb94-13"><a href="why-pls-doesnt-always-work.html#cb94-13" aria-hidden="true" tabindex="-1"></a>  cmst<span class="ot">&lt;-</span>cmst[<span class="fu">which</span>(cmst<span class="sc">$</span>Month <span class="sc">%in%</span> month_range),]</span>
+<span id="cb94-14"><a href="why-pls-doesnt-always-work.html#cb94-14" aria-hidden="true" tabindex="-1"></a>  cmst<span class="sc">$</span>Month_names<span class="ot">&lt;-</span> <span class="fu">factor</span>(cmst<span class="sc">$</span>Month, <span class="at">levels=</span>month_range,</span>
+<span id="cb94-15"><a href="why-pls-doesnt-always-work.html#cb94-15" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels=</span>month.name[month_range])  </span>
+<span id="cb94-16"><a href="why-pls-doesnt-always-work.html#cb94-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb94-17"><a href="why-pls-doesnt-always-work.html#cb94-17" aria-hidden="true" tabindex="-1"></a>  DM_sensitivity<span class="ot">&lt;-</span></span>
+<span id="cb94-18"><a href="why-pls-doesnt-always-work.html#cb94-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(cmst,</span>
+<span id="cb94-19"><a href="why-pls-doesnt-always-work.html#cb94-19" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes_string</span>(<span class="at">x=</span><span class="st">&quot;Tmin&quot;</span>,<span class="at">y=</span><span class="st">&quot;Tmax&quot;</span>,<span class="at">fill=</span>temp_model)) <span class="sc">+</span></span>
+<span id="cb94-20"><a href="why-pls-doesnt-always-work.html#cb94-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb94-21"><a href="why-pls-doesnt-always-work.html#cb94-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradientn</span>(<span class="at">colours=</span><span class="fu">alpha</span>(<span class="fu">matlab.like</span>(<span class="dv">15</span>), <span class="at">alpha =</span> .<span class="dv">5</span>),</span>
+<span id="cb94-22"><a href="why-pls-doesnt-always-work.html#cb94-22" aria-hidden="true" tabindex="-1"></a>                         <span class="at">name=</span>legend_label) <span class="sc">+</span></span>
+<span id="cb94-23"><a href="why-pls-doesnt-always-work.html#cb94-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlim</span>(Tmins[<span class="dv">1</span>],Tmins[<span class="fu">length</span>(Tmins)]) <span class="sc">+</span></span>
+<span id="cb94-24"><a href="why-pls-doesnt-always-work.html#cb94-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(Tmaxs[<span class="dv">1</span>],Tmaxs[<span class="fu">length</span>(Tmaxs)])</span>
+<span id="cb94-25"><a href="why-pls-doesnt-always-work.html#cb94-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb94-26"><a href="why-pls-doesnt-always-work.html#cb94-26" aria-hidden="true" tabindex="-1"></a>  temperatures<span class="ot">&lt;-</span></span>
+<span id="cb94-27"><a href="why-pls-doesnt-always-work.html#cb94-27" aria-hidden="true" tabindex="-1"></a>    temperatures[<span class="fu">which</span>(temperatures<span class="sc">$</span>Month <span class="sc">%in%</span> month_range),]</span>
+<span id="cb94-28"><a href="why-pls-doesnt-always-work.html#cb94-28" aria-hidden="true" tabindex="-1"></a>  temperatures[<span class="fu">which</span>(temperatures<span class="sc">$</span>Tmax<span class="sc">&lt;</span>temperatures<span class="sc">$</span>Tmin),</span>
+<span id="cb94-29"><a href="why-pls-doesnt-always-work.html#cb94-29" aria-hidden="true" tabindex="-1"></a>               <span class="fu">c</span>(<span class="st">&quot;Tmax&quot;</span>,<span class="st">&quot;Tmin&quot;</span>)]<span class="ot">&lt;-</span><span class="cn">NA</span></span>
+<span id="cb94-30"><a href="why-pls-doesnt-always-work.html#cb94-30" aria-hidden="true" tabindex="-1"></a>  temperatures<span class="sc">$</span>Month_names <span class="ot">&lt;-</span></span>
+<span id="cb94-31"><a href="why-pls-doesnt-always-work.html#cb94-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">factor</span>(temperatures<span class="sc">$</span>Month,</span>
+<span id="cb94-32"><a href="why-pls-doesnt-always-work.html#cb94-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">levels=</span>month_range,</span>
+<span id="cb94-33"><a href="why-pls-doesnt-always-work.html#cb94-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">labels=</span>month.name[month_range])  </span>
+<span id="cb94-34"><a href="why-pls-doesnt-always-work.html#cb94-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb94-35"><a href="why-pls-doesnt-always-work.html#cb94-35" aria-hidden="true" tabindex="-1"></a>  DM_sensitivity <span class="sc">+</span></span>
+<span id="cb94-36"><a href="why-pls-doesnt-always-work.html#cb94-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data=</span>temperatures,</span>
+<span id="cb94-37"><a href="why-pls-doesnt-always-work.html#cb94-37" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x=</span>Tmin,<span class="at">y=</span>Tmax,<span class="at">fill=</span><span class="cn">NULL</span>,<span class="at">color=</span><span class="st">&quot;Temperature&quot;</span>),</span>
+<span id="cb94-38"><a href="why-pls-doesnt-always-work.html#cb94-38" aria-hidden="true" tabindex="-1"></a>               <span class="at">size=</span><span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb94-39"><a href="why-pls-doesnt-always-work.html#cb94-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(Month_names)) <span class="sc">+</span></span>
+<span id="cb94-40"><a href="why-pls-doesnt-always-work.html#cb94-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb94-41"><a href="why-pls-doesnt-always-work.html#cb94-41" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="st">&quot;Daily temperature </span><span class="sc">\n</span><span class="st">extremes (°C)&quot;</span>,</span>
+<span id="cb94-42"><a href="why-pls-doesnt-always-work.html#cb94-42" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name=</span><span class="st">&quot;Observed at site&quot;</span> ) <span class="sc">+</span></span>
+<span id="cb94-43"><a href="why-pls-doesnt-always-work.html#cb94-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colorbar</span>(<span class="at">order =</span> <span class="dv">1</span>),</span>
+<span id="cb94-44"><a href="why-pls-doesnt-always-work.html#cb94-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">order =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb94-45"><a href="why-pls-doesnt-always-work.html#cb94-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Tmax (°C)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-46"><a href="why-pls-doesnt-always-work.html#cb94-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;Tmin (°C)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb94-47"><a href="why-pls-doesnt-always-work.html#cb94-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>(<span class="at">base_size=</span><span class="dv">15</span>)</span>
+<span id="cb94-48"><a href="why-pls-doesnt-always-work.html#cb94-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-49"><a href="why-pls-doesnt-always-work.html#cb94-49" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<button title="Click to show/hide the code for the functions" type="button" onclick="if(document.getElementById(&#39;spoiler&#39;) .style.display==&#39;none&#39;)
+              {document.getElementById(&#39;spoiler&#39;) .style.display=&#39;&#39;}
+            else{document.getElementById(&#39;spoiler&#39;) .style.display=&#39;none&#39;}">
+Show/Hide code
+</button>
+<p><br />
+</p>
+<p>In the following code chunk, I create again a sensitivity data frame with the <code>chill_model_sensitivity()</code> function. This time I also add the Growing Degree Hours to the function. This allows me to use the <code>chill_sensitivity_temps()</code> function to create plots for chill and heat model sensitivity as seen below.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="why-pls-doesnt-always-work.html#cb95-1" aria-hidden="true" tabindex="-1"></a>model_sensitivities_CT <span class="ot">&lt;-</span> </span>
+<span id="cb95-2"><a href="why-pls-doesnt-always-work.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chill_model_sensitivity</span>(<span class="at">latitude =</span> coords[<span class="dv">2</span>],</span>
+<span id="cb95-3"><a href="why-pls-doesnt-always-work.html#cb95-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">temp_models =</span> <span class="fu">list</span>(<span class="at">Dynamic_Model=</span>Dynamic_Model,</span>
+<span id="cb95-4"><a href="why-pls-doesnt-always-work.html#cb95-4" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">GDH=</span>GDH),</span>
+<span id="cb95-5"><a href="why-pls-doesnt-always-work.html#cb95-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">month_range =</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>))</span>
+<span id="cb95-6"><a href="why-pls-doesnt-always-work.html#cb95-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="why-pls-doesnt-always-work.html#cb95-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-8"><a href="why-pls-doesnt-always-work.html#cb95-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(model_sensitivities_CT,</span>
+<span id="cb95-9"><a href="why-pls-doesnt-always-work.html#cb95-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;data/model_sensitivities_CT.csv&quot;</span>,<span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="why-pls-doesnt-always-work.html#cb96-1" aria-hidden="true" tabindex="-1"></a>model_sensitivities_CT <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/model_sensitivities_CT.csv&quot;</span>)</span>
+<span id="cb96-2"><a href="why-pls-doesnt-always-work.html#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-3"><a href="why-pls-doesnt-always-work.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">chill_sensitivity_temps</span>(model_sensitivities_CT,</span>
+<span id="cb96-4"><a href="why-pls-doesnt-always-work.html#cb96-4" aria-hidden="true" tabindex="-1"></a>                        CT_temperatures,</span>
+<span id="cb96-5"><a href="why-pls-doesnt-always-work.html#cb96-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">temp_model=</span><span class="st">&quot;Dynamic_Model&quot;</span>,</span>
+<span id="cb96-6"><a href="why-pls-doesnt-always-work.html#cb96-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
+<span id="cb96-7"><a href="why-pls-doesnt-always-work.html#cb96-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend_label=</span><span class="st">&quot;Chill per day </span><span class="sc">\n</span><span class="st">(Dynamic Model)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb96-8"><a href="why-pls-doesnt-always-work.html#cb96-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Chill model sensitivity at Cape Town, South Africa&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-101"></span>
+<img src="_main_files/figure-html/unnamed-chunk-101-1.png" alt="Chill model sensitivity plot for Cape Town created with the function" width="672" />
+<p class="caption">
+Figure 22.2: Chill model sensitivity plot for Cape Town created with the function
+</p>
+</div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="why-pls-doesnt-always-work.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chill_sensitivity_temps</span>(model_sensitivities_CT,</span>
+<span id="cb97-2"><a href="why-pls-doesnt-always-work.html#cb97-2" aria-hidden="true" tabindex="-1"></a>                        CT_temperatures,</span>
+<span id="cb97-3"><a href="why-pls-doesnt-always-work.html#cb97-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">temp_model=</span><span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb97-4"><a href="why-pls-doesnt-always-work.html#cb97-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">month_range=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>),</span>
+<span id="cb97-5"><a href="why-pls-doesnt-always-work.html#cb97-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend_label=</span><span class="st">&quot;Heat per day </span><span class="sc">\n</span><span class="st">(GDH)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb97-6"><a href="why-pls-doesnt-always-work.html#cb97-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Heat model sensitivity at Cape Town, South Africa&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-102"></span>
+<img src="_main_files/figure-html/unnamed-chunk-102-1.png" alt="Heat model sensitivity plot for Cape Town created with the function" width="672" />
+<p class="caption">
+Figure 22.3: Heat model sensitivity plot for Cape Town created with the function
+</p>
+</div>
 <p>I already discussed the temperatures in Cape Town in the context of chill generation. I still plotted the sensitivity again, because the preset temperature ranges are more suitable with the warm temperatures of South Africa. The heat model sensitivity plot shows in which way the temperatures in Cape Town generate for the ecodormancy relevant heat. The amount of generated heat is sufficient and chill is the limiting factor for the phenology development.</p>
 </div>
 <div id="look-at-the-plots-for-the-agroclimate-based-pls-analyses-of-the-alexander-lucas-and-roter-boskoop-datasets.-provide-your-best-estimates-of-the-chilling-and-forcing-phases." class="section level2 hasAnchor" number="22.2">
 <h2><span class="header-section-number">22.2</span> Look at the plots for the agroclimate-based PLS analyses of the ‘Alexander Lucas’ and ‘Roter Boskoop’ datasets. Provide your best estimates of the chilling and forcing phases.<a href="why-pls-doesnt-always-work.html#look-at-the-plots-for-the-agroclimate-based-pls-analyses-of-the-alexander-lucas-and-roter-boskoop-datasets.-provide-your-best-estimates-of-the-chilling-and-forcing-phases." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="why-pls-doesnt-always-work.html#cb9-1" aria-hidden="true" tabindex="-1"></a>temps<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
-<span id="cb9-2"><a href="why-pls-doesnt-always-work.html#cb9-2" aria-hidden="true" tabindex="-1"></a>temps_hourly<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(temps,<span class="at">latitude=</span><span class="fl">50.6</span>)</span>
-<span id="cb9-3"><a href="why-pls-doesnt-always-work.html#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="why-pls-doesnt-always-work.html#cb9-4" aria-hidden="true" tabindex="-1"></a>Boskoop <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>)</span>
-<span id="cb9-5"><a href="why-pls-doesnt-always-work.html#cb9-5" aria-hidden="true" tabindex="-1"></a>Boskoop_first <span class="ot">&lt;-</span> Boskoop[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb9-6"><a href="why-pls-doesnt-always-work.html#cb9-6" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Year&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">1</span>,<span class="dv">4</span>)</span>
-<span id="cb9-7"><a href="why-pls-doesnt-always-work.html#cb9-7" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Month&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">5</span>,<span class="dv">6</span>)</span>
-<span id="cb9-8"><a href="why-pls-doesnt-always-work.html#cb9-8" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Day&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">7</span>,<span class="dv">8</span>)</span>
-<span id="cb9-9"><a href="why-pls-doesnt-always-work.html#cb9-9" aria-hidden="true" tabindex="-1"></a>Boskoop_first <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(Boskoop_first)</span>
-<span id="cb9-10"><a href="why-pls-doesnt-always-work.html#cb9-10" aria-hidden="true" tabindex="-1"></a>Boskoop_first <span class="ot">&lt;-</span> Boskoop_first[,<span class="fu">c</span>(<span class="st">&quot;Pheno_year&quot;</span>,<span class="st">&quot;JDay&quot;</span>)]</span>
-<span id="cb9-11"><a href="why-pls-doesnt-always-work.html#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Boskoop_first) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;pheno&quot;</span>)</span>
-<span id="cb9-12"><a href="why-pls-doesnt-always-work.html#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="why-pls-doesnt-always-work.html#cb9-13" aria-hidden="true" tabindex="-1"></a>Alex <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Alexander_Lucas_bloom_1958_2019.csv&quot;</span>)</span>
-<span id="cb9-14"><a href="why-pls-doesnt-always-work.html#cb9-14" aria-hidden="true" tabindex="-1"></a>Alex_first <span class="ot">&lt;-</span> Alex[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
-<span id="cb9-15"><a href="why-pls-doesnt-always-work.html#cb9-15" aria-hidden="true" tabindex="-1"></a>Alex_first[,<span class="st">&quot;Year&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Alex_first<span class="sc">$</span>First_bloom,<span class="dv">1</span>,<span class="dv">4</span>)</span>
-<span id="cb9-16"><a href="why-pls-doesnt-always-work.html#cb9-16" aria-hidden="true" tabindex="-1"></a>Alex_first[,<span class="st">&quot;Month&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Alex_first<span class="sc">$</span>First_bloom,<span class="dv">5</span>,<span class="dv">6</span>)</span>
-<span id="cb9-17"><a href="why-pls-doesnt-always-work.html#cb9-17" aria-hidden="true" tabindex="-1"></a>Alex_first[,<span class="st">&quot;Day&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Alex_first<span class="sc">$</span>First_bloom,<span class="dv">7</span>,<span class="dv">8</span>)</span>
-<span id="cb9-18"><a href="why-pls-doesnt-always-work.html#cb9-18" aria-hidden="true" tabindex="-1"></a>Alex_first <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(Alex_first)</span>
-<span id="cb9-19"><a href="why-pls-doesnt-always-work.html#cb9-19" aria-hidden="true" tabindex="-1"></a>Alex_first <span class="ot">&lt;-</span> Alex_first[,<span class="fu">c</span>(<span class="st">&quot;Pheno_year&quot;</span>,<span class="st">&quot;JDay&quot;</span>)]</span>
-<span id="cb9-20"><a href="why-pls-doesnt-always-work.html#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Alex_first) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;pheno&quot;</span>)</span></code></pre></div>
-<p>I added a title function to the <code>plot_PLS_chill_force()</code> function to add the cultivar name to the plots. The estimated delineations for the plots can be seen in the plots. The phases of the Alexander Lucas cultivar extend over a longer period of time, while the Roter Boskoop phases are shorter. The heat phase is easier to delineate compared to the chilling period, which can sometimes have a less significant beginning.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="why-pls-doesnt-always-work.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions/plot_PLS_chill_force.R&quot;</span>)</span>
-<span id="cb10-2"><a href="why-pls-doesnt-always-work.html#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="why-pls-doesnt-always-work.html#cb10-3" aria-hidden="true" tabindex="-1"></a>daychill<span class="ot">&lt;-</span><span class="fu">daily_chill</span>(<span class="at">hourtemps=</span>temps_hourly,</span>
-<span id="cb10-4"><a href="why-pls-doesnt-always-work.html#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">running_mean=</span><span class="dv">9</span>,</span>
-<span id="cb10-5"><a href="why-pls-doesnt-always-work.html#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">models =</span> <span class="fu">list</span>(<span class="at">Chilling_Hours =</span> Chilling_Hours, <span class="at">Utah_Chill_Units =</span> Utah_Model,</span>
-<span id="cb10-6"><a href="why-pls-doesnt-always-work.html#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Chill_Portions =</span> Dynamic_Model, <span class="at">GDH =</span> GDH)</span>
-<span id="cb10-7"><a href="why-pls-doesnt-always-work.html#cb10-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-8"><a href="why-pls-doesnt-always-work.html#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="why-pls-doesnt-always-work.html#cb10-9" aria-hidden="true" tabindex="-1"></a>plscf_alex<span class="ot">&lt;-</span><span class="fu">PLS_chill_force</span>(<span class="at">daily_chill_obj=</span>daychill,</span>
-<span id="cb10-10"><a href="why-pls-doesnt-always-work.html#cb10-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">bio_data_frame=</span>Alex_first,</span>
-<span id="cb10-11"><a href="why-pls-doesnt-always-work.html#cb10-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">split_month=</span><span class="dv">6</span>,</span>
-<span id="cb10-12"><a href="why-pls-doesnt-always-work.html#cb10-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">chill_models =</span> <span class="fu">c</span>(<span class="st">&quot;Chill_Portions&quot;</span>),</span>
-<span id="cb10-13"><a href="why-pls-doesnt-always-work.html#cb10-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">heat_models =</span> <span class="fu">c</span>(<span class="st">&quot;GDH&quot;</span>))</span>
-<span id="cb10-14"><a href="why-pls-doesnt-always-work.html#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="why-pls-doesnt-always-work.html#cb10-15" aria-hidden="true" tabindex="-1"></a>plscf_boskoop<span class="ot">&lt;-</span><span class="fu">PLS_chill_force</span>(<span class="at">daily_chill_obj=</span>daychill,</span>
-<span id="cb10-16"><a href="why-pls-doesnt-always-work.html#cb10-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">bio_data_frame=</span>Boskoop_first,</span>
-<span id="cb10-17"><a href="why-pls-doesnt-always-work.html#cb10-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">split_month=</span><span class="dv">6</span>,</span>
-<span id="cb10-18"><a href="why-pls-doesnt-always-work.html#cb10-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">chill_models =</span> <span class="fu">c</span>(<span class="st">&quot;Chill_Portions&quot;</span>),</span>
-<span id="cb10-19"><a href="why-pls-doesnt-always-work.html#cb10-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">heat_models =</span> <span class="fu">c</span>(<span class="st">&quot;GDH&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="why-pls-doesnt-always-work.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_PLS_chill_force</span>(plscf_alex,</span>
-<span id="cb11-2"><a href="why-pls-doesnt-always-work.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_metric=</span><span class="st">&quot;Chill_Portions&quot;</span>,</span>
-<span id="cb11-3"><a href="why-pls-doesnt-always-work.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_metric=</span><span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb11-4"><a href="why-pls-doesnt-always-work.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_label=</span><span class="st">&quot;CP&quot;</span>,</span>
-<span id="cb11-5"><a href="why-pls-doesnt-always-work.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_label=</span><span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb11-6"><a href="why-pls-doesnt-always-work.html#cb11-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_phase=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">52</span>,<span class="dv">62</span>),</span>
-<span id="cb11-7"><a href="why-pls-doesnt-always-work.html#cb11-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_phase=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">106</span>),</span>
-<span id="cb11-8"><a href="why-pls-doesnt-always-work.html#cb11-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cultivar_name =</span> <span class="st">&quot;Alexander Lucas&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="why-pls-doesnt-always-work.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_PLS_chill_force</span>(plscf_boskoop,</span>
-<span id="cb12-2"><a href="why-pls-doesnt-always-work.html#cb12-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_metric=</span><span class="st">&quot;Chill_Portions&quot;</span>,</span>
-<span id="cb12-3"><a href="why-pls-doesnt-always-work.html#cb12-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_metric=</span><span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb12-4"><a href="why-pls-doesnt-always-work.html#cb12-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_label=</span><span class="st">&quot;CP&quot;</span>,</span>
-<span id="cb12-5"><a href="why-pls-doesnt-always-work.html#cb12-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_label=</span><span class="st">&quot;GDH&quot;</span>,</span>
-<span id="cb12-6"><a href="why-pls-doesnt-always-work.html#cb12-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_phase=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">24</span>,<span class="dv">62</span>),</span>
-<span id="cb12-7"><a href="why-pls-doesnt-always-work.html#cb12-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_phase=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">108</span>),</span>
-<span id="cb12-8"><a href="why-pls-doesnt-always-work.html#cb12-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cultivar_name =</span> <span class="st">&quot;Roter Boskoop&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="why-pls-doesnt-always-work.html#cb98-1" aria-hidden="true" tabindex="-1"></a>temps<span class="ot">&lt;-</span><span class="fu">read_tab</span>(<span class="st">&quot;data/TMaxTMin1958-2019_patched.csv&quot;</span>)</span>
+<span id="cb98-2"><a href="why-pls-doesnt-always-work.html#cb98-2" aria-hidden="true" tabindex="-1"></a>temps_hourly<span class="ot">&lt;-</span><span class="fu">stack_hourly_temps</span>(temps,<span class="at">latitude=</span><span class="fl">50.6</span>)</span>
+<span id="cb98-3"><a href="why-pls-doesnt-always-work.html#cb98-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-4"><a href="why-pls-doesnt-always-work.html#cb98-4" aria-hidden="true" tabindex="-1"></a>Boskoop <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Roter_Boskoop_bloom_1958_2019.csv&quot;</span>)</span>
+<span id="cb98-5"><a href="why-pls-doesnt-always-work.html#cb98-5" aria-hidden="true" tabindex="-1"></a>Boskoop_first <span class="ot">&lt;-</span> Boskoop[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb98-6"><a href="why-pls-doesnt-always-work.html#cb98-6" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Year&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb98-7"><a href="why-pls-doesnt-always-work.html#cb98-7" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Month&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb98-8"><a href="why-pls-doesnt-always-work.html#cb98-8" aria-hidden="true" tabindex="-1"></a>Boskoop_first[,<span class="st">&quot;Day&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Boskoop_first<span class="sc">$</span>First_bloom,<span class="dv">7</span>,<span class="dv">8</span>)</span>
+<span id="cb98-9"><a href="why-pls-doesnt-always-work.html#cb98-9" aria-hidden="true" tabindex="-1"></a>Boskoop_first <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(Boskoop_first)</span>
+<span id="cb98-10"><a href="why-pls-doesnt-always-work.html#cb98-10" aria-hidden="true" tabindex="-1"></a>Boskoop_first <span class="ot">&lt;-</span> Boskoop_first[,<span class="fu">c</span>(<span class="st">&quot;Pheno_year&quot;</span>,<span class="st">&quot;JDay&quot;</span>)]</span>
+<span id="cb98-11"><a href="why-pls-doesnt-always-work.html#cb98-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Boskoop_first) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;pheno&quot;</span>)</span>
+<span id="cb98-12"><a href="why-pls-doesnt-always-work.html#cb98-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-13"><a href="why-pls-doesnt-always-work.html#cb98-13" aria-hidden="true" tabindex="-1"></a>Alex <span class="ot">&lt;-</span> <span class="fu">read_tab</span>(<span class="st">&quot;data/Alexander_Lucas_bloom_1958_2019.csv&quot;</span>)</span>
+<span id="cb98-14"><a href="why-pls-doesnt-always-work.html#cb98-14" aria-hidden="true" tabindex="-1"></a>Alex_first <span class="ot">&lt;-</span> Alex[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb98-15"><a href="why-pls-doesnt-always-work.html#cb98-15" aria-hidden="true" tabindex="-1"></a>Alex_first[,<span class="st">&quot;Year&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Alex_first<span class="sc">$</span>First_bloom,<span class="dv">1</span>,<span class="dv">4</span>)</span>
+<span id="cb98-16"><a href="why-pls-doesnt-always-work.html#cb98-16" aria-hidden="true" tabindex="-1"></a>Alex_first[,<span class="st">&quot;Month&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Alex_first<span class="sc">$</span>First_bloom,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb98-17"><a href="why-pls-doesnt-always-work.html#cb98-17" aria-hidden="true" tabindex="-1"></a>Alex_first[,<span class="st">&quot;Day&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">substr</span>(Alex_first<span class="sc">$</span>First_bloom,<span class="dv">7</span>,<span class="dv">8</span>)</span>
+<span id="cb98-18"><a href="why-pls-doesnt-always-work.html#cb98-18" aria-hidden="true" tabindex="-1"></a>Alex_first <span class="ot">&lt;-</span> <span class="fu">make_JDay</span>(Alex_first)</span>
+<span id="cb98-19"><a href="why-pls-doesnt-always-work.html#cb98-19" aria-hidden="true" tabindex="-1"></a>Alex_first <span class="ot">&lt;-</span> Alex_first[,<span class="fu">c</span>(<span class="st">&quot;Pheno_year&quot;</span>,<span class="st">&quot;JDay&quot;</span>)]</span>
+<span id="cb98-20"><a href="why-pls-doesnt-always-work.html#cb98-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(Alex_first) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Year&quot;</span>,<span class="st">&quot;pheno&quot;</span>)</span></code></pre></div>
+<p>I added a title function to the <code>plot_PLS_chill_force()</code> function to add the cultivar name to the plots. The estimated delineations for the plots can be seen in the plots. The phases of the “Alexander Lucas” cultivar extend over a longer period of time, while the “Roter Boskoop” phases are shorter. The heat phase is easier to delineate compared to the chilling period, which can sometimes have a less significant beginning.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="why-pls-doesnt-always-work.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions/plot_PLS_chill_force.R&quot;</span>)</span>
+<span id="cb99-2"><a href="why-pls-doesnt-always-work.html#cb99-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="why-pls-doesnt-always-work.html#cb99-3" aria-hidden="true" tabindex="-1"></a>daychill <span class="ot">&lt;-</span> <span class="fu">daily_chill</span>(<span class="at">hourtemps=</span>temps_hourly,</span>
+<span id="cb99-4"><a href="why-pls-doesnt-always-work.html#cb99-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">running_mean=</span><span class="dv">9</span>,</span>
+<span id="cb99-5"><a href="why-pls-doesnt-always-work.html#cb99-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">models =</span> <span class="fu">list</span>(<span class="at">Chilling_Hours =</span> Chilling_Hours,</span>
+<span id="cb99-6"><a href="why-pls-doesnt-always-work.html#cb99-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Utah_Chill_Units =</span> Utah_Model,</span>
+<span id="cb99-7"><a href="why-pls-doesnt-always-work.html#cb99-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Chill_Portions =</span> Dynamic_Model, <span class="at">GDH =</span> GDH)</span>
+<span id="cb99-8"><a href="why-pls-doesnt-always-work.html#cb99-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb99-9"><a href="why-pls-doesnt-always-work.html#cb99-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-10"><a href="why-pls-doesnt-always-work.html#cb99-10" aria-hidden="true" tabindex="-1"></a>plscf_alex <span class="ot">&lt;-</span> <span class="fu">PLS_chill_force</span>(<span class="at">daily_chill_obj=</span>daychill,</span>
+<span id="cb99-11"><a href="why-pls-doesnt-always-work.html#cb99-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">bio_data_frame=</span>Alex_first,</span>
+<span id="cb99-12"><a href="why-pls-doesnt-always-work.html#cb99-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">split_month=</span><span class="dv">6</span>,</span>
+<span id="cb99-13"><a href="why-pls-doesnt-always-work.html#cb99-13" aria-hidden="true" tabindex="-1"></a>                       <span class="at">chill_models =</span> <span class="fu">c</span>(<span class="st">&quot;Chill_Portions&quot;</span>),</span>
+<span id="cb99-14"><a href="why-pls-doesnt-always-work.html#cb99-14" aria-hidden="true" tabindex="-1"></a>                       <span class="at">heat_models =</span> <span class="fu">c</span>(<span class="st">&quot;GDH&quot;</span>))</span>
+<span id="cb99-15"><a href="why-pls-doesnt-always-work.html#cb99-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-16"><a href="why-pls-doesnt-always-work.html#cb99-16" aria-hidden="true" tabindex="-1"></a>plscf_boskoop <span class="ot">&lt;-</span> <span class="fu">PLS_chill_force</span>(<span class="at">daily_chill_obj=</span>daychill,</span>
+<span id="cb99-17"><a href="why-pls-doesnt-always-work.html#cb99-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">bio_data_frame=</span>Boskoop_first,</span>
+<span id="cb99-18"><a href="why-pls-doesnt-always-work.html#cb99-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">split_month=</span><span class="dv">6</span>,</span>
+<span id="cb99-19"><a href="why-pls-doesnt-always-work.html#cb99-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">chill_models =</span> <span class="fu">c</span>(<span class="st">&quot;Chill_Portions&quot;</span>),</span>
+<span id="cb99-20"><a href="why-pls-doesnt-always-work.html#cb99-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">heat_models =</span> <span class="fu">c</span>(<span class="st">&quot;GDH&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="why-pls-doesnt-always-work.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_PLS_chill_force</span>(plscf_alex,</span>
+<span id="cb100-2"><a href="why-pls-doesnt-always-work.html#cb100-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_metric=</span><span class="st">&quot;Chill_Portions&quot;</span>,</span>
+<span id="cb100-3"><a href="why-pls-doesnt-always-work.html#cb100-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_metric=</span><span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb100-4"><a href="why-pls-doesnt-always-work.html#cb100-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_label=</span><span class="st">&quot;CP&quot;</span>,</span>
+<span id="cb100-5"><a href="why-pls-doesnt-always-work.html#cb100-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_label=</span><span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb100-6"><a href="why-pls-doesnt-always-work.html#cb100-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_phase=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">52</span>,<span class="dv">62</span>),</span>
+<span id="cb100-7"><a href="why-pls-doesnt-always-work.html#cb100-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_phase=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">106</span>),</span>
+<span id="cb100-8"><a href="why-pls-doesnt-always-work.html#cb100-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">plot_title =</span> <span class="st">&quot;Alexander Lucas&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-105"></span>
+<img src="_main_files/figure-html/unnamed-chunk-105-1.png" alt="Temperature response pattern of ‘Alexander Lucas’ apples at CKA based on a PLS regression." width="672" />
+<p class="caption">
+Figure 22.4: Temperature response pattern of ‘Alexander Lucas’ apples at CKA based on a PLS regression.
+</p>
+</div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="why-pls-doesnt-always-work.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_PLS_chill_force</span>(plscf_boskoop,</span>
+<span id="cb101-2"><a href="why-pls-doesnt-always-work.html#cb101-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_metric=</span><span class="st">&quot;Chill_Portions&quot;</span>,</span>
+<span id="cb101-3"><a href="why-pls-doesnt-always-work.html#cb101-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_metric=</span><span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb101-4"><a href="why-pls-doesnt-always-work.html#cb101-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_label=</span><span class="st">&quot;CP&quot;</span>,</span>
+<span id="cb101-5"><a href="why-pls-doesnt-always-work.html#cb101-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_label=</span><span class="st">&quot;GDH&quot;</span>,</span>
+<span id="cb101-6"><a href="why-pls-doesnt-always-work.html#cb101-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">chill_phase=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">24</span>,<span class="dv">62</span>),</span>
+<span id="cb101-7"><a href="why-pls-doesnt-always-work.html#cb101-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">heat_phase=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">108</span>),</span>
+<span id="cb101-8"><a href="why-pls-doesnt-always-work.html#cb101-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">plot_title =</span> <span class="st">&quot;Roter Boskoop&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-106"></span>
+<img src="_main_files/figure-html/unnamed-chunk-106-1.png" alt="Temperature response pattern of ‘Roter Boskoop’ apples at CKA based on a PLS regression." width="672" />
+<p class="caption">
+Figure 22.5: Temperature response pattern of ‘Roter Boskoop’ apples at CKA based on a PLS regression.
+</p>
+</div>
+<br />
+
+<hr />
 
 </div>
 </div>
@@ -633,7 +700,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/22-why_PLS_not_always_works.Rmd",
+"link": "https://github.com/JNBauer/tree_pheno_modelling/22-why_PLS_not_always_works.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -651,7 +718,8 @@ gitbook.start({
 },
 "toc": {
 "collapse": "subsection"
-}
+},
+"code_folding": "hide"
 });
 });
 </script>

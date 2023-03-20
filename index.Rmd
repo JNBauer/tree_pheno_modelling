@@ -11,22 +11,16 @@ github-repo: rstudio/bookdown-demo
 always_allow_html: true
 ---
 
+# Introduction
 
-```{r setup}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(warning = FALSE)
-knitr::opts_chunk$set(message = FALSE)
-```
 
-# About
-```{r showChoro1}
-htmltools::includeHTML("html/header.html")
-```
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's 
+<p align="center">
+  [<img src="images/chillR_hexSticker.png" width="390" height="451">](http://inresgb-lehre.iaas.uni-bonn.de/chillR_book/introduction.html)
+</p>
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+
+
+
+I can still remember our first lesson, where the question went around how our state of R knowledge is. At that time I already had contact with R several times and also worked with it a lot in the Decision Analysis course, but I still felt like a beginner. Now at the end of this module, after learning so many new things, I don't feel that way anymore. Because of the module, I can now not only transform dataframes to my own needs in various ways, but I have also learned about many new packages and was introduced to the world of dormancy. I am very happy that the module is offered despite the low survivor rate and I think that it could help many people to be much more secure in dealing with R.
+
+Thank you very much!

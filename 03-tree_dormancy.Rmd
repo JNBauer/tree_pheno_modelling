@@ -4,20 +4,21 @@
 
 At the moment the Dynamic model is the most sophisticated approach, because of its process based idea. This leads on the other hand to more complicated calculations compared to prior methods . Models like the chilling hours are easier to calculate, but do not longer meet the needed requirements. I would recommend the breeder to use the Dynamic model, because of its high reliability. The temperature as only input is the same for all models.
 
-
 ## Which are the advantages (2) of the BBCH scale compared with earlies scales?
 
--   covers the whole development of the plant not only the buds as with earlier scales
--   developed in a way that it can suited to all plant species numerical order is more comprehensive
+The BBCH scale covers the whole development of the plant not only the buds as with earlier scales. The second advantage is that the BBCH scale is developed in a way that it can be adapted to all plant species. Additionally the numerical structured order is more comprehensive.
 
+## Classify the following phenological stages of sweet cherry according to the BBCH scale:
 
-## Classify the following phenological stages of sweet cherry according to the BBCH scale:**![Phenological stages of sweet cherry buds](images/03_pheno_stages.png)
+```{r, echo=FALSE, out.width="100%", fig.cap='Phenological stages of sweet cherry buds'}
+knitr::include_graphics("images/03_pheno_stages.png")
+```
 
 1.  54/55
 
 2.  65 could be also lower if the object in the background is a (closed) bud
 
 3.  89\
-    \
 
-    <hr />
+\
+<hr />

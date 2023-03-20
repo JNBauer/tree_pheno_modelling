@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 17 Chill model comparison | Tree phenology analysis with R - Logbook</title>
   <meta name="description" content="The logbook for the Tree phenology analysis with R logbook" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 17 Chill model comparison | Tree phenology analysis with R - Logbook" />
   <meta property="og:type" content="book" />
@@ -50,8 +50,96 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+<link href="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.css" rel="stylesheet" />
+<script src="libs/leaflet-minimap-3.3.1/Control.MiniMap.min.js"></script>
+<script src="libs/leaflet-minimap-3.3.1/Minimap-binding.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.9/grViz.js"></script>
+<script src="libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -70,34 +158,34 @@
 <li><a href="./">Tree phenology Logbook</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
-<li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>2</b> Packages</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="tools.html"><a href="tools.html#organization"><i class="fa fa-check"></i><b>2.1</b> Organization</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="tools.html"><a href="tools.html#bookdown"><i class="fa fa-check"></i><b>2.1.1</b> Bookdown</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="tools.html"><a href="tools.html#packages"><i class="fa fa-check"></i><b>2.2</b> Packages</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="tools.html"><a href="tools.html#chillr"><i class="fa fa-check"></i><b>2.2.1</b> chillR</a></li>
-<li class="chapter" data-level="2.2.2" data-path="tools.html"><a href="tools.html#dplyr-family"><i class="fa fa-check"></i><b>2.2.2</b> dplyr family</a></li>
-<li class="chapter" data-level="2.2.3" data-path="tools.html"><a href="tools.html#ggplot2"><i class="fa fa-check"></i><b>2.2.3</b> ggplot2</a></li>
-<li class="chapter" data-level="2.2.4" data-path="tools.html"><a href="tools.html#plotly"><i class="fa fa-check"></i><b>2.2.4</b> plotly</a></li>
-<li class="chapter" data-level="2.2.5" data-path="tools.html"><a href="tools.html#leaflet"><i class="fa fa-check"></i><b>2.2.5</b> leaflet</a></li>
-</ul></li>
+<li class="chapter" data-level="2.0.1" data-path="packages.html"><a href="packages.html#bookdown"><i class="fa fa-check"></i><b>2.0.1</b> Bookdown</a></li>
+<li class="chapter" data-level="2.0.2" data-path="packages.html"><a href="packages.html#chillr"><i class="fa fa-check"></i><b>2.0.2</b> chillR</a></li>
+<li class="chapter" data-level="2.0.3" data-path="packages.html"><a href="packages.html#dplyr-family"><i class="fa fa-check"></i><b>2.0.3</b> dplyr family</a></li>
+<li class="chapter" data-level="2.0.4" data-path="packages.html"><a href="packages.html#ggplot2"><i class="fa fa-check"></i><b>2.0.4</b> ggplot2</a></li>
+<li class="chapter" data-level="2.0.5" data-path="packages.html"><a href="packages.html#leaflet"><i class="fa fa-check"></i><b>2.0.5</b> leaflet</a></li>
+<li class="chapter" data-level="2.0.6" data-path="packages.html"><a href="packages.html#kableextra"><i class="fa fa-check"></i><b>2.0.6</b> kableExtra</a></li>
+<li class="chapter" data-level="2.0.7" data-path="packages.html"><a href="packages.html#plotly"><i class="fa fa-check"></i><b>2.0.7</b> plotly</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tree-dormancy.html"><a href="tree-dormancy.html"><i class="fa fa-check"></i><b>3</b> Tree dormancy</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="tree-dormancy.html"><a href="tree-dormancy.html#put-yourself-in-the-place-of-a-breeder-who-wants-to-calculate-the-temperature-requirements-of-a-newly-released-cultivar.-which-method-will-you-use-to-calculate-the-chilling-and-forcing-periods-please-justify-your-answer."><i class="fa fa-check"></i><b>3.1</b> Put yourself in the place of a breeder who wants to calculate the temperature requirements of a newly released cultivar. Which method will you use to calculate the chilling and forcing periods? Please justify your answer.</a></li>
 <li class="chapter" data-level="3.2" data-path="tree-dormancy.html"><a href="tree-dormancy.html#which-are-the-advantages-2-of-the-bbch-scale-compared-with-earlies-scales"><i class="fa fa-check"></i><b>3.2</b> Which are the advantages (2) of the BBCH scale compared with earlies scales?</a></li>
-<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scalephenological-stages-of-sweet-cherry-buds"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:**<img src="images/03_pheno_stages.png" alt="Phenological stages of sweet cherry buds" /></a></li>
+<li class="chapter" data-level="3.3" data-path="tree-dormancy.html"><a href="tree-dormancy.html#classify-the-following-phenological-stages-of-sweet-cherry-according-to-the-bbch-scale"><i class="fa fa-check"></i><b>3.3</b> Classify the following phenological stages of sweet cherry according to the BBCH scale:</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html"><i class="fa fa-check"></i><b>4</b> Climate change and impact projection</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#list-the-main-drivers-of-climate-change-at-the-decade-to-century-scale-and-briefly-explain-the-mechanism-through-which-the-currently-most-important-driver-affects-our-climate."><i class="fa fa-check"></i><b>4.1</b> List the main drivers of climate change at the decade to century scale, and briefly explain the mechanism through which the currently most important driver affects our climate.</a></li>
 <li class="chapter" data-level="4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#explain-briefly-what-is-special-about-temperature-dynamics-of-the-recent-decades-and-why-we-have-good-reasons-to-be-concerned."><i class="fa fa-check"></i><b>4.2</b> Explain briefly what is special about temperature dynamics of the recent decades, and why we have good reasons to be concerned.</a></li>
 <li class="chapter" data-level="4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#what-does-the-abbreviation-rcp-stand-for-how-are-rcps-defined-and-what-is-their-role-in-projecting-future-climates"><i class="fa fa-check"></i><b>4.3</b> What does the abbreviation ‘RCP’ stand for, how are RCPs defined, and what is their role in projecting future climates?</a></li>
-<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-4-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 4 climate impact projection methods described in the fourth video.</a></li>
+<li class="chapter" data-level="4.4" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#briefly-describe-the-3-climate-impact-projection-methods-described-in-the-fourth-video."><i class="fa fa-check"></i><b>4.4</b> Briefly describe the 3 climate impact projection methods described in the fourth video.</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#statistical-models"><i class="fa fa-check"></i><b>4.4.1</b> Statistical models</a></li>
+<li class="chapter" data-level="4.4.2" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#process-based-models"><i class="fa fa-check"></i><b>4.4.2</b> Process-based models</a></li>
+<li class="chapter" data-level="4.4.3" data-path="climate-change-and-impact-projection.html"><a href="climate-change-and-impact-projection.html#climate-analogue-models"><i class="fa fa-check"></i><b>4.4.3</b> Climate analogue models</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="winter-chill-projections.html"><a href="winter-chill-projections.html"><i class="fa fa-check"></i><b>5</b> Winter chill projections</a>
 <ul>
@@ -110,8 +198,18 @@
 <li class="chapter" data-level="6.2" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#apply-this-function-to-the-winters_hours_gaps-dataset"><i class="fa fa-check"></i><b>6.2</b> Apply this function to the Winters_hours_gaps dataset</a></li>
 <li class="chapter" data-level="6.3" data-path="manual-chill-analysis.html"><a href="manual-chill-analysis.html#extend-this-function-so-that-it-can-take-start-and-end-dates-as-inputs-and-sums-up-warm-hours-between-these-dates"><i class="fa fa-check"></i><b>6.3</b> Extend this function, so that it can take start and end dates as inputs and sums up warm hours between these dates</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a></li>
-<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a></li>
+<li class="chapter" data-level="7" data-path="chill-models.html"><a href="chill-models.html"><i class="fa fa-check"></i><b>7</b> Chill Models</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chill-models.html"><a href="chill-models.html#run-the-chilling-function-on-the-winters_hours_gap-dataset"><i class="fa fa-check"></i><b>7.1</b> Run the chilling() function on the Winters_hours_gap dataset</a></li>
+<li class="chapter" data-level="7.2" data-path="chill-models.html"><a href="chill-models.html#create-your-own-temperature-weighting-chill-model-using-the-step_model-function."><i class="fa fa-check"></i><b>7.2</b> Create your own temperature-weighting chill model using the step_model() function.</a></li>
+<li class="chapter" data-level="7.3" data-path="chill-models.html"><a href="chill-models.html#run-this-model-on-the-winters_hours_gaps-dataset-using-the-tempresponse-function."><i class="fa fa-check"></i><b>7.3</b> Run this model on the Winters_hours_gaps dataset using the tempResponse() function.</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html"><i class="fa fa-check"></i><b>8</b> Making hourly temperatures</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#choose-a-location-of-interest-find-out-its-latitude-and-produce-plots-of-daily-sunrise-sunset-and-daylength"><i class="fa fa-check"></i><b>8.1</b> Choose a location of interest, find out its latitude and produce plots of daily sunrise, sunset and daylength</a></li>
+<li class="chapter" data-level="8.2" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-an-hourly-dataset-based-on-idealized-daily-curves-for-the-ka_weather-dataset-included-in-chillr"><i class="fa fa-check"></i><b>8.2</b> Produce an hourly dataset, based on idealized daily curves, for the KA_weather dataset (included in chillR)</a></li>
+<li class="chapter" data-level="8.3" data-path="making-hourly-temperatures.html"><a href="making-hourly-temperatures.html#produce-empirical-temperature-curve-parameters-for-the-winters_hours_gaps-dataset-and-use-them-to-predict-hourly-values-from-daily-temperatures-this-is-very-similar-to-the-example-above-but-please-make-sure-you-understand-whats-going-on"><i class="fa fa-check"></i><b>8.3</b> Produce empirical temperature curve parameters for the Winters_hours_gaps dataset, and use them to predict hourly values from daily temperatures (this is very similar to the example above, but please make sure you understand what’s going on)</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html"><i class="fa fa-check"></i><b>9</b> Getting temperature data</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="getting-temperature-data.html"><a href="getting-temperature-data.html#choose-a-location-of-interest-and-find-the-25-closest-weather-stations-using-the-handle_gsod-function"><i class="fa fa-check"></i><b>9.1</b> Choose a location of interest and find the 25 closest weather stations using the handle_gsod function</a></li>
@@ -156,16 +254,9 @@
 </ul></li>
 <li class="chapter" data-level="17" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html"><i class="fa fa-check"></i><b>17</b> Chill model comparison</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#first"><i class="fa fa-check"></i><b>17.1</b> First</a></li>
-<li class="chapter" data-level="17.2" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#second"><i class="fa fa-check"></i><b>17.2</b> Second</a></li>
-<li class="chapter" data-level="17.3" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#third"><i class="fa fa-check"></i><b>17.3</b> Third</a></li>
-<li class="chapter" data-level="17.4" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis."><i class="fa fa-check"></i><b>17.4</b> Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.</a>
-<ul>
-<li class="chapter" data-level="17.4.1" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#answer"><i class="fa fa-check"></i><b>17.4.1</b> Answer</a></li>
-<li class="chapter" data-level="17.4.2" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#cartoon"><i class="fa fa-check"></i><b>17.4.2</b> Cartoon</a></li>
-</ul></li>
-<li class="chapter" data-level="17.5" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates."><i class="fa fa-check"></i><b>17.5</b> Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.</a></li>
-<li class="chapter" data-level="17.6" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#what-do-we-need-to-know-to-build-a-process-based-model-from-this"><i class="fa fa-check"></i><b>17.6</b> What do we need to know to build a process-based model from this?</a></li>
+<li class="chapter" data-level="17.1" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis."><i class="fa fa-check"></i><b>17.1</b> Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.</a></li>
+<li class="chapter" data-level="17.2" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates."><i class="fa fa-check"></i><b>17.2</b> Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.</a></li>
+<li class="chapter" data-level="17.3" data-path="chill-model-comparison-1.html"><a href="chill-model-comparison-1.html#what-do-we-need-to-know-to-build-a-process-based-model-from-this"><i class="fa fa-check"></i><b>17.3</b> What do we need to know to build a process-based model from this?</a></li>
 </ul></li>
 <li class="chapter" data-level="18" data-path="delineating-temperature-response-phases-with-pls-regression.html"><a href="delineating-temperature-response-phases-with-pls-regression.html"><i class="fa fa-check"></i><b>18</b> Delineating temperature response phases with PLS regression</a>
 <ul>
@@ -186,7 +277,8 @@
 </ul></li>
 <li class="chapter" data-level="21" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html"><i class="fa fa-check"></i><b>21</b> Examples of PLS regression with agroclimatic metrics</a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed."><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?.</a></li>
+<li class="chapter" data-level="21.1" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#look-across-all-the-pls-results-presented-above.-can-you-detect-a-pattern-in-where-chilling-and-forcing-periods-could-be-delineated-clearly-and-where-this-attempt-failed"><i class="fa fa-check"></i><b>21.1</b> Look across all the PLS results presented above. Can you detect a pattern in where chilling and forcing periods could be delineated clearly, and where this attempt failed?</a></li>
+<li class="chapter" data-level="21.2" data-path="examples-of-pls-regression-with-agroclimatic-metrics.html"><a href="examples-of-pls-regression-with-agroclimatic-metrics.html#can-you-think-about-possible-reasons-for-the-success-or-failure-of-pls-analysis-based-on-agroclimatic-metrics-if-so-write-down-your-thoughts"><i class="fa fa-check"></i><b>21.2</b> Can you think about possible reasons for the success or failure of PLS analysis based on agroclimatic metrics (if so, write down your thoughts)?</a></li>
 </ul></li>
 <li class="chapter" data-level="22" data-path="why-pls-doesnt-always-work.html"><a href="why-pls-doesnt-always-work.html"><i class="fa fa-check"></i><b>22</b> Why PLS doesn’t always work</a>
 <ul>
@@ -234,7 +326,7 @@
 <li class="chapter" data-level="29.5" data-path="frost-risk-analysis.html"><a href="frost-risk-analysis.html#evaluate-how-the-risk-of-spring-frost-for-this-cultivar-has-changed-over-time.-has-there-been-a-significant-trend"><i class="fa fa-check"></i><b>29.5</b> Evaluate how the risk of spring frost for this cultivar has changed over time. Has there been a significant trend?</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published by Julian Bauer with bookdown</a></li>
 
 </ul>
 
@@ -255,35 +347,106 @@
             <section class="normal" id="section-">
 <div id="chill-model-comparison-1" class="section level1 hasAnchor" number="17">
 <h1><span class="header-section-number">Chapter 17</span> Chill model comparison<a href="chill-model-comparison-1.html#chill-model-comparison-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="first" class="section level2 hasAnchor" number="17.1">
-<h2><span class="header-section-number">17.1</span> First<a href="chill-model-comparison-1.html#first" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A first section</p>
-</div>
-<div id="second" class="section level2 hasAnchor" number="17.2">
-<h2><span class="header-section-number">17.2</span> Second<a href="chill-model-comparison-1.html#second" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>content of sub-chapter #2</p>
-</div>
-<div id="third" class="section level2 hasAnchor" number="17.3">
-<h2><span class="header-section-number">17.3</span> Third<a href="chill-model-comparison-1.html#third" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>content of sub-chapter #3</p>
-</div>
-<div id="provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis." class="section level2 tabset hasAnchor" number="17.4">
-<h2><span class="header-section-number">17.4</span> Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.<a href="chill-model-comparison-1.html#provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="answer" class="section level3 active hasAnchor" number="17.4.1">
-<h3><span class="header-section-number">17.4.1</span> Answer<a href="chill-model-comparison-1.html#answer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>P-hacking is the term used when scientists artificially represent their results in a significant way. Large data sets always contain significant structures. By data analysis and there especially often by machine learning methods such correlations are specifically searched for, although they have no relevance for the actual application. Therefore, it is important to understand the data in the context of its origin and its natural process.</p>
-</div>
-<div id="cartoon" class="section level3 hasAnchor" number="17.4.2">
-<h3><span class="header-section-number">17.4.2</span> Cartoon<a href="chill-model-comparison-1.html#cartoon" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="images/significant.png" alt="So, uh, we did the green study again and got no link. It was probably a– “RESEARCH CONFLICTED ON GREEN JELLY BEAN/ACNE LINK; MORE STUDY RECOMMENDED!”." />
-## {-}</p>
+<div id="provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis." class="section level2 hasAnchor" number="17.1">
+<h2><span class="header-section-number">17.1</span> Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.<a href="chill-model-comparison-1.html#provide-a-brief-narrative-describing-what-p-hacking-is-and-why-this-is-a-problematic-approach-to-data-analysis." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>P-hacking is the term used when scientists artificially represent their results in a significant way. Large data sets always contain significant structures. By data analysis and there especially often by machine learning methods such correlations are specifically searched for, although they have no relevance for the actual application. Therefore, it is important to understand the data in the context of its origin and its natural process.
+Another form of p-hacking can be seen in the cartoon below, where 21 trials are made to achieve one significant result with a p-value below 0.05. This result is then broadly proclaimed, while the 20 other unsignificant trials are not mentioned</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-64"></span>
+<img src="images/significant.png" alt="&quot;So, uh, we did the green study again and got no link. It was probably a-- &quot;RESEARCH CONFLICTED ON GREEN JELLY BEAN/ACNE LINK; MORE STUDY RECOMMENDED!&quot; [Source: xkcd](https://xkcd.com/882)" width="60%" />
+<p class="caption">
+Figure 17.1: “So, uh, we did the green study again and got no link. It was probably a–”RESEARCH CONFLICTED ON GREEN JELLY BEAN/ACNE LINK; MORE STUDY RECOMMENDED!” <a href="https://xkcd.com/882">Source: xkcd</a>
+</p>
 </div>
 </div>
-<div id="provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates." class="section level2 hasAnchor" number="17.5">
-<h2><span class="header-section-number">17.5</span> Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.<a href="chill-model-comparison-1.html#provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates." class="section level2 hasAnchor" number="17.2">
+<h2><span class="header-section-number">17.2</span> Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.<a href="chill-model-comparison-1.html#provide-a-sketch-of-your-causal-understanding-of-the-relationship-between-temperature-and-bloom-dates." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Temperature is an important factor regarding the development of temperate fruit trees during the winter. During the winter these trees enter the state of dormancy, which ceases with the combination of the right temperatures. During this time, the tree appears inactive from the outside, although various processes are taking place inside. Those processes are driven by the main two phases of dormancy, the endodormancy and the ecodormancy, whose requirements are fulfilled by specific amounts of chill and heat. Their fulfillment results in the overcoming of dormancy and the consequent continuation of development. This allows the buds to break in the spring before the flower begins to bloom thereafter. Different temperatures during dormancy thus lead to a delay or advance of flowering.</p>
+<p>I plotted a very simplified sketch with a function from the DiagrammeR package. Some points of the graph could be improved, but to show that the temperature does not directly affect the Bloom date it is enough.</p>
+<br />
+
+<div id="spoiler" style="display:none">
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="chill-model-comparison-1.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(DiagrammeR)</span>
+<span id="cb71-2"><a href="chill-model-comparison-1.html#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="chill-model-comparison-1.html#cb71-3" aria-hidden="true" tabindex="-1"></a>plot <span class="ot">&lt;-</span> <span class="fu">grViz</span>(<span class="st">&quot;digraph dot {</span></span>
+<span id="cb71-4"><a href="chill-model-comparison-1.html#cb71-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-5"><a href="chill-model-comparison-1.html#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="st">graph [layout = dot</span></span>
+<span id="cb71-6"><a href="chill-model-comparison-1.html#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="st">       rankdir = LR</span></span>
+<span id="cb71-7"><a href="chill-model-comparison-1.html#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="st">       fontsize = &#39;12&#39;</span></span>
+<span id="cb71-8"><a href="chill-model-comparison-1.html#cb71-8" aria-hidden="true" tabindex="-1"></a><span class="st">       fontname = Arial</span></span>
+<span id="cb71-9"><a href="chill-model-comparison-1.html#cb71-9" aria-hidden="true" tabindex="-1"></a><span class="st">       compound = true</span></span>
+<span id="cb71-10"><a href="chill-model-comparison-1.html#cb71-10" aria-hidden="true" tabindex="-1"></a><span class="st">       newrank=true]</span></span>
+<span id="cb71-11"><a href="chill-model-comparison-1.html#cb71-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-12"><a href="chill-model-comparison-1.html#cb71-12" aria-hidden="true" tabindex="-1"></a><span class="st">node [shape = rectangle,</span></span>
+<span id="cb71-13"><a href="chill-model-comparison-1.html#cb71-13" aria-hidden="true" tabindex="-1"></a><span class="st">      style = filled,</span></span>
+<span id="cb71-14"><a href="chill-model-comparison-1.html#cb71-14" aria-hidden="true" tabindex="-1"></a><span class="st">      fillcolor = aliceblue,</span></span>
+<span id="cb71-15"><a href="chill-model-comparison-1.html#cb71-15" aria-hidden="true" tabindex="-1"></a><span class="st">      fontname = Arial,</span></span>
+<span id="cb71-16"><a href="chill-model-comparison-1.html#cb71-16" aria-hidden="true" tabindex="-1"></a><span class="st">      fontsize = &#39;12&#39;]</span></span>
+<span id="cb71-17"><a href="chill-model-comparison-1.html#cb71-17" aria-hidden="true" tabindex="-1"></a><span class="st">      </span></span>
+<span id="cb71-18"><a href="chill-model-comparison-1.html#cb71-18" aria-hidden="true" tabindex="-1"></a><span class="st">      a [label = &#39;Temperature&#39;]</span></span>
+<span id="cb71-19"><a href="chill-model-comparison-1.html#cb71-19" aria-hidden="true" tabindex="-1"></a><span class="st">      d [label = &#39;Phenology&#39;]</span></span>
+<span id="cb71-20"><a href="chill-model-comparison-1.html#cb71-20" aria-hidden="true" tabindex="-1"></a><span class="st">      e [label = &#39;Cultivar specific&#39;]</span></span>
+<span id="cb71-21"><a href="chill-model-comparison-1.html#cb71-21" aria-hidden="true" tabindex="-1"></a><span class="st">      f [label = &#39;Bloom Dates&#39;]</span></span>
+<span id="cb71-22"><a href="chill-model-comparison-1.html#cb71-22" aria-hidden="true" tabindex="-1"></a><span class="st">      g [label = &#39;Climate forcing&#39;, fillcolor = gray98,</span></span>
+<span id="cb71-23"><a href="chill-model-comparison-1.html#cb71-23" aria-hidden="true" tabindex="-1"></a><span class="st">      fontcolor = gray60, color = gray60]</span></span>
+<span id="cb71-24"><a href="chill-model-comparison-1.html#cb71-24" aria-hidden="true" tabindex="-1"></a><span class="st">      h [label = &#39;Greenhouse Gas Emissions&#39;, fillcolor = gray98,</span></span>
+<span id="cb71-25"><a href="chill-model-comparison-1.html#cb71-25" aria-hidden="true" tabindex="-1"></a><span class="st">      fontcolor = gray60, color = gray60]</span></span>
+<span id="cb71-26"><a href="chill-model-comparison-1.html#cb71-26" aria-hidden="true" tabindex="-1"></a><span class="st">      i [label = &#39;Geographical location&#39;, fillcolor = gray98,</span></span>
+<span id="cb71-27"><a href="chill-model-comparison-1.html#cb71-27" aria-hidden="true" tabindex="-1"></a><span class="st">      fontcolor = gray60, color = gray60]</span></span>
+<span id="cb71-28"><a href="chill-model-comparison-1.html#cb71-28" aria-hidden="true" tabindex="-1"></a><span class="st">      l [style=invis]</span></span>
+<span id="cb71-29"><a href="chill-model-comparison-1.html#cb71-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-30"><a href="chill-model-comparison-1.html#cb71-30" aria-hidden="true" tabindex="-1"></a><span class="st">      </span></span>
+<span id="cb71-31"><a href="chill-model-comparison-1.html#cb71-31" aria-hidden="true" tabindex="-1"></a><span class="st">      subgraph cluster {</span></span>
+<span id="cb71-32"><a href="chill-model-comparison-1.html#cb71-32" aria-hidden="true" tabindex="-1"></a><span class="st">      label=&#39;Dormancy&#39;</span></span>
+<span id="cb71-33"><a href="chill-model-comparison-1.html#cb71-33" aria-hidden="true" tabindex="-1"></a><span class="st">      fontsize = &#39;14&#39;</span></span>
+<span id="cb71-34"><a href="chill-model-comparison-1.html#cb71-34" aria-hidden="true" tabindex="-1"></a><span class="st">      fillcolor = &#39;lightskyblue1:tomato&#39;</span></span>
+<span id="cb71-35"><a href="chill-model-comparison-1.html#cb71-35" aria-hidden="true" tabindex="-1"></a><span class="st">      style = filled</span></span>
+<span id="cb71-36"><a href="chill-model-comparison-1.html#cb71-36" aria-hidden="true" tabindex="-1"></a><span class="st">      gradientangle = 0</span></span>
+<span id="cb71-37"><a href="chill-model-comparison-1.html#cb71-37" aria-hidden="true" tabindex="-1"></a><span class="st">      b [label = &#39;Chill requirement&#39;, fillcolor = lightskyblue]</span></span>
+<span id="cb71-38"><a href="chill-model-comparison-1.html#cb71-38" aria-hidden="true" tabindex="-1"></a><span class="st">      c [label = &#39;Heat requirements&#39;, fillcolor = tomato]</span></span>
+<span id="cb71-39"><a href="chill-model-comparison-1.html#cb71-39" aria-hidden="true" tabindex="-1"></a><span class="st">      j [label = &#39;Chill&#39;, fillcolor = lightskyblue]</span></span>
+<span id="cb71-40"><a href="chill-model-comparison-1.html#cb71-40" aria-hidden="true" tabindex="-1"></a><span class="st">      k [label = &#39;Heat&#39;, fillcolor = tomato]}</span></span>
+<span id="cb71-41"><a href="chill-model-comparison-1.html#cb71-41" aria-hidden="true" tabindex="-1"></a><span class="st">      </span></span>
+<span id="cb71-42"><a href="chill-model-comparison-1.html#cb71-42" aria-hidden="true" tabindex="-1"></a><span class="st">      subgraph cluster2 {</span></span>
+<span id="cb71-43"><a href="chill-model-comparison-1.html#cb71-43" aria-hidden="true" tabindex="-1"></a><span class="st">      label = &#39;Internal processes&#39;</span></span>
+<span id="cb71-44"><a href="chill-model-comparison-1.html#cb71-44" aria-hidden="true" tabindex="-1"></a><span class="st">      ranksep = 2.2</span></span>
+<span id="cb71-45"><a href="chill-model-comparison-1.html#cb71-45" aria-hidden="true" tabindex="-1"></a><span class="st">      fontsize = &#39;16&#39;</span></span>
+<span id="cb71-46"><a href="chill-model-comparison-1.html#cb71-46" aria-hidden="true" tabindex="-1"></a><span class="st">      fillcolor = &#39;grey90&#39;</span></span>
+<span id="cb71-47"><a href="chill-model-comparison-1.html#cb71-47" aria-hidden="true" tabindex="-1"></a><span class="st">      style = invis}</span></span>
+<span id="cb71-48"><a href="chill-model-comparison-1.html#cb71-48" aria-hidden="true" tabindex="-1"></a><span class="st">      </span></span>
+<span id="cb71-49"><a href="chill-model-comparison-1.html#cb71-49" aria-hidden="true" tabindex="-1"></a><span class="st">      a-&gt;j</span></span>
+<span id="cb71-50"><a href="chill-model-comparison-1.html#cb71-50" aria-hidden="true" tabindex="-1"></a><span class="st">      j-&gt;b</span></span>
+<span id="cb71-51"><a href="chill-model-comparison-1.html#cb71-51" aria-hidden="true" tabindex="-1"></a><span class="st">      a-&gt;k</span></span>
+<span id="cb71-52"><a href="chill-model-comparison-1.html#cb71-52" aria-hidden="true" tabindex="-1"></a><span class="st">      k-&gt;c [minlen = 2]</span></span>
+<span id="cb71-53"><a href="chill-model-comparison-1.html#cb71-53" aria-hidden="true" tabindex="-1"></a><span class="st">      b-&gt;d </span></span>
+<span id="cb71-54"><a href="chill-model-comparison-1.html#cb71-54" aria-hidden="true" tabindex="-1"></a><span class="st">      c-&gt;d [minlen = 2]</span></span>
+<span id="cb71-55"><a href="chill-model-comparison-1.html#cb71-55" aria-hidden="true" tabindex="-1"></a><span class="st">      e-&gt;b [lhead = cluster, minlen=3]</span></span>
+<span id="cb71-56"><a href="chill-model-comparison-1.html#cb71-56" aria-hidden="true" tabindex="-1"></a><span class="st">      d-&gt;f</span></span>
+<span id="cb71-57"><a href="chill-model-comparison-1.html#cb71-57" aria-hidden="true" tabindex="-1"></a><span class="st">      h-&gt;g</span></span>
+<span id="cb71-58"><a href="chill-model-comparison-1.html#cb71-58" aria-hidden="true" tabindex="-1"></a><span class="st">      g-&gt;a </span></span>
+<span id="cb71-59"><a href="chill-model-comparison-1.html#cb71-59" aria-hidden="true" tabindex="-1"></a><span class="st">      i-&gt;a [constraint=false]</span></span>
+<span id="cb71-60"><a href="chill-model-comparison-1.html#cb71-60" aria-hidden="true" tabindex="-1"></a><span class="st">      { rank = same; h;  g; a; i}</span></span>
+<span id="cb71-61"><a href="chill-model-comparison-1.html#cb71-61" aria-hidden="true" tabindex="-1"></a><span class="st">      { rank = same; e; b; l }</span></span>
+<span id="cb71-62"><a href="chill-model-comparison-1.html#cb71-62" aria-hidden="true" tabindex="-1"></a><span class="st">      { rank = same; l; k; l }}&quot;</span>)</span></code></pre></div>
 </div>
-<div id="what-do-we-need-to-know-to-build-a-process-based-model-from-this" class="section level2 hasAnchor" number="17.6">
-<h2><span class="header-section-number">17.6</span> What do we need to know to build a process-based model from this?<a href="chill-model-comparison-1.html#what-do-we-need-to-know-to-build-a-process-based-model-from-this" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<button title="Click to show/hide code the code for the sketch." type="button" onclick="if(document.getElementById(&#39;spoiler&#39;) .style.display==&#39;none&#39;)
+              {document.getElementById(&#39;spoiler&#39;) .style.display=&#39;&#39;}
+            else{document.getElementById(&#39;spoiler&#39;) .style.display=&#39;none&#39;}">
+Show/Hide code
+</button>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-66"></span>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9fa1446333e4246bb917" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-9fa1446333e4246bb917">{"x":{"diagram":"digraph dot {\n\ngraph [layout = dot\n       rankdir = LR\n       fontsize = \"12\"\n       fontname = Arial\n       compound = true\n       newrank=true]\n\nnode [shape = rectangle,\n      style = filled,\n      fillcolor = aliceblue,\n      fontname = Arial,\n      fontsize = \"12\"]\n      \n      a [label = \"Temperature\"]\n      d [label = \"Phenology\"]\n      e [label = \"Cultivar specific\"]\n      f [label = \"Bloom Dates\"]\n      g [label = \"Climate forcing\", fillcolor = gray98, fontcolor = gray60, color = gray60]\n      h [label = \"Greenhouse Gas Emissions\", fillcolor = gray98, fontcolor = gray60, color = gray60]\n      i [label = \"Geographical location\", fillcolor = gray98, fontcolor = gray60, color = gray60]\n      l [style=invis]\n\n      \n      subgraph cluster {\n      label=\"Dormancy\"\n      fontsize = \"14\"\n      fillcolor = \"lightskyblue1:tomato\"\n      style = filled\n      gradientangle = 0\n      b [label = \"Chill requirement\", fillcolor = lightskyblue]\n      c [label = \"Heat requirements\", fillcolor = tomato]\n      j [label = \"Chill\", fillcolor = lightskyblue]\n      k [label = \"Heat\", fillcolor = tomato]}\n      \n      subgraph cluster2 {\n      label = \"Internal processes\"\n      ranksep = 2.2\n      fontsize = \"16\"\n      fillcolor = \"grey90\"\n      style = invis}\n      \n      a->j\n      j->b\n      a->k\n      k->c [minlen = 2]\n      b->d \n      c->d [minlen = 2]\n      e->b [lhead = cluster, minlen=3]\n      d->f\n      h->g\n      g->a \n      i->a [constraint=false]\n      { rank = same; h;  g; a; i}\n      { rank = same; e; b; l }\n      { rank = same; l; k; l }}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 17.2: Sketch for the relationship between temperature and bloom dates
+</p>
+</div>
+</div>
+<div id="what-do-we-need-to-know-to-build-a-process-based-model-from-this" class="section level2 hasAnchor" number="17.3">
+<h2><span class="header-section-number">17.3</span> What do we need to know to build a process-based model from this?<a href="chill-model-comparison-1.html#what-do-we-need-to-know-to-build-a-process-based-model-from-this" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To build a process-based model, we need to understand the relation between temperature and the bloom dates of the trees. We already know, that an important factor in this relation is the dormancy with its chill and heat related phases. For a process based model it is important which effect the temperatures have on the individual phases. For this purpose, there are already individual models such as the Dynamic Model for the chilling phase or the Growing Degree Hours model for the forcing period. These can be the basis for a process based model, and must then be combined reasonably to calculate a bloom date from a long time series of temperatures.</p>
+<br />
+
+<hr />
 
 </div>
 </div>
@@ -324,7 +487,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/17-simple_phenology_analysis.Rmd",
+"link": "https://github.com/JNBauer/tree_pheno_modelling/17-simple_phenology_analysis.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -342,7 +505,8 @@ gitbook.start({
 },
 "toc": {
 "collapse": "subsection"
-}
+},
+"code_folding": "hide"
 });
 });
 </script>

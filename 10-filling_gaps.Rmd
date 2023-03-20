@@ -2,10 +2,11 @@
 
 ## Use chillR functions to find out how many gaps you have in this dataset (even if you have none, please still follow all further steps)
 
-```{r Load data and create artificial gap, echo=FALSE, message=FALSE, warning=FALSE}
+Before using the I first `fix_weather()`function, I created a gap in the dataset (2015/2016) to show the patching method on a real example.
+
+```{r Load data and create artificial gap, message=FALSE, warning=FALSE}
 cleaned_weather <- read.csv("data/CapeTown_chillR_weather.csv")
 CapeTown_weather_gap <- cleaned_weather[-c(13890:14449),]
-coords <- c(18.8148, -33.9575)
 ```
 
 ```{r Test for gaps in data, warning=FALSE, message=FALSE}
@@ -16,13 +17,26 @@ fixed_weather <- fix_weather(CapeTown_weather_gap)
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 require(dplyr)
 require(kableExtra)
-kbl(fixed_weather$QC, escape = F) %>%
-  kable_paper("hover", full_width = F, position = "left")
+
+title <- "Checking for gaps in the temperature record"
+subset(fixed_weather$QC) %>% 
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left") %>%
+
+scroll_box(
+  height = "500px",
+  #width = "200px",
+  box_css = "border: 1px solid #ddd; padding: 5px; ",
+)
+
 ```
 
 ## Create a list of the 25 closest weather stations using the handle_gsod function
+
 I created a new `patching_station_list` for the time interval between 2014 and 2016, because we can see in the table above, that the artificial gap is in the years from 2014 till 2016. The new station list allow us to see, which weather stations have data for this gap.
+
 ```{r Command for creating the weather stations list, eval=TRUE, warning=FALSE}
+coords <- c(18.8148, -33.9575)
 patching_station_list<-handle_gsod(action="list_stations",
                           location=c(coords[1], coords[2]),
                           time_interval=c(2014,2016),
@@ -42,12 +56,12 @@ kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```
 
-
 ## Identify suitable weather stations for patching gaps
 
 The ``r patching_station_list$STATION.NAME[2]``' station on the second position or the ``r patching_station_list$STATION.NAME[4]`` station on position 4 could be suitable stations for patching gaps in our main data set. The ``r patching_station_list$STATION.NAME[2]`` station is characterized by a close distance to the location of interest and the ``r patching_station_list$STATION.NAME[4]`` as a station that is less affected by coastal climate than other closer stations. ``r patching_station_list$STATION.NAME[6]`` serves as a last backup.
 
 ## Download weather data for promising stations, convert them to chillR format and compile them in a list
+
 We download the weather data with this loop structure and the `handle_gsod` function. The data is downloaded and transformed. The previously selected stations are stored in `positions_in_station_list`.
 ```{r Looping through the data for patching, eval=FALSE}
 positions_in_station_list<-c(2,4,6)
@@ -102,7 +116,7 @@ kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```
 
-Stdev_bias too high!
+In a real patching scenarios, the standard derivation bias would be too high. It would be best to search for more suitable data for patching or use the data with an increased caution.
 
 ## Investigate the results - have all gaps been filled?
 
@@ -113,12 +127,17 @@ final_patched_fixed_weather <- fix_weather(patched_fixed_weather)
 
 ```
 
-
 ```{r, echo=FALSE}
 title <- "Quality check after the patching procedure"
 subset(patched_fixed_weather$QC) %>% 
 kbl(escape = F, format = "html", caption = title) %>%
-  kable_paper("hover", full_width = T, position = "left")
+  kable_paper("hover", full_width = T, position = "left") %>%
+
+scroll_box(
+  height = "500px",
+  #width = "200px",
+  box_css = "border: 1px solid #ddd; padding: 5px; ",
+)
 ```
 
 ```{r, echo=FALSE}
@@ -129,9 +148,9 @@ kbl(escape = F, format = "html", caption = title) %>%
 ```
 
 
-
 ## If necessary, repeat until you have a dataset you can work with in further analyses
-The last single day gaps were fixed with the `fixed_weather` command. For further analyses, i will use the original dataset without the artificial gap. Gaps of single days are interpolated with `fixed_weather`.
+
+The last single day gaps were fixed with the `fixed_weather` command. For further analyses, I will use the original dataset without the artificial gap. Gaps of single days are interpolated with `fixed_weather`.
 
 ```{r Loading original data and fixing single missing days, eval=FALSE}
 cleaned_weather <- read.csv("data/CapeTown_chillR_weather.csv")

@@ -3,13 +3,10 @@
 ## Repeat the PLS_chill_force procedure for the ‘Roter Boskoop’ dataset. Include plots of daily chill and heat accumulation.
 ```{r}
 library(chillR)
-library(kableExtra)
+
 
 temps<-read_tab("data/TMaxTMin1958-2019_patched.csv")
 temps_hourly<-stack_hourly_temps(temps,latitude=50.6)
-
-kable(head(temps))  %>%
-  kable_styling("striped", position = "left",font_size = 8)
 
 daychill<-daily_chill(hourtemps=temps_hourly,
             running_mean=1,
@@ -25,7 +22,6 @@ Boskoop_first <- make_JDay(Boskoop_first)
 Boskoop_first <- Boskoop_first[,c("Pheno_year","JDay")]
 colnames(Boskoop_first) <- c("Year","pheno")
 
-
 plscf <- PLS_chill_force(daily_chill_obj=daychill,
                        bio_data_frame=Boskoop_first,
                        split_month=6,
@@ -35,9 +31,13 @@ plscf <- PLS_chill_force(daily_chill_obj=daychill,
 ```
 
 
-```{r}
-kbl(head(plscf$Chill_Portions$GDH$PLS_summary), escape = F) %>%
-  kable_paper("hover", full_width = F, position = "left")
+```{r, echo=FALSE}
+library(kableExtra)
+
+title <- "Extract of the coefficients from the PLS analysis"
+head(plscf$Chill_Portions$GDH$PLS_summary) %>%
+kbl(escape = F, format = "html", caption = title) %>%
+  kable_paper("hover", full_width = T, position = "left")   
 ```
 
 ```{r}
@@ -52,7 +52,7 @@ PLS_gg[which(PLS_gg$JDay<=0),"Date"] <-
 PLS_gg[,"VIP_importance"] <- PLS_gg$VIP>=0.8
 PLS_gg[,"VIP_Coeff"] <- factor(sign(PLS_gg$Coef)*PLS_gg$VIP_importance)
 
-chill_start_JDay<--48 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+chill_start_JDay<--48 #!
 chill_end_JDay<-72
 heat_start_JDay<--8
 heat_end_JDay<-110
@@ -103,9 +103,7 @@ temp_plot<- ggplot(PLS_gg,x=Date) +
                   ymax=MetricMean + MetricStdev * (VIP_Coeff==1)),
               fill="dark green") +
   geom_line(aes(x=Date,y=MetricMean ))
-```
 
-```{r}
 temp_plot<- temp_plot +
   facet_wrap(vars(Type), scales = "free_y",
              strip.position="left",
@@ -119,11 +117,14 @@ temp_plot<- temp_plot +
         plot.title = element_text(hjust = 0.5),
         axis.title.y=element_blank()
         )
+```
 
+
+```{r, echo=FALSE, fig.cap="Daily chill and heat accumulation rates plot as part for the final graph"}
 temp_plot
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 VIP_plot<- ggplot(PLS_gg,aes(x=Date,y=VIP)) +
   annotate("rect",
            xmin = chill_start_date,
@@ -149,9 +150,7 @@ VIP_plot<- ggplot(PLS_gg,aes(x=Date,y=VIP)) +
                median(plscf$pheno$pheno,na.rm=TRUE)*24*3600,
              linetype = "dashed") +
   geom_bar(stat='identity',aes(fill=VIP>0.8))
-```
 
-```{r}
 VIP_plot <- VIP_plot + facet_wrap(vars(Type), scales="free",
              strip.position="left",
              labeller = labeller(Type = as_labeller(
@@ -166,9 +165,7 @@ VIP_plot <- VIP_plot + facet_wrap(vars(Type), scales="free",
         plot.title = element_text(hjust = 0.5),
         axis.title.y=element_blank()
         )
-```
 
-```{r}
 VIP_plot <- VIP_plot +
   scale_fill_manual(name="VIP", 
                     labels = c("<0.8", ">0.8"), 
@@ -177,11 +174,14 @@ VIP_plot <- VIP_plot +
         axis.ticks.x = element_blank(),
         axis.title.x = element_blank(),
         axis.title.y = element_blank())
+```
 
+
+```{r, echo=FALSE, fig.cap="VIP scores plotted and used as part for the final graph"}
 VIP_plot
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 coeff_plot<- ggplot(PLS_gg,aes(x=Date,y=Coef)) +
   annotate("rect",
            xmin = chill_start_date,
@@ -207,9 +207,7 @@ coeff_plot<- ggplot(PLS_gg,aes(x=Date,y=Coef)) +
                median(plscf$pheno$pheno,na.rm=TRUE)*24*3600,
              linetype = "dashed") +
   geom_bar(stat='identity',aes(fill=VIP_Coeff))
-```
 
-```{r}
 coeff_plot <- coeff_plot + facet_wrap(vars(Type), scales="free",
              strip.position="left",
              labeller = labeller(
@@ -226,9 +224,7 @@ coeff_plot <- coeff_plot + facet_wrap(vars(Type), scales="free",
         plot.title = element_text(hjust = 0.5),
         axis.title.y=element_blank()
         )
-```
 
-```{r, message=FALSE, warning=FALSE}
 coeff_plot <- coeff_plot + facet_wrap(vars(Type), scales="free",
              strip.position="left",
              labeller = labeller(
@@ -245,9 +241,7 @@ coeff_plot <- coeff_plot + facet_wrap(vars(Type), scales="free",
         plot.title = element_text(hjust = 0.5),
         axis.title.y=element_blank()
         )
-```
 
-```{r, message=FALSE, warning=FALSE}
 coeff_plot <- coeff_plot +  scale_fill_manual(name="Effect direction", 
                     labels = c("Advancing", "Unimportant","Delaying"), 
                     values = c("-1"="red", "0"="grey","1"="dark green")) +
@@ -256,7 +250,10 @@ coeff_plot <- coeff_plot +  scale_fill_manual(name="Effect direction",
         axis.ticks.x = element_blank(),
         axis.title.x = element_blank(),
         axis.title.y = element_blank())
+```
 
+
+```{r, echo=FALSE, fig.cap="Model coefficients plotted for the use in the final graph"}
 coeff_plot
 ```
 
@@ -272,11 +269,18 @@ plot<- (VIP_plot +
                   legend.text = element_text(size=8),
                   legend.title = element_text(size=10),
                   axis.title.x=element_blank())
+```
 
+
+```{r, echo=FALSE, fig.cap="Final result with all three subplots patched together"}
 plot
 ```
 
-```{r, message=FALSE, warning=FALSE}
+I hid the code for the `plot_PLS_chill_force()` function behind the button below to save some space.
+\
+<div id="spoiler" style="display:none">
+
+```{r, warning=FALSE, message=FALSE}
 plot_PLS_chill_force<-function(plscf,
                                chill_metric="Chill_Portions",
                                heat_metric="GDH",
@@ -284,7 +288,7 @@ plot_PLS_chill_force<-function(plscf,
                                heat_label="GDH",
                                chill_phase=c(-48,62),
                                heat_phase=c(-5,105.5),
-                               cultivar_name=" ")
+                               plot_title=" ")
 {
   PLS_gg<-plscf[[chill_metric]][[heat_metric]]$PLS_summary
   PLS_gg[,"Month"]<-trunc(PLS_gg$Date/100)
@@ -440,27 +444,41 @@ plot_PLS_chill_force<-function(plscf,
                     legend.text = element_text(size=8),
                     legend.title = element_text(size=10),
                     axis.title.x=element_blank()) + 
-          plot_annotation(title = cultivar_name)
+          plot_annotation(title = plot_title)
 
 plot
-
 }
 ```
+
+</div>
+
+<button title="Click to show/hide the code for the modified function" type="button"
+   onclick="if(document.getElementById('spoiler') .style.display=='none')
+              {document.getElementById('spoiler') .style.display=''}
+            else{document.getElementById('spoiler') .style.display='none'}">
+  Show/Hide code
+</button>
 \
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+source("functions/plot_PLS_chill_force.R")
+```
 
 ## Run PLS_chill_force analyses for all three major chill models. Delineate your best estimates of chilling and forcing phases for all of them.
 
 ```{r, message=FALSE, warning=FALSE}
-daychill<-daily_chill(hourtemps=temps_hourly,
+daychill <- daily_chill(hourtemps=temps_hourly,
             running_mean=9,
-            models = list(Chilling_Hours = Chilling_Hours, Utah_Chill_Units = Utah_Model,
+            models = list(Chilling_Hours = Chilling_Hours,
+                          Utah_Chill_Units = Utah_Model,
     Chill_Portions = Dynamic_Model, GDH = GDH)
     )
 
-plscf<-PLS_chill_force(daily_chill_obj=daychill,
+plscf <- PLS_chill_force(daily_chill_obj=daychill,
                        bio_data_frame=Boskoop_first,
                        split_month=6,
-                       chill_models = c("Chilling_Hours", "Utah_Chill_Units", "Chill_Portions"),
+                       chill_models = c("Chilling_Hours",
+                                        "Utah_Chill_Units", "Chill_Portions"),
                        heat_models = c("GDH"))
 ```
 
@@ -472,58 +490,56 @@ plscf
 ```
 My estimated delineations are included in the table below. I wasnt able to delineate the chilling phase for the Chilling Hours model, because no model coefficients seemed to have an advancing effect. For both other models I was able to delineate the chilling period. For the GDH model, I set the delineation estimates once and did not change them, even though I observed slight changes in the advancing effects between the different chill models.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 name <- c("Chilling Hours", "Utah Model", "Dynamic Model")
 start_c <- c(0,-13,24)
 end_c <- c(0,65,62)
 start_h <- c(8,8,8)
 end_h <- c(106,106,106)
-delineations <- data.frame(name, start_c, end_c, start_h, end_h, row.names = )
+delineations <- data.frame(name, start_c, end_c, start_h, end_h)
 
 kbl(delineations, col.names = NULL) %>%
   kable_paper("hover", full_width = F, position = "left") %>%
   add_header_above(c(" ", "Start", "End", "Start", "End")) %>%
-  add_header_above(c(" ", "Chill" = 2, "Heat" = 2))
+  add_header_above(c(" ", "Chilling phase" = 2, "Forcing phase" = 2))
 ```
-
-
-
-\
 
 ## Plot results for all three analyses, including shaded plot areas for the chilling and forcing periods you estimated.
 
 Below I plotted the estimated delineations together with the previously created function. For the Chilling Hours plot (as already mentioned above) no chilling period can be determined
-```{r}
+\
+```{r, message=FALSE, warning=FALSE, fig.cap="PLS regression plot for the response of the Chilling Hours model and GDH model for ‘Roter Boskoop’ apples at CKA"}
 plot_PLS_chill_force(plscf,
                      chill_metric="Chilling_Hours",
                      heat_metric="GDH",
                      chill_label="CH",
                      heat_label="GDH",
                      chill_phase=c(0,0),
-                     heat_phase=c(8,106))
+                     heat_phase=c(8,106),
+                     plot_title = "Chilling Hours model")
 ```
-
-```{r}
+\
+```{r, message=FALSE, warning=FALSE, fig.cap="PLS regression plot for the response of the Utah Chill model and GDH model for ‘Roter Boskoop’ apples at CKA"}
 plot_PLS_chill_force(plscf,
                      chill_metric="Utah_Chill_Units",
                      heat_metric="GDH",
                      chill_label="CU",
                      heat_label="GDH",
                      chill_phase=c(-13,65),
-                     heat_phase=c(8,108))
+                     heat_phase=c(8,108),
+                     plot_title = "Utah Chill model")
 ```
-
-```{r}
+\
+```{r, message=FALSE, warning=FALSE, fig.cap="PLS regression plot for the response of the Dynamic Model and GDH model for ‘Roter Boskoop’ apples at CKA"}
 plot_PLS_chill_force(plscf,
                      chill_metric="Chill_Portions",
                      heat_metric="GDH",
                      chill_label="CP",
                      heat_label="GDH",
                      chill_phase=c(-24,62),
-                     heat_phase=c(8,108))
+                     heat_phase=c(8,108),
+                     plot_title = "Dynamic Model")
 ```
 
-
-
-
-
+\
+<hr />

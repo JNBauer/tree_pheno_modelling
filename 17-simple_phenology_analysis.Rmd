@@ -1,15 +1,164 @@
 # Chill model comparison
 
-## Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.{.tabset}
+## Provide a brief narrative describing what p-hacking is, and why this is a problematic approach to data analysis.
 
-### Answer{.active}
 P-hacking is the term used when scientists artificially represent their results in a significant way. Large data sets always contain significant structures. By data analysis and there especially often by machine learning methods such correlations are specifically searched for, although they have no relevance for the actual application. Therefore, it is important to understand the data in the context of its origin and its natural process.
+Another form of p-hacking can be seen in the cartoon below, where 21 trials are made to achieve one significant result with a p-value below 0.05. This result is then broadly proclaimed, while the 20 other unsignificant trials are not mentioned
 
-### Cartoon
-![So, uh, we did the green study again and got no link. It was probably a-- "RESEARCH CONFLICTED ON GREEN JELLY BEAN/ACNE LINK; MORE STUDY RECOMMENDED!".](images/significant.png)
-## {-}
+```{r, echo=FALSE, out.width="60%", fig.cap='"So, uh, we did the green study again and got no link. It was probably a-- "RESEARCH CONFLICTED ON GREEN JELLY BEAN/ACNE LINK; MORE STUDY RECOMMENDED!" [Source: xkcd](https://xkcd.com/882)'}
+knitr::include_graphics("images/significant.png")
+```
 
 ## Provide a sketch of your causal understanding of the relationship between temperature and bloom dates.
 
+Temperature is an important factor regarding the development of temperate fruit trees during the winter. During the winter these trees enter the state of dormancy, which ceases with the combination of the right temperatures. During this time, the tree appears inactive from the outside, although various processes are taking place inside. Those processes are driven by the main two phases of dormancy, the endodormancy and the ecodormancy, whose requirements are fulfilled by specific amounts of chill and heat. Their fulfillment results in the overcoming of dormancy and the consequent continuation of development. This allows the buds to break in the spring before the flower begins to bloom thereafter. Different temperatures during dormancy thus lead to a delay or advance of flowering.
+
+I plotted a very simplified sketch with a function from the DiagrammeR package. Some points of the graph could be improved, but to show that the temperature does not directly affect the Bloom date it is enough.
+
+\
+<div id="spoiler" style="display:none">
+
+```{r, warning=FALSE, message=FALSE}
+
+require(DiagrammeR)
+
+plot <- grViz("digraph dot {
+
+graph [layout = dot
+       rankdir = LR
+       fontsize = '12'
+       fontname = Arial
+       compound = true
+       newrank=true]
+
+node [shape = rectangle,
+      style = filled,
+      fillcolor = aliceblue,
+      fontname = Arial,
+      fontsize = '12']
+      
+      a [label = 'Temperature']
+      d [label = 'Phenology']
+      e [label = 'Cultivar specific']
+      f [label = 'Bloom Dates']
+      g [label = 'Climate forcing', fillcolor = gray98,
+      fontcolor = gray60, color = gray60]
+      h [label = 'Greenhouse Gas Emissions', fillcolor = gray98,
+      fontcolor = gray60, color = gray60]
+      i [label = 'Geographical location', fillcolor = gray98,
+      fontcolor = gray60, color = gray60]
+      l [style=invis]
+
+      
+      subgraph cluster {
+      label='Dormancy'
+      fontsize = '14'
+      fillcolor = 'lightskyblue1:tomato'
+      style = filled
+      gradientangle = 0
+      b [label = 'Chill requirement', fillcolor = lightskyblue]
+      c [label = 'Heat requirements', fillcolor = tomato]
+      j [label = 'Chill', fillcolor = lightskyblue]
+      k [label = 'Heat', fillcolor = tomato]}
+      
+      subgraph cluster2 {
+      label = 'Internal processes'
+      ranksep = 2.2
+      fontsize = '16'
+      fillcolor = 'grey90'
+      style = invis}
+      
+      a->j
+      j->b
+      a->k
+      k->c [minlen = 2]
+      b->d 
+      c->d [minlen = 2]
+      e->b [lhead = cluster, minlen=3]
+      d->f
+      h->g
+      g->a 
+      i->a [constraint=false]
+      { rank = same; h;  g; a; i}
+      { rank = same; e; b; l }
+      { rank = same; l; k; l }}")
+```
+
+</div>
+
+<button title="Click to show/hide code the code for the sketch." type="button"
+   onclick="if(document.getElementById('spoiler') .style.display=='none')
+              {document.getElementById('spoiler') .style.display=''}
+            else{document.getElementById('spoiler') .style.display='none'}">
+  Show/Hide code
+</button>
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, out.width="100%",fig.cap='Sketch for the relationship between temperature and bloom dates'}
+
+require(DiagrammeR)
+
+grViz("digraph dot {
+
+graph [layout = dot
+       rankdir = LR
+       fontsize = '12'
+       fontname = Arial
+       compound = true
+       newrank=true]
+
+node [shape = rectangle,
+      style = filled,
+      fillcolor = aliceblue,
+      fontname = Arial,
+      fontsize = '12']
+      
+      a [label = 'Temperature']
+      d [label = 'Phenology']
+      e [label = 'Cultivar specific']
+      f [label = 'Bloom Dates']
+      g [label = 'Climate forcing', fillcolor = gray98, fontcolor = gray60, color = gray60]
+      h [label = 'Greenhouse Gas Emissions', fillcolor = gray98, fontcolor = gray60, color = gray60]
+      i [label = 'Geographical location', fillcolor = gray98, fontcolor = gray60, color = gray60]
+      l [style=invis]
+
+      
+      subgraph cluster {
+      label='Dormancy'
+      fontsize = '14'
+      fillcolor = 'lightskyblue1:tomato'
+      style = filled
+      gradientangle = 0
+      b [label = 'Chill requirement', fillcolor = lightskyblue]
+      c [label = 'Heat requirements', fillcolor = tomato]
+      j [label = 'Chill', fillcolor = lightskyblue]
+      k [label = 'Heat', fillcolor = tomato]}
+      
+      subgraph cluster2 {
+      label = 'Internal processes'
+      ranksep = 2.2
+      fontsize = '16'
+      fillcolor = 'grey90'
+      style = invis}
+      
+      a->j
+      j->b
+      a->k
+      k->c [minlen = 2]
+      b->d 
+      c->d [minlen = 2]
+      e->b [lhead = cluster, minlen=3]
+      d->f
+      h->g
+      g->a 
+      i->a [constraint=false]
+      { rank = same; h;  g; a; i}
+      { rank = same; e; b; l }
+      { rank = same; l; k; l }}")
+```
 
 ## What do we need to know to build a process-based model from this?
+
+To build a process-based model, we need to understand the relation between temperature and the bloom dates of the trees. We already know, that an important factor in this relation is the dormancy with its chill and heat related phases. For a process based model it is important which effect the temperatures have on the individual phases. For this purpose, there are already individual models such as the Dynamic Model for the chilling phase or the Growing Degree Hours model for the forcing period. These can be the basis for a process based model, and must then be combined reasonably to calculate a bloom date from a long time series of temperatures. 
+
+\
+<hr />

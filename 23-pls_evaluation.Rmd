@@ -1,8 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
 # Evaluating PLS outputs
 
 ## Reproduce the analysis for the ‘Roter Boskoop’ dataset.
@@ -48,7 +43,7 @@ plscf<-PLS_chill_force(daily_chill_obj=daychill,
 
 With the `plot_PLS_chill_force()` function, that we already created in one of the previous chapters, we can try to visualize the two phases. I adjusted the parameter for the beginning of the forcing phase to accurately delineate it. For the other delineations, the parameters from the website were suitable . 
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap="PLS regression plot for the response of the Dynamic Model and GDH model for ‘Roter Boskoop’ apples at CKA"}
 source("functions/plot_PLS_chill_force.R")
 
 plot_PLS_chill_force(plscf,
@@ -147,11 +142,11 @@ rotate <- function(x) t(apply(x, 2, rev))
 B <- rotate(N)
 ```
 
-For plotting the krigged matrix we can use the `scale_fill_gradientn()` function from `ggplot2`. This creates a two-dimensional surface where the bloom date is coded by color. One finding of the plot is that a warm forcing phase contributes significantly to earlier flowering. The black dots in the graph show the years that were used in the krigging process. Years with the most distinctive temperatures shape the outer border of the surface.
+For plotting the krigged matrix we can use the `geom_contour_fill()` function from `ggplot2`. This creates a two-dimensional surface where the bloom date is coded by color. One finding of the plot is that a warm forcing phase contributes significantly to earlier flowering. The black dots in the graph show the years that were used in the krigging process. Years with the most distinctive temperatures shape the outer border of the surface.
 
-I noticed that the selection of delineations has an impact on the generation of the graph. If the delineations from the Alexander Lucas dataset are used, a surface plot is created, which appears to be not correct and additionally the `krig()` function outputs a warning. In the two-dimensional plot I was already able to see it, but where it was visible even better is in the three-dimensional graph below. There the surface with the wrong lineated phase parameters was a completely smooth plane, which was not possible due to the given data.
+I noticed that the selection of delineations has an impact on the generation of the graph. If the delineations from the "Alexander Lucas" dataset are used, a surface plot is created, which appears completely parallel and additionally the `krig()` function outputs a warning. In the two-dimensional plot I was already able to see it, but where it was visible even better is in the three-dimensional graph below. There the surface with the differently delineated phase parameters was a completely smooth plane, which did not fitted well to the given data.
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, fig.cap='Impact of chilling and forcing temperatures on "Roter Boskoop"'}
 ggplot(melted,
        aes(x=Tmean_chill,y=Tmean_heat,z=value)) +
   geom_contour_fill(bins=100) +
@@ -162,14 +157,87 @@ ggplot(melted,
              aes(x=Tmean_chill,y=Tmean_heat,z=NULL),
              size=0.7) +
   geom_text_contour(stroke = 0.2) +
-  ylab(expression(paste("Forcing phase ", T[mean]," (",degree,"C)"))) +
-  xlab(expression(paste("Chilling phase ", T[mean]," (",degree,"C)")))  +
+  ylab(expression(paste("Forcing phase ", T[mean]," (°C)"))) +
+  xlab(expression(paste("Chilling phase ", T[mean]," (°C)")))  +
   theme_bw(base_size=15)
 ```
 
-Three-dimensional graphs rarely contain data that could not be extracted from a two-dimensional graph. The idea of actively interacting with the data fascinates me on the other hand. With `plotly` I came across a R package that offers this interactivity. In terms of the surface plot, I also liked the feature of being able to immediately see more detailed data from each individual point (interpolated as well as observed). This makes it possible, for example, to find out more about outliers like the point at the top right from the year 1963. Additionally, the influence of individual data points on the interpolation becomes more clearly visible.
+Three-dimensional graphs rarely contain data that could not be extracted from two-dimensional graphs. The idea of actively interacting with the data fascinates me on the other hand. With `plotly` I came across a R package that offers this interactivity. In terms of the surface plot, I also liked the feature of being able to immediately see more detailed data from each individual point (interpolated as well as observed). This makes it possible, for example, to find out more about outliers like the point at the top right from the year 1963. Additionally, the influence of individual data points on the interpolation becomes more clearly visible.
 
-```{r, message=FALSE}
+<div id="spoiler" style="display:none">
+
+```{r, eval=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+library(colorRamps)
+
+plot_ly() %>% 
+  add_surface(x = pred$x,
+              y = pred$y,
+              z = B,
+              colors = alpha(matlab.like(15)),
+              name = "Interpolated",
+              hoverlabel = list(namelength = 0),
+              hovertemplate = paste('</br><b>Interpolated</b>',
+                                    '</br>Chill T<sub>mean</sub>: %{x:.2f}°C',
+                                    '</br>Force T<sub>mean</sub>: %{y:.2f}°C',
+                                    '</br>Bloom date: %{z:.1f} JDay'),
+              contours =
+                list(
+                  z = list(color = alpha(matlab.like(15)),
+                           highlight = TRUE,
+                           show = TRUE,
+                           start = 85,
+                           end = 150,
+                           size = 5,
+                           project=list(z=TRUE)),
+                           showlabels = TRUE)) %>% 
+  add_trace(x = Tmeans_pheno$Tmean_chill,
+            y = Tmeans_pheno$Tmean_heat,
+            z = Tmeans_pheno$pheno,
+            type = 'scatter3d',
+            mode = 'markers',
+            name = "Observed",
+            hoverinfo ="text",
+            text = ~paste('</br><b>Observed</b>',
+                          '</br>Chill T<sub>mean</sub>:',
+                          round(Tmeans_pheno$Tmean_chill, digits = 2),'°C',
+                          '</br>Force T<sub>mean</sub>:',
+                          round(Tmeans_pheno$Tmean_heat, digits = 2),'°C',
+                          '</br>Bloom date:',Tmeans_pheno$pheno, 'JDay',
+                          '</br>Year:', as.character(Tmeans_pheno$End_year)),
+            marker = list(size = 4, color = 'black')) %>%
+  colorbar(title = "Bloom date\n(day of the year)") %>% 
+  layout(
+    scene = list(
+      xaxis = list(title = "Chilling phase T<sub>mean</sub> (°C)",
+                   showspikes=FALSE),
+      yaxis = list(title = "Forcing phase T<sub>mean</sub> (°C)",
+                   showspikes=FALSE),
+      zaxis = list(title = "Date of Bloom", showspikes=FALSE)
+    ))%>% 
+  layout(
+      scene = list(
+        camera=list(
+          #up = list(x=0, y=0, z=0),
+          #center = list(x=0, y=0, z=0),
+          eye = list(x=-1.2, y=2, z=1)
+        )
+      )
+    )
+```
+
+</div>
+
+<button title="Click to show/hide the code for the three-dimensional plot" type="button"
+   onclick="if(document.getElementById('spoiler') .style.display=='none')
+              {document.getElementById('spoiler') .style.display=''}
+            else{document.getElementById('spoiler') .style.display='none'}">
+  Show/Hide code
+</button>
+\
+
+
+```{r, echo=FALSE, message=FALSE, fig.cap='Three dimensional plot for the impact of chilling and forcing temperatures on "Roter Boskoop"'}
 library(plotly)
 library(colorRamps)
 
@@ -231,5 +299,7 @@ plot_ly() %>%
 
 ## We’ve looked at data from a number of locations so far. How would you expect this surface plot to look like in Beijing? And how should it look in Tunisia?
 
-The angles of the contours of the plots show how the ratio of chilling and forcing influences the bloom date. For vertical contours, the chilling phase is the decisive factor, while for horizontal contours, the forcing phase mainly influences the bloom date. In the weather data of the CKA and the phenology data of the Alexander Lukas cultivar, both phases have a certain influence, but the forcing phase is still more dominant. This characteristic depends on the location and the given chilling and forcing conditions. In cold China heat is probably the determining factor while in Tunisia the phenological development is mainly limited by the chilling amount.
+The angles of the contours of the plots show how the ratio of chilling and forcing influences the bloom date. For vertical contours, the chilling phase is the decisive factor, while for horizontal contours, the forcing phase mainly influences the bloom date. In the weather data of the CKA and the phenology data of the "Alexander Lucas" cultivar, both phases have a certain influence, but the forcing phase is still more dominant. This characteristic depends on the location and the given chilling and forcing conditions. In cold China heat is probably the determining factor while in Tunisia the phenological development is mainly limited by the chilling amount.
 
+\
+<hr />

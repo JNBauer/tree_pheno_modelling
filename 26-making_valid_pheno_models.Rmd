@@ -1,6 +1,5 @@
 # Making valid tree phenology models
 
-
 ## Explain the difference between output validation and process validation.
 
 The complicated processes in nature have often resulted in output validated models. In this case, only the model output is compared with real observations. The way in which this output has been generated is not further elucidated. Such output validated models are often based on machine learning methods like regression, neural networks or random forest approaches. The goal is to use the training data to create a model that gives a suitable output. With output validated models, good performance has little to do with an accurate model.
@@ -12,13 +11,13 @@ Process validated models, on the other hand, aim to capture the real process beh
 The validity domain is the area of a model in which it can make reliable statements. Models can often make statements outside of their validity domain. However, it is important to recognize this and be cautious when necessary. The validity domain is often influenced by the model or the data it was calibrated on. If the calibration data are in a certain range, the validity domain covers to some extent only this range.
 This is especially important when making predictions about future events. Often the input data will be different in the future than it was in the past. Models trained only on past data have a validity domain that would not include future data. This leads to model results that are not credible. The model will still produce results, but since the validity domain has been exceeded, they are likely to be flawed.
 
-
 ## What is validation for purpose?
 
 Validation for purpose considers whether a model is suitable for the actual application. Which features are part of the model and how exactly can a model fulfill its intention. If the model is validated for the wrong purpose, errors can occur during its later use.
-
 
 ## How can we ensure that our model is suitable for the predictions we want to make?
 
 Regarding the validity domain, we need to check if the test data overlaps substantially with the data the model was calibrated on. If this is not the case, a possible option would be to increase the validity domain by adding artificially created data to the calibration.
 
+\
+<hr />

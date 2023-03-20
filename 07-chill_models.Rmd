@@ -1,6 +1,6 @@
 # Chill Models
 
-**1. Run the chilling() function on the Winters_hours_gap dataset**
+## Run the chilling() function on the Winters_hours_gap dataset
 
 The chilling function calculates different chilling methods and GDH.
 
@@ -8,7 +8,7 @@ The chilling function calculates different chilling methods and GDH.
 require(chillR)
 chilling_output <- chilling(make_JDay(Winters_hours_gaps),Start_JDay = 80, End_JDay = 120)
 ```
-\
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 require(kableExtra)
 require(dplyr)
@@ -17,9 +17,8 @@ chilling_output %>%
 kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```
-\
 
-**2. Create your own temperature-weighting chill model using the step_model() function.**
+## Create your own temperature-weighting chill model using the step_model() function.
 
 ```{r 07 creating own step_model() function}
 own_utah_steps <- data.frame(
@@ -27,7 +26,6 @@ own_utah_steps <- data.frame(
   upper=c(0,1,2,3,4,5,6,100),
   weight=c(0,0.5,1,2,3,2,1,0))
 ```
-
 
 ```{r, echo=FALSE}
 title <- "Table for `own_utah_steps`"
@@ -40,10 +38,11 @@ Testing the modified `own_utah_steps` alone.
 ```{r 07 applying own step_model() function}
 own_utah <- function(x) step_model(x,own_utah_steps)
 test <- own_utah(Winters_hours_gaps$Temp)
-```
-\
 
-**3. Run this model on the Winters_hours_gaps dataset using the tempResponse() function.**
+head(test)
+```
+
+## Run this model on the Winters_hours_gaps dataset using the tempResponse() function.
 
 In the next code chunk, the `Modified_Utah_Model` is included in the list of the `tempResponse()` function.
 ```{r}
@@ -53,12 +52,12 @@ output<-tempResponse(make_JDay(Winters_hours_gaps),
                      whole_record = FALSE)
 ```
 
-
 ```{r, echo=FALSE}
 title <- "TempResponse output for the chill of the `Modified_Utah_Model` and `Chill_portions`"
 output %>% 
 kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```
+
 \
 <hr />

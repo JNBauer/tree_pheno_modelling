@@ -8,7 +8,9 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Tree phenology Logbook</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published by Julian Bauer with bookdown</a></li>
+    edit: https://github.com/JNBauer/tree_pheno_modelling/%s
     download: ["epub"]
+    code_folding: hide
 bookdown::epub_book: default
+

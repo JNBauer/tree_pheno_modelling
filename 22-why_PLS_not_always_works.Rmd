@@ -1,5 +1,4 @@
 # Why PLS doesn’t always work
-\
 
 ## Produce chill and heat model sensitivity plots for the location you focused on in previous exercises.
 
@@ -18,7 +17,6 @@ Tmins=c(-20:20)
 Tmaxs=c(-15:30)
 ```
 
-
 ```{r, eval=FALSE}
 
 
@@ -26,7 +24,7 @@ coords <- c(18.8148, -33.9575)
 
 latitude<-coords[2]
 
-month_range=c(4,5,6,7,8,9)
+month_range=c(4,5,6,7,8,9) # South African winter
 
 Tmins=c(-20:20)
 Tmaxs=c(-15:30)
@@ -62,7 +60,6 @@ for(mon in month_range)
 results<-data.frame(Month=month,Tmin=mins,Tmax=maxs,CP)
 results<-results[!is.na(results$Month),]
 
-
 write.csv(results,"data/model_sensitivity_development.csv",row.names = FALSE)
 ```
 
@@ -86,13 +83,11 @@ DM_sensitivity <- DM_sensitivity +
   facet_wrap(vars(Month_names)) +
   ylim(min(results$Tmax),max(results$Tmax)) +
   ylim(min(results$Tmin),max(results$Tmin))
-
-DM_sensitivity
 ```
 
 In order to link the plot with Cape Town, real weather recordings are included as points in the existing sensitivity plots. This visualizes how effective the recorded temperatures have been to generate chill. 
 
-```{r,warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, fig.cap="Chill model sensitivity plot for Cape Town"}
 CT_temperatures<-read_tab("data/CapeTown_weather.csv")
 
 CT_temperatures<-CT_temperatures[which(CT_temperatures$Month %in% month_range),]
@@ -121,8 +116,10 @@ DM_sensitivity +
 ```
 
 Compared to other regions where low temperatures result in enough chill, this is not the case in Cape Town. The plotted actual weather records in the plots overlap only to a small extent with the area in which chill is generated at all. Additionally, the generation of chill per day is significantly lower in the majority of the overlapping areas because the temperatures are too warm in general.
-\
-The code to create the sensitivity data frames and the sensitivity plots is easier to handle within in functions. This also allows to import the functions at a later point in time.
+
+The code to create the sensitivity data frames and the sensitivity plots is easier to handle within in functions. This also allows to import the functions at a later point in time. Again I hide the code for the functions to save some space.
+
+<div id="spoiler" style="display:none">
 
 ```{r, warning=FALSE, message=FALSE}
 chill_model_sensitivity <- 
@@ -172,7 +169,6 @@ chill_model_sensitivity <-
   results<-results[!is.na(results$Month),]
 }
 ```
-
 
 ```{r, warning=FALSE, message=FALSE}
 chill_sensitivity_temps <- function(chill_model_sensitivity_table,
@@ -226,7 +222,18 @@ chill_sensitivity_temps <- function(chill_model_sensitivity_table,
 }
 ```
 
-In the following code chunk, I create again a sensitivity data frame. This time I also add the Growing Degree Hours to the function. This allows me to use the `chill_sensitivity_temps()` to create plots for chill and heat model sensitivity as seen below.
+</div>
+
+<button title="Click to show/hide the code for the functions" type="button"
+   onclick="if(document.getElementById('spoiler') .style.display=='none')
+              {document.getElementById('spoiler') .style.display=''}
+            else{document.getElementById('spoiler') .style.display='none'}">
+  Show/Hide code
+</button>
+\
+
+
+In the following code chunk, I create again a sensitivity data frame with the `chill_model_sensitivity()` function. This time I also add the Growing Degree Hours to the function. This allows me to use the `chill_sensitivity_temps()` function to create plots for chill and heat model sensitivity as seen below.
 
 ```{r, eval=FALSE}
 model_sensitivities_CT <- 
@@ -240,7 +247,7 @@ write.csv(model_sensitivities_CT,
           "data/model_sensitivities_CT.csv",row.names = FALSE)
 ```
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap="Chill model sensitivity plot for Cape Town created with the function"}
 model_sensitivities_CT <- read.csv("data/model_sensitivities_CT.csv")
 
 chill_sensitivity_temps(model_sensitivities_CT,
@@ -251,7 +258,7 @@ chill_sensitivity_temps(model_sensitivities_CT,
   ggtitle("Chill model sensitivity at Cape Town, South Africa")
 ```
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap="Heat model sensitivity plot for Cape Town created with the function"}
 chill_sensitivity_temps(model_sensitivities_CT,
                         CT_temperatures,
                         temp_model="GDH",
@@ -287,31 +294,32 @@ Alex_first <- Alex_first[,c("Pheno_year","JDay")]
 colnames(Alex_first) <- c("Year","pheno")
 ```
 
-I added a title function to the `plot_PLS_chill_force()` function to add the cultivar name to the plots. The estimated delineations for the plots can be seen in the plots. The phases of the Alexander Lucas cultivar extend over a longer period of time, while the Roter Boskoop phases are shorter. The heat phase is easier to delineate compared to the chilling period, which can sometimes have a less significant beginning.
+I added a title function to the `plot_PLS_chill_force()` function to add the cultivar name to the plots. The estimated delineations for the plots can be seen in the plots. The phases of the "Alexander Lucas" cultivar extend over a longer period of time, while the "Roter Boskoop" phases are shorter. The heat phase is easier to delineate compared to the chilling period, which can sometimes have a less significant beginning.
 
 ```{r, warning=FALSE, message=FALSE}
 source("functions/plot_PLS_chill_force.R")
 
-daychill<-daily_chill(hourtemps=temps_hourly,
+daychill <- daily_chill(hourtemps=temps_hourly,
             running_mean=9,
-            models = list(Chilling_Hours = Chilling_Hours, Utah_Chill_Units = Utah_Model,
+            models = list(Chilling_Hours = Chilling_Hours,
+                          Utah_Chill_Units = Utah_Model,
     Chill_Portions = Dynamic_Model, GDH = GDH)
     )
 
-plscf_alex<-PLS_chill_force(daily_chill_obj=daychill,
+plscf_alex <- PLS_chill_force(daily_chill_obj=daychill,
                        bio_data_frame=Alex_first,
                        split_month=6,
                        chill_models = c("Chill_Portions"),
                        heat_models = c("GDH"))
 
-plscf_boskoop<-PLS_chill_force(daily_chill_obj=daychill,
+plscf_boskoop <- PLS_chill_force(daily_chill_obj=daychill,
                        bio_data_frame=Boskoop_first,
                        split_month=6,
                        chill_models = c("Chill_Portions"),
                        heat_models = c("GDH"))
 ```
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap="Temperature response pattern of ‘Alexander Lucas’ apples at CKA based on a PLS regression."}
 plot_PLS_chill_force(plscf_alex,
                      chill_metric="Chill_Portions",
                      heat_metric="GDH",
@@ -319,11 +327,10 @@ plot_PLS_chill_force(plscf_alex,
                      heat_label="GDH",
                      chill_phase=c(-52,62),
                      heat_phase=c(-5,106),
-                     cultivar_name = "Alexander Lucas")
+                     plot_title = "Alexander Lucas")
 ```
 
-
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.cap="Temperature response pattern of ‘Roter Boskoop’ apples at CKA based on a PLS regression."}
 plot_PLS_chill_force(plscf_boskoop,
                      chill_metric="Chill_Portions",
                      heat_metric="GDH",
@@ -331,6 +338,8 @@ plot_PLS_chill_force(plscf_boskoop,
                      heat_label="GDH",
                      chill_phase=c(-24,62),
                      heat_phase=c(10,108),
-                     cultivar_name = "Roter Boskoop")
+                     plot_title = "Roter Boskoop")
 ```
 
+\
+<hr />

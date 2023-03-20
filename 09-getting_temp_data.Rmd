@@ -3,20 +3,30 @@
 ## Choose a location of interest and find the 25 closest weather stations using the handle_gsod function
 
 I chose a location in South Africa near Cape Town with a longitude of `18.8148` and a latitude of `-33.9575`, which can be seen in the leaflet below.
+
 ```{r}
 coords <- c(18.8148, -33.9575)
 ```
 
-```{r goedvertrouw, fig.cap="A leaflet map that shows the selected location.", echo=FALSE, message=FALSE}
-require(leaflet) 
+```{r goedvertrouw, fig.cap="Leaflet map for the selected location near Cape Town.", echo=FALSE, message=FALSE}
+require(leaflet)
+require(leafem)
+
 m <- leaflet() %>% setView(lng = coords[1] , lat = coords[2], zoom = 16)
 m %>% addProviderTiles(providers$Esri.WorldImagery) %>%
   addMiniMap(tiles = providers$Esri.WorldStreetMap,toggleDisplay = TRUE) %>% 
-  addMarkers(coords[1], coords[2])
+  addMarkers(coords[1], coords[2]) %>%
+  addLogo("https://symbols.getvecta.com/stencil_317/33_north-arrow-1.060831cef6.svg",
+          position = "bottomleft",
+          offset.x = 15,
+          offset.y = 40,
+          width = 100,
+          height = 100)
 
 require(chillR)
 library(kableExtra)
 ```
+\
 The multi-functional `handle_gsod` function can be used to create a list of surrounding stations for a location of interest. The ten closest stations are shown in the list below and are also marked in the lower leaflet map. The apple marks the selected farm and the weather station icons symbolize the position of the stations.
 
 ```{r Creating station list with handle_gsod, message=FALSE, warning=FALSE, eval=FALSE}
@@ -34,7 +44,13 @@ kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```
 
-```{r, echo=FALSE}
+\
+<div id="spoiler" style="display:none">
+
+```{r, warning=FALSE, message=FALSE}
+library(leaflet)
+library(leafem)
+
 station_list <- read.csv("data/station_list.csv")
 
 center <- makeIcon(
@@ -47,15 +63,82 @@ stations <- makeIcon(
   iconWidth = 30, iconHeight = 30,
   iconAnchorX = 15, iconAnchorY = 15)
 
+html_legend <- "<img src='https://cdn-icons-png.flaticon.com/512/415/415682.png'
+style='width:30px;height:30px;'>Center<br/>
+
+<img src='https://cdn-icons-png.flaticon.com/512/1753/1753451.png'
+style='width:30px;height:30px;'>Stations"
 
 m <- leaflet(width = "100%")
 m <- addTiles(m) %>%
   setView(m, lng = coords[1], lat = coords[2], zoom = 10) %>%
+  addLogo("https://symbols.getvecta.com/stencil_317/33_north-arrow-1.060831cef6.svg",
+          position = "bottomright",
+          offset.x = 15,
+          offset.y = 40,
+          width = 100,
+          height = 100) %>%
   addProviderTiles(providers$Esri.WorldTopoMap, group = "Topographical map") %>%
   addProviderTiles(providers$Esri.WorldImagery, group = "World imagery") %>%
   addMarkers(m, lng=coords[1], lat= coords[2], popup="Center", icon = center) %>%
   addLayersControl(baseGroups = c("Topographical map", "World imagery"),
-                   options = layersControlOptions(collapsed = FALSE))
+                   options = layersControlOptions(collapsed = FALSE)) %>%
+  addControl(html = html_legend, position = "topleft")
+  
+
+ for(i in 1:10) {
+      m <- addMarkers(m, lng=station_list[i,5], lat=station_list[i,4], popup=station_list[i,2],
+                      icon = stations)
+ }
+```
+
+</div>
+
+<button title="Click to show/hide the code for the leaflet map" type="button"
+   onclick="if(document.getElementById('spoiler') .style.display=='none')
+              {document.getElementById('spoiler') .style.display=''}
+            else{document.getElementById('spoiler') .style.display='none'}">
+  Show/Hide code
+</button>
+\
+
+```{r, echo=FALSE, fig.cap="Leaflet map with the weather stations of the `station_list` and the location of the farm in the center."}
+library(leafem)
+
+station_list <- read.csv("data/station_list.csv")
+
+center <- makeIcon(
+  iconUrl = "https://cdn-icons-png.flaticon.com/512/415/415682.png",
+  iconWidth = 40, iconHeight = 40,
+  iconAnchorX = 20, iconAnchorY = 20)
+
+stations <- makeIcon(
+  iconUrl = "https://cdn-icons-png.flaticon.com/512/1753/1753451.png",
+  iconWidth = 30, iconHeight = 30,
+  iconAnchorX = 15, iconAnchorY = 15)
+
+html_legend <- "<img src='https://cdn-icons-png.flaticon.com/512/415/415682.png'
+style='width:30px;height:30px;'>Center<br/>
+
+<img src='https://cdn-icons-png.flaticon.com/512/1753/1753451.png'
+style='width:30px;height:30px;'>Stations"
+
+m <- leaflet(width = "100%")
+m <- addTiles(m) %>%
+  setView(m, lng = coords[1], lat = coords[2], zoom = 10) %>%
+  addLogo("https://symbols.getvecta.com/stencil_317/33_north-arrow-1.060831cef6.svg",
+          position = "bottomright",
+          offset.x = 15,
+          offset.y = 40,
+          width = 100,
+          height = 100) %>%
+  addProviderTiles(providers$Esri.WorldTopoMap, group = "Topographical map") %>%
+  addProviderTiles(providers$Esri.WorldImagery, group = "World imagery") %>%
+  addMarkers(m, lng=coords[1], lat= coords[2], popup="Center", icon = center) %>%
+  addLayersControl(baseGroups = c("Topographical map", "World imagery"),
+                   options = layersControlOptions(collapsed = FALSE)) %>%
+  addControl(html = html_legend, position = "topleft")
+  
 
  for(i in 1:10) {
       m <- addMarkers(m, lng=station_list[i,5], lat=station_list[i,4], popup=station_list[i,2],
@@ -63,7 +146,6 @@ m <- addTiles(m) %>%
  }
 m
 ```
-
 
 ## Download weather data for the most promising station on the list
 
@@ -75,7 +157,6 @@ downloaded_weather<-handle_gsod(action="download_weather",
                      location=station_list$chillR_code[1],
                      time_interval=c(1977,2020))
 ```
-
 
 ## Convert the weather data into chillR format
 
@@ -98,4 +179,6 @@ write.csv(station_list,"data/station_list.csv",row.names=FALSE)
 write.csv(weather,"data/CapeTown_weather.csv",row.names=FALSE)
 write.csv(cleaned_weather$`CAPE TOWN INTL`$weather,"data/CapeTown_chillR_weather.csv",row.names=FALSE)
 ```
+
+\
 <hr />

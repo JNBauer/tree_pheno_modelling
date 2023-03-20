@@ -11,11 +11,13 @@ row.names(hourtemps) <- NULL
 
 require(kableExtra)
 require(dplyr)
+
 title <- "Table for the modified `Winters_hours_gaps` dataset"
 hourtemps[1:5,] %>%
 kbl(escape = F, format = "html", caption = title) %>%
   kable_paper("hover", full_width = T, position = "left")
 ```
+
 The function creates a new column `Warming_hours` that contains the result of the comparison if `hourtemps$Temp`is greater than 25.
 
 ```{r}
@@ -25,8 +27,6 @@ WH <- function(hourtemps)
   return(hourtemps)
 }
 ```
-
-\
 
 ## Apply this function to the Winters_hours_gaps dataset
 
@@ -57,7 +57,8 @@ kbl(escape = F, format = "html", caption = title) %>%
 
 The following function contains additional input variables for the start and end dates. The variables are used to index the correct rows between which the sum of the warm hours should be taken. The previously created `WH` function is used to compare the temperature to the threshold.
 ```{r}
-WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA, start_hour=12, end_hour=12)
+WH_YEARMODA <- function(hourtemps, start_dateYEARMODA,end_dateYEARMODA,
+                        start_hour=12, end_hour=12)
 {
   start_year <- as.numeric(substr(start_dateYEARMODA, 1, 4))
   start_month <- as.numeric(substr(start_dateYEARMODA, 5, 6))
@@ -67,7 +68,6 @@ WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA, start_h
   end_month <- as.numeric(substr(end_dateYEARMODA, 5, 6))
   end_day <- as.numeric(substr(end_dateYEARMODA, 7, 8))
   
-
   start_date <- which(hourtemps$Year==start_year & hourtemps$Month==start_month
                       & hourtemps$Day==start_day & hourtemps$Hour==start_hour)
   end_date <- which(hourtemps$Year==end_year & hourtemps$Month==end_month
@@ -81,8 +81,11 @@ WH_YEARMODA <- function(hourtemps, start_dateYEARMODA, end_dateYEARMODA, start_h
 
 warming_hours_for_time_frame <- WH_YEARMODA(hourtemps, 20080501, 20080831)
 
+warming_hours_for_time_frame
 ```
 
 Between the 1th of May 2008 (20080501) and the 31th of August 2008 (20080831), **`r warming_hours_for_time_frame`** hours over 25°C occurred.
 
-------------------------------------------------------------------------
+
+\
+<hr />

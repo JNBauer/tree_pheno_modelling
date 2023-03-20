@@ -42,7 +42,7 @@ temperatures[,"Date"]<-as.Date(ISOdate(2000,
 
 We plot the two different `Data_source`s in two plots for a better comparison. `geom_smooth` is a better method to display the data than `geom_line` because of our raw data. The plots are split with `facet_wrap` by their `Data_source`.
 
-```{r 11-Plotting-generated-weather-with-ggplot-and-geom-smooth, fig.cap="Geom_smooth plot to compare observed and simulated temperature data.", message=FALSE}
+```{r 11-Plotting-generated-weather-with-ggplot-and-geom-smooth, fig.cap="`Geom_smooth()` temperature plot to compare observed and simulated temperature data.", message=FALSE}
 ggplot(data=temperatures, aes(Date,Tmin)) +
   geom_smooth(aes(colour = factor(Year))) +
   facet_wrap(vars(Data_source)) +
@@ -50,7 +50,6 @@ ggplot(data=temperatures, aes(Date,Tmin)) +
   theme(legend.position = "none") +
   scale_x_date(date_labels = "%b")
 ```
-\
 
 ## Calculate winter chill (in Chill Portions) for your synthetic weather, and illustrate your results as histograms and cumulative distributions.
 
@@ -107,7 +106,6 @@ ggplot(chill_simulations, aes(x=Chill_portions)) +
 ```{r 11 Calculating the SWC with quantile}
 quantile(chill_simulations$Chill_portions, 0.1)
 ```
-\
 
 ## Produce similar plots for the number of freezing hours (<0°C) in April (or October, if your site is in the Southern Hemisphere) for your location of interest.
 
@@ -157,6 +155,7 @@ freezing_comparison_full_seasons<-freezing_comparison[
 ```
 
 We can plot the data in the same way as seen before in Figure \@ref(fig:chill-histo). This time we can use the `freezing_comparison` dataset as input for the `ggplot` function.
+
 ```{r freeze-histo, fig.cap="A histogram that shows the freezing hours for the observed and simulated data."}
 ggplot(freezing_comparison, aes(x=Freezing_Hours)) + 
   geom_histogram(binwidth=1,aes(fill = factor(Data_source))) +
@@ -167,6 +166,7 @@ ggplot(freezing_comparison, aes(x=Freezing_Hours)) +
 ```
 
 My chosen location is near Cape Town, South Africa. As we can see in Figure \@ref(fig:freeze-histo), freezing hours are nearly non existent. Calculating something like a "Safe Freezing Hours" is not possible.
+
 ```{r 11-Cumulative-plotting-of-freezing-hours, fig.cap="The graph for accumulated freeze hours."}
 freezing_simulations<-freezing_comparison_full_seasons[
   which(freezing_comparison_full_seasons$Data_source=="simulated"),]
@@ -177,4 +177,6 @@ ggplot(freezing_simulations, aes(x=Freezing_Hours)) +
   xlab("Freeze hours accumulation") +
   theme_bw(base_size = 20)
 ```
+
+\
 <hr />
