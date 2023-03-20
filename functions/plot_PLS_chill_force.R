@@ -5,7 +5,7 @@ plot_PLS_chill_force<-function(plscf,
                                heat_label="GDH",
                                chill_phase=c(-48,62),
                                heat_phase=c(-5,105.5),
-                               cultivar_name=" ")
+                               plot_title=" ")
 {
   require(ggplot2)
   require(dplyr)
@@ -163,7 +163,7 @@ plot_PLS_chill_force<-function(plscf,
             legend.text = element_text(size=8),
             legend.title = element_text(size=10),
             axis.title.x=element_blank()) + 
-    plot_annotation(title = cultivar_name)
+    plot_annotation(title = plot_title)
   
   plot
   
